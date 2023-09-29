@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CASPARWeb", "CASPARWeb\CASPARWeb.csproj", "{71B2B558-F81E-4BF8-80AE-5C0250808E5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CASPARWeb", "CASPARWeb\CASPARWeb.csproj", "{71B2B558-F81E-4BF8-80AE-5C0250808E5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{E7D48F8D-1EAF-45EB-8849-6E258B3BB6BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{E7D48F8D-1EAF-45EB-8849-6E258B3BB6BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{E0CA3FE2-C7B2-4683-8A0B-1EB603F3E1A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{E0CA3FE2-C7B2-4683-8A0B-1EB603F3E1A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{399D40E9-8199-40EC-952F-CA1C964ADCCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utility", "Utility\Utility.csproj", "{399D40E9-8199-40EC-952F-CA1C964ADCCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
