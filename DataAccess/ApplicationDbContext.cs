@@ -15,26 +15,64 @@ namespace DataAccess
             
         }
 
-        public DbSet<Category> Categories { get; set; } //the physical table "Categories"
-        public DbSet<Manufacturer> Manufacturers { get; set; } //the physical table "Manufacturers"
-        public DbSet<Product> Products { get; set; } //the physical table "Products"
+        public DbSet<AcademicProgram> AcademicPrograms { get; set; }
 
-        //continue adding models
+        public DbSet<Building> Buildings { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "Non-Alcoholic Beverages", DisplayOrder = 1 },
-                new Category { Id = 2, Name = "Wine", DisplayOrder = 2 },
-                new Category { Id = 3, Name = "Snacks", DisplayOrder = 3 }
-                );
+        public DbSet<Campus> Campuses { get; set; }
 
-            modelBuilder.Entity<Manufacturer>().HasData(
-               new Manufacturer { Id = 1, Name = "Coca Cola" },
-               new Manufacturer { Id = 2, Name = "Yellow Tail" },
-               new Manufacturer { Id = 3, Name = "Trinchero Family Estates" },
-               new Manufacturer { Id = 4, Name = "Frito Lay" }
-               );
-        }
+        public DbSet<Classroom> Classrooms { get; set; }
+
+        public DbSet<ClassroomAmenity> ClassroomAmenities { get; set; }
+
+        public DbSet<ClassroomAmenityPossession> ClassroomAmenityPossessions { get; set; }
+
+        public DbSet<Course> Courses { get; set; }
+
+        public DbSet<DaysOfWeek> DaysOfWeeks { get; set; }
+
+        public DbSet<Instructor> Instructors { get; set; }
+
+        public DbSet<LoadReq> LoadReqs { get; set; }
+
+        public DbSet<Modality> Modalities { get; set; }
+
+        public DbSet<PartOfTerm> PartOfTerms { get; set; }
+
+        public DbSet<PayModel> PayModels { get; set; }
+
+        public DbSet<PayOrganization> PayOrganizations { get; set; }
+
+        public DbSet<PreferenceList> PreferenceLists { get; set; }
+
+        public DbSet<PreferenceListDetail> PreferenceListDetails { get; set; }
+
+        public DbSet<ProgramAssignment> ProgramAssignments { get; set; }
+
+        public DbSet<ReleaseTime> ReleaseTimes { get; set; }
+
+        public DbSet<CourseSection> CourseSections { get; set; }
+
+        public DbSet<SectionStatus> SectionStatuses { get; set; }
+
+        public DbSet<Semester> Semesters { get; set; }
+
+        public DbSet<SemesterInstance> SemestersInstances { get; set; }
+
+        public DbSet<Student> Students { get; set; }
+
+        public DbSet<Template> Templates { get; set; }
+
+        public DbSet<TimeBlock> TimeBlocks { get; set; }
+
+        public DbSet<Wishlist> Wishlists { get; set; }
+
+        public DbSet<WishlistDetail> WishlistDetails { get; set; }
+
+        //These ones will eventually not be needed
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<RoleAssignment> RoleAssignments { get; set; }
+
     }
 }
