@@ -14,12 +14,6 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
-        public string? TimeBlockName { get; set; }
-
-        [Required]
-        public string? TimeBlockStart { get; set; }
-
-        [Required]
-        public string? TimeBlockEnd { get; set;}
+        public string? TimeBlockValue { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
-        public string ModalityName { get; set; }
+        public string? ModalityName { get; set; }
     }
 }

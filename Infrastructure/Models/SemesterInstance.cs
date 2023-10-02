@@ -18,10 +18,19 @@ namespace Infrastructure.Models
         public string? SemesterInstanceName { get; set; }
 
         [Required]
-        public string? SemesterInstanceYear { get; set; }
+        public string? ScheduleStatus { get; set; }
 
         [Required]
-        public string? ScheduleStatus { get; set; }
+        public DateTime? StartDate { get; set; }
+
+        [Required]
+        public DateTime? EndDate { get; set; }
+
+        [Required]
+        public DateTime? RegistrationDate { get; set; }
+
+        [Required]
+        public DateTime? EndRegistrationDate { get; set; }
 
         [Required]
         [DisplayName("Semester")]

@@ -47,6 +47,8 @@ namespace DataAccess
 
         public DbSet<PreferenceListDetail> PreferenceListDetails { get; set; }
 
+        public DbSet<PreferenceListDetailModality> PreferenceListDetailModalities { get; set; }
+
         public DbSet<ProgramAssignment> ProgramAssignments { get; set; }
 
         public DbSet<ReleaseTime> ReleaseTimes { get; set; }
@@ -68,6 +70,8 @@ namespace DataAccess
         public DbSet<Wishlist> Wishlists { get; set; }
 
         public DbSet<WishlistDetail> WishlistDetails { get; set; }
+
+        public DbSet<WishlistDetailModality> WishlistDetailModalities { get; set; }
 
         //These ones will eventually not be needed
         public DbSet<Role> Roles { get; set; }

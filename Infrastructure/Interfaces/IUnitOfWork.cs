@@ -42,6 +42,8 @@ namespace Infrastructure.Interfaces
 
         public IGenericRepository<PreferenceListDetail> PreferenceListDetail { get; }
 
+        public IGenericRepository<PreferenceListDetailModality> PreferenceListDetailModality { get; }
+
         public IGenericRepository<ProgramAssignment> ProgramAssignment { get; }
 
         public IGenericRepository<ReleaseTime> ReleaseTime { get; }
@@ -63,6 +65,8 @@ namespace Infrastructure.Interfaces
         public IGenericRepository<Wishlist> Wishlist { get; }
 
         public IGenericRepository<WishlistDetail> WishlistDetail { get; }
+
+        public IGenericRepository<WishlistDetailModality> WishlistDetailModality { get; }
 
         //These ones will eventually not be needed
         public IGenericRepository<Role> Role { get; }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230929203918_AddedAllBaseModels")]
-    partial class AddedAllBaseModels
+    [Migration("20231002205618_AddedFixedBaseModels")]
+    partial class AddedFixedBaseModels
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -230,11 +230,13 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SectionFinalEnrollment")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("SectionFinalEnrollment")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("SectionFirstDayEnrollment")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("SectionFirstDayEnrollment")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SectionNotes")
                         .IsRequired()
@@ -305,7 +307,7 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("InstructorTitle")
+                    b.Property<string>("InstructorName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -424,18 +426,14 @@ namespace DataAccess.Migrations
                     b.Property<int>("InstructorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PreferenceYear")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SemesterId")
+                    b.Property<int>("SemesterInstanceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("InstructorId");
 
-                    b.HasIndex("SemesterId");
+                    b.HasIndex("SemesterInstanceId");
 
                     b.ToTable("PreferenceLists");
                 });
@@ -451,38 +449,56 @@ namespace DataAccess.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DaysOfWeekId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ModalityId")
-                        .HasColumnType("int");
-
                     b.Property<int>("PreferenceListId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PreferencePartOfDay")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("PreferenceRank")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TimeBlockId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
+                    b.HasIndex("PreferenceListId");
+
+                    b.ToTable("PreferenceListDetails");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.PreferenceListDetailModality", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DaysOfWeekId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ModalityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PreferenceListDetailId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PreferencePartOfDay")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TimeBlockId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("DaysOfWeekId");
 
                     b.HasIndex("ModalityId");
 
-                    b.HasIndex("PreferenceListId");
+                    b.HasIndex("PreferenceListDetailId");
 
                     b.HasIndex("TimeBlockId");
 
-                    b.ToTable("PreferenceListDetails");
+                    b.ToTable("PreferenceListDetailModalities");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.ProgramAssignment", b =>
@@ -607,25 +623,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("EndDate")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("EndRegistrationDate")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("RegistrationDate")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("SemesterName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("StartDate")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -640,6 +640,18 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime?>("EndDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("EndRegistrationDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("RegistrationDate")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ScheduleStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -651,9 +663,9 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SemesterInstanceYear")
+                    b.Property<DateTime?>("StartDate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -722,15 +734,7 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("TimeBlockEnd")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TimeBlockName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TimeBlockStart")
+                    b.Property<string>("TimeBlockValue")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -776,19 +780,15 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("SemesterId")
+                    b.Property<int>("SemesterInstanceId")
                         .HasColumnType("int");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("WishlistYear")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("SemesterId");
+                    b.HasIndex("SemesterInstanceId");
 
                     b.HasIndex("StudentId");
 
@@ -806,13 +806,33 @@ namespace DataAccess.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<int>("WishlistId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("WishlistId");
+
+                    b.ToTable("WishlistDetails");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.WishlistDetailModality", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<int>("DaysOfWeekId")
                         .HasColumnType("int");
 
                     b.Property<int>("ModalityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WishlistId")
+                    b.Property<int>("WishlistDetailId")
                         .HasColumnType("int");
 
                     b.Property<string>("WishlistPartOfDay")
@@ -821,15 +841,13 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
-
                     b.HasIndex("DaysOfWeekId");
 
                     b.HasIndex("ModalityId");
 
-                    b.HasIndex("WishlistId");
+                    b.HasIndex("WishlistDetailId");
 
-                    b.ToTable("WishlistDetails");
+                    b.ToTable("WishlistDetailModalities");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.Building", b =>
@@ -1013,15 +1031,15 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Models.Semester", "Semester")
+                    b.HasOne("Infrastructure.Models.SemesterInstance", "SemesterInstance")
                         .WithMany()
-                        .HasForeignKey("SemesterId")
+                        .HasForeignKey("SemesterInstanceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Instructor");
 
-                    b.Navigation("Semester");
+                    b.Navigation("SemesterInstance");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.PreferenceListDetail", b =>
@@ -1032,6 +1050,19 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Infrastructure.Models.PreferenceList", "PreferenceList")
+                        .WithMany()
+                        .HasForeignKey("PreferenceListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("PreferenceList");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.PreferenceListDetailModality", b =>
+                {
                     b.HasOne("Infrastructure.Models.DaysOfWeek", "DaysOfWeek")
                         .WithMany()
                         .HasForeignKey("DaysOfWeekId")
@@ -1044,9 +1075,9 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Models.PreferenceList", "PreferenceList")
+                    b.HasOne("Infrastructure.Models.PreferenceListDetail", "PreferenceListDetail")
                         .WithMany()
-                        .HasForeignKey("PreferenceListId")
+                        .HasForeignKey("PreferenceListDetailId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1056,13 +1087,11 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Course");
-
                     b.Navigation("DaysOfWeek");
 
                     b.Navigation("Modality");
 
-                    b.Navigation("PreferenceList");
+                    b.Navigation("PreferenceListDetail");
 
                     b.Navigation("TimeBlock");
                 });
@@ -1167,9 +1196,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Infrastructure.Models.Wishlist", b =>
                 {
-                    b.HasOne("Infrastructure.Models.Semester", "Semester")
+                    b.HasOne("Infrastructure.Models.SemesterInstance", "SemesterInstance")
                         .WithMany()
-                        .HasForeignKey("SemesterId")
+                        .HasForeignKey("SemesterInstanceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1179,7 +1208,7 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Semester");
+                    b.Navigation("SemesterInstance");
 
                     b.Navigation("Student");
                 });
@@ -1192,6 +1221,19 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Infrastructure.Models.Wishlist", "Wishlist")
+                        .WithMany()
+                        .HasForeignKey("WishlistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Wishlist");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.WishlistDetailModality", b =>
+                {
                     b.HasOne("Infrastructure.Models.DaysOfWeek", "DaysOfWeek")
                         .WithMany()
                         .HasForeignKey("DaysOfWeekId")
@@ -1204,19 +1246,17 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Models.Wishlist", "Wishlist")
+                    b.HasOne("Infrastructure.Models.WishlistDetail", "WishlistDetail")
                         .WithMany()
-                        .HasForeignKey("WishlistId")
+                        .HasForeignKey("WishlistDetailId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Course");
 
                     b.Navigation("DaysOfWeek");
 
                     b.Navigation("Modality");
 
-                    b.Navigation("Wishlist");
+                    b.Navigation("WishlistDetail");
                 });
 #pragma warning restore 612, 618
         }

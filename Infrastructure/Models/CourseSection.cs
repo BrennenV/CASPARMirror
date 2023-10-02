@@ -21,10 +21,10 @@ namespace Infrastructure.Models
         public string? SectionNotes { get; set; }
 
         [Required]
-        public int SectionFirstDayEnrollment { get; set; }
+        public DateTime? SectionFirstDayEnrollment { get; set; }
 
         [Required]
-        public int SectionFinalEnrollment { get; set; }
+        public DateTime? SectionFinalEnrollment { get; set; }
 
         [Required]
         public DateTime? SectionUpdated { get; set; }

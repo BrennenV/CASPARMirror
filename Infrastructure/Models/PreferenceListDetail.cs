@@ -15,9 +15,6 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
-        public string? PreferencePartOfDay { get; set; }
-
-        [Required]
         public int PreferenceRank { get; set; }
 
         [Required]
@@ -28,31 +25,10 @@ namespace Infrastructure.Models
         [DisplayName("Course")]
         public int CourseId { get; set; }
 
-        [Required]
-        [DisplayName("Modality")]
-        public int ModalityId { get; set; }
-
-        [Required]
-        [DisplayName("Days of the Week")]
-        public int DaysOfWeekId { get; set; }
-
-        [Required]
-        [DisplayName("Time Block")]
-        public int TimeBlockId { get; set; }
-
         [ForeignKey("PreferenceListId")]
         public PreferenceList? PreferenceList { get; set; }
 
         [ForeignKey("CourseId")]
         public Course? Course { get; set; }
-
-        [ForeignKey("ModalityId")]
-        public Modality? Modality { get; set; }
-
-        [ForeignKey("DaysOfWeekId")]
-        public DaysOfWeek? DaysOfWeek { get; set; }
-
-        [ForeignKey("TimeBlockId")]
-        public TimeBlock? TimeBlock { get; set; }
     }
 }

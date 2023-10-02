@@ -16,7 +16,7 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
-        public string? InstructorTitle { get; set; }
+        public string? InstructorName { get; set; }
 
         [Required]
         [DisplayName("User")]

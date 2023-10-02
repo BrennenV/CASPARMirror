@@ -15,20 +15,17 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
-        public string? PreferenceYear { get; set; }
-
-        [Required]
         [DisplayName("Instructor")]
         public int InstructorId { get; set; }
 
         [Required]
-        [DisplayName("Semester")]
-        public int SemesterId { get; set; }
+        [DisplayName("Semester Instance")]
+        public int SemesterInstanceId { get; set; }
 
         [ForeignKey("InstructorId")]
         public Instructor? Instructor { get; set; }
 
-        [ForeignKey("SemesterId")]
-        public Semester? Semester { get; set; }
+        [ForeignKey("SemesterInstanceId")]
+        public SemesterInstance? SemesterInstance { get; set; }
     }
 }

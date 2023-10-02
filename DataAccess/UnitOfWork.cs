@@ -51,6 +51,8 @@ namespace DataAccess
 
         public IGenericRepository<PreferenceListDetail> _PreferenceListDetail;
 
+        public IGenericRepository<PreferenceListDetailModality> _PreferenceListDetailModality;
+
         public IGenericRepository<ProgramAssignment> _ProgramAssignment;
 
         public IGenericRepository<ReleaseTime> _ReleaseTime;
@@ -72,6 +74,8 @@ namespace DataAccess
         public IGenericRepository<Wishlist> _Wishlist;
 
         public IGenericRepository<WishlistDetail> _WishlistDetail;
+
+        public IGenericRepository<WishlistDetailModality> _WishlistDetailModality;
 
         //These ones will eventually not be needed
         public IGenericRepository<Role> _Role;
@@ -299,6 +303,19 @@ namespace DataAccess
             }
         }
 
+        public IGenericRepository<PreferenceListDetailModality> PreferenceListDetailModality
+        {
+            get
+            {
+                if (_PreferenceListDetailModality == null)
+                {
+                    _PreferenceListDetailModality = new GenericRepository<PreferenceListDetailModality>(_dbContext);
+                }
+
+                return _PreferenceListDetailModality;
+            }
+        }
+
         public IGenericRepository<ProgramAssignment> ProgramAssignment
         {
             get
@@ -426,6 +443,19 @@ namespace DataAccess
                 }
 
                 return _WishlistDetail;
+            }
+        }
+
+        public IGenericRepository<WishlistDetailModality> WishlistDetailModality
+        {
+            get
+            {
+                if (_WishlistDetailModality == null)
+                {
+                    _WishlistDetailModality = new GenericRepository<WishlistDetailModality>(_dbContext);
+                }
+
+                return _WishlistDetailModality;
             }
         }
 

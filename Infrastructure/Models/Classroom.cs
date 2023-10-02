@@ -21,7 +21,7 @@ namespace Infrastructure.Models
         public int ClassroomSeats { get; set; }
 
         [Required]
-        public string ClassroomNumber { get; set; }
+        public string? ClassroomNumber { get; set; }
 
         [Required]
         [DisplayName("Building")]
