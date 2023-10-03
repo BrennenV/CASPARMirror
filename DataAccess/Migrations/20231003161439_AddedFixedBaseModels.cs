@@ -194,7 +194,7 @@ namespace DataAccess.Migrations
                     CourseTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CourseCreditHours = table.Column<int>(type: "int", nullable: false),
                     CourseNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CourseDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CourseDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProgramId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -454,7 +454,6 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ReleaseTimeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReleaseTimeAmount = table.Column<int>(type: "int", nullable: false),
                     ReleaseTimeNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SemesterId = table.Column<int>(type: "int", nullable: false),
@@ -535,12 +534,12 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BannerCRN = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SectionNotes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SectionFirstDayEnrollment = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SectionFinalEnrollment = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BannerCRN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SectionNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SectionFirstDayEnrollment = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SectionFinalEnrollment = table.Column<DateTime>(type: "datetime2", nullable: true),
                     SectionUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SectionBannerUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SectionBannerUpdated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CourseId = table.Column<int>(type: "int", nullable: false),
                     SemesterInstanceId = table.Column<int>(type: "int", nullable: false),
                     InstructorId = table.Column<int>(type: "int", nullable: false),
@@ -683,7 +682,6 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PreferencePartOfDay = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PreferenceListDetailId = table.Column<int>(type: "int", nullable: false),
                     ModalityId = table.Column<int>(type: "int", nullable: false),
                     DaysOfWeekId = table.Column<int>(type: "int", nullable: false),
@@ -724,7 +722,7 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    WishlistPartOfDay = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WishlistPartOfDay = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WishlistDetailId = table.Column<int>(type: "int", nullable: false),
                     ModalityId = table.Column<int>(type: "int", nullable: false),
                     DaysOfWeekId = table.Column<int>(type: "int", nullable: false)

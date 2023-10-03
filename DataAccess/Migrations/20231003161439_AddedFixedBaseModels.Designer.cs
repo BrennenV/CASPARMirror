@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231002205618_AddedFixedBaseModels")]
+    [Migration("20231003161439_AddedFixedBaseModels")]
     partial class AddedFixedBaseModels
     {
         /// <inheritdoc />
@@ -166,7 +166,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CourseDescription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CourseNotes")
@@ -199,7 +198,6 @@ namespace DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BannerCRN")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ClassroomId")
@@ -227,19 +225,15 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("SectionBannerUpdated")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("SectionFinalEnrollment")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("SectionFirstDayEnrollment")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SectionNotes")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SectionStatusId")
@@ -481,10 +475,6 @@ namespace DataAccess.Migrations
                     b.Property<int>("PreferenceListDetailId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PreferencePartOfDay")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("TimeBlockId")
                         .HasColumnType("int");
 
@@ -537,10 +527,6 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("ReleaseTimeAmount")
                         .HasColumnType("int");
-
-                    b.Property<string>("ReleaseTimeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ReleaseTimeNotes")
                         .HasColumnType("nvarchar(max)");
@@ -836,7 +822,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("WishlistPartOfDay")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
