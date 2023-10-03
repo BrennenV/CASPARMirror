@@ -15,9 +15,6 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
-        public string? ReleaseTimeName { get; set; }
-
-        [Required]
         public int ReleaseTimeAmount { get; set; }
 
         public string? ReleaseTimeNotes { get; set; }

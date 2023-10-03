@@ -23,7 +23,6 @@ namespace Infrastructure.Models
         [Required]
         public string? CourseNumber { get; set; }
 
-        [Required]
         public string? CourseDescription { get; set; }
 
         public string? CourseNotes { get; set; }

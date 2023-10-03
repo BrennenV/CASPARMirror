@@ -14,7 +14,6 @@ namespace Infrastructure.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
         public string? WishlistPartOfDay { get; set; }
 
         [Required]
@@ -25,7 +24,6 @@ namespace Infrastructure.Models
         [DisplayName("Modality")]
         public int ModalityId { get; set; }
 
-        [Required]
         [DisplayName("Days of the Week")]
         public int DaysOfWeekId { get; set; }
 

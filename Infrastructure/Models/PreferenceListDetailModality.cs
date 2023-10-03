@@ -15,9 +15,6 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
-        public string? PreferencePartOfDay { get; set; }
-
-        [Required]
         [DisplayName("Preference List Detail")]
         public int PreferenceListDetailId { get; set; }
 

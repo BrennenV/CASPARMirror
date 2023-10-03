@@ -14,22 +14,17 @@ namespace Infrastructure.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
         public string? BannerCRN { get; set; }
 
-        [Required]
         public string? SectionNotes { get; set; }
 
-        [Required]
         public DateTime? SectionFirstDayEnrollment { get; set; }
 
-        [Required]
         public DateTime? SectionFinalEnrollment { get; set; }
 
         [Required]
         public DateTime? SectionUpdated { get; set; }
 
-        [Required]
         public DateTime? SectionBannerUpdated { get; set; }
 
         [Required]
@@ -40,35 +35,27 @@ namespace Infrastructure.Models
         [DisplayName("Semester Instance")]
         public int SemesterInstanceId { get; set; }
 
-        [Required]
         [DisplayName("Instructor")]
         public int InstructorId { get; set; }
 
-        [Required]
         [DisplayName("Modality")]
         public int ModalityId { get; set; }
 
-        [Required]
         [DisplayName("Classroom")]
         public int ClassroomId { get; set; }
 
-        [Required]
         [DisplayName("Time Block")]
         public int TimeBlockId { get; set; }
 
-        [Required]
         [DisplayName("Days of Week")]
         public int DaysOfWeekId { get; set; }
 
-        [Required]
         [DisplayName("Part of Term")]
         public int PartOfTermId { get; set; }
 
-        [Required]
         [DisplayName("Pay Model")]
         public int PayModelId { get; set; }
 
-        [Required]
         [DisplayName("Pay Organization")]
         public int PayOrganizationId { get; set; }
 
