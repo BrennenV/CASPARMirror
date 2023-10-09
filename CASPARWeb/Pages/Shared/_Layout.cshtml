@@ -25,12 +25,6 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
                         <li>
                             <div class="dropdown">
                                 <button class="btn dropdown-toggle text-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -39,7 +33,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="#">My Profile</a></li>
                                     <div class="dropdown-divider"></div>
-                                    <li><a class="dropdown-item" href="#">Schedual Preferences</a></li>
+                                    <li><a class="dropdown-item" href="#">Schedule Preferences</a></li>
                                     <!-- Add more dropdown items as needed -->
                                 </ul>
                             </div>
@@ -52,9 +46,9 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="#">My Profile</a></li>
                                     <div class="dropdown-divider"></div>
-                                    <li><a class="dropdown-item" href="#">Schedual Preferences</a></li>
-                                    <li><a class="dropdown-item" href="#">Create Ticket</a></li>
-                                    <li><a class="dropdown-item" href="#">View Your Schedual</a></li>
+                                    <li><a class="dropdown-item" href="#">Schedule Preferences</a></li>
+                                    <li><a class="dropdown-item" href="#">Request Release Time</a></li>
+                                    <li><a class="dropdown-item" href="#">View Your Schedule</a></li>
                                     <!-- Add more dropdown items as needed -->
                                 </ul>
                             </div>
@@ -67,15 +61,28 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="#">My Profile</a></li>
                                     <div class="dropdown-divider"></div>
-                                    <li><a class="dropdown-item" href="#">Semester Templates</a></li>
-                                    <li><a class="dropdown-item" href="#">Classroom Details</a></li>
+                                    <li><a class="dropdown-item" href="#">Semester Templates</a></li>                             
+                                    <li><a class="dropdown-item" href="#">Semesters</a></li>
+                                    <li><a class="dropdown-item" href="#">Part of Terms</a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li><a class="dropdown-item" href="#">Instructor Load Requirements</a></li>
+                                    <li><a class="dropdown-item" href="#">Instructor Release Times</a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li><a class="dropdown-item" href="#">Pay Models</a></li>
+                                    <li><a class="dropdown-item" href="#">Pay Organizations</a></li>
                                     <div class="dropdown-divider"></div>
                                     <li><a class="dropdown-item" href="#">Campuses</a></li>
                                     <li><a class="dropdown-item" href="#">Buildings</a></li>
+                                    <li><a class="dropdown-item" href="#">Classrooms</a></li>
+                                    <li><a class="dropdown-item" href="#">Classroom Amenities</a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li><a class="dropdown-item" href="#">Academic Programs</a></li>
+                                    <li><a class="dropdown-item" href="#">Modalities</a></li>
+                                    <li><a class="dropdown-item" href="#">Section Statuses</a></li>
                                     <div class="dropdown-divider"></div>
                                     <li><a class="dropdown-item" href="#">Days</a></li>
                                     <li><a class="dropdown-item" href="#">Time Slots</a></li>
-                                    <li><a class="dropdown-item" href="#">Time of Day</a></li>
+                                    <li><a class="dropdown-item" href="#">Time of Days</a></li>
                                     <div class="dropdown-divider"></div>
                                     <li><a class="dropdown-item" href="#">Users</a></li>
                                     <li><a class="dropdown-item" href="#">Roles</a></li>
@@ -91,9 +98,8 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="#">My Profile</a></li>
                                     <div class="dropdown-divider"></div>
-                                    <li><a class="dropdown-item" href="#">Semester Schedule</a></li>
-                                    <li><a class="dropdown-item" href="#">Instructors</a></li><!--This is were we will view the instructor tickets-->
-                                    <li><a class="dropdown-item" href="#">Programs/Classes</a></li>
+                                    <li><a class="dropdown-item" href="#">Semester Schedule</a></li> 
+                                    <li><a class="dropdown-item" href="#">Instructor Release Requests</a></li>
                                     <!-- Add more dropdown items as needed -->
                                 </ul>
                             </div>
@@ -120,11 +126,10 @@
                                     <!--Secretary Reports-->
                                     <li><a class="dropdown-item" href="#">Offered Courses</a></li>
                                     <!--Administrator Reports-->
-                                    <li><a class="dropdown-item" href="#">Budget</a></li>
-                                    <li><a class="dropdown-item" href="#">Course Demand Hist</a></li>
                                     <li><a class="dropdown-item" href="#">1st, 3rd week enrollment data</a></li>
                                     <!--Program Coordinator Reports-->
                                     <li><a class="dropdown-item" href="#">Student Course Preferences</a></li>
+                                    <li><a class="dropdown-item" href="#">Instructor Overview</a></li> <!-- Shows the final load and overload for each instructor -->
                                     <!-- Add more dropdown items as needed -->
                                 </ul>
                             </div>
