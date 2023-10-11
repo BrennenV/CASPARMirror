@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedFixedBaseModels : Migration
+    public partial class initialize : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -230,7 +230,7 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SemestersInstances",
+                name: "SemesterInstances",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -245,9 +245,9 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SemestersInstances", x => x.Id);
+                    table.PrimaryKey("PK_SemesterInstances", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SemestersInstances_Semesters_SemesterId",
+                        name: "FK_SemesterInstances_Semesters_SemesterId",
                         column: x => x.SemesterId,
                         principalTable: "Semesters",
                         principalColumn: "Id",
@@ -278,7 +278,8 @@ namespace DataAccess.Migrations
                 name: "RoleAssignments",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -415,9 +416,9 @@ namespace DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PreferenceLists_SemestersInstances_SemesterInstanceId",
+                        name: "FK_PreferenceLists_SemesterInstances_SemesterInstanceId",
                         column: x => x.SemesterInstanceId,
-                        principalTable: "SemestersInstances",
+                        principalTable: "SemesterInstances",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -489,9 +490,9 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Wishlists", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Wishlists_SemestersInstances_SemesterInstanceId",
+                        name: "FK_Wishlists_SemesterInstances_SemesterInstanceId",
                         column: x => x.SemesterInstanceId,
-                        principalTable: "SemestersInstances",
+                        principalTable: "SemesterInstances",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -610,9 +611,9 @@ namespace DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CourseSections_SemestersInstances_SemesterInstanceId",
+                        name: "FK_CourseSections_SemesterInstances_SemesterInstanceId",
                         column: x => x.SemesterInstanceId,
-                        principalTable: "SemestersInstances",
+                        principalTable: "SemesterInstances",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -916,8 +917,8 @@ namespace DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SemestersInstances_SemesterId",
-                table: "SemestersInstances",
+                name: "IX_SemesterInstances_SemesterId",
+                table: "SemesterInstances",
                 column: "SemesterId");
 
             migrationBuilder.CreateIndex(
@@ -1059,7 +1060,7 @@ namespace DataAccess.Migrations
                 name: "AcademicPrograms");
 
             migrationBuilder.DropTable(
-                name: "SemestersInstances");
+                name: "SemesterInstances");
 
             migrationBuilder.DropTable(
                 name: "Students");

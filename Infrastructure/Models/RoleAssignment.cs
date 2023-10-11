@@ -14,7 +14,7 @@ namespace Infrastructure.Models
     {
         //THIS MODEL SHOULD EVENTUALLY BE REPLACED
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [DisplayName("Role")]
