@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231003161439_AddedFixedBaseModels")]
-    partial class AddedFixedBaseModels
+    [Migration("20231011182752_initialize")]
+    partial class initialize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -562,8 +562,11 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Infrastructure.Models.RoleAssignment", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
@@ -657,7 +660,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("SemesterId");
 
-                    b.ToTable("SemestersInstances");
+                    b.ToTable("SemesterInstances");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.Student", b =>

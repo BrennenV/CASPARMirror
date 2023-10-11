@@ -559,8 +559,11 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Infrastructure.Models.RoleAssignment", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
@@ -654,7 +657,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("SemesterId");
 
-                    b.ToTable("SemestersInstances");
+                    b.ToTable("SemesterInstances");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.Student", b =>

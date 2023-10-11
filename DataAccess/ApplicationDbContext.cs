@@ -59,7 +59,7 @@ namespace DataAccess
 
         public DbSet<Semester> Semesters { get; set; }
 
-        public DbSet<SemesterInstance> SemestersInstances { get; set; }
+        public DbSet<SemesterInstance> SemesterInstances { get; set; }
 
         public DbSet<Student> Students { get; set; }
 

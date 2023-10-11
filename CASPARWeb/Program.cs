@@ -14,6 +14,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<UnitOfWork>();
+builder.Services.AddScoped<DbInitializer>();
 
 var app = builder.Build();
 
@@ -34,8 +35,17 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+SeedDatabase();
+
 app.UseAuthorization();
 
 app.MapRazorPages();
 
 app.Run();
+
+void SeedDatabase()
+{
+	using var scope = app.Services.CreateScope();
+	var dbInitializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
+	dbInitializer.Initialize();
+}
