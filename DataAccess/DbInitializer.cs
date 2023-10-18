@@ -614,6 +614,26 @@ namespace DataAccess
 					PayOrganizationId = 1,
 					SectionStatusId = 1
 				},
+				new CourseSection
+				{
+					BannerCRN = "34569",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2021, 6, 23),
+					SectionFinalEnrollment = new DateTime(2021, 8, 23),
+					SectionUpdated = new DateTime(2021, 8, 23),
+					SectionBannerUpdated = new DateTime(2021, 8, 23),
+					CourseId = 4,
+					SemesterInstanceId = 2,
+					InstructorId = 1,
+					ModalityId = 1,
+					ClassroomId = 3,
+					TimeBlockId = 3,
+					DaysOfWeekId = 3,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1
+				},
 			};
 
 			foreach (var c in CourseSections)

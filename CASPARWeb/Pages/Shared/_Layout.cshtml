@@ -44,7 +44,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="#">My Profile</a></li>
                                     <div class="dropdown-divider"></div>
-                                    <li><a class="dropdown-item" href="#">Schedule Preferences</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Instructor/PreferenceLists/Index">Schedule Preferences</a></li>
                                     <li><a class="dropdown-item" href="#">Request Release Time</a></li>
                                     <li><a class="dropdown-item" href="#">View Your Schedule</a></li>
                                     <!-- Add more dropdown items as needed -->
@@ -144,6 +144,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <partial name="_ToastrNotification" />
             @RenderBody()
         </main>
     </div>

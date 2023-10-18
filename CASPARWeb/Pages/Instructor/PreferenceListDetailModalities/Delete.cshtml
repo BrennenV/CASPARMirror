@@ -1,0 +1,43 @@
+﻿@page
+@model CASPARWeb.Pages.Instructor.PreferenceListDetailModalities.DeleteModel
+@{
+}
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary">Delete Modality</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input type="hidden" asp-for="objPreferenceListDetailModality.Id" />
+            <input type="hidden" asp-for="objPreferenceListDetailModality.PreferenceListDetailId">
+            <div class="border p-3">
+                <div class="mb-3 col-6">
+                    <label asp-for="objPreferenceListDetailModality.ModalityId"></label>
+                    <select disabled id="ddlSemesterIntance" asp-for="objPreferenceListDetailModality.ModalityId" asp-items="@Model.ModalityList" class="form-select"></select>
+                </div>
+                <div class="mb-3 col-6">
+                    <label asp-for="objPreferenceListDetailModality.DaysOfWeekId"></label>
+                    <select disabled id="ddlSemesterIntance" asp-for="objPreferenceListDetailModality.DaysOfWeekId" asp-items="@Model.DaysOfWeekList" class="form-select"></select>
+                </div>
+                <div class="mb-3 col-6">
+                    <label asp-for="objPreferenceListDetailModality.TimeBlockId"></label>
+                    <select disabled id="ddlSemesterIntance" asp-for="objPreferenceListDetailModality.TimeBlockId" asp-items="@Model.TimeBlockList" class="form-select"></select>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-danger form-control">Delete</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-page="./Index" asp-route-id="@Model.objPreferenceListDetailModality.PreferenceListDetail" class="btn btn-outline-primary border  form-control">
+                            Back to Preference List Items
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
