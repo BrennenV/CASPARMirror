@@ -1,0 +1,49 @@
+﻿@page
+@model CASPARWeb.Pages.Instructor.PreferenceListDetailModalities.UpsertModel
+@{
+}
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary py-2">@(Model.objPreferenceListDetailModality.Id != 0 ? "Update " : "Add ") Preference List</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input type="hidden" asp-for="objPreferenceListDetailModality.Id">
+            <input type="hidden" asp-for="objPreferenceListDetailModality.PreferenceListDetailId">
+            <div class="border p-3">
+                <div class="form-floating py-2 col-12">
+                    <div class="mb-3 col-6">
+                        <label asp-for="objPreferenceListDetailModality.ModalityId"></label>
+                        <select id="ddlCourse" asp-for="objPreferenceListDetailModality.ModalityId" asp-items="@Model.ModalityList" class="form-select">
+                            <option disabled selected>--Select Modality--</option>
+                        </select>
+
+                        <label asp-for="objPreferenceListDetailModality.DaysOfWeekId"></label>
+                        <select id="ddlCourse" asp-for="objPreferenceListDetailModality.DaysOfWeekId" asp-items="@Model.DaysOfWeekList" class="form-select">
+                            <option disabled selected>--Select Days of Week--</option>
+                        </select>
+
+                        <label asp-for="objPreferenceListDetailModality.TimeBlockId"></label>
+                        <select id="ddlCourse" asp-for="objPreferenceListDetailModality.TimeBlockId" asp-items="@Model.TimeBlockList" class="form-select">
+                            <option disabled selected>--Select Time Block--</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">@(Model.objPreferenceListDetailModality.Id != 0 ? "Update " : "Add ")</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-page="./Index" asp-route-id="@Model.objPreferenceListDetailModality.PreferenceListDetailId" class=" btn btn-outline-primary border form-control">
+                            Back to List Item Modalities
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

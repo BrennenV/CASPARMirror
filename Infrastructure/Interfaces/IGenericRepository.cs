@@ -34,7 +34,7 @@ namespace Infrastructure.Interfaces
         // Expression is the same as before (WHERE clause)
         // A second Expression is added for Order By (column as an int)
         // Includes allows JOINS
-        IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate, Expression<Func<T, int>>? orderBy = null, string? includes = null);
+        IEnumerable<T> GetAll(Expression<Func<T, bool>>? predicate = null, Expression<Func<T, int>>? orderBy = null, string? includes = null);
 
         //Same as GetAll but asynchronous call
         Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> predicate, Expression<Func<T, int>>? orderBy = null, string? includes = null);
