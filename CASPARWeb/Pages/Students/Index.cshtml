@@ -13,7 +13,7 @@
 		</div><!-- End 1st Column-->
 		<div class="col-3 text-end">
 			<!--25% row right justified-->
-			<select id="ddlStudent" class="form-select">
+			<select id="ddlStudent" class="form-select rounded">
 				<option disabled selected>--Select Semester--</option>
 				<option value="1">Fall 2023</option>
 				<option value="2">Spring 2024</option>
@@ -30,7 +30,7 @@
 		</div> <!--End 3rd Column-->
 	</div> <!--End Row-->
 
-	<table class="table table-bordered table-striped" id="DT_Products" style="width:100%">
+	<table class="table table-bordered table-striped" id="DT_Students" style="width:100%">
 		<thead>
 			<tr>
 				<th>
@@ -48,161 +48,9 @@
 				<th>&nbsp;</th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<select id="ddlStudent" class="form-select">
-						<option disabled selected>--Select Course--</option>
-						<option value="1">CS 1010 - Introduction to Interactive Entertainment</option>
-						<option value="2">CS 2450 - Software Engineering I</option>
-						<option value="3">CS 2350 - Client-Side Web Development</option>
-						<option value="4">CS 2130 - Computational Structures</option>
-						<!--Will be replaced with db data-->
-					</select>
-				</td>
-				<td>
-					<select id="ddlStudent" class="form-select">
-						<option disabled selected>--Select Modality--</option>
-						<option value="1">FTF Face to Face</option>
-						<option value="2">VTL Virtual</option>
-						<option value="3">ONL Online</option>
-						<option value="4">Flex</option>
-						<option value="5">Hybrid</option>
-						<!--Will be replaced with db data-->
-					</select>
-				</td>
-				<td>
-					<select id="ddlStudent" class="form-select">
-						<option disabled selected>--Select Campus--</option>
-						<option value="1">Ogden</option>
-						<option value="2">Davis</option>
-						<option value="3">SLCC</option>
-						<option value="4">Farmington</option>
-						<!--Will be replaced with db data-->
-					</select>
-				</td>
-				<td>
-					<select id="ddlStudent" class="form-select">
-						<option disabled selected>--Select Time--</option>
-						<option value="1">Morning</option>
-						<option value="2">Afternoon</option>
-						<option value="3">Evening</option>
-						<!--Will be replaced with db data-->
-					</select>
-				</td>
-				<td>
-					<div class="text-center">
-						<a href="#" class="btn btn-primary text-white mt-1 rounded" style="cursor:pointer; width: 100px;">
-							<i class="bi bi-save2"></i> Save
-						</a>
-						<a href="#" class="btn btn-outline-danger mt-1 rounded" style="cursor:pointer; width: 100px;">
-							<i class="bi bi-x-lg"></i> Cancel
-						</a>
-					</div>
-				</td>
-			</tr>
-			<!--Next Row-->
-			<tr>
-				<td>
-					CS 1010 - Introduction to Interactive Entertainment
-				</td>
-				<td class="text-center">
-					FTF Face to Face
-				</td>
-				<td class="text-center">
-					Ogden
-				</td>
-				<td class="text-center">
-					Morning
-				</td>
-				<td>
-					<div class="text-center">
-						<a href="#" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; width: 100px;">
-							<i class="bi bi-pencil-square"></i> Edit
-						</a>
-						<a href="#" class="btn btn-danger text-white mt-1 rounded" style="cursor:pointer; width: 100px;">
-							<i class="bi bi-trash"></i> Delete
-						</a>
-					</div>
-				</td>
-			</tr>
-			<!--Next Row-->
-			<tr>
-				<td>
-					CS 2450 - Software Engineering I
-				</td>
-				<td class="text-center">
-					ONL Online
-				</td>
-				<td class="text-center">
-				</td>
-				<td class="text-center">
-				</td>
-				<td>
-					<div class="text-center">
-						<a href="#" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; width: 100px;">
-							<i class="bi bi-pencil-square"></i> Edit
-						</a>
-						<a href="#" class="btn btn-danger text-white mt-1 rounded" style="cursor:pointer; width: 100px;">
-							<i class="bi bi-trash"></i> Delete
-						</a>
-					</div>
-				</td>
-			</tr>
-			<!--Next Row-->
-			<tr>
-				<td>
-					CS 2350 - Client-Side Web Development
-				</td>
-				<td class="text-center">
-					Hybrid
-				</td>
-				<td class="text-center">
-					Davis
-				</td>
-				<td class="text-center">
-					Afternoon
-				</td>
-				<td>
-					<div class="text-center">
-						<a href="#" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; width: 100px;">
-							<i class="bi bi-pencil-square"></i> Edit
-						</a>
-						</a>
-						<a href="#" class="btn btn-danger text-white mt-1 rounded" style="cursor:pointer; width: 100px;">
-							<i class="bi bi-trash"></i> Delete
-						</a>
-						</a>
-					</div>
-				</td>
-			</tr>
-			<!--Next Row-->
-			<tr>
-				<td>
-					CS 2130 - Computational Structures
-				</td>
-				<td class="text-center">
-					VTL Virtual
-				</td>
-				<td class="text-center">
-				</td>
-				<td class="text-center">
-					Evening
-				</td>
-				<td>
-					<div class="text-center">
-						<a href="#" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; width: 100px;">
-							<i class="bi bi-pencil-square"></i> Edit
-						</a>
-						<a href="#" class="btn btn-danger text-white mt-1 rounded" style="cursor:pointer; width: 100px;">
-							<i class="bi bi-trash"></i> Delete
-						</a>
-					</div>
-				</td>
-			</tr>
-		</tbody>
+		
 	</table>
 </div> <!--Close Container-->
 @section Scripts{
-	<script src="~/js/products.js"></script>
+	<script src="~/js/students.js"></script>
 }
