@@ -477,7 +477,7 @@ namespace DataAccess
 			{
 				new SemesterInstance { 
 					SemesterInstanceName = "Fall 2021", 
-					ScheduleStatus = "Open", 
+					ScheduleStatus = "Active", 
 					StartDate = new DateTime(2021, 8, 23), 
 					EndDate = new DateTime(2021, 12, 10), 
 					RegistrationDate = new DateTime(2021, 4, 1), 
@@ -487,7 +487,7 @@ namespace DataAccess
 				new SemesterInstance
 				{
 					SemesterInstanceName = "Spring 2022", 
-					ScheduleStatus = "Open", 
+					ScheduleStatus = "Active", 
 					StartDate = new DateTime(2022, 1, 10), 
 					EndDate = new DateTime(2022, 4, 29), 
 					RegistrationDate = new DateTime(2021, 10, 1), 
@@ -497,7 +497,7 @@ namespace DataAccess
 				new SemesterInstance
 				{
 					SemesterInstanceName = "Summer 2022", 
-					ScheduleStatus = "Open", 
+					ScheduleStatus = "Active", 
 					StartDate = new DateTime(2022, 5, 9), 
 					EndDate = new DateTime(2022, 8, 5), 
 					RegistrationDate = new DateTime(2022, 1, 1), 
