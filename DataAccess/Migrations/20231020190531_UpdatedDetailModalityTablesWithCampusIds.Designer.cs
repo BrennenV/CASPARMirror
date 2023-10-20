@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231020190531_UpdatedDetailModalityTablesWithCampusIds")]
+    partial class UpdatedDetailModalityTablesWithCampusIds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,28 +200,28 @@ namespace DataAccess.Migrations
                     b.Property<string>("BannerCRN")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ClassroomId")
+                    b.Property<int>("ClassroomId")
                         .HasColumnType("int");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DaysOfWeekId")
+                    b.Property<int>("DaysOfWeekId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("InstructorId")
+                    b.Property<int>("InstructorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ModalityId")
+                    b.Property<int>("ModalityId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PartOfTermId")
+                    b.Property<int>("PartOfTermId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PayModelId")
+                    b.Property<int>("PayModelId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PayOrganizationId")
+                    b.Property<int>("PayOrganizationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("SectionBannerUpdated")
@@ -233,16 +236,17 @@ namespace DataAccess.Migrations
                     b.Property<string>("SectionNotes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SectionStatusId")
+                    b.Property<int>("SectionStatusId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("SectionUpdated")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("SemesterInstanceId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TimeBlockId")
+                    b.Property<int>("TimeBlockId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -895,7 +899,9 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Infrastructure.Models.Classroom", "Classroom")
                         .WithMany()
-                        .HasForeignKey("ClassroomId");
+                        .HasForeignKey("ClassroomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Infrastructure.Models.Course", "Course")
                         .WithMany()
@@ -905,31 +911,45 @@ namespace DataAccess.Migrations
 
                     b.HasOne("Infrastructure.Models.DaysOfWeek", "DaysOfWeek")
                         .WithMany()
-                        .HasForeignKey("DaysOfWeekId");
+                        .HasForeignKey("DaysOfWeekId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Infrastructure.Models.Instructor", "Instructor")
                         .WithMany()
-                        .HasForeignKey("InstructorId");
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Infrastructure.Models.Modality", "Modality")
                         .WithMany()
-                        .HasForeignKey("ModalityId");
+                        .HasForeignKey("ModalityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Infrastructure.Models.PartOfTerm", "PartOfTerm")
                         .WithMany()
-                        .HasForeignKey("PartOfTermId");
+                        .HasForeignKey("PartOfTermId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Infrastructure.Models.PayModel", "PayModel")
                         .WithMany()
-                        .HasForeignKey("PayModelId");
+                        .HasForeignKey("PayModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Infrastructure.Models.PayOrganization", "PayOrganization")
                         .WithMany()
-                        .HasForeignKey("PayOrganizationId");
+                        .HasForeignKey("PayOrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Infrastructure.Models.SectionStatus", "SectionStatus")
                         .WithMany()
-                        .HasForeignKey("SectionStatusId");
+                        .HasForeignKey("SectionStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Infrastructure.Models.SemesterInstance", "SemesterInstance")
                         .WithMany()
@@ -939,7 +959,9 @@ namespace DataAccess.Migrations
 
                     b.HasOne("Infrastructure.Models.TimeBlock", "TimeBlock")
                         .WithMany()
-                        .HasForeignKey("TimeBlockId");
+                        .HasForeignKey("TimeBlockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Classroom");
 
