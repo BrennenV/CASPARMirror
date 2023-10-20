@@ -17,15 +17,19 @@
             <div class="border p-3">
                 <div class="mb-3 col-6">
                     <label asp-for="objPreferenceListDetailModality.ModalityId"></label>
-                    <select disabled id="ddlSemesterIntance" asp-for="objPreferenceListDetailModality.ModalityId" asp-items="@Model.ModalityList" class="form-select"></select>
+                    <select disabled id="ddlModality" asp-for="objPreferenceListDetailModality.ModalityId" asp-items="@Model.ModalityList" class="form-select"></select>
+                </div>
+                <div class="mb-3 col-6">
+                    <label asp-for="objPreferenceListDetailModality.CampusId"></label>
+                    <select disabled id="ddlCampus" asp-for="objPreferenceListDetailModality.CampusId" asp-items="@Model.CampusList" class="form-select"></select>
                 </div>
                 <div class="mb-3 col-6">
                     <label asp-for="objPreferenceListDetailModality.DaysOfWeekId"></label>
-                    <select disabled id="ddlSemesterIntance" asp-for="objPreferenceListDetailModality.DaysOfWeekId" asp-items="@Model.DaysOfWeekList" class="form-select"></select>
+                    <select disabled id="ddlDaysOfWeek" asp-for="objPreferenceListDetailModality.DaysOfWeekId" asp-items="@Model.DaysOfWeekList" class="form-select"></select>
                 </div>
                 <div class="mb-3 col-6">
                     <label asp-for="objPreferenceListDetailModality.TimeBlockId"></label>
-                    <select disabled id="ddlSemesterIntance" asp-for="objPreferenceListDetailModality.TimeBlockId" asp-items="@Model.TimeBlockList" class="form-select"></select>
+                    <select disabled id="ddlTimeBlock" asp-for="objPreferenceListDetailModality.TimeBlockId" asp-items="@Model.TimeBlockList" class="form-select"></select>
                 </div>
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">

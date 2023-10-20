@@ -12,6 +12,7 @@ namespace CASPARWeb.Pages.Instructor.PreferenceListDetailModalities
         [BindProperty]
         public PreferenceListDetailModality objPreferenceListDetailModality { get; set; }
         public IEnumerable<SelectListItem> ModalityList { get; set; }
+        public IEnumerable<SelectListItem> CampusList { get; set; }
         public IEnumerable<SelectListItem> DaysOfWeekList { get; set; }
         public IEnumerable<SelectListItem> TimeBlockList { get; set; }
 
@@ -20,6 +21,7 @@ namespace CASPARWeb.Pages.Instructor.PreferenceListDetailModalities
             _unitOfWork = unitOfWork;
             objPreferenceListDetailModality = new PreferenceListDetailModality();
             ModalityList = new List<SelectListItem>();
+            CampusList = new List<SelectListItem>();
             DaysOfWeekList = new List<SelectListItem>();
             TimeBlockList = new List<SelectListItem>();
         }
@@ -32,6 +34,12 @@ namespace CASPARWeb.Pages.Instructor.PreferenceListDetailModalities
                                 Text = c.ModalityName,
                                 Value = c.Id.ToString()
                             });
+            CampusList = _unitOfWork.Campus.GetAll(null)
+                           .Select(c => new SelectListItem
+                           {
+                               Text = c.CampusName,
+                               Value = c.Id.ToString()
+                           });
             DaysOfWeekList = _unitOfWork.DaysOfWeek.GetAll()
                             .Select(c => new SelectListItem
                             {

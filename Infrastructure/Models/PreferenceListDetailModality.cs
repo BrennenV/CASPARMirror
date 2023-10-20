@@ -30,6 +30,10 @@ namespace Infrastructure.Models
         [DisplayName("Time Block")]
         public int TimeBlockId { get; set; }
 
+        [Required]
+        [DisplayName("Campus")]
+        public int CampusId { get; set; }
+
         [ForeignKey("PreferenceListDetailId")]
         public PreferenceListDetail? PreferenceListDetail { get; set; }
 
@@ -41,5 +45,8 @@ namespace Infrastructure.Models
 
         [ForeignKey("TimeBlockId")]
         public TimeBlock? TimeBlock { get; set; }
+
+        [ForeignKey("CampusId")]
+        public Campus? Campus { get; set; }
     }
 }

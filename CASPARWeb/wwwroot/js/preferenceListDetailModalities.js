@@ -13,9 +13,10 @@ function loadList() {
         },
         "columns": [
             //should not be capital
-            { "data": "modality.modalityName", "width": "25%" },
-            { "data": "daysOfWeek.daysOfWeekTitle", "width": "25%" },
-            { "data": "timeBlock.timeBlockValue", "width": "20%" },
+            { "data": "modality.modalityName", "width": "20%" },
+            { "data": "campus.campusName", "width": "20%" },
+            { "data": "daysOfWeek.daysOfWeekTitle", "width": "20%" },
+            { "data": "timeBlock.timeBlockValue", "width": "10%" },
             {
                 "data": "id",
                 "render": function (data) {
