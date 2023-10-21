@@ -1,0 +1,38 @@
+﻿@page
+@model CASPARWeb.Pages.Administrator.ReleaseTimes.IndexModel
+@{
+}
+<div class="container">
+    <div class="row pt=4">
+        <!--Start Row-->
+        <div class="col-6">
+            <!--50% of row-->
+            <h2 class="text-primary">
+                Release Times
+            </h2>
+        </div><!-- End 1st Column-->
+    </div> <!--End Row-->
+    <table class="table table-bordered table-striped" id="DT_ReleaseTimes" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Instructor
+                </th>
+                <th>
+                    Semester
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Notes
+                </th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+    </table>
+</div> <!--Close Container-->
+@section Scripts
+{
+    <script src="~/js/releaseTimes.js"></script>
+}
