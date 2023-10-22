@@ -6,7 +6,6 @@ $(document).ready(function () {
     loadList();
 
     $('#ddlSemesterInstance').change(function () {
-        console.log("Dropdown value changed to: ", $(this).val());
         dataTable.ajax.reload();
     });
 });
@@ -20,9 +19,6 @@ function loadddl() {
             var $dropdown = $("#ddlSemesterInstance");
             $dropdown.empty();
             $.each(data.data, function (index, item) {
-                console.log(item);
-                console.log('id:', item.id);
-                console.log('semesterInstanceName:', item.semesterInstanceName);
                 $dropdown.append($("<option />").val(item.id).text(item.semesterInstanceName));
             });
         },
@@ -40,12 +36,9 @@ function loadList() {
             "datatype": "json",
             "dataSrc": function (json) {
                 var selectedSemester = Number($('#ddlSemesterInstance').val());
-                console.log("Selected semester: ", selectedSemester);
                 var filteredData = $.grep(json.data, function (row) {
-                    console.log("Selected semester comparison: ", row.wishlistDetail.wishlist.semesterInstance.id);
                     return Number(row.wishlistDetail.wishlist.semesterInstance.id) === selectedSemester;
                 });
-                console.log("Filtered data: ", filteredData);
                 return filteredData;
             },
             "error": function (xhr, error, thrown) {
