@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231020180511_JBRemovedRequired")]
+    partial class JBRemovedRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -462,9 +465,6 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CampusId")
-                        .HasColumnType("int");
-
                     b.Property<int>("DaysOfWeekId")
                         .HasColumnType("int");
 
@@ -478,8 +478,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CampusId");
 
                     b.HasIndex("DaysOfWeekId");
 
@@ -816,7 +814,7 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CampusId")
+                    b.Property<int>("DaysOfWeekId")
                         .HasColumnType("int");
 
                     b.Property<int>("ModalityId")
@@ -830,7 +828,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CampusId");
+                    b.HasIndex("DaysOfWeekId");
 
                     b.HasIndex("ModalityId");
 
@@ -1034,12 +1032,6 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Infrastructure.Models.PreferenceListDetailModality", b =>
                 {
-                    b.HasOne("Infrastructure.Models.Campus", "Campus")
-                        .WithMany()
-                        .HasForeignKey("CampusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Infrastructure.Models.DaysOfWeek", "DaysOfWeek")
                         .WithMany()
                         .HasForeignKey("DaysOfWeekId")
@@ -1063,8 +1055,6 @@ namespace DataAccess.Migrations
                         .HasForeignKey("TimeBlockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Campus");
 
                     b.Navigation("DaysOfWeek");
 
@@ -1213,9 +1203,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Infrastructure.Models.WishlistDetailModality", b =>
                 {
-                    b.HasOne("Infrastructure.Models.Campus", "Campus")
+                    b.HasOne("Infrastructure.Models.DaysOfWeek", "DaysOfWeek")
                         .WithMany()
-                        .HasForeignKey("CampusId")
+                        .HasForeignKey("DaysOfWeekId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1231,7 +1221,7 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Campus");
+                    b.Navigation("DaysOfWeek");
 
                     b.Navigation("Modality");
 

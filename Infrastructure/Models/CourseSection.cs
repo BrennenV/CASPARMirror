@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -22,46 +23,42 @@ namespace Infrastructure.Models
 
         public DateTime? SectionFinalEnrollment { get; set; }
 
-        [Required]
         public DateTime? SectionUpdated { get; set; }
 
         public DateTime? SectionBannerUpdated { get; set; }
 
-        [Required]
         [DisplayName("Course")]
         public int CourseId { get; set; }
 
-        [Required]
         [DisplayName("Semester Instance")]
         public int SemesterInstanceId { get; set; }
 
         [DisplayName("Instructor")]
-        public int InstructorId { get; set; }
+        public int? InstructorId { get; set; }
 
         [DisplayName("Modality")]
-        public int ModalityId { get; set; }
+        public int? ModalityId { get; set; }
 
         [DisplayName("Classroom")]
-        public int ClassroomId { get; set; }
+        public int? ClassroomId { get; set; }
 
         [DisplayName("Time Block")]
-        public int TimeBlockId { get; set; }
+        public int? TimeBlockId { get; set; }
 
         [DisplayName("Days of Week")]
-        public int DaysOfWeekId { get; set; }
+        public int? DaysOfWeekId { get; set; }
 
         [DisplayName("Part of Term")]
-        public int PartOfTermId { get; set; }
+        public int? PartOfTermId { get; set; }
 
         [DisplayName("Pay Model")]
-        public int PayModelId { get; set; }
+        public int? PayModelId { get; set; }
 
         [DisplayName("Pay Organization")]
-        public int PayOrganizationId { get; set; }
+        public int? PayOrganizationId { get; set; }
 
-        [Required]
         [DisplayName("Section Status")]
-        public int SectionStatusId { get; set; }
+        public int? SectionStatusId { get; set; }
 
         [ForeignKey("CourseId")]
         public Course? Course { get; set; }

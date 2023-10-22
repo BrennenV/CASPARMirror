@@ -15,8 +15,6 @@ function loadList() {
             //should not be capital
             { "data": "preferenceRank", "width": "10%" },
             { "data": "course.courseTitle", "width": "20%" },
-            { "data": "preferenceListId", "width": "20%" },
-            { "data": "preferenceList.instructorId", "width": "20%" },
             {
                 "data": "id",
                 "render": function (data) {

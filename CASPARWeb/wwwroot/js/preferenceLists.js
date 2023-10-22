@@ -11,8 +11,7 @@ function loadList() {
         },
         "columns": [
             //should not be capital
-            { "data": "semesterInstance.semesterInstanceName", "width": "65%" },
-            { "data": "instructor.id", "width": "5%" },
+            { "data": "semesterInstance.semesterInstanceName", "width": "70%" },
             {
                 "data": "id",
                 "render": function (data) {

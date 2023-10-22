@@ -477,7 +477,7 @@ namespace DataAccess
 			{
 				new SemesterInstance { 
 					SemesterInstanceName = "Fall 2021", 
-					ScheduleStatus = "Open", 
+					ScheduleStatus = "Active", 
 					StartDate = new DateTime(2021, 8, 23), 
 					EndDate = new DateTime(2021, 12, 10), 
 					RegistrationDate = new DateTime(2021, 4, 1), 
@@ -487,7 +487,7 @@ namespace DataAccess
 				new SemesterInstance
 				{
 					SemesterInstanceName = "Spring 2022", 
-					ScheduleStatus = "Open", 
+					ScheduleStatus = "Active", 
 					StartDate = new DateTime(2022, 1, 10), 
 					EndDate = new DateTime(2022, 4, 29), 
 					RegistrationDate = new DateTime(2021, 10, 1), 
@@ -497,7 +497,7 @@ namespace DataAccess
 				new SemesterInstance
 				{
 					SemesterInstanceName = "Summer 2022", 
-					ScheduleStatus = "Open", 
+					ScheduleStatus = "Active", 
 					StartDate = new DateTime(2022, 5, 9), 
 					EndDate = new DateTime(2022, 8, 5), 
 					RegistrationDate = new DateTime(2022, 1, 1), 
@@ -779,16 +779,16 @@ namespace DataAccess
 
 			var WishlistDetailModalities = new List<WishlistDetailModality>
 			{ 
-				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 1, DaysOfWeekId = 1 },
-				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 2, DaysOfWeekId = 2 },
-				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 1, DaysOfWeekId = 3 },
-				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 2, DaysOfWeekId = 4 },
-				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 1, DaysOfWeekId = 5 },
-				new WishlistDetailModality { WishlistPartOfDay = "Afternoon", WishlistDetailId = 2, ModalityId = 3, DaysOfWeekId = 1 },
-				new WishlistDetailModality { WishlistPartOfDay = "Evening", WishlistDetailId = 2, ModalityId = 4, DaysOfWeekId = 2 },
-				new WishlistDetailModality { WishlistPartOfDay = "Afternoon", WishlistDetailId = 3, ModalityId = 3, DaysOfWeekId = 3 },
-				new WishlistDetailModality { WishlistPartOfDay = "Evening", WishlistDetailId = 3, ModalityId = 1, DaysOfWeekId = 4 },
-				new WishlistDetailModality { WishlistPartOfDay = "Afternoon", WishlistDetailId = 4, ModalityId = 3, DaysOfWeekId = 5 }
+				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 1, CampusId = 1 },
+				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 2, CampusId = 2 },
+				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 1, CampusId = 3 },
+				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 2, CampusId = 4 },
+				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 1, CampusId = 1 },
+				new WishlistDetailModality { WishlistPartOfDay = "Afternoon", WishlistDetailId = 2, ModalityId = 3, CampusId = 1 },
+				new WishlistDetailModality { WishlistPartOfDay = "Evening", WishlistDetailId = 2, ModalityId = 4, CampusId = 2 },
+				new WishlistDetailModality { WishlistPartOfDay = "Afternoon", WishlistDetailId = 3, ModalityId = 3, CampusId = 3 },
+				new WishlistDetailModality { WishlistPartOfDay = "Evening", WishlistDetailId = 3, ModalityId = 1, CampusId = 4 },
+				new WishlistDetailModality { WishlistPartOfDay = "Afternoon", WishlistDetailId = 4, ModalityId = 3, CampusId = 1 }
 			};
 
 			foreach (var w in WishlistDetailModalities)
@@ -858,16 +858,16 @@ namespace DataAccess
 
 			var PreferenceListDetailModalities = new List<PreferenceListDetailModality>
 			{
-				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 1, DaysOfWeekId = 1, TimeBlockId = 1 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 2, DaysOfWeekId = 2, TimeBlockId = 2 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 1, DaysOfWeekId = 3, TimeBlockId = 3 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 2, DaysOfWeekId = 4, TimeBlockId = 1 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 1, DaysOfWeekId = 5, TimeBlockId = 2 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 2, ModalityId = 3, DaysOfWeekId = 1, TimeBlockId = 3 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 2, ModalityId = 4, DaysOfWeekId = 2, TimeBlockId = 1 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 3, ModalityId = 3, DaysOfWeekId = 3, TimeBlockId = 2 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 3, ModalityId = 1, DaysOfWeekId = 4, TimeBlockId = 3 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 4, ModalityId = 3, DaysOfWeekId = 5, TimeBlockId = 1 }
+				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 1, DaysOfWeekId = 1, TimeBlockId = 1, CampusId = 3 },
+				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 2, DaysOfWeekId = 2, TimeBlockId = 2, CampusId = 2 },
+				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 1, DaysOfWeekId = 3, TimeBlockId = 3, CampusId = 1 },
+				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 2, DaysOfWeekId = 4, TimeBlockId = 1, CampusId = 3 },
+				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 1, DaysOfWeekId = 5, TimeBlockId = 2, CampusId = 2 },
+				new PreferenceListDetailModality { PreferenceListDetailId = 2, ModalityId = 3, DaysOfWeekId = 1, TimeBlockId = 3, CampusId = 1 },
+				new PreferenceListDetailModality { PreferenceListDetailId = 2, ModalityId = 4, DaysOfWeekId = 2, TimeBlockId = 1, CampusId = 3 },
+				new PreferenceListDetailModality { PreferenceListDetailId = 3, ModalityId = 3, DaysOfWeekId = 3, TimeBlockId = 2, CampusId = 2 },
+				new PreferenceListDetailModality { PreferenceListDetailId = 3, ModalityId = 1, DaysOfWeekId = 4, TimeBlockId = 3, CampusId = 1 },
+				new PreferenceListDetailModality { PreferenceListDetailId = 4, ModalityId = 3, DaysOfWeekId = 5, TimeBlockId = 1, CampusId = 3 }
 			};
 
 			foreach (var p in PreferenceListDetailModalities)

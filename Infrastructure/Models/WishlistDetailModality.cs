@@ -24,8 +24,9 @@ namespace Infrastructure.Models
         [DisplayName("Modality")]
         public int ModalityId { get; set; }
 
-        [DisplayName("Days of the Week")]
-        public int DaysOfWeekId { get; set; }
+        [Required]
+        [DisplayName("Campus")]
+        public int CampusId { get; set; }
 
         [ForeignKey("WishlistDetailId")]
         public WishlistDetail? WishlistDetail { get; set; }
@@ -33,7 +34,7 @@ namespace Infrastructure.Models
         [ForeignKey("ModalityId")]
         public Modality? Modality { get; set; }
 
-        [ForeignKey("DaysOfWeekId")]
-        public DaysOfWeek? DaysOfWeek { get; set; }
+        [ForeignKey("CampusId")]
+        public Campus? Campus { get; set; }
     }
 }
