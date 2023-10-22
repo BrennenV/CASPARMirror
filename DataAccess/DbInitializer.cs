@@ -707,7 +707,7 @@ namespace DataAccess
 				new Template { Quantity = 1, SemesterId = 3, CourseId = 3 }
 			};
 
-			foreach (var t in Templates)
+			foreach (var t in Templates)              
 			{
 				_db.Templates.Add(t);
 			}

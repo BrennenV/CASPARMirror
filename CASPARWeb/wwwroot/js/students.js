@@ -14,15 +14,15 @@ function loadList() {
                 alert('Ajax error:' + xhr.responseText); }
         },
         "columns": [
-            { "data": "wishlistdetail.course.coursetitle", "width": "40%" },
-            { "data": "modality.modalityname", "width": "15%" },
-            { "data": "wishlistdetail.course.coursesection.classroom.buildiing.campus.campusname", "width": "15%" },
-            { "data": "wishlistpartofday", "width": "15%" },
+            { "data": "wishlistDetail.course.courseTitle", "width": "40%" },
+            { "data": "modality.modalityName", "width": "15%" },
+            //{ "data": "wishlistdetail.course.coursesection.classroom.buildiing.campus.campusname", "width": "15%" },
+            { "data": "wishlistPartOfDay", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                                <a href="/Students/Index?id=${data}" class="btn btn-primary-outline mb-1 rounded" style="cursor:pointer; width: 100px;">
+                                <a href="/Students/Index?id=${data}" class="btn btn-outline-primary mb-1 rounded" style="cursor:pointer; width: 100px;">
                                     <i class="far fa-edit"></i> Edit </a>
                                 <a href="/Students/Index?id=${data}" class="btn btn-danger mb-1 rounded text-white" style="cursor:pointer; width: 100px;">
                                     <i class="far fa-trash-alt"></i> Delete </a>    
