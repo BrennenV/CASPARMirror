@@ -1,5 +1,5 @@
 ﻿@page
-@model CASPARWeb.Pages.Administrator.Semesters.IndexModel
+@model CASPARWeb.Pages.Administrator.Users.IndexModel
 @{
 }
 <div class="container">
@@ -8,22 +8,22 @@
         <div class="col-6">
             <!--50% of row-->
             <h2 class="text-primary">
-                Semester Templates
+                Users
             </h2>
         </div><!-- End 1st Column-->
         <div class="col-6 text-end">
             <!--50% row right justified-->
-            <a asp-page="Upsert" class="btn btn-primary">
-                <i class="bi bi-plus-circle"></i> Add Semester Template
+            <a asp-page="Upsert"  class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Add User
             </a>
         </div> <!--End 2nd Column-->
     </div> <!--End Row-->
-    <table class="table table-bordered table-striped" id="DT_Semesters" style="width:100%">
+    <table class="table table-bordered table-striped" id="DT_Users" style="width:100%">
         <thead>
             <tr>
-                <th>
-                    Semester Template
-                </th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
@@ -31,5 +31,5 @@
 </div> <!--Close Container-->
 @section Scripts
 {
-    <script src="~/js/semesters.js"></script>
+    <script src="~/js/users.js"></script>
 }

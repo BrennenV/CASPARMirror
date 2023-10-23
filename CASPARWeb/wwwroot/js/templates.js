@@ -25,10 +25,10 @@ function loadList() {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                    <a href="/Administrator/Templates/Upsert?id=${data}" class="btn btn-success text-white" style="cursor:pointer; width: 100px;">
-                        <i class="far fa-edit"></i> Edit </a>
-                    <a href="/Administrator/Templates/Delete?id=${data}" class="btn btn-danger text-white" style="cursor:pointer; width: 100px;">
-                        <i class="far fa-trash-alt"></i> Delete </a>
+                    <a href="/Administrator/Templates/Upsert?id=${data}" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; style="cursor:pointer; width: 100px;"">
+                        <i class="bi bi-pencil-square"></i> Edit </a>
+                    <a href="/Administrator/Templates/Delete?id=${data}" class="btn btn-outline-danger mt-1 rounded" style="cursor:pointer; style="cursor:pointer; width: 100px;">
+                        <i class="bi bi-trash"></i> Delete </a>
                     </div>`;
                 }, "width": "20%"
             }
