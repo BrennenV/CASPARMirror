@@ -13,18 +13,12 @@
 		</div><!-- End 1st Column-->
 		<div class="col-3 text-end">
 			<!--25% row right justified-->
-			<select id="ddlStudent" class="form-select rounded">
-				<option disabled selected>--Select Semester--</option>
-				<option value="1">Fall 2023</option>
-				<option value="2">Spring 2024</option>
-				<option value="3">Summer 2024</option>
-				<option value="4">Fall 2024</option>
-				<!--Will be replaced with db data-->
+			<select id="ddlSemesterInstance" class="form-select rounded">
 			</select>
 		</div> <!--End 2nd Column-->
 		<div class="col-6 text-start">
 			<!--25% row-->
-			<a asp-page="#" asp-route-id="0" class="btn btn-primary rounded">
+			<a asp-page="Upsert" asp-route-id="0" class="btn btn-primary rounded">
 				<i class="bi bi-plus-circle"></i> Add Preference
 			</a>
 		</div> <!--End 3rd Column-->
@@ -39,14 +33,16 @@
 				<th>
 					Modality
 				</th>
-				<!--<th>Campus</th>-->
+				<th>
+					Campus
+				</th>
 				<th>
 					Time of Day
 				</th>
 				<th>&nbsp;</th>
 			</tr>
 		</thead>
-		
+
 	</table>
 </div> <!--Close Container-->
 @section Scripts{
