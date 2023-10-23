@@ -14,7 +14,8 @@ namespace Infrastructure.Models
         [Key]
         public int Id { get; set; }
 
-        public string? WishlistPartOfDay { get; set; }
+		[DisplayName("Part of Day")]
+		public string? WishlistPartOfDay { get; set; }
 
         [Required]
         [DisplayName("Wishlist Detail")]

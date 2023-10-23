@@ -19,6 +19,7 @@ namespace CASPARWeb.Pages.Students
 		public IEnumerable<SelectListItem> SemesterInstanceList { get; set; }
 		public IEnumerable<SelectListItem> ModalityList { get; set; }
 		public IEnumerable<SelectListItem> CampusList { get; set; }
+		public IEnumerable<SelectListItem> WishlistPartOfDayList { get; set; }
 
 		public UpsertModel(UnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
 		{
@@ -31,6 +32,7 @@ namespace CASPARWeb.Pages.Students
 			SemesterInstanceList = new List<SelectListItem>();
 			ModalityList = new List<SelectListItem>();
 			CampusList = new List<SelectListItem>();
+			WishlistPartOfDayList = new List<SelectListItem>();
 		}
 		public IActionResult OnGet(int? id)
 		{
@@ -56,6 +58,12 @@ namespace CASPARWeb.Pages.Students
 				Text = c.CampusName,
 				Value = c.Id.ToString()
 			});
+			WishlistPartOfDayList = new List<SelectListItem>
+			{
+				new SelectListItem { Text = "Morning", Value = "Morning" },
+				new SelectListItem { Text = "Afternoon", Value = "Afternoon" },
+				new SelectListItem { Text = "Evening", Value = "Evening" }
+			};
 
 			// Are we in create mode
 			if (id == null || id == 0)

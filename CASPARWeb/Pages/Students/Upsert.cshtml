@@ -9,7 +9,7 @@
 			<div class="border p-3 mt-4 row">
 				<div class="col-12 pb-2">
 					<h2 class="text-primary">@(Model.objWishlistDetailModality.Id != 0 ? "Update " : "Create ") Preference</h2>
-					<div class="col-4">
+					<div class="col-3">
 						<select id="ddlSemesterInstance" asp-for="objWishlist.SemesterInstanceId" asp-items="@Model.SemesterInstanceList" class="form-select rounded">
 							<option disabled selected>--Select Semester--</option>
 						</select>
@@ -36,17 +36,14 @@
 				</div>
 				<div class="mb-3 col-3">
 					<label asp-for="objWishlistDetailModality.WishlistPartOfDay"></label>
-					<select id="ddlWishlistPartOfDay" class="form-select rounded">
+					<select id="ddlWishlistPartOfDay" asp-for="objWishlistDetailModality.WishlistPartOfDay" asp-items="@Model.WishlistPartOfDayList" class="form-select rounded">
 						<option disabled selected>--Select--</option>
-						<option value="Morning">Morning</option>
-						<option value="Afternoon">Afternoon</option>
-						<option value="Evening">Evening</option>
 					</select>
 				</div>
 				<div class="col-12">
 					@if (Model.objWishlistDetailModality.Id != 0)
 					{
-						<button type="submit" onclick="return ValidateInput()" class="btn btn-primary rounded" style="width:150px">Update</button>
+						<button type="submit" onclick="return ValidateInput()" class="btn btn-primary rounded me-2" style="width:150px">Update</button>
 					} //Preference being edited
 					else //Else new Preference
 					{
