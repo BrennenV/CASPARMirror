@@ -1,0 +1,35 @@
+﻿@page
+@model CASPARWeb.Pages.Administrator.DaysOfWeeks.IndexModel
+@{
+}
+<div class="container">
+    <div class="row pt=4">
+        <!--Start Row-->
+        <div class="col-6">
+            <!--50% of row-->
+            <h2 class="text-primary">
+                Days of the Week
+            </h2>
+        </div><!-- End 1st Column-->
+        <div class="col-6 text-end">
+            <!--50% row right justified-->
+            <a asp-page="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Add a Days of the Week Choice
+            </a>
+        </div> <!--End 2nd Column-->
+    </div> <!--End Row-->
+    <table class="table table-bordered table-striped" id="DT_DaysOfWeeks" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Days of the Week
+                </th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+    </table>
+</div> <!--Close Container-->
+@section Scripts
+    {
+    <script src="~/js/daysOfWeeks.js"></script>
+}
