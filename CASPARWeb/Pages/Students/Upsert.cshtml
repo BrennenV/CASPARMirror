@@ -10,7 +10,7 @@
 				<div class="col-12 pb-2">
 					<h2 class="text-primary">@(Model.objWishlistDetailModality.Id != 0 ? "Update " : "Create ") Preference</h2>
 					<div class="col-3">
-						<select id="ddlSemesterInstance" asp-for="objWishlist.SemesterInstanceId" asp-items="@Model.SemesterInstanceList" class="form-select rounded">
+						<select id="ddlSemesterInstance" asp-for="objWishlistDetail.WishlistId" asp-items="@Model.SemesterInstanceList" class="form-select rounded">
 							<option disabled selected>--Select Semester--</option>
 						</select>
 					</div>
@@ -35,8 +35,8 @@
 					</select>
 				</div>
 				<div class="mb-3 col-3">
-					<label asp-for="objWishlistDetailModality.WishlistPartOfDay"></label>
-					<select id="ddlWishlistPartOfDay" asp-for="objWishlistDetailModality.WishlistPartOfDay" asp-items="@Model.WishlistPartOfDayList" class="form-select rounded">
+					<label asp-for="objWishlistDetailModality.TimeOfDayId"></label>
+					<select id="ddlWishlistPartOfDay" asp-for="objWishlistDetailModality.TimeOfDayId" asp-items="@Model.TimeOfDayList" class="form-select rounded">
 						<option disabled selected>--Select--</option>
 					</select>
 				</div>

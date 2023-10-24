@@ -67,6 +67,8 @@ namespace DataAccess
 
         public DbSet<TimeBlock> TimeBlocks { get; set; }
 
+        public DbSet<TimeOfDay> TimeOfDays { get; set; }
+
         public DbSet<Wishlist> Wishlists { get; set; }
 
         public DbSet<WishlistDetail> WishlistDetails { get; set; }
