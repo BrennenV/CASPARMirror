@@ -1,0 +1,49 @@
+﻿@page
+@model CASPARWeb.Pages.Administrator.Classrooms.IndexModel
+@{
+}
+<div class="container">
+    <div class="row pt=4">
+        <!--Start Row-->
+        <div class="col-6">
+            <!--50% of row-->
+            <h2 class="text-primary">
+                Classrooms
+            </h2>
+        </div><!-- End 1st Column-->
+        <div class="col-6 text-end">
+            <!--50% row right justified-->
+            <a href="/Administrator/Classrooms/CreateClassroom" type="button" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create Classroom
+            </a>
+        </div> <!--End 2nd Column-->
+    </div> <!--End Row-->
+    <table class="table table-bordered table-striped" id="DT_Classrooms" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Classroom #
+                </th>
+                <th>
+                    Building
+                </th>
+                <th>
+                    Campus
+                </th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+    </table>
+    <p>
+        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            View
+        </button>
+    </p>
+    <div class="collapse" id="collapseExample">
+         yes this is content
+    </div>
+</div> <!--Close Container-->
+@section Scripts
+    {
+    <script src="~/js/classroomList.js"></script>
+}
