@@ -20,3 +20,24 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.color-picker-custom {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 35px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.color-picker-custom::-webkit-color-swatch {
+    border-radius: 10px;
+    border: none;
+}
+
+.color-picker-custom::-moz-color-swatch {
+    border-radius: 10px;
+    border: none;
+}
