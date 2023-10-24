@@ -11,7 +11,7 @@ function loadList() {
         },
         "columns": [
             //should not be capital
-            { "data": "sectionStatusName", "width": "70%" },
+            { "data": "sectionStatusName", "width": "65%" },
             {
                 "data": "sectionStatusColor",
                 "render": function (data) {
