@@ -62,7 +62,9 @@ namespace Infrastructure.Interfaces
 
         public IGenericRepository<TimeBlock> TimeBlock { get; }
 
-        public IGenericRepository<Wishlist> Wishlist { get; }
+		public IGenericRepository<TimeOfDay> TimeOfDay { get; }
+
+		public IGenericRepository<Wishlist> Wishlist { get; }
 
         public IGenericRepository<WishlistDetail> WishlistDetail { get; }
 

@@ -49,7 +49,7 @@ function loadList() {
             { "data": "wishlistDetail.course.courseTitle", "width": "30%" },
             { "data": "modality.modalityName", "width": "15%" },
             { "data": "campus.campusName", "width": "15%" },
-            { "data": "wishlistPartOfDay", "width": "15%" },
+            { "data": "timeOfDay.partOfDay", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {
