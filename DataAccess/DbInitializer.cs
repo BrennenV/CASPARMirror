@@ -770,25 +770,42 @@ namespace DataAccess
 			_db.SaveChanges();
 
 			//****************************************************************************** WishlistDetails
+			// Seed the TimeOfDay
+			// - PartOfDay (FK)
+
+			var TimeOfDay = new List<TimeOfDay>
+			{
+				new TimeOfDay { PartOfDay = "Morning" },
+				new TimeOfDay { PartOfDay = "Afternoon" },
+				new TimeOfDay { PartOfDay = "Evening" }
+			};
+
+			foreach (var t in TimeOfDay)
+			{
+				_db.TimeOfDays.Add(t);
+			}
+			_db.SaveChanges();
+
+			//****************************************************************************** TimeOfDay
 
 			// Seed the WishlistDetailModalities
-			// - WishlistPartOfDay 
+			// - PartOfDay (FK) 
 			// - WishlistDetailId (FK)
 			// - ModalityId (FK)
 			// - DaysOfWeekId (FK)
 
 			var WishlistDetailModalities = new List<WishlistDetailModality>
 			{ 
-				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 1, CampusId = 1 },
-				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 2, CampusId = 2 },
-				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 1, CampusId = 3 },
-				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 2, CampusId = 4 },
-				new WishlistDetailModality { WishlistPartOfDay = "Morning", WishlistDetailId = 1, ModalityId = 1, CampusId = 1 },
-				new WishlistDetailModality { WishlistPartOfDay = "Afternoon", WishlistDetailId = 2, ModalityId = 3, CampusId = 1 },
-				new WishlistDetailModality { WishlistPartOfDay = "Evening", WishlistDetailId = 2, ModalityId = 4, CampusId = 2 },
-				new WishlistDetailModality { WishlistPartOfDay = "Afternoon", WishlistDetailId = 3, ModalityId = 3, CampusId = 3 },
-				new WishlistDetailModality { WishlistPartOfDay = "Evening", WishlistDetailId = 3, ModalityId = 1, CampusId = 4 },
-				new WishlistDetailModality { WishlistPartOfDay = "Afternoon", WishlistDetailId = 4, ModalityId = 3, CampusId = 1 }
+				new WishlistDetailModality { TimeOfDayId = 1, WishlistDetailId = 1, ModalityId = 1, CampusId = 1 },
+				new WishlistDetailModality { TimeOfDayId = 1, WishlistDetailId = 1, ModalityId = 2, CampusId = 2 },
+				new WishlistDetailModality { TimeOfDayId = 1, WishlistDetailId = 1, ModalityId = 1, CampusId = 3 },
+				new WishlistDetailModality { TimeOfDayId = 1, WishlistDetailId = 1, ModalityId = 2, CampusId = 4 },
+				new WishlistDetailModality { TimeOfDayId = 3, WishlistDetailId = 1, ModalityId = 1, CampusId = 1 },
+				new WishlistDetailModality { TimeOfDayId = 2, WishlistDetailId = 2, ModalityId = 3, CampusId = 1 },
+				new WishlistDetailModality { TimeOfDayId = 3, WishlistDetailId = 2, ModalityId = 4, CampusId = 2 },
+				new WishlistDetailModality { TimeOfDayId = 2, WishlistDetailId = 3, ModalityId = 3, CampusId = 3 },
+				new WishlistDetailModality { TimeOfDayId = 3, WishlistDetailId = 3, ModalityId = 1, CampusId = 4 },
+				new WishlistDetailModality { TimeOfDayId = 2, WishlistDetailId = 4, ModalityId = 3, CampusId = 1 }
 			};
 
 			foreach (var w in WishlistDetailModalities)

@@ -71,7 +71,9 @@ namespace DataAccess
 
         public IGenericRepository<TimeBlock> _TimeBlock;
 
-        public IGenericRepository<Wishlist> _Wishlist;
+		public IGenericRepository<TimeOfDay> _TimeOfDay;
+
+		public IGenericRepository<Wishlist> _Wishlist;
 
         public IGenericRepository<WishlistDetail> _WishlistDetail;
 
@@ -420,6 +422,19 @@ namespace DataAccess
             }
         }
 
+        public IGenericRepository<TimeOfDay> TimeOfDay
+        {
+			get
+            {
+				if (_TimeOfDay == null)
+                {
+					_TimeOfDay = new GenericRepository<TimeOfDay>(_dbContext);
+				}
+
+				return _TimeOfDay;
+			}
+		}
+
         public IGenericRepository<Wishlist> Wishlist
         {
             get
@@ -498,7 +513,73 @@ namespace DataAccess
             }
         }
 
-        public int Commit()
+		IGenericRepository<AcademicProgram> IUnitOfWork.AcademicProgram => throw new NotImplementedException();
+
+		IGenericRepository<Building> IUnitOfWork.Building => throw new NotImplementedException();
+
+		IGenericRepository<Campus> IUnitOfWork.Campus => throw new NotImplementedException();
+
+		IGenericRepository<Classroom> IUnitOfWork.Classroom => throw new NotImplementedException();
+
+		IGenericRepository<ClassroomAmenity> IUnitOfWork.ClassroomAmenity => throw new NotImplementedException();
+
+		IGenericRepository<ClassroomAmenityPossession> IUnitOfWork.ClassroomAmenityPossession => throw new NotImplementedException();
+
+		IGenericRepository<Course> IUnitOfWork.Course => throw new NotImplementedException();
+
+		IGenericRepository<DaysOfWeek> IUnitOfWork.DaysOfWeek => throw new NotImplementedException();
+
+		IGenericRepository<Instructor> IUnitOfWork.Instructor => throw new NotImplementedException();
+
+		IGenericRepository<LoadReq> IUnitOfWork.LoadReq => throw new NotImplementedException();
+
+		IGenericRepository<Modality> IUnitOfWork.Modality => throw new NotImplementedException();
+
+		IGenericRepository<PartOfTerm> IUnitOfWork.PartOfTerm => throw new NotImplementedException();
+
+		IGenericRepository<PayModel> IUnitOfWork.PayModel => throw new NotImplementedException();
+
+		IGenericRepository<PayOrganization> IUnitOfWork.PayOrganization => throw new NotImplementedException();
+
+		IGenericRepository<PreferenceList> IUnitOfWork.PreferenceList => throw new NotImplementedException();
+
+		IGenericRepository<PreferenceListDetail> IUnitOfWork.PreferenceListDetail => throw new NotImplementedException();
+
+		IGenericRepository<PreferenceListDetailModality> IUnitOfWork.PreferenceListDetailModality => throw new NotImplementedException();
+
+		IGenericRepository<ProgramAssignment> IUnitOfWork.ProgramAssignment => throw new NotImplementedException();
+
+		IGenericRepository<ReleaseTime> IUnitOfWork.ReleaseTime => throw new NotImplementedException();
+
+		IGenericRepository<CourseSection> IUnitOfWork.CourseSection => throw new NotImplementedException();
+
+		IGenericRepository<SectionStatus> IUnitOfWork.SectionStatus => throw new NotImplementedException();
+
+		IGenericRepository<Semester> IUnitOfWork.Semester => throw new NotImplementedException();
+
+		IGenericRepository<SemesterInstance> IUnitOfWork.SemesterInstance => throw new NotImplementedException();
+
+		IGenericRepository<Student> IUnitOfWork.Student => throw new NotImplementedException();
+
+		IGenericRepository<Template> IUnitOfWork.Template => throw new NotImplementedException();
+
+		IGenericRepository<TimeBlock> IUnitOfWork.TimeBlock => throw new NotImplementedException();
+
+		IGenericRepository<TimeOfDay> IUnitOfWork.TimeOfDay => throw new NotImplementedException();
+
+		IGenericRepository<Wishlist> IUnitOfWork.Wishlist => throw new NotImplementedException();
+
+		IGenericRepository<WishlistDetail> IUnitOfWork.WishlistDetail => throw new NotImplementedException();
+
+		IGenericRepository<WishlistDetailModality> IUnitOfWork.WishlistDetailModality => throw new NotImplementedException();
+
+		IGenericRepository<Role> IUnitOfWork.Role => throw new NotImplementedException();
+
+		IGenericRepository<User> IUnitOfWork.User => throw new NotImplementedException();
+
+		IGenericRepository<RoleAssignment> IUnitOfWork.RoleAssignment => throw new NotImplementedException();
+
+		public int Commit()
         {
             return _dbContext.SaveChanges();
         }
@@ -512,5 +593,15 @@ namespace DataAccess
         {
             _dbContext.Dispose();
         }
-    }
+
+		int IUnitOfWork.Commit()
+		{
+			throw new NotImplementedException();
+		}
+
+		Task<int> IUnitOfWork.CommitAsync()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
