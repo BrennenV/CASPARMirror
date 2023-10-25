@@ -55,9 +55,9 @@ function loadList() {
                 "render": function (data) {
                     return `<div class="text-center">
                                 <a href="/Students/Upsert?id=${data}" class="btn btn-outline-primary mb-1 rounded" style="cursor:pointer; width: 100px;">
-                                    <i class="far fa-edit"></i> Edit </a>
-                                <a href="/Students/Delete?id=${data}" class="btn btn-danger mb-1 rounded text-white" style="cursor:pointer; width: 100px;">
-                                    <i class="far fa-trash-alt"></i> Delete </a>   
+                                    <i class="bi bi-pencil-square"></i> Edit </a>
+                                <a href="/Students/Delete?id=${data}" class="btn btn-outline-danger mb-1 rounded" style="cursor:pointer; width: 100px;">
+                                    <i class="bi bi-trash"></i> Delete </a>   
                             </div>`;
                 }, "width": "25%"
             }
