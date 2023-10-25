@@ -108,28 +108,29 @@ namespace CASPARWeb.Pages.Students
 				var objWishlistDetailFromDb = _unitOfWork.WishlistDetail.Get(w => w.Id == objWishlistDetailModalityFromDb.WishlistDetailId);
 				var objWishlistFromDb = _unitOfWork.Wishlist.Get(w => w.Id == objWishlistDetailFromDb.WishlistId);
 
-				if (objWishlistDetailModalityFromDb != null && objWishlistDetailFromDb != null)
+				if (objWishlistDetailModalityFromDb != null)
 				{
-					//... update other properties as needed
-
-
-					if (objWishlistDetailFromDb.WishlistId != objWishlistDetail.WishlistId || objWishlistDetailFromDb.CourseId != objWishlistDetail.CourseId)
-					{
-						//objWishlistDetailFromDb.WishlistId = objWishlistDetail.WishlistId;
-						//objWishlistDetailFromDb.CourseId = objWishlistDetail.CourseId;
-
-						_unitOfWork.WishlistDetail.Update(objWishlistDetail);
-						_unitOfWork.Commit();
-					}
-					//... update other properties as needed
-
 					if (objWishlistDetailModalityFromDb.TimeOfDayId != objWishlistDetailModality.TimeOfDayId || objWishlistDetailModalityFromDb.ModalityId != objWishlistDetailModality.ModalityId || objWishlistDetailModalityFromDb.CampusId != objWishlistDetailModality.CampusId)
 					{
 						objWishlistDetailModalityFromDb.TimeOfDayId = objWishlistDetailModality.TimeOfDayId;
 						objWishlistDetailModalityFromDb.ModalityId = objWishlistDetailModality.ModalityId;
 						objWishlistDetailModalityFromDb.CampusId = objWishlistDetailModality.CampusId;
 
-						_unitOfWork.WishlistDetailModality.Update(objWishlistDetailModality);
+						_unitOfWork.WishlistDetailModality.Update(objWishlistDetailModalityFromDb);
+
+						//Save the changes to the DB
+						_unitOfWork.Commit();
+					}
+				}
+
+				if (objWishlistDetailFromDb != null)
+				{
+					if (objWishlistDetailFromDb.WishlistId != objWishlistDetail.WishlistId || objWishlistDetailFromDb.CourseId != objWishlistDetail.CourseId)
+					{
+						objWishlistDetailFromDb.WishlistId = objWishlistDetail.WishlistId;
+						objWishlistDetailFromDb.CourseId = objWishlistDetail.CourseId;
+
+						_unitOfWork.WishlistDetail.Update(objWishlistDetailFromDb);
 					}
 				}
 			}
