@@ -106,7 +106,6 @@ namespace CASPARWeb.Pages.Students
 			{
 				var objWishlistDetailModalityFromDb = _unitOfWork.WishlistDetailModality.Get(w => w.Id == objWishlistDetailModality.Id);
 				var objWishlistDetailFromDb = _unitOfWork.WishlistDetail.Get(w => w.Id == objWishlistDetailModalityFromDb.WishlistDetailId);
-				var objWishlistFromDb = _unitOfWork.Wishlist.Get(w => w.Id == objWishlistDetailFromDb.WishlistId);
 
 				if (objWishlistDetailModalityFromDb != null)
 				{
