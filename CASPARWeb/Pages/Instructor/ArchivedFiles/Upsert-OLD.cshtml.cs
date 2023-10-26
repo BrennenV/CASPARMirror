@@ -4,16 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace CASPARWeb.Pages.Instructor.PreferenceLists
+namespace CASPARWeb.Pages.Instructor.ArchivedFiles
 {
-    public class UpsertModel : PageModel
+    public class UpsertModelOLD : PageModel
     {
         private readonly UnitOfWork _unitOfWork;
         [BindProperty]
         public PreferenceList objPreferenceList { get; set; }
         public IEnumerable<SelectListItem> SemesterInstanceList { get; set; }
 
-        public UpsertModel(UnitOfWork unitOfWork)
+        public UpsertModelOLD(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             objPreferenceList = new PreferenceList();

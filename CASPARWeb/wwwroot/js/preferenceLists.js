@@ -1,34 +1,97 @@
 ﻿var dataTable;
+
 $(document).ready(function () {
+    loadddl();
     loadList();
+
+    $('#ddlSemesterInstance').change(function () {
+        setSemesterInstanceIdForQueryString();
+        dataTable.ajax.reload();
+    });
 });
+
+function loadddl() {
+    $.ajax({
+        url: "/api/semesterInstance",
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            var dropdown = $("#ddlSemesterInstance");
+            dropdown.empty();
+            $.each(data.data, function (index, item) {
+                if (item.id == $("#selectedSemesterId").text()) {
+                    dropdown.append($("<option />").val(item.id).text(item.semesterInstanceName).attr("selected", "selected"));
+                }
+                else {
+                    dropdown.append($("<option />").val(item.id).text(item.semesterInstanceName));
+                }
+            });
+
+            //This is to add the semester instance to the query string when the add preference button is clicked
+            setSemesterInstanceIdForQueryString();
+        },
+        error: function (xhr, error, thrown) {
+            alert('Ajax error:' + xhr.responseText);
+        }
+    });
+}
+
+function setSemesterInstanceIdForQueryString() {
+    var dropdown = $("#ddlSemesterInstance");
+    var btn = $("#addPreferenceBtn");
+
+    var oldHref = btn.attr("href");
+    var newHref = oldHref.slice(0, oldHref.indexOf("=") + 1) + dropdown.val().toString();
+
+    btn.attr("href", newHref);
+}
+
 function loadList() {
-    dataTable = $('#DT_PreferenceLists').DataTable({
+    dataTable = $('#DT_PreferenceDetails').DataTable({
         "ajax": {
-            "url": "/api/preferenceList",
+            "url": "/api/preferenceDetail",
             "type": "GET",
-            "datatype": "json"
+            "datatype": "json",
+            "dataSrc": function (json) {
+                var selectedSemester = Number($('#ddlSemesterInstance').val());
+                var filteredData = $.grep(json.data, function (row) {
+                    return Number(row.preferenceListDetail.preferenceList.semesterInstanceId) === selectedSemester;
+                });
+                return filteredData;
+            },
+            "error": function (xhr, error, thrown) {
+                alert('Ajax error:' + xhr.responseText);
+            }
         },
         "columns": [
-            //should not be capital
-            { "data": "semesterInstance.semesterInstanceName", "width": "70%" },
+            {
+                "data": "preferenceListDetail",
+                "render": function (data) {
+                    return `${data.course.academicProgram.programCode} ${data.course.courseNumber} `
+                },
+                "width": "20%"
+            },
+            { "data": "preferenceListDetail.preferenceRank", "width": "5%"},
+            { "data": "modality.modalityName", "width": "15%" },
+            { "data": "campus.campusName", "width": "15%" },
+            { "data": "daysOfWeek.daysOfWeekTitle", "width": "10%" },
+            { "data": "timeBlock.timeBlockValue", "width": "10%" },
             {
                 "data": "id",
-                "render": function (data) {
+                "render": function (data, type, row, meta) {
                     return `<div class="text-center">
-                    <a href="/Instructor/PreferenceLists/Upsert?id=${data}" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; style="cursor:pointer; width: 100px;">
-                        <i class="bi bi-pencil-square"></i> Edit </a>
-                    <a href="/Instructor/PreferenceLists/Delete?id=${data}" class="btn btn-outline-danger mt-1 rounded" style="cursor:pointer; style="cursor:pointer; width: 100px;">
-                        <i class="bi bi-trash"></i> Delete </a>
-                    <a href="/Instructor/PreferenceListDetails/Index?id=${data}" class="btn btn-outline-info mt-1 rounded" style="cursor:pointer; style="cursor:pointer; width: 100px;">
-                        <i class="far fa-trash-alt"></i> Details </a>
-                    </div>`;
-                }, "width": "30%"
+                                <a href="/Instructor/PreferenceLists/Update?id=${data}&semesterInstanceId=${row.preferenceListDetail.preferenceList.semesterInstanceId}" class="btn btn-outline-primary mb-1 rounded" style="cursor:pointer; width: 100px;">
+                                    <i class="bi bi-pencil-square"></i> Edit </a>
+                                <a href="/Instructor/PreferenceLists/Delete?id=${data}&semesterInstanceId=${row.preferenceListDetail.preferenceList.semesterInstanceId}" class="btn btn-outline-danger mb-1 rounded" style="cursor:pointer; width: 100px;">
+                                    <i class="bi bi-trash"></i> Delete </a>   
+                            </div>`;
+                }, "width": "25%"
             }
         ],
         "language": {
             "emptyTable": "No data found."
         },
-        "width": "100%"
+        "width": "100%",
+        "order": [[0, "asc"]]
     });
 }

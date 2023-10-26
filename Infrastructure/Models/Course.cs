@@ -32,6 +32,6 @@ namespace Infrastructure.Models
         public int ProgramId { get; set; }
 
         [ForeignKey("ProgramId")]
-        public AcademicProgram? Program { get; set; }
+        public AcademicProgram? AcademicProgram { get; set; }
     }
 }

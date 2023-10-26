@@ -285,12 +285,12 @@ namespace DataAccess
 
 			var Courses = new List<Course>
 			{
-				new Course { CourseTitle = "Introduction to Computer Science", CourseCreditHours = 3, CourseNumber = "CS 1030", CourseDescription = "Introduction to computer science", CourseNotes = "None", ProgramId = 1 },
-				new Course { CourseTitle = "Introduction to Programming", CourseCreditHours = 3, CourseNumber = "CS 1400", CourseDescription = "Introduction to programming", CourseNotes = "None", ProgramId = 1 },
-				new Course { CourseTitle = "Introduction to Literature", CourseCreditHours = 3, CourseNumber = "ENG 1010", CourseDescription = "Introduction to literature", CourseNotes = "None", ProgramId = 2 },
-				new Course { CourseTitle = "Introduction to Political Science", CourseCreditHours = 3, CourseNumber = "POLS 1010", CourseDescription = "Introduction to political science", CourseNotes = "None", ProgramId = 3 },
-				new Course { CourseTitle = "Introduction to History", CourseCreditHours = 3, CourseNumber = "HIST 1010", CourseDescription = "Introduction to history", CourseNotes = "None", ProgramId = 4 },
-				new Course { CourseTitle = "Introduction to Statistics", CourseCreditHours = 3, CourseNumber = "MATH 1080", CourseDescription = "Introduction to statistics", CourseNotes = "None", ProgramId = 5 }
+				new Course { CourseTitle = "Introduction to Computer Science", CourseCreditHours = 3, CourseNumber = "1030", CourseDescription = "Introduction to computer science", CourseNotes = "None", ProgramId = 1 },
+				new Course { CourseTitle = "Introduction to Programming", CourseCreditHours = 3, CourseNumber = "1400", CourseDescription = "Introduction to programming", CourseNotes = "None", ProgramId = 1 },
+				new Course { CourseTitle = "Introduction to Literature", CourseCreditHours = 3, CourseNumber = "1010", CourseDescription = "Introduction to literature", CourseNotes = "None", ProgramId = 2 },
+				new Course { CourseTitle = "Introduction to Political Science", CourseCreditHours = 3, CourseNumber = "1010", CourseDescription = "Introduction to political science", CourseNotes = "None", ProgramId = 3 },
+				new Course { CourseTitle = "Introduction to History", CourseCreditHours = 3, CourseNumber = "1010", CourseDescription = "Introduction to history", CourseNotes = "None", ProgramId = 4 },
+				new Course { CourseTitle = "Introduction to Statistics", CourseCreditHours = 3, CourseNumber = "1080", CourseDescription = "Introduction to statistics", CourseNotes = "None", ProgramId = 5 }
 			};
 
 			foreach (var c in Courses)

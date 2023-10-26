@@ -22,17 +22,14 @@ namespace Infrastructure.Models
         [DisplayName("Modality")]
         public int ModalityId { get; set; }
 
-        [Required]
         [DisplayName("Days of the Week")]
-        public int DaysOfWeekId { get; set; }
+        public int? DaysOfWeekId { get; set; }
 
-        [Required]
         [DisplayName("Time Block")]
-        public int TimeBlockId { get; set; }
+        public int? TimeBlockId { get; set; }
 
-        [Required]
         [DisplayName("Campus")]
-        public int CampusId { get; set; }
+        public int? CampusId { get; set; }
 
         [ForeignKey("PreferenceListDetailId")]
         public PreferenceListDetail? PreferenceListDetail { get; set; }
