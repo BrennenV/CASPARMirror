@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231020190531_UpdatedDetailModalityTablesWithCampusIds")]
-    partial class UpdatedDetailModalityTablesWithCampusIds
+    [Migration("20231027164030_Initialize")]
+    partial class Initialize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -200,28 +200,28 @@ namespace DataAccess.Migrations
                     b.Property<string>("BannerCRN")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ClassroomId")
+                    b.Property<int?>("ClassroomId")
                         .HasColumnType("int");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DaysOfWeekId")
+                    b.Property<int?>("DaysOfWeekId")
                         .HasColumnType("int");
 
-                    b.Property<int>("InstructorId")
+                    b.Property<int?>("InstructorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ModalityId")
+                    b.Property<int?>("ModalityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PartOfTermId")
+                    b.Property<int?>("PartOfTermId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PayModelId")
+                    b.Property<int?>("PayModelId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PayOrganizationId")
+                    b.Property<int?>("PayOrganizationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("SectionBannerUpdated")
@@ -236,17 +236,16 @@ namespace DataAccess.Migrations
                     b.Property<string>("SectionNotes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SectionStatusId")
+                    b.Property<int?>("SectionStatusId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("SectionUpdated")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("SemesterInstanceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TimeBlockId")
+                    b.Property<int?>("TimeBlockId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -466,10 +465,10 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CampusId")
+                    b.Property<int?>("CampusId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DaysOfWeekId")
+                    b.Property<int?>("DaysOfWeekId")
                         .HasColumnType("int");
 
                     b.Property<int>("ModalityId")
@@ -478,7 +477,7 @@ namespace DataAccess.Migrations
                     b.Property<int>("PreferenceListDetailId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TimeBlockId")
+                    b.Property<int?>("TimeBlockId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -737,6 +736,23 @@ namespace DataAccess.Migrations
                     b.ToTable("TimeBlocks");
                 });
 
+            modelBuilder.Entity("Infrastructure.Models.TimeOfDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("PartOfDay")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TimeOfDays");
+                });
+
             modelBuilder.Entity("Infrastructure.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -820,23 +836,26 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CampusId")
+                    b.Property<int?>("CampusId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("ModalityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WishlistDetailId")
+                    b.Property<int?>("TimeOfDayId")
                         .HasColumnType("int");
 
-                    b.Property<string>("WishlistPartOfDay")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("WishlistDetailId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CampusId");
 
                     b.HasIndex("ModalityId");
+
+                    b.HasIndex("TimeOfDayId");
 
                     b.HasIndex("WishlistDetailId");
 
@@ -886,22 +905,20 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Infrastructure.Models.Course", b =>
                 {
-                    b.HasOne("Infrastructure.Models.AcademicProgram", "Program")
+                    b.HasOne("Infrastructure.Models.AcademicProgram", "AcademicProgram")
                         .WithMany()
                         .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Program");
+                    b.Navigation("AcademicProgram");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.CourseSection", b =>
                 {
                     b.HasOne("Infrastructure.Models.Classroom", "Classroom")
                         .WithMany()
-                        .HasForeignKey("ClassroomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClassroomId");
 
                     b.HasOne("Infrastructure.Models.Course", "Course")
                         .WithMany()
@@ -911,45 +928,31 @@ namespace DataAccess.Migrations
 
                     b.HasOne("Infrastructure.Models.DaysOfWeek", "DaysOfWeek")
                         .WithMany()
-                        .HasForeignKey("DaysOfWeekId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DaysOfWeekId");
 
                     b.HasOne("Infrastructure.Models.Instructor", "Instructor")
                         .WithMany()
-                        .HasForeignKey("InstructorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("InstructorId");
 
                     b.HasOne("Infrastructure.Models.Modality", "Modality")
                         .WithMany()
-                        .HasForeignKey("ModalityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ModalityId");
 
                     b.HasOne("Infrastructure.Models.PartOfTerm", "PartOfTerm")
                         .WithMany()
-                        .HasForeignKey("PartOfTermId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PartOfTermId");
 
                     b.HasOne("Infrastructure.Models.PayModel", "PayModel")
                         .WithMany()
-                        .HasForeignKey("PayModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PayModelId");
 
                     b.HasOne("Infrastructure.Models.PayOrganization", "PayOrganization")
                         .WithMany()
-                        .HasForeignKey("PayOrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PayOrganizationId");
 
                     b.HasOne("Infrastructure.Models.SectionStatus", "SectionStatus")
                         .WithMany()
-                        .HasForeignKey("SectionStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SectionStatusId");
 
                     b.HasOne("Infrastructure.Models.SemesterInstance", "SemesterInstance")
                         .WithMany()
@@ -959,9 +962,7 @@ namespace DataAccess.Migrations
 
                     b.HasOne("Infrastructure.Models.TimeBlock", "TimeBlock")
                         .WithMany()
-                        .HasForeignKey("TimeBlockId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TimeBlockId");
 
                     b.Navigation("Classroom");
 
@@ -1058,15 +1059,11 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Infrastructure.Models.Campus", "Campus")
                         .WithMany()
-                        .HasForeignKey("CampusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CampusId");
 
                     b.HasOne("Infrastructure.Models.DaysOfWeek", "DaysOfWeek")
                         .WithMany()
-                        .HasForeignKey("DaysOfWeekId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DaysOfWeekId");
 
                     b.HasOne("Infrastructure.Models.Modality", "Modality")
                         .WithMany()
@@ -1082,9 +1079,7 @@ namespace DataAccess.Migrations
 
                     b.HasOne("Infrastructure.Models.TimeBlock", "TimeBlock")
                         .WithMany()
-                        .HasForeignKey("TimeBlockId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TimeBlockId");
 
                     b.Navigation("Campus");
 
@@ -1247,6 +1242,10 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Infrastructure.Models.TimeOfDay", "TimeOfDay")
+                        .WithMany()
+                        .HasForeignKey("TimeOfDayId");
+
                     b.HasOne("Infrastructure.Models.WishlistDetail", "WishlistDetail")
                         .WithMany()
                         .HasForeignKey("WishlistDetailId")
@@ -1256,6 +1255,8 @@ namespace DataAccess.Migrations
                     b.Navigation("Campus");
 
                     b.Navigation("Modality");
+
+                    b.Navigation("TimeOfDay");
 
                     b.Navigation("WishlistDetail");
                 });

@@ -98,22 +98,22 @@
 		}
 
 		function ValidateInput() {
-			// if ($('#ddlCourse').prop('selectedIndex') == 0) {
-			// 	swal.fire('Error', 'Please Select a Course', 'error')
-			// 	return false
-			// }
-			// if ($('#ddlModality').prop('selectedIndex') == 0) {
+			if ($('#ddlCourse').prop('selectedIndex') == 0) {
+			 	swal.fire('Error', 'Please Select a Course', 'error')
+			 	return false
+			}
+			//if ($('#ddlModality').prop('selectedIndex') == 0) {
 			// 	swal.fire('Error', 'Please Select a Modality', 'error')
 			// 	return false
-			// }
-			// if ($('#ddlCampus').prop('selectedIndex') == 0) {
+			//}
+			//if ($('#ddlCampus').prop('selectedIndex') == 0) {
 			// 	swal.fire('Error', 'Please Select a Campus', 'error')
 			// 	return false
-			// }
-			// if ($('#ddlDaysOfWeek').prop('selectedIndex') == 0) {
-			// 	swal.fire('Error', 'Please Select a Time of Day', 'error')
-			// 	return false
-			// }
+			//}
+			//if ($('#ddlTimeOfDays').prop('selectedIndex') == 0) {
+			//	swal.fire('Error', 'Please Select a Time of Day', 'error')
+			//	return false
+			//}
 			return true;
 		}
 

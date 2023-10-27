@@ -67,9 +67,9 @@ function loadList() {
             {
                 "data": "preferenceListDetail",
                 "render": function (data) {
-                    return `${data.course.academicProgram.programCode} ${data.course.courseNumber} `
+                    return `${data.course.academicProgram.programCode} ${data.course.courseNumber} ${data.course.courseTitle}`
                 },
-                "width": "20%"
+                "width": "25%"
             },
             { "data": "preferenceListDetail.preferenceRank", "width": "5%"},
             { "data": "modality.modalityName", "width": "15%" },
@@ -85,7 +85,7 @@ function loadList() {
                                 <a href="/Instructor/PreferenceLists/Delete?id=${data}&semesterInstanceId=${row.preferenceListDetail.preferenceList.semesterInstanceId}" class="btn btn-outline-danger mb-1 rounded" style="cursor:pointer; width: 100px;">
                                     <i class="bi bi-trash"></i> Delete </a>   
                             </div>`;
-                }, "width": "25%"
+                }, "width": "20%"
             }
         ],
         "language": {

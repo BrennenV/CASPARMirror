@@ -47,7 +47,7 @@ namespace CASPARWeb.Pages.Students
 			CourseList = _unitOfWork.CourseSection.GetAll(c => c.SemesterInstanceId == semesterInstanceId, null, "Course,SemesterInstance,Course.AcademicProgram")
 							.Select(c => new SelectListItem
 							{
-								Text = c.Course.AcademicProgram.ProgramCode + " " + c.Course.CourseNumber,
+								Text = c.Course.AcademicProgram.ProgramCode + " " + c.Course.CourseNumber + " " + c.Course.CourseTitle,
 								Value = c.CourseId.ToString()
 							});
 

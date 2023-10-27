@@ -833,13 +833,14 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CampusId")
+                    b.Property<int?>("CampusId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("ModalityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TimeOfDayId")
+                    b.Property<int?>("TimeOfDayId")
                         .HasColumnType("int");
 
                     b.Property<int>("WishlistDetailId")
@@ -901,13 +902,13 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Infrastructure.Models.Course", b =>
                 {
-                    b.HasOne("Infrastructure.Models.AcademicProgram", "Program")
+                    b.HasOne("Infrastructure.Models.AcademicProgram", "AcademicProgram")
                         .WithMany()
                         .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Program");
+                    b.Navigation("AcademicProgram");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.CourseSection", b =>
@@ -1240,9 +1241,7 @@ namespace DataAccess.Migrations
 
                     b.HasOne("Infrastructure.Models.TimeOfDay", "TimeOfDay")
                         .WithMany()
-                        .HasForeignKey("TimeOfDayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TimeOfDayId");
 
                     b.HasOne("Infrastructure.Models.WishlistDetail", "WishlistDetail")
                         .WithMany()
