@@ -1,4 +1,5 @@
 using DataAccess;
+using Infrastructure.Interfaces;
 using Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -6,12 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CASPARWeb.Pages.Administrator.SemesterInstances
 {
-    public class UpsertModel : PageModel
-    {
-        private readonly UnitOfWork _unitOfWork;
+	public class UpsertModel : PageModel
+	{
+		private readonly UnitOfWork _unitOfWork;
         [BindProperty]
         public SemesterInstance objSemesterInstance { get; set; }
-        public IEnumerable<SelectListItem> SemesterList { get; set; }
+		public CourseSection objCourseSection { get; set; }
+		public IEnumerable<SelectListItem> SemesterList { get; set; }
         public UpsertModel(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -50,9 +52,30 @@ namespace CASPARWeb.Pages.Administrator.SemesterInstances
             //Creating a Row
             if (objSemesterInstance.Id == 0)
             {
-                _unitOfWork.SemesterInstance.Add(objSemesterInstance);
-                TempData["success"] = "Semester Instance added Successfully";
-            }
+				_unitOfWork.SemesterInstance.Add(objSemesterInstance);
+				_unitOfWork.Commit();
+
+				//get the <list> of templates that have a semesterId equal to the selected semesterId 
+				IEnumerable<Template> templates = _unitOfWork.Template.GetAll(t => t.SemesterId == objSemesterInstance.SemesterId);
+
+				//create all courseSections based on the templates
+				foreach (Template template in templates)
+				{
+					if (template.Quantity > 0)
+					{
+						for (int i = 0; i < template.Quantity; i++)
+						{
+							//create the same course for each count in quantity
+							objCourseSection = new CourseSection();
+							objCourseSection.SemesterInstanceId = objSemesterInstance.Id;
+							objCourseSection.CourseId = template.CourseId;
+							objCourseSection.SectionUpdated = DateTime.Now;
+							_unitOfWork.CourseSection.Add(objCourseSection);
+						}
+					}
+
+				}
+			}
             //Modifying a Row
             else
             {
