@@ -5,8 +5,5 @@ namespace CASPARWeb.Pages.Administrator.TimeBlocks
 {
     public class IndexModel : PageModel
     {
-        public void OnGet()
-        {
-        }
     }
 }

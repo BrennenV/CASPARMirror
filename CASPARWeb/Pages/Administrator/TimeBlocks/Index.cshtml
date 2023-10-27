@@ -8,21 +8,21 @@
         <div class="col-6">
             <!--50% of row-->
             <h2 class="text-primary">
-                Time Slots
+                Time Blocks
             </h2>
         </div><!-- End 1st Column-->
         <div class="col-6 text-end">
             <!--50% row right justified-->
-            <a href="/Administrator/TimeBlocks/CreateTimeBlock" type="button" class="btn btn-primary">
-                <i class="bi bi-plus-circle"></i> Create Time Slot
+            <a asp-page="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Add Time Block
             </a>
         </div> <!--End 2nd Column-->
     </div> <!--End Row-->
-    <table class="table table-bordered table-striped" id="DT_TimeSlot" style="width:100%">
+    <table class="table table-bordered table-striped" id="DT_TimeBlock" style="width:100%">
         <thead>
             <tr>
                 <th>
-                    Time Slot
+                    Time Block
                 </th>
                 <th>&nbsp;</th>
             </tr>

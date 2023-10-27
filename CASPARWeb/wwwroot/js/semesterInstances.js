@@ -11,7 +11,7 @@ function loadList() {
         },
         "columns": [
             //should not be capital
-            { "data": "semesterInstanceName", "width": "25%" },
+            { "data": "semesterInstanceName", "width": "24%" },
             {"data": "startDate", "render": function (data, type, row) {
                     if (type === 'display') {
                         // Format the date using JavaScript's Date object
@@ -19,7 +19,7 @@ function loadList() {
                         return date.toLocaleDateString();
                     }
                     return data;
-                }, "width": "25%" },
+                }, "width": "23%" },
             {"data": "endDate", "render": function (data, type, row) {
                     if (type === 'display') {
                         // Format the date using JavaScript's Date object
@@ -27,12 +27,15 @@ function loadList() {
                         return date.toLocaleDateString();
                     }
                     return data;
-                }, "width": "25%" },
+                }, "width": "23%" },
             {"data": "id", "render": function (data) {
                     return `<div class="text-center">
-                    <a href="/Administrator/SemesterInstances/CreateSemesterInstance?id=${data}" type="button" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; width: 100px;">
-                        <i class="bi bi-pencil-square"></i> Edit </a>`;
-                }, "width": "25%"
+                    <a href="/Administrator/SemesterInstances/Upsert?id=${data}" type="button" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; width: 100px;">
+                        <i class="bi bi-pencil-square"></i> Edit </a>
+                    <a href="/Administrator/SemesterInstances/Delete?id=${data}" class="btn btn-outline-danger mt-1 rounded" style="cursor:pointer; style="cursor: pointer; width: 100px; ">
+                        <i class="bi bi-trash" ></i> Delete </a>
+                    </div>`;
+            }, "width": "30%"
             }
         ],
         "language": {

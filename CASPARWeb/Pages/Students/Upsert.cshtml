@@ -1,0 +1,96 @@
+﻿@page
+@model CASPARWeb.Pages.Students.UpsertModel
+@{
+}
+<form method="post" asp-page="Upsert" enctype="multipart/form-data">
+	<input asp-for="objWishlistDetailModality.Id" hidden />
+	<div class="row">
+		<div class="col-10">
+			<div class="border p-3 mt-4 row">
+				<div class="col-12 pb-2">
+					<h2 class="text-primary">@(Model.objWishlistDetailModality.Id != 0 ? "Update " : "Create ") Preference</h2>
+					<div class="col-3">
+						<select id="ddlSemesterInstance" asp-for="objWishlistDetail.WishlistId" asp-items="@Model.SemesterInstanceList" class="form-select rounded">
+							<option disabled selected>--Select Semester--</option>
+						</select>
+					</div>
+					<hr />
+				</div>
+				<div class="mb-3 col-4">
+					<label asp-for="objWishlistDetail.CourseId"></label>
+					<select id="ddlCourse" asp-for="objWishlistDetail.CourseId" asp-items="@Model.CourseList" class="form-select rounded">
+						<option disabled selected>--Select--</option>
+					</select>
+				</div>
+				<div class="mb-3 col-3">
+					<label asp-for="objWishlistDetailModality.ModalityId"></label>
+					<select id="ddlModality" asp-for="objWishlistDetailModality.ModalityId" asp-items="@Model.ModalityList" class="form-select rounded">
+						<option disabled selected>--Select--</option>
+					</select>
+				</div>
+				<div class="mb-3 col-2">
+					<label asp-for="objWishlistDetailModality.CampusId"></label>
+					<select id="ddlCampus" asp-for="objWishlistDetailModality.CampusId" asp-items="@Model.CampusList" class="form-select rounded">
+						<option disabled selected>--Select--</option>
+					</select>
+				</div>
+				<div class="mb-3 col-3">
+					<label asp-for="objWishlistDetailModality.TimeOfDayId"></label>
+					<select id="ddlWishlistPartOfDay" asp-for="objWishlistDetailModality.TimeOfDayId" asp-items="@Model.TimeOfDayList" class="form-select rounded">
+						<option disabled selected>--Select--</option>
+					</select>
+				</div>
+				<div class="col-12">
+					@if (Model.objWishlistDetailModality.Id != 0)
+					{
+						<button type="submit" onclick="return ValidateInput()" class="btn btn-primary rounded me-2" style="width:150px">Update</button>
+					} //Preference being edited
+					else //Else new Preference
+					{
+						<button type="submit" onclick="return ValidateInput()" class="btn btn-primary rounded" style="width:150px">Create</button>
+					}<!--END ELSE -->
+
+					<a asp-page="Index" class="btn btn-outline-primary rounded" style="width:150px">
+						Back to List
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+@section Scripts{
+	<script>
+
+		tinymce.init({
+			selector: 'textarea',
+			plugins: "lists",
+			menubar: "file edit format"
+		});
+
+		function ValidateInput() {
+			if ($('#ddlSemesterInstance').prop('selectedIndex') == 0) {
+				swal.fire('Error', 'Please Select a Semester', 'error')
+				return false
+			}
+			if ($('#ddlCourse').prop('selectedIndex') == 0) {
+				swal.fire('Error', 'Please Select a Course', 'error')
+				return false
+			}
+			if ($('#ddlModality').prop('selectedIndex') == 0) {
+				swal.fire('Error', 'Please Select a Modality', 'error')
+				return false
+			}
+			if ($('#ddlCampus').prop('selectedIndex') == 0) {
+				swal.fire('Error', 'Please Select a Campus', 'error')
+				return false
+			}
+			if ($('#ddlWishlistPartOfDay').prop('selectedIndex') == 0) {
+				swal.fire('Error', 'Please Select a Time of Day', 'error')
+				return false
+			}
+			return true;
+		}
+
+	</script>
+}

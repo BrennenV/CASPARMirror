@@ -52,7 +52,7 @@ namespace CASPARWeb.Pages.Administrator.Semesters
             }
             //Saves changes
             _unitOfWork.Commit();
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Templates/Upsert", new { semesterId = objSemester.Id });
         }
     }
 }

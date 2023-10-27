@@ -1,4 +1,5 @@
 ﻿var dataTable;
+var ddlSemesterInstance;
 
 $(document).ready(function () {
     loadddl();

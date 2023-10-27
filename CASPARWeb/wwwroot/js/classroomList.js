@@ -11,15 +11,18 @@ function loadList() {
         },
         "columns": [
             //should not be capital
-            { "data": "classroomNumber", "width": "25%" },
-            { "data": "building.buildingName", "width": "25%" },
-            { "data": "building.campus.campusName", "width": "25%" },
+            { "data": "classroomNumber", "width": "24%" },
+            { "data": "building.buildingName", "width": "23%" },
+            { "data": "building.campus.campusName", "width": "23%" },
             {
                 "data": "id", "render": function (data) {
                     return `<div class="text-center">
-                    <a href="/Administrator/Classrooms/CreateClassroom?id=${data}" type="button" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; width: 100px;">
-                        <i class="bi bi-pencil-square"></i> Edit </a>`;
-                }, "width": "25%"
+                    <a href="/Administrator/Classrooms/Upsert?id=${data}" type="button" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; width: 100px;">
+                        <i class="bi bi-pencil-square"></i> Edit </a>
+                    <a href="/Administrator/Classrooms/Delete?id=${data}" class="btn btn-outline-danger mt-1 rounded" style="cursor:pointer; style="cursor: pointer; width: 100px; ">
+                        <i class="bi bi-trash" ></i> Delete </a>
+                    </div>`;
+                }, "width": "30%"
             }
         ],
         "language": {

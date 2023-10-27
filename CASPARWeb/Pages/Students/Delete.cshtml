@@ -3,15 +3,15 @@
 @{
 }
 <div class="card shadow border-0 mt-4">
-	<div class="card-header bg-secondary bg-gradient ml-0 py-3">
-		<div class="row">
-			<div class="col-12 text-center">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
 				<h2 class="text-primary py-2">Delete Modality</h2>
-			</div>
-		</div>
-	</div>
-	<div class="card-body p-4">
-		<form method="post" class="row">
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
 			<input type="hidden" asp-for="objWishlistDetailModality.Id">
 			<input type="hidden" asp-for="objWishlistDetailModality.WishlistDetailId">
 			<input type="hidden" asp-for="originalCourseId">
@@ -47,19 +47,19 @@
 						</div>
 					</div>
 				</div>
-				<div class="row pt-2">
-					<div class="col-6 col-md-3">
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
 						<button type="submit" class="btn btn-danger rounded form-control">Delete</button>
-					</div>
-					<div class="col-6 col-md-3">
+                    </div>
+                    <div class="col-6 col-md-3">
 						<a asp-page="./Index" asp-route-selectedSemesterId="@Model.currentSemesterInstanceId" class="rounded btn btn-outline-primary border form-control">
 							Back to Preference List
-						</a>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 <script>

@@ -32,6 +32,9 @@ namespace Infrastructure.Models
         [ForeignKey("TimeOfDayId")]
         public TimeOfDay? TimeOfDay { get; set; }
 
+        [ForeignKey("TimeOfDayId")]
+        public TimeOfDay? TimeOfDay { get; set; }
+
         [ForeignKey("WishlistDetailId")]
         public WishlistDetail? WishlistDetail { get; set; }
 

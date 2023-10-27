@@ -9,6 +9,8 @@ namespace CASPARWeb.Pages.Students
     public class DeleteModel : PageModel
     {
         private readonly UnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
         [BindProperty]
         public WishlistDetailModality objWishlistDetailModality { get; set; }
 		[BindProperty]
@@ -22,7 +24,7 @@ namespace CASPARWeb.Pages.Students
 		public IEnumerable<SelectListItem> CampusList { get; set; }
 		public IEnumerable<SelectListItem> TimeOfDayList { get; set; }
 
-		public DeleteModel(UnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
+        public DeleteModel(UnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
 			objWishlistDetailModality = new WishlistDetailModality();
@@ -30,10 +32,10 @@ namespace CASPARWeb.Pages.Students
 			ModalityList = new List<SelectListItem>();
 			CampusList = new List<SelectListItem>();
 			TimeOfDayList = new List<SelectListItem>();
-		}
+        }
 
 		public IActionResult OnGet(int id, int semesterInstanceId)
-		{
+        {
 			objWishlistDetailModality = _unitOfWork.WishlistDetailModality.GetById(id);
 			WishlistDetail objWishlistDetail = _unitOfWork.WishlistDetail.GetById(objWishlistDetailModality.WishlistDetailId);
 			CourseId = objWishlistDetail.CourseId;
@@ -42,9 +44,9 @@ namespace CASPARWeb.Pages.Students
 
 			//Nothing found in DB
 			if (objWishlistDetailModality == null)
-			{
-				return NotFound();
-			}
+            {
+                return NotFound();
+            }
 
 			//Grab all the ids for the options
 			CourseList = _unitOfWork.CourseSection.GetAll(c => c.SemesterInstanceId == semesterInstanceId, null, "Course,SemesterInstance,Course.AcademicProgram")
@@ -72,20 +74,20 @@ namespace CASPARWeb.Pages.Students
 								Value = c.Id.ToString()
 							});
 
-			return Page();
-		}
+            return Page();
+        }
 
-		public IActionResult OnPost(int? id)
-		{
+        public IActionResult OnPost(int? id)
+        {
 			var wishlistDetailModality = _unitOfWork.WishlistDetailModality.GetById(id);
 			if (wishlistDetailModality == null)
-			{
-				return NotFound();
-			}
+            {
+                return NotFound();
+            }
 			_unitOfWork.WishlistDetailModality.Delete(wishlistDetailModality); //TODO: this will eventually just change it to archived
 			TempData["success"] = "Modality Deleted Successfully";
-			_unitOfWork.Commit();
+            _unitOfWork.Commit();
 			return RedirectToPage("./Index", new { selectedSemesterId = currentSemesterInstanceId });
-		}
-	}
+        }
+    }
 }
