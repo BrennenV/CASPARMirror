@@ -1,11 +1,11 @@
 ﻿var dataTable;
-var ddlSemesterInstance;
 
 $(document).ready(function () {
     loadddl();
     loadList();
 
     $('#ddlSemesterInstance').change(function () {
+        setSemesterInstanceIdForQueryString();
         dataTable.ajax.reload();
     });
 });
@@ -16,16 +16,34 @@ function loadddl() {
         type: "GET",
         dataType: "json",
         success: function (data) {
-            var $dropdown = $("#ddlSemesterInstance");
-            $dropdown.empty();
+            var dropdown = $("#ddlSemesterInstance");
+            dropdown.empty();
             $.each(data.data, function (index, item) {
-                $dropdown.append($("<option />").val(item.id).text(item.semesterInstanceName));
+                if (item.id == $("#selectedSemesterId").text()) {
+                    dropdown.append($("<option />").val(item.id).text(item.semesterInstanceName).attr("selected", "selected"));
+                }
+                else {
+                    dropdown.append($("<option />").val(item.id).text(item.semesterInstanceName));
+                }
             });
+
+            //This is to add the semester instance to the query string when the add preference button is clicked
+            setSemesterInstanceIdForQueryString();
         },
         error: function (xhr, error, thrown) {
             alert('Ajax error:' + xhr.responseText);
         }
     });
+}
+
+function setSemesterInstanceIdForQueryString() {
+    var dropdown = $("#ddlSemesterInstance");
+    var btn = $("#addPreferenceBtn");
+
+    var oldHref = btn.attr("href");
+    var newHref = oldHref.slice(0, oldHref.indexOf("=") + 1) + dropdown.val().toString();
+
+    btn.attr("href", newHref);
 }
 
 function loadList() {
@@ -37,7 +55,7 @@ function loadList() {
             "dataSrc": function (json) {
                 var selectedSemester = Number($('#ddlSemesterInstance').val());
                 var filteredData = $.grep(json.data, function (row) {
-                    return Number(row.wishlistDetail.wishlist.semesterInstance.id) === selectedSemester;
+                    return Number(row.wishlistDetail.wishlist.semesterInstanceId) === selectedSemester;
                 });
                 return filteredData;
             },
@@ -46,20 +64,26 @@ function loadList() {
             }
         },
         "columns": [
-            { "data": "wishlistDetail.course.courseTitle", "width": "30%" },
+            {
+                "data": "wishlistDetail",
+                "render": function (data) {
+                    return `${data.course.academicProgram.programCode} ${data.course.courseNumber} ${data.course.courseTitle} `
+                },
+                "width": "25%"
+            },
             { "data": "modality.modalityName", "width": "15%" },
             { "data": "campus.campusName", "width": "15%" },
-            { "data": "timeOfDay.partOfDay", "width": "15%" },
+            { "data": "timeOfDay.partOfDay", "width": "10%" },
             {
                 "data": "id",
-                "render": function (data) {
+                "render": function (data, type, row, meta) {
                     return `<div class="text-center">
-                                <a href="/Students/Upsert?id=${data}" class="btn btn-outline-primary mb-1 rounded" style="cursor:pointer; width: 100px;">
+                                <a href="/Student/Update?id=${data}&semesterInstanceId=${row.wishlistDetail.wishlist.semesterInstanceId}" class="btn btn-outline-primary mb-1 rounded" style="cursor:pointer; width: 100px;">
                                     <i class="bi bi-pencil-square"></i> Edit </a>
-                                <a href="/Students/Delete?id=${data}" class="btn btn-outline-danger mb-1 rounded" style="cursor:pointer; width: 100px;">
+                                <a href="/Student/Delete?id=${data}&semesterInstanceId=${row.wishlistDetail.wishlist.semesterInstanceId}" class="btn btn-outline-danger mb-1 rounded" style="cursor:pointer; width: 100px;">
                                     <i class="bi bi-trash"></i> Delete </a>   
                             </div>`;
-                }, "width": "25%"
+                }, "width": "20%"
             }
         ],
         "language": {

@@ -13,12 +13,13 @@
 		</div><!-- End 1st Column-->
 		<div class="col-3 text-end">
 			<!--25% row right justified-->
+			<span style="display:none" id="selectedSemesterId">@(Model.SelectedSemesterId != 0 ? Model.SelectedSemesterId : "0")</span>
 			<select id="ddlSemesterInstance" class="form-select rounded">
 			</select>
 		</div> <!--End 2nd Column-->
 		<div class="col-6 text-start">
 			<!--25% row-->
-			<a asp-page="Upsert" asp-route-id="0" class="btn btn-primary rounded">
+			<a asp-page="Insert" asp-route-semesterInstanceId="0" class="btn btn-primary rounded" id="addPreferenceBtn">
 				<i class="bi bi-plus-circle"></i> Add Preference
 			</a>
 		</div> <!--End 3rd Column-->

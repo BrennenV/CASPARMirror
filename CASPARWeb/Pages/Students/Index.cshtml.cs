@@ -9,6 +9,20 @@ namespace CASPARWeb.Pages.Students
 {
     public class IndexModel : PageModel
     {
-		//Purposely left blank as Datatables will handle the data with js
+		public int SelectedSemesterId;
+		public IActionResult OnGet(int? selectedSemesterId)
+		{
+			//This code is to help preserve the selected semester id upon returning to the index page
+			if (selectedSemesterId != null)
+			{
+				SelectedSemesterId = (int)selectedSemesterId;
+			}
+			else
+			{
+				SelectedSemesterId = 0;
+			}
+
+			return Page();
+		}
 	}
 }

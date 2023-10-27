@@ -15,7 +15,7 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
 		[DisplayName("Part of Day")]
-		public int TimeOfDayId { get; set; }
+		public int? TimeOfDayId { get; set; }
 
         [Required]
         [DisplayName("Wishlist Detail")]
@@ -27,7 +27,7 @@ namespace Infrastructure.Models
 
         [Required]
         [DisplayName("Campus")]
-        public int CampusId { get; set; }
+        public int? CampusId { get; set; }
 
         [ForeignKey("TimeOfDayId")]
         public TimeOfDay? TimeOfDay { get; set; }
