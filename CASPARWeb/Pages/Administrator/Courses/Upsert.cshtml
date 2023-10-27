@@ -1,0 +1,74 @@
+﻿@page
+@model CASPARWeb.Pages.Administrator.Courses.UpsertModel
+@{
+}
+<div class="card shadow border-0 mt-4 col-6 mx-auto">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary py-2">@(Model.objCourse.Id != 0 ? "Update " : "Add ") Course</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input type="hidden" asp-for="objCourse.CourseNotes" />
+            <input type="hidden" asp-for="objCourse.Id">
+            <div class="border p-3">
+                <label class="form-label mt-4">Course Title</label>
+                <div class="form-group mt-1">
+                    <input id="inputCourseTitle" asp-for="objCourse.CourseTitle" class="form-control border-0 shadow" />
+                </div>
+                <label class="form-label">Academic Program</label>
+                <select id="inputAcademicProgram" asp-for="objCourse.ProgramId" asp-items="@Model.AcademicProgramList" class="form-select border-0 shadow">
+                    <option disabled selected>--Select Building--</option>
+                </select>
+                <label class="form-label mt-4">Course Number</label>
+                <div class="form-group mt-1">
+                    <input id="inputCourseNumber" asp-for="objCourse.CourseNumber" class="form-control border-0 shadow" />
+                </div>
+                <label class="form-label mt-4">Description</label>
+                <div class="form-group mt-1">
+                    <input id="inputCourseDescription" asp-for="objCourse.CourseDescription" class="form-control border-0 shadow" />
+                </div>
+                <label class="form-label mt-4">Credit Hours</label>
+                <div class="form-group mt-1">
+                    <input id="inputCourseCreditHours" asp-for="objCourse.CourseCreditHours" class="form-control border-0 shadow" />
+                </div>
+                <div class="row pt-2 mt-3">
+                    <div class="col-6">
+                        <button type="submit" onclick="return ValidateInput()" class="btn btn-primary form-control">@(Model.objCourse.Id != 0 ? "Update " : "Add ")</button>
+                    </div>
+                    <div class="col-6">
+                        <a asp-page="./Index" class=" btn btn-outline-primary border form-control">
+                            Back to Courses
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function ValidateInput() {
+        if (document.getElementById('inputBuilding').value == "--Select Building--") {
+            swal.fire('Error', 'Please Select a Building', 'error');
+            return false;
+        }
+        else if (document.getElementById('inputClassroomNumber').value == "") {
+
+            swal.fire('Error', 'Please enter a Classroom Number', 'error');
+            return false;
+        }
+        else if (document.getElementById('inputNumberOfSeats').value < 0) {
+
+            swal.fire('Error', 'Please enter a Valid Number of Seats', 'error');
+            return false;
+        }
+        else if (document.getElementById('inputClassroomDetails').value == "") {
+
+            swal.fire('Error', 'Please enter Classroom Details', 'error');
+            return false;
+        }
+    }
+</script>
