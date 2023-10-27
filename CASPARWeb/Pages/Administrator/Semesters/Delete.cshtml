@@ -2,7 +2,7 @@
 @model CASPARWeb.Pages.Administrator.Semesters.DeleteModel
 @{
 }
-<div class="card shadow border-0 mt-4">
+<div class="card shadow border-0 mt-4 col-6 mx-auto">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
@@ -14,15 +14,15 @@
         <form method="post" class="row">
             <input type="hidden" asp-for="objSemester.Id" />
             <div class="border p-3">
-                <div class="mb-3 col-6">
-                    <label>Semester Template</label>
+                <div class="mb-3">
+                    <label class="form-label">Semester Template</label>
                     <input disabled id="ddlSemester" asp-for="objSemester.SemesterName" asp-items="@Model.objSemester.SemesterName" class="form-select">
                 </div>
                 <div class="row pt-2">
-                    <div class="col-6 col-md-3">
+                    <div class="col-6">
                         <button type="submit" class="btn btn-danger form-control">Delete</button>
                     </div>
-                    <div class="col-6 col-md-3">
+                    <div class="col-6">
                         <a asp-page="./Index" class="btn btn-outline-primary border  form-control">
                             Back to Semester Template List
                         </a>

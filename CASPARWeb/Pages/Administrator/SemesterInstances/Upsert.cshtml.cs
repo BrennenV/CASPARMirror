@@ -1,12 +1,67 @@
+using DataAccess;
+using Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CASPARWeb.Pages.Administrator.SemesterInstances
 {
     public class UpsertModel : PageModel
     {
-        public void OnGet()
+        private readonly UnitOfWork _unitOfWork;
+        [BindProperty]
+        public SemesterInstance objSemesterInstance { get; set; }
+        public IEnumerable<SelectListItem> SemesterList { get; set; }
+        public UpsertModel(UnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
+            objSemesterInstance = new SemesterInstance();
+            SemesterList = new List<SelectListItem>();
+        }
+        public IActionResult OnGet(int? id)
+        {
+            //Populate the foreign keys to avoid foreign key conflicts
+            SemesterList = _unitOfWork.Semester.GetAll()
+                            .Select(c => new SelectListItem
+                            {
+                                Text = c.SemesterName,
+                                Value = c.Id.ToString()
+                            });
+            //Edit mode
+            if (id != null && id != 0)
+            {
+                objSemesterInstance = _unitOfWork.SemesterInstance.GetById(id);
+            }
+            //Nothing found in DB
+            if (objSemesterInstance == null)
+            {
+                return NotFound();
+            }
+            //Create mode
+            return Page();
+        }
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["error"] = "Data Incomplete";
+                return Page();
+            }
+            //Creating a Row
+            if (objSemesterInstance.Id == 0)
+            {
+                _unitOfWork.SemesterInstance.Add(objSemesterInstance);
+                TempData["success"] = "Semester Instance added Successfully";
+            }
+            //Modifying a Row
+            else
+            {
+                _unitOfWork.SemesterInstance.Update(objSemesterInstance);
+                TempData["success"] = "Semester Instance updated Successfully";
+            }
+            //Saves changes
+            _unitOfWork.Commit();
+            return RedirectToPage("./Index");
         }
     }
 }
