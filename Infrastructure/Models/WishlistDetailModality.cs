@@ -14,7 +14,9 @@ namespace Infrastructure.Models
         [Key]
         public int Id { get; set; }
 
-		[DisplayName("Part of Day")]
+        public bool? IsArchived { get; set; }
+
+        [DisplayName("Part of Day")]
 		public int? TimeOfDayId { get; set; }
 
         [Required]

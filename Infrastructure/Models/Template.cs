@@ -15,7 +15,10 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("Quantity")]
         public int Quantity { get; set; }
+
+        public bool? IsArchived { get; set; }
 
         [Required]
         [DisplayName("Semester")]

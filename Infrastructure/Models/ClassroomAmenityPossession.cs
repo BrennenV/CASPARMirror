@@ -14,6 +14,8 @@ namespace Infrastructure.Models
         [Key]
         public int Id { get; set; }
 
+        public bool? IsArchived { get; set; }
+
         [Required]
         [DisplayName("Classroom Amenity")]
         public int ClassroomAmenityId { get; set; }

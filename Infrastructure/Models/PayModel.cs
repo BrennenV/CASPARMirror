@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,9 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("Pay Model Title")]
         public string? PayModelTitle { get; set; }
+
+        public bool? IsArchived { get; set; }
     }
 }

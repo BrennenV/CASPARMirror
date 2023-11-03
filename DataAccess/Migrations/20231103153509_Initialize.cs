@@ -18,7 +18,8 @@ namespace DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProgramName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProgramCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ProgramCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,7 +32,8 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CampusName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CampusName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,7 +46,8 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClassroomAmenityName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ClassroomAmenityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,7 +60,8 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DaysOfWeekTitle = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    DaysOfWeekTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,7 +74,8 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ModalityName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ModalityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,7 +88,8 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PartOfTermTitle = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PartOfTermTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -96,7 +102,8 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PayModelTitle = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PayModelTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -109,7 +116,8 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PayOrganizationTitle = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PayOrganizationTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -136,7 +144,8 @@ namespace DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SectionStatusName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SectionStatusColor = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    SectionStatusColor = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -149,7 +158,8 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SemesterName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    SemesterName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -162,7 +172,8 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TimeBlockValue = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TimeBlockValue = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -175,7 +186,8 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PartOfDay = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PartOfDay = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -208,7 +220,7 @@ namespace DataAccess.Migrations
                     CourseCreditHours = table.Column<int>(type: "int", nullable: false),
                     CourseNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CourseDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CourseNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     ProgramId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -229,6 +241,7 @@ namespace DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BuildingName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     CampusId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -254,6 +267,7 @@ namespace DataAccess.Migrations
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndRegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     SemesterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -274,6 +288,7 @@ namespace DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InstructorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -321,6 +336,7 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StudentMajor = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StudentGradYear = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -341,6 +357,7 @@ namespace DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<int>(type: "int", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     SemesterId = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -370,6 +387,7 @@ namespace DataAccess.Migrations
                     ClassroomDetail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClassroomSeats = table.Column<int>(type: "int", nullable: false),
                     ClassroomNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     BuildingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -389,9 +407,10 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LoadReqHours = table.Column<int>(type: "int", nullable: false),
+                    LoadReqAmount = table.Column<int>(type: "int", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     InstructorId = table.Column<int>(type: "int", nullable: false),
-                    SemesterId = table.Column<int>(type: "int", nullable: false)
+                    SemesterInstanceId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -403,9 +422,9 @@ namespace DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_LoadReqs_Semesters_SemesterId",
-                        column: x => x.SemesterId,
-                        principalTable: "Semesters",
+                        name: "FK_LoadReqs_SemesterInstances_SemesterInstanceId",
+                        column: x => x.SemesterInstanceId,
+                        principalTable: "SemesterInstances",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -416,6 +435,7 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     InstructorId = table.Column<int>(type: "int", nullable: false),
                     SemesterInstanceId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -442,6 +462,7 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     InstructorId = table.Column<int>(type: "int", nullable: false),
                     ProgramId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -470,7 +491,8 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ReleaseTimeAmount = table.Column<int>(type: "int", nullable: false),
                     ReleaseTimeNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SemesterId = table.Column<int>(type: "int", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
+                    SemesterInstanceId = table.Column<int>(type: "int", nullable: false),
                     InstructorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -483,9 +505,9 @@ namespace DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ReleaseTimes_Semesters_SemesterId",
-                        column: x => x.SemesterId,
-                        principalTable: "Semesters",
+                        name: "FK_ReleaseTimes_SemesterInstances_SemesterInstanceId",
+                        column: x => x.SemesterInstanceId,
+                        principalTable: "SemesterInstances",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -496,6 +518,7 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     StudentId = table.Column<int>(type: "int", nullable: false),
                     SemesterInstanceId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -522,6 +545,7 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     ClassroomAmenityId = table.Column<int>(type: "int", nullable: false),
                     ClassroomId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -554,6 +578,7 @@ namespace DataAccess.Migrations
                     SectionFinalEnrollment = table.Column<DateTime>(type: "datetime2", nullable: true),
                     SectionUpdated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     SectionBannerUpdated = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     CourseId = table.Column<int>(type: "int", nullable: false),
                     SemesterInstanceId = table.Column<int>(type: "int", nullable: false),
                     InstructorId = table.Column<int>(type: "int", nullable: true),
@@ -635,6 +660,7 @@ namespace DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PreferenceRank = table.Column<int>(type: "int", nullable: false),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     PreferenceListId = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -661,6 +687,7 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     WishlistId = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -687,6 +714,7 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     PreferenceListDetailId = table.Column<int>(type: "int", nullable: false),
                     ModalityId = table.Column<int>(type: "int", nullable: false),
                     DaysOfWeekId = table.Column<int>(type: "int", nullable: true),
@@ -731,10 +759,11 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsArchived = table.Column<bool>(type: "bit", nullable: true),
                     TimeOfDayId = table.Column<int>(type: "int", nullable: true),
                     WishlistDetailId = table.Column<int>(type: "int", nullable: false),
                     ModalityId = table.Column<int>(type: "int", nullable: false),
-                    CampusId = table.Column<int>(type: "int", nullable: true)
+                    CampusId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -855,9 +884,9 @@ namespace DataAccess.Migrations
                 column: "InstructorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LoadReqs_SemesterId",
+                name: "IX_LoadReqs_SemesterInstanceId",
                 table: "LoadReqs",
-                column: "SemesterId");
+                column: "SemesterInstanceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PreferenceListDetailModalities_CampusId",
@@ -920,9 +949,9 @@ namespace DataAccess.Migrations
                 column: "InstructorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReleaseTimes_SemesterId",
+                name: "IX_ReleaseTimes_SemesterInstanceId",
                 table: "ReleaseTimes",
-                column: "SemesterId");
+                column: "SemesterInstanceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleAssignments_RoleId",

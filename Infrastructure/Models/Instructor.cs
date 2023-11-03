@@ -16,7 +16,10 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("Instructor Name")]
         public string? InstructorName { get; set; }
+
+        public bool? IsArchived { get; set; }
 
         [Required]
         [DisplayName("User")]

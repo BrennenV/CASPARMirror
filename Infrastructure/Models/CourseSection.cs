@@ -27,6 +27,8 @@ namespace Infrastructure.Models
 
         public DateTime? SectionBannerUpdated { get; set; }
 
+        public bool? IsArchived { get; set; }
+
         [DisplayName("Course")]
         public int CourseId { get; set; }
 

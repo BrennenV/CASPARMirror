@@ -285,12 +285,12 @@ namespace DataAccess
 
 			var Courses = new List<Course>
 			{
-				new Course { CourseTitle = "Introduction to Computer Science", CourseCreditHours = 3, CourseNumber = "1030", CourseDescription = "Introduction to computer science", CourseNotes = "None", ProgramId = 1 },
-				new Course { CourseTitle = "Introduction to Programming", CourseCreditHours = 3, CourseNumber = "1400", CourseDescription = "Introduction to programming", CourseNotes = "None", ProgramId = 1 },
-				new Course { CourseTitle = "Introduction to Literature", CourseCreditHours = 3, CourseNumber = "1010", CourseDescription = "Introduction to literature", CourseNotes = "None", ProgramId = 2 },
-				new Course { CourseTitle = "Introduction to Political Science", CourseCreditHours = 3, CourseNumber = "1010", CourseDescription = "Introduction to political science", CourseNotes = "None", ProgramId = 3 },
-				new Course { CourseTitle = "Introduction to History", CourseCreditHours = 3, CourseNumber = "1010", CourseDescription = "Introduction to history", CourseNotes = "None", ProgramId = 4 },
-				new Course { CourseTitle = "Introduction to Statistics", CourseCreditHours = 3, CourseNumber = "1080", CourseDescription = "Introduction to statistics", CourseNotes = "None", ProgramId = 5 }
+				new Course { CourseTitle = "Introduction to Computer Science", CourseCreditHours = 3, CourseNumber = "1030", CourseDescription = "Introduction to computer science", ProgramId = 1 },
+				new Course { CourseTitle = "Introduction to Programming", CourseCreditHours = 3, CourseNumber = "1400", CourseDescription = "Introduction to programming", ProgramId = 1 },
+				new Course { CourseTitle = "Introduction to Literature", CourseCreditHours = 3, CourseNumber = "1010", CourseDescription = "Introduction to literature", ProgramId = 2 },
+				new Course { CourseTitle = "Introduction to Political Science", CourseCreditHours = 3, CourseNumber = "1010", CourseDescription = "Introduction to political science", ProgramId = 3 },
+				new Course { CourseTitle = "Introduction to History", CourseCreditHours = 3, CourseNumber = "1010", CourseDescription = "Introduction to history", ProgramId = 4 },
+				new Course { CourseTitle = "Introduction to Statistics", CourseCreditHours = 3, CourseNumber = "1080", CourseDescription = "Introduction to statistics", ProgramId = 5 }
 			};
 
 			foreach (var c in Courses)
@@ -650,12 +650,12 @@ namespace DataAccess
 
 			var ReleaseTimes = new List<ReleaseTime>
 			{
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterId = 1, InstructorId = 1 },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterId = 2, InstructorId = 1 },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterId = 3, InstructorId = 1 },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterId = 1, InstructorId = 2 },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterId = 2, InstructorId = 2 },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterId = 3, InstructorId = 2 }
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = 1 },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = 1 },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = 1 },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = 2 },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = 2 },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = 2 }
 			};
 
 			foreach (var r in ReleaseTimes)
@@ -673,12 +673,12 @@ namespace DataAccess
 
 			var LoadReqs = new List<LoadReq>
 			{
-				new LoadReq { LoadReqHours = 12, InstructorId = 1, SemesterId = 1 },
-				new LoadReq { LoadReqHours = 12, InstructorId = 1, SemesterId = 2 },
-				new LoadReq { LoadReqHours = 12, InstructorId = 1, SemesterId = 3 },
-				new LoadReq { LoadReqHours = 12, InstructorId = 2, SemesterId = 1 },
-				new LoadReq { LoadReqHours = 12, InstructorId = 2, SemesterId = 2 },
-				new LoadReq { LoadReqHours = 12, InstructorId = 2, SemesterId = 3 }
+				new LoadReq { LoadReqAmount = 12, InstructorId = 1, SemesterInstanceId = 1 },
+				new LoadReq { LoadReqAmount = 12, InstructorId = 1, SemesterInstanceId = 2 },
+				new LoadReq { LoadReqAmount = 12, InstructorId = 1, SemesterInstanceId = 3 },
+				new LoadReq { LoadReqAmount = 12, InstructorId = 2, SemesterInstanceId = 1 },
+				new LoadReq { LoadReqAmount = 12, InstructorId = 2, SemesterInstanceId = 2 },
+				new LoadReq { LoadReqAmount = 12, InstructorId = 2, SemesterInstanceId = 3 }
 			};
 
 			foreach (var l in LoadReqs)

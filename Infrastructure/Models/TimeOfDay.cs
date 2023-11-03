@@ -17,5 +17,7 @@ namespace Infrastructure.Models
 		[Required]
 		[DisplayName("Time of Day")]
 		public string? PartOfDay { get; set; }
-	}
+
+        public bool? IsArchived { get; set; }
+    }
 }

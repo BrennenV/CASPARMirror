@@ -15,7 +15,10 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("Preference Rank")]
         public int PreferenceRank { get; set; }
+
+        public bool? IsArchived { get; set; }
 
         [Required]
         [DisplayName("Preference List")]

@@ -15,17 +15,20 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("Course Title")]
         public string? CourseTitle { get; set; }
 
         [Required]
+        [DisplayName("Course Credit Hours")]
         public int CourseCreditHours { get; set; }
 
         [Required]
+        [DisplayName("Course Number")]
         public string? CourseNumber { get; set; }
 
         public string? CourseDescription { get; set; }
 
-        public string? CourseNotes { get; set; }
+        public bool? IsArchived { get; set; }
 
         [Required]
         [DisplayName("Program")]

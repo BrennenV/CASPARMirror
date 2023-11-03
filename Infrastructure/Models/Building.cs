@@ -15,7 +15,10 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("Building Name")]
         public string? BuildingName { get; set; }
+
+        public bool? IsArchived { get; set; }
 
         [Required]
         [DisplayName("Campus")]

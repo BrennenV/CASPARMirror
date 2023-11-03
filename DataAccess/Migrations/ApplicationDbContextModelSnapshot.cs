@@ -30,6 +30,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<string>("ProgramCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -58,6 +61,9 @@ namespace DataAccess.Migrations
                     b.Property<int>("CampusId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CampusId");
@@ -76,6 +82,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("CampusName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -104,6 +113,9 @@ namespace DataAccess.Migrations
                     b.Property<int>("ClassroomSeats")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BuildingId");
@@ -123,6 +135,9 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("ClassroomAmenities");
@@ -141,6 +156,9 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("ClassroomId")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -165,9 +183,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("CourseDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CourseNotes")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CourseNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -175,6 +190,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("CourseTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ProgramId")
                         .HasColumnType("int");
@@ -208,6 +226,9 @@ namespace DataAccess.Migrations
 
                     b.Property<int?>("InstructorId")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("ModalityId")
                         .HasColumnType("int");
@@ -284,6 +305,9 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("DaysOfWeeks");
@@ -300,6 +324,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("InstructorName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -322,17 +349,20 @@ namespace DataAccess.Migrations
                     b.Property<int>("InstructorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LoadReqHours")
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LoadReqAmount")
                         .HasColumnType("int");
 
-                    b.Property<int>("SemesterId")
+                    b.Property<int>("SemesterInstanceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("InstructorId");
 
-                    b.HasIndex("SemesterId");
+                    b.HasIndex("SemesterInstanceId");
 
                     b.ToTable("LoadReqs");
                 });
@@ -344,6 +374,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModalityName")
                         .IsRequired()
@@ -362,6 +395,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<string>("PartOfTermTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -379,6 +415,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<string>("PayModelTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -395,6 +434,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PayOrganizationTitle")
                         .IsRequired()
@@ -415,6 +457,9 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("InstructorId")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.Property<int>("SemesterInstanceId")
                         .HasColumnType("int");
@@ -438,6 +483,9 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.Property<int>("PreferenceListId")
                         .HasColumnType("int");
@@ -467,6 +515,9 @@ namespace DataAccess.Migrations
 
                     b.Property<int?>("DaysOfWeekId")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ModalityId")
                         .HasColumnType("int");
@@ -503,6 +554,9 @@ namespace DataAccess.Migrations
                     b.Property<int>("InstructorId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<int>("ProgramId")
                         .HasColumnType("int");
 
@@ -526,20 +580,23 @@ namespace DataAccess.Migrations
                     b.Property<int>("InstructorId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<int>("ReleaseTimeAmount")
                         .HasColumnType("int");
 
                     b.Property<string>("ReleaseTimeNotes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SemesterId")
+                    b.Property<int>("SemesterInstanceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("InstructorId");
 
-                    b.HasIndex("SemesterId");
+                    b.HasIndex("SemesterInstanceId");
 
                     b.ToTable("ReleaseTimes");
                 });
@@ -592,6 +649,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<string>("SectionStatusColor")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -612,6 +672,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.Property<string>("SemesterName")
                         .IsRequired()
@@ -637,6 +700,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime?>("EndRegistrationDate")
                         .IsRequired()
                         .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("RegistrationDate")
                         .IsRequired()
@@ -672,6 +738,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<string>("StudentGradYear")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -701,6 +770,9 @@ namespace DataAccess.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -724,6 +796,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<string>("TimeBlockValue")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -740,6 +815,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PartOfDay")
                         .IsRequired()
@@ -787,6 +865,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<int>("SemesterInstanceId")
                         .HasColumnType("int");
 
@@ -813,6 +894,9 @@ namespace DataAccess.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<int>("WishlistId")
                         .HasColumnType("int");
 
@@ -836,6 +920,9 @@ namespace DataAccess.Migrations
                     b.Property<int?>("CampusId")
                         .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<bool?>("IsArchived")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ModalityId")
                         .HasColumnType("int");
@@ -1003,15 +1090,15 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Models.Semester", "Semester")
+                    b.HasOne("Infrastructure.Models.SemesterInstance", "SemesterInstance")
                         .WithMany()
-                        .HasForeignKey("SemesterId")
+                        .HasForeignKey("SemesterInstanceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Instructor");
 
-                    b.Navigation("Semester");
+                    b.Navigation("SemesterInstance");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.PreferenceList", b =>
@@ -1116,15 +1203,15 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Models.Semester", "Semester")
+                    b.HasOne("Infrastructure.Models.SemesterInstance", "SemesterInstance")
                         .WithMany()
-                        .HasForeignKey("SemesterId")
+                        .HasForeignKey("SemesterInstanceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Instructor");
 
-                    b.Navigation("Semester");
+                    b.Navigation("SemesterInstance");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.RoleAssignment", b =>

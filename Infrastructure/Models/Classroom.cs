@@ -15,13 +15,18 @@ namespace Infrastructure.Models
         public int Id { get; set; }
 
         [Required]
+        [DisplayName("Classroom Detail")]
         public string? ClassroomDetail { get; set; }
 
         [Required]
+        [DisplayName("Classroom Seats")]
         public int ClassroomSeats { get; set; }
 
         [Required]
+        [DisplayName("Classroom Number")]
         public string? ClassroomNumber { get; set; }
+
+        public bool? IsArchived { get; set; }
 
         [Required]
         [DisplayName("Building")]

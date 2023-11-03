@@ -14,23 +14,31 @@ namespace Infrastructure.Models
         [Key]
         public int Id { get; set; }
 
-        [Required] 
+        [Required]
+        [DisplayName("Semester Instance Name")]
         public string? SemesterInstanceName { get; set; }
 
         [Required]
+        [DisplayName("Schedule Status")]
         public string? ScheduleStatus { get; set; }
 
         [Required]
+        [DisplayName("Start Date")]
         public DateTime? StartDate { get; set; }
 
         [Required]
+        [DisplayName("End Date")]
         public DateTime? EndDate { get; set; }
 
         [Required]
+        [DisplayName("Registration Date")]
         public DateTime? RegistrationDate { get; set; }
 
         [Required]
+        [DisplayName("End Registration Date")]
         public DateTime? EndRegistrationDate { get; set; }
+
+        public bool? IsArchived { get; set; }
 
         [Required]
         [DisplayName("Semester")]
