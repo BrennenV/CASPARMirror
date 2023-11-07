@@ -1,0 +1,41 @@
+﻿@page
+@model CASPARWeb.Areas.Admin.Pages.Templates.UpsertModel
+@{
+}
+<div class="card shadow border-0 mt-4 col-6 mx-auto">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary py-2">@(Model.objTemplate.Id != 0 ? "Update " : "Add ") Course</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input type="hidden" asp-for="objTemplate.Id">
+            <input type="hidden" asp-for="objTemplate.SemesterId">
+            <div class="border p-3">
+                <label class="form-label">Quantity</label>
+                <div class="col-12">
+                    <input asp-for="objTemplate.Quantity" class="form-control border-0 shadow" />
+                    <div class="mb-3">
+                        <label class="form-label mt-4">Course</label>
+                        <select id="ddlCourse" asp-for="objTemplate.CourseId" asp-items="@Model.CourseList" class="form-select">
+                            <option disabled selected>--Select Course--</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary form-control">@(Model.objTemplate.Id != 0 ? "Update " : "Add ")</button>
+                    </div>
+                    <div class="col-6">
+                        <a asp-page="./Index" asp-route-id="@Model.objTemplate.SemesterId" class=" btn btn-outline-primary border form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

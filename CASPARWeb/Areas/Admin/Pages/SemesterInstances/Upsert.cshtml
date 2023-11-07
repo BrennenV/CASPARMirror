@@ -1,0 +1,135 @@
+﻿@page
+@model CASPARWeb.Areas.Admin.Pages.SemesterInstances.UpsertModel
+@{
+}
+<style>
+    .bold-text {
+        font-weight: bold;
+    }
+</style>
+<div class="card shadow border-0 mt-8 col-6 mx-auto">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary py-2">@(Model.objSemesterInstance.Id != 0 ? "Update " : "Add ") Semester Instance</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div class="form-row">
+                @*<div asp-validation-summary="ModelOnly"></div>*@
+                <input type="hidden" asp-for="objSemesterInstance.Id">
+                <div class="form-group mt-1">
+                    <label class="ms-2">Semester Name</label>
+                    <input asp-for="objSemesterInstance.SemesterInstanceName" id="inputSemesterName" class="form-control border-0 shadow mt-3"/>
+                </div>
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <label class="ms-2">Semester Template</label>
+                            <select id="inputSemesterTemplate" asp-for="objSemesterInstance.SemesterId" asp-items="@Model.SemesterList" class="form-select border-0 shadow mt-3">
+                                <option disabled selected>--Select Template--</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="ms-2">Schedule Status</label>
+                            <select id="inputSemesterStatus" asp-for="objSemesterInstance.ScheduleStatus" class="form-select border-0 shadow mt-3">
+                                <option disabled selected>--Select Status--</option>
+                                <option>P</option>
+                                <option>C</option>
+                                <option>Active</option>
+                                <option>Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <label class="ms-2">Semester Start/End Date:</label>
+                        <div class="mb-3 col-6">
+                            <div class="form-group mt-1">
+                                <label class="ms-2">Start Date</label>
+                                <input id="inputSemesterStartDate" asp-for="objSemesterInstance.StartDate" type="date" class="form-control border-0 shadow" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <div class="form-group mt-1">
+                                <label class="ms-2">End Date</label>
+                                <input id="inputSemesterEndDate" asp-for="objSemesterInstance.EndDate" type="date" class="form-control border-0 shadow" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <label class="ms-2">Registration Start/End Date:</label>
+                        <div class="mb-3 col-6">
+                            <div class="form-group mt-1">
+                                <label class="ms-2">Start Date</label>
+                                <input id="inputRegistrationStartDate" asp-for="objSemesterInstance.RegistrationDate" type="date" class="form-control border-0 shadow" />
+                            </div>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <div class="form-group mt-1">
+                                <label class="ms-2">End Date</label>
+                                <input id="inputRegistrationEndDate" asp-for="objSemesterInstance.EndRegistrationDate" type="date" class="form-control border-0 shadow" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="mb-3 col-6">
+                        <button type="submit" onclick="return ValidateInput()" class="btn btn-primary form-control">@(Model.objSemesterInstance.Id != 0 ? "Update " : "Add ")</button>
+                    </div>
+                    <div class="mb-3 col-6">
+                        <a asp-page="./Index" class="btn btn-outline-primary border form-control">
+                            Back to Semester Instances
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function ValidateInput() {
+        if (document.getElementById('inputSemesterName').value == "") {
+            swal.fire('Error', 'Please Enter a Semester Name', 'error');
+            return false;
+        }
+        else if (document.getElementById('inputSemesterTemplate').value == "--Select Template--") {
+            swal.fire('Error', 'Please select a Semester Template', 'error');
+            return false;
+        }
+        else if (document.getElementById('inputSemesterStatus').value == "--Select Status--") {
+            swal.fire('Error', 'Please select a Semester Status', 'error');
+            return false;
+        }
+        else if (document.getElementById('inputSemesterStartDate').value == "") {
+            swal.fire('Error', 'Please select a Semester Start Date', 'error');
+            return false;
+        } 
+        else if (document.getElementById('inputSemesterEndDate').value == "") {
+            swal.fire('Error', 'Please select a Semester End Date', 'error');
+            return false;
+        }
+        else if (document.getElementById('inputSemesterStartDate').value >= document.getElementById('inputSemesterEndDate').value) {
+            swal.fire('Error', 'Please make sure your Semester Start Date is less than the Semester End Date', 'error');
+            return false;
+        }
+        else if (document.getElementById('inputRegistrationStartDate').value == "") {
+            swal.fire('Error', 'Please select a Registration Start Date', 'error');
+            return false;
+        } 
+        else if (document.getElementById('inputRegistrationEndDate').value == "") {
+            swal.fire('Error', 'Please select a Registration End Date', 'error');
+            return false;
+        }
+        else if (document.getElementById('inputRegistrationStartDate').value >= document.getElementById('inputRegistrationEndDate').value) {
+            swal.fire('Error', 'Please make sure your Registration Start Date is less than the Registration End Date', 'error');
+            return false;
+        }
+        return true;
+    }
+</script>

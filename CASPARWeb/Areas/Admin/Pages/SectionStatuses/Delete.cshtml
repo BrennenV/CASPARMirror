@@ -1,0 +1,40 @@
+﻿@page
+@model CASPARWeb.Areas.Admin.Pages.SectionStatuses.DeleteModel
+@{
+}
+<div class="card shadow border-0 mt-4 col-6 mx-auto">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary">Delete Section Status</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input type="hidden" asp-for="objSectionStatus.Id" />
+            <div class="border p-3">
+                <div class="row form-floating py-2 col-12">
+                    <div class="col-6">
+                        <label class="form-label">Section Status Name</label>
+                        <input disabled asp-for="objSectionStatus.SectionStatusName" class="form-control border-0 shadow" />
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Section Status Color</label>
+                        <input disabled type="color" asp-for="objSectionStatus.SectionStatusColor" class="color-picker-custom form-control" />
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-danger form-control">Delete</button>
+                    </div>
+                    <div class="col-6">
+                        <a asp-page="./Index" class="btn btn-outline-primary border  form-control">
+                            Back to Section Statuses
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

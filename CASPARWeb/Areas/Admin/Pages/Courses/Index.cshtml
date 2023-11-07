@@ -1,5 +1,5 @@
 ﻿@page
-@model CASPARWeb.Pages.Administrator.TimeBlocks.IndexModel
+@model CASPARWeb.Areas.Admin.Pages.Courses.IndexModel
 @{
 }
 <div class="container">
@@ -8,21 +8,30 @@
         <div class="col-6">
             <!--50% of row-->
             <h2 class="text-primary">
-                Time Slots
+                Courses
             </h2>
         </div><!-- End 1st Column-->
         <div class="col-6 text-end">
             <!--50% row right justified-->
             <a asp-page="Upsert" class="btn btn-primary">
-                <i class="bi bi-plus-circle"></i> Add Time Slot
+                <i class="bi bi-plus-circle"></i> Add Course
             </a>
         </div> <!--End 2nd Column-->
     </div> <!--End Row-->
-    <table class="table table-bordered table-striped" id="DT_TimeBlock" style="width:100%">
+    <table class="table table-bordered table-striped" id="DT_Courses" style="width:100%">
         <thead>
             <tr>
                 <th>
-                    Time Slot
+                    Academic Program
+                </th>
+                <th>
+                    Course Number
+                </th>
+                <th>
+                    Course
+                </th>
+                <th>
+                    Credit Hours
                 </th>
                 <th>&nbsp;</th>
             </tr>
@@ -31,5 +40,5 @@
 </div> <!--Close Container-->
 @section Scripts
     {
-    <script src="~/js/timeBlockList.js"></script>
+    <script src="~/js/courses.js"></script>
 }

@@ -1,0 +1,50 @@
+﻿@page
+@model CASPARWeb.Areas.Admin.Pages.Buildings.UpsertModel
+@{
+}
+<div class="card shadow border-0 mt-4 col-6 mx-auto">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary py-2">@(Model.objBuilding.Id != 0 ? "Update " : "Add ") Building</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            @*<div asp-validation-summary="ModelOnly"></div>*@
+            <input type="hidden" asp-for="objBuilding.Id">
+            <div class="border p-3">
+                <label class="form-label">Building Name</label>
+                <div class="form-group mt-1">
+                    <input id="inputBuildingName" asp-for="objBuilding.BuildingName" class="form-control border-0 shadow" />
+                </div>
+                <label class="form-label mt-4">Campus</label>
+                <select id="inputCampus" asp-for="objBuilding.CampusId" asp-items="@Model.CampusList" class="form-select border-0 shadow">
+                    <option disabled selected>--Select Campus--</option>
+                </select>
+                <div class="row pt-2 mt-3">
+                    <div class="col-6">
+                        <button type="submit" onclick="return ValidateInput()" class="btn btn-primary form-control">@(Model.objBuilding.Id != 0 ? "Update " : "Add ")</button>
+                    </div>
+                    <div class="col-6">
+                        <a asp-page="./Index" class=" btn btn-outline-primary border form-control">
+                            Back to Buildings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function ValidateInput() {
+        if (document.getElementById('inputBuildingName').value == "") {
+            swal.fire('Error', 'Please Enter a Building Name', 'error');
+            return false;
+        } else if (document.getElementById('inputCampus').value == "--Select Campus--") {
+            swal.fire('Error', 'Please Select a Campus', 'error');
+            return false;
+        }
+    }
+</script>
