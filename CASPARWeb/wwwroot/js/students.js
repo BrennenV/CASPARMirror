@@ -79,9 +79,9 @@ function loadList() {
                 "data": "id",
                 "render": function (data, type, row, meta) {
                     return `<div class="text-center">
-                                <a href="/Students/Update?id=${data}&semesterInstanceId=${row.wishlistDetail.wishlist.semesterInstanceId}" class="btn btn-outline-primary mb-1 rounded" style="cursor:pointer; width: 100px;">
+                                <a href="/Stud/WishlistsOLD/Update?id=${data}&semesterInstanceId=${row.wishlistDetail.wishlist.semesterInstanceId}" class="btn btn-outline-primary mb-1 rounded" style="cursor:pointer; width: 100px;">
                                     <i class="bi bi-pencil-square"></i> Edit </a>
-                                <a href="/Students/Delete?id=${data}&semesterInstanceId=${row.wishlistDetail.wishlist.semesterInstanceId}" class="btn btn-outline-danger mb-1 rounded" style="cursor:pointer; width: 100px;">
+                                <a href="/Stud/WishlistsOLD/Delete?id=${data}&semesterInstanceId=${row.wishlistDetail.wishlist.semesterInstanceId}" class="btn btn-outline-danger mb-1 rounded" style="cursor:pointer; width: 100px;">
                                     <i class="bi bi-trash"></i> Delete </a>   
                             </div>`;
                 }, "width": "20%"

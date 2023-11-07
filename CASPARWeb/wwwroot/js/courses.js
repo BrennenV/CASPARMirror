@@ -18,9 +18,9 @@ function loadList() {
             {
                 "data": "id", "render": function (data) {
                     return `<div class="text-center">
-                    <a href="/Administrator/Courses/Upsert?id=${data}" type="button" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; width: 100px;">
+                    <a href="/Admin/Courses/Upsert?id=${data}" type="button" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; width: 100px;">
                         <i class="bi bi-pencil-square"></i> Edit </a>
-                    <a href="/Administrator/Courses/Delete?id=${data}" class="btn btn-outline-danger mt-1 rounded" style="cursor:pointer; style="cursor: pointer; width: 100px; ">
+                    <a href="/Admin/Courses/Delete?id=${data}" class="btn btn-outline-danger mt-1 rounded" style="cursor:pointer; style="cursor: pointer; width: 100px; ">
                         <i class="bi bi-trash" ></i> Delete </a>
                     </div>`;
                 }, "width": "30%"
