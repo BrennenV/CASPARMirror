@@ -70,6 +70,9 @@ namespace Infrastructure.Interfaces
 
         public IGenericRepository<WishlistDetailModality> WishlistDetailModality { get; }
 
+        //Added After Identity Framework Scaffolding
+        public IGenericRepository<ApplicationUser> ApplicationUser { get; }
+
         //These ones will eventually not be needed
         public IGenericRepository<Role> Role { get; }
         public IGenericRepository<User> User { get; }

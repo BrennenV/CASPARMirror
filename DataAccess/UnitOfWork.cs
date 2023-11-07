@@ -79,6 +79,9 @@ namespace DataAccess
 
         public IGenericRepository<WishlistDetailModality> _WishlistDetailModality;
 
+        //Added After Identity Framework Scaffolding
+        public IGenericRepository<ApplicationUser> _ApplicationUser;
+
         //These ones will eventually not be needed
         public IGenericRepository<Role> _Role;
         public IGenericRepository<User> _User;
@@ -471,6 +474,19 @@ namespace DataAccess
                 }
 
                 return _WishlistDetailModality;
+            }
+        }
+
+        public IGenericRepository<ApplicationUser> ApplicationUser
+        {
+            get
+            {
+                if (_ApplicationUser == null)
+                {
+                    _ApplicationUser = new GenericRepository<ApplicationUser>(_dbContext);
+                }
+
+                return _ApplicationUser;
             }
         }
 

@@ -1,21 +1,27 @@
 ﻿using Infrastructure.Interfaces;
 using Infrastructure.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utility;
 
 namespace DataAccess
 {
 	public class DbInitializer : IDbInitializer
 	{
 		private readonly ApplicationDbContext _db;
+		private readonly UserManager<ApplicationUser> _userManager;
+		private readonly RoleManager<IdentityRole> _roleManager;
 
-		public DbInitializer(ApplicationDbContext db)
+		public DbInitializer(ApplicationDbContext db, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
 		{
 			_db = db;
+			_userManager = userManager;
+			_roleManager = roleManager;
 		}
 
 
@@ -38,81 +44,129 @@ namespace DataAccess
 
 			// Start Seeding the Database
 
-
-			// Seed the Users
-			// - UserFirstName
-			// - UserLastName
-			// - UserEmail
-			// - UserPassword
-
-			if (_db.Users.Any())
+			if (_db.Campuses.Any())
 			{
 				return; //DB has been seeded
 			}
 
-			var Users = new List<User>
-			{
-				new User { UserFirstName = "Chris", UserLastName = "Jensen", UserEmail = "chrisjensen3@mail.weber.edu", UserPassword = "password"},
-				new User { UserFirstName = "Joseph", UserLastName = "Brower", UserEmail = "josephbrower@mail.weber.edu", UserPassword = "wordpass"},
-				new User { UserFirstName = "Jaeden", UserLastName = "Fisher", UserEmail = "jaedenfisher@mail.weber.edu", UserPassword = "pass"},
-				new User { UserFirstName = "Brennen", UserLastName = "Vanderpool", UserEmail = "brennenvanderpool@mail.weber.edu", UserPassword = "word"},
-				new User { UserFirstName = "Stacey", UserLastName = "Smom", UserEmail = "hasgotitgoingon@yahoo.com", UserPassword = "password1"},
-				new User { UserFirstName = "Richard", UserLastName = "Fry", UserEmail = "rfry@weber.edu", UserPassword = "temp1234"}
-			};
-
-			foreach (var u in Users)
-			{
-				_db.Users.Add(u);
-			}
-			_db.SaveChanges();
-
-			//****************************************************************************** Users
-
 			// Seed the Roles
-			// - RoleName
 
-			var Roles = new List<Role>
-			{
-				new Role { RoleName = "Admin" },
-				new Role { RoleName = "Instructor" },
-				new Role { RoleName = "Student" }
-			};
-
-			foreach (var r in Roles)
-			{
-				_db.Roles.Add(r);
-			}
-			_db.SaveChanges();
+			_roleManager.CreateAsync(new IdentityRole(SD.ADMIN_ROLE)).GetAwaiter().GetResult();
+			_roleManager.CreateAsync(new IdentityRole(SD.INSTRUCTOR_ROLE)).GetAwaiter().GetResult();
+			_roleManager.CreateAsync(new IdentityRole(SD.STUDENT_ROLE)).GetAwaiter().GetResult();
 
 			//****************************************************************************** Roles
 
-			// Seed the RoleAssignments
-			// - RoleId (FK)
-			// - UserId (FK)
-
-			var RoleAssignments = new List<RoleAssignment>
+			// Seed Users and their roles including a super admin
+			_userManager.CreateAsync(new ApplicationUser
 			{
-				new RoleAssignment { RoleId = 1, UserId = 1 },
-				new RoleAssignment { RoleId = 2, UserId = 5 },
-				new RoleAssignment { RoleId = 2, UserId = 6 },
-				new RoleAssignment { RoleId = 3, UserId = 2 },
-				new RoleAssignment { RoleId = 3, UserId = 3 },
-				new RoleAssignment { RoleId = 3, UserId = 4 }
-			};
+				UserName = "admin@admin.com",
+				Email = "admin@admin.com",
+				FirstName = "Admin",
+				LastName = "istrator",
+			}, "Admin123*").GetAwaiter().GetResult();
 
-			foreach (var r in RoleAssignments)
-			{
-				_db.RoleAssignments.Add(r);
-			}
-			_db.SaveChanges();
+            ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@admin.com");
+            _userManager.AddToRoleAsync(user, SD.ADMIN_ROLE).GetAwaiter().GetResult();
 
-			//****************************************************************************** RoleAssignments
+            user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@admin.com");
+            _userManager.AddToRoleAsync(user, SD.INSTRUCTOR_ROLE).GetAwaiter().GetResult();
 
-			// Seed the Instructors
-			// - InstructorName
-			// - UserId (FK)
+            user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@admin.com");
+            _userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
 
-			var Instructors = new List<Instructor>
+            _userManager.CreateAsync(new ApplicationUser
+            {
+                UserName = "instructor@instructor.com",
+                Email = "instructor@instructor.com",
+                FirstName = "Instructor",
+                LastName = "Doe",
+            }, "Instructor123*").GetAwaiter().GetResult();
+
+            user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
+            _userManager.AddToRoleAsync(user, SD.INSTRUCTOR_ROLE).GetAwaiter().GetResult();
+
+            _userManager.CreateAsync(new ApplicationUser
+            {
+                UserName = "student@student.com",
+                Email = "student@student.com",
+                FirstName = "Student",
+                LastName = "Doe",
+            }, "Student123*").GetAwaiter().GetResult();
+
+            user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
+            _userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
+
+            //****************************************************************************** Super Admin
+
+            //START - THIS BLOCK OF USERS, ROLES, AND ROLEASSIGNMENTS WILL BE HANDLED BY THE IDENTITY FRAMEWORK
+			// HOWEVER, THIS NEEDS TO BE HERE FOR THE REST OF THE SEED DATA TO WORK
+
+            var Users = new List<User>
+            {
+                new User { UserFirstName = "Chris", UserLastName = "Jensen", UserEmail = "chrisjensen3@mail.weber.edu", UserPassword = "password"},
+                new User { UserFirstName = "Joseph", UserLastName = "Brower", UserEmail = "josephbrower@mail.weber.edu", UserPassword = "wordpass"},
+                new User { UserFirstName = "Jaeden", UserLastName = "Fisher", UserEmail = "jaedenfisher@mail.weber.edu", UserPassword = "pass"},
+                new User { UserFirstName = "Brennen", UserLastName = "Vanderpool", UserEmail = "brennenvanderpool@mail.weber.edu", UserPassword = "word"},
+                new User { UserFirstName = "Stacey", UserLastName = "Smom", UserEmail = "hasgotitgoingon@yahoo.com", UserPassword = "password1"},
+                new User { UserFirstName = "Richard", UserLastName = "Fry", UserEmail = "rfry@weber.edu", UserPassword = "temp1234"}
+            };
+
+            foreach (var u in Users)
+            {
+                _db.Users.Add(u);
+            }
+            _db.SaveChanges();
+
+            //****************************************************************************** Users
+
+            // Seed the Roles
+            // - RoleName
+
+            var Roles = new List<Role>
+            {
+                new Role { RoleName = "Admin" },
+                new Role { RoleName = "Instructor" },
+                new Role { RoleName = "Student" }
+            };
+
+            foreach (var r in Roles)
+            {
+                _db.Roles.Add(r);
+            }
+            _db.SaveChanges();
+
+            //****************************************************************************** Roles
+
+            // Seed the RoleAssignments
+            // - RoleId (FK)
+            // - UserId (FK)
+
+            var RoleAssignments = new List<RoleAssignment>
+            {
+                new RoleAssignment { RoleId = 1, UserId = 1 },
+                new RoleAssignment { RoleId = 2, UserId = 5 },
+                new RoleAssignment { RoleId = 2, UserId = 6 },
+                new RoleAssignment { RoleId = 3, UserId = 2 },
+                new RoleAssignment { RoleId = 3, UserId = 3 },
+                new RoleAssignment { RoleId = 3, UserId = 4 }
+            };
+
+            foreach (var r in RoleAssignments)
+            {
+                _db.RoleAssignments.Add(r);
+            }
+            _db.SaveChanges();
+
+            //****************************************************************************** RoleAssignments
+
+            //END - DELETE BLOCK FOR LATER
+
+            // Seed the Instructors
+            // - InstructorName
+            // - UserId (FK)
+
+            var Instructors = new List<Instructor>
 			{ 
 				new Instructor { InstructorName = "Stacey Smom", UserId = 5 },
 				new Instructor { InstructorName = "Richard Fry", UserId = 6 }
@@ -304,7 +358,6 @@ namespace DataAccess
 			// Seed the ProgramAssignments
 			// - InstructorId (FK)
 			// - ProgramId (FK)
-
 			var ProgramAssignments = new List<ProgramAssignment>
 			{
 				new ProgramAssignment { InstructorId = 1, ProgramId = 4 },

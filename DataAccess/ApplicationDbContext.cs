@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -74,6 +75,9 @@ namespace DataAccess
         public DbSet<WishlistDetail> WishlistDetails { get; set; }
 
         public DbSet<WishlistDetailModality> WishlistDetailModalities { get; set; }
+
+        //Added on After Identity Scaffolding
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         //These ones will eventually not be needed
         public DbSet<Role> Roles { get; set; }
