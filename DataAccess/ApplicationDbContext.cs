@@ -38,17 +38,13 @@ namespace DataAccess
 
         public DbSet<Modality> Modalities { get; set; }
 
+        public DbSet<PartOfDay> PartOfDays { get; set; }
+
         public DbSet<PartOfTerm> PartOfTerms { get; set; }
 
         public DbSet<PayModel> PayModels { get; set; }
 
         public DbSet<PayOrganization> PayOrganizations { get; set; }
-
-        public DbSet<PreferenceList> PreferenceLists { get; set; }
-
-        public DbSet<PreferenceListDetail> PreferenceListDetails { get; set; }
-
-        public DbSet<PreferenceListDetailModality> PreferenceListDetailModalities { get; set; }
 
         public DbSet<ProgramAssignment> ProgramAssignments { get; set; }
 
@@ -68,13 +64,19 @@ namespace DataAccess
 
         public DbSet<TimeBlock> TimeBlocks { get; set; }
 
-        public DbSet<TimeOfDay> TimeOfDays { get; set; }
-
         public DbSet<Wishlist> Wishlists { get; set; }
 
-        public DbSet<WishlistDetail> WishlistDetails { get; set; }
+        public DbSet<WishlistCampus> WishlistCampuses { get; set; }
 
-        public DbSet<WishlistDetailModality> WishlistDetailModalities { get; set; }
+        public DbSet<WishlistCourse> WishlistCourses { get; set; }
+
+        public DbSet<WishlistDaysOfWeek> WishlistDaysOfWeeks { get; set; }
+
+        public DbSet<WishlistModality> WishlistModalities { get; set; }
+
+        public DbSet<WishlistPartOfDay> WishlistPartOfDays { get; set; }
+
+        public DbSet<WishlistTimeBlock> WishlistTimeBlocks { get; set; }
 
         //Added on After Identity Scaffolding
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }

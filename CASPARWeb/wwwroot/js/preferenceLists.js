@@ -74,7 +74,7 @@ function loadList() {
             { "data": "preferenceListDetail.preferenceRank", "width": "5%"},
             { "data": "modality.modalityName", "width": "15%" },
             { "data": "campus.campusName", "width": "15%" },
-            { "data": "daysOfWeek.daysOfWeekTitle", "width": "10%" },
+            { "data": "daysOfWeek.daysOfWeekValue", "width": "10%" },
             { "data": "timeBlock.timeBlockValue", "width": "10%" },
             {
                 "data": "id",

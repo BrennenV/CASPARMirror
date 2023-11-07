@@ -46,8 +46,8 @@ namespace CASPARWeb.Controllers
 
             //    detailsDictionary[plistId] = detailsString;
             //}
-
-            return Json(new { data = _unitOfWork.PreferenceList.GetAll(c => c.InstructorId == 1, null, "Instructor,SemesterInstance") });
+            //THIS CONTROLLER WILL LIKELY NEED TO BE DELETED
+            return Json(new { data = _unitOfWork.Wishlist.GetAll(null, null, "Instructor,SemesterInstance") });
         }
     }
 }

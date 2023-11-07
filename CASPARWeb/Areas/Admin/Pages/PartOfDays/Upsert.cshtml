@@ -1,26 +1,26 @@
 ﻿@page
-@model CASPARWeb.Areas.Admin.Pages.TimeOfDays.UpsertModel
+@model CASPARWeb.Areas.Admin.Pages.PartOfDays.UpsertModel
 @{
 }
 <div class="card shadow border-0 mt-4 col-6 mx-auto">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-primary py-2">@(Model.objTimeOfDay.Id != 0 ? "Update " : "Add ") Time Of Day</h2>
+                <h2 class="text-primary py-2">@(Model.objPartOfDay.Id != 0 ? "Update " : "Add ") Time Of Day</h2>
             </div>
         </div>
     </div>
     <div class="card-body p-4">
         <form method="post" class="row">
-            <input type="hidden" asp-for="objTimeOfDay.Id">
+            <input type="hidden" asp-for="objPartOfDay.Id">
             <div class="border p-3">
                 <label class="form-label">Time Of Day</label>
                 <div class="form-group mt-1">
-                    <input asp-for="objTimeOfDay.PartOfDay" class="form-control border-0 shadow"/>
+                    <input asp-for="objPartOfDay.PartOfDayValue" class="form-control border-0 shadow"/>
                 </div>
                 <div class="row pt-2 mt-3">
                     <div class="col-6">
-                        <button type="submit" class="btn btn-primary form-control">@(Model.objTimeOfDay.Id != 0 ? "Update " : "Add ")</button>
+                        <button type="submit" class="btn btn-primary form-control">@(Model.objPartOfDay.Id != 0 ? "Update " : "Add ")</button>
                     </div>
                     <div class="col-6">
                         <a asp-page="./Index" class=" btn btn-outline-primary border form-control">

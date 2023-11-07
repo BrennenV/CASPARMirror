@@ -68,7 +68,7 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
 			DaysOfWeekList = _unitOfWork.DaysOfWeek.GetAll(null)
 							.Select(c => new SelectListItem
 							{
-								Text = c.DaysOfWeekTitle,
+								Text = c.DaysOfWeekValue,
 								Value = c.Id.ToString()
 							});
 			TimeBlockList = _unitOfWork.TimeBlock.GetAll(null)
@@ -84,6 +84,7 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
 			return Page();
 		}
 
+		/*
 		public IActionResult OnPost()
 		{
 			PreferenceList objPreferenceList = new PreferenceList();
@@ -152,5 +153,6 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
 			////Redirect to the preferences page
 			return RedirectToPage("./Index", new { selectedSemesterId = SemesterInstanceId });
 		}
+		*/
 	}
 }

@@ -9,8 +9,8 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
     public class UpdateModel : PageModel
     {
         private readonly UnitOfWork _unitOfWork;
-        [BindProperty]
-        public PreferenceListDetailModality objPreferenceListDetailModality { get; set; }
+        //[BindProperty]
+        //public PreferenceListDetailModality objPreferenceListDetailModality { get; set; }
 		[BindProperty]
 		public int CourseId { get; set; }
 		[BindProperty]
@@ -26,7 +26,7 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
         public UpdateModel(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            objPreferenceListDetailModality = new PreferenceListDetailModality();
+            //objPreferenceListDetailModality = new PreferenceListDetailModality();
             CourseList = new List<SelectListItem>();
             ModalityList = new List<SelectListItem>();
             CampusList = new List<SelectListItem>();
@@ -35,6 +35,7 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
         }
         public IActionResult OnGet(int id, int semesterInstanceId)
         {
+            /*
             objPreferenceListDetailModality = _unitOfWork.PreferenceListDetailModality.GetById(id);
             PreferenceListDetail objPreferenceListDetail = _unitOfWork.PreferenceListDetail.GetById(objPreferenceListDetailModality.PreferenceListDetailId);
             CourseId = objPreferenceListDetail.CourseId;
@@ -69,7 +70,7 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
             DaysOfWeekList = _unitOfWork.DaysOfWeek.GetAll(null)
                             .Select(c => new SelectListItem
                             {
-                                Text = c.DaysOfWeekTitle,
+                                Text = c.DaysOfWeekValue,
                                 Value = c.Id.ToString()
                             });
             TimeBlockList = _unitOfWork.TimeBlock.GetAll(null)
@@ -78,9 +79,12 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
                                 Text = c.TimeBlockValue,
                                 Value = c.Id.ToString()
                             });
+            */
 
             return Page();
         }
+
+        /*
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
@@ -143,17 +147,20 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
             _unitOfWork.Commit();
             return RedirectToPage("./Index", new { selectedSemesterId = currentSemesterInstanceId });
         }
+        */
 
         private void emptyLocaleAndDateIfOnline()
         {
             //If the user chooses online as their modality, it can lead to a case where the dates and location are set on an online modality
             //this ensures that those are cleared before updating the PreferenceListDetailModality
+            /*
 			if (_unitOfWork.Modality.GetById(objPreferenceListDetailModality.ModalityId).ModalityName == "Online")
 			{
 				objPreferenceListDetailModality.CampusId = null;
 				objPreferenceListDetailModality.DaysOfWeekId = null;
 				objPreferenceListDetailModality.TimeBlockId = null;
 			}
+            */
 		}
     }
 }

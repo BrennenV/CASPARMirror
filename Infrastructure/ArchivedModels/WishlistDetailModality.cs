@@ -6,8 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Infrastructure.Models;
 
-namespace Infrastructure.Models
+namespace Infrastructure.ArchivedModels
 {
     public class WishlistDetailModality
     {
@@ -17,7 +18,7 @@ namespace Infrastructure.Models
         public bool? IsArchived { get; set; }
 
         [DisplayName("Part of Day")]
-		public int? TimeOfDayId { get; set; }
+        public int? TimeOfDayId { get; set; }
 
         [Required]
         [DisplayName("Wishlist Detail")]

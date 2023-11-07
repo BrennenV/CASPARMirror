@@ -1,5 +1,5 @@
 ﻿@page
-@model CASPARWeb.Areas.Admin.Pages.TimeOfDays.DeleteModel
+@model CASPARWeb.Areas.Admin.Pages.PartOfDays.DeleteModel
 @{
 }
 <div class="card shadow border-0 mt-4 col-6 mx-auto">
@@ -12,11 +12,11 @@
     </div>
     <div class="card-body p-4">
         <form method="post" class="row">
-            <input type="hidden" asp-for="objTimeOfDay.Id" />
+            <input type="hidden" asp-for="objPartOfDay.Id" />
             <div class="border p-3">
                 <label class="form-label">Time Of Day</label>
                 <div class="form-group mt-1">
-                    <input disabled id="ddlTimeOfDay" asp-for="objTimeOfDay.PartOfDay" asp-items="@Model.objTimeOfDay.PartOfDay" class="form-control border-0 shadow">
+                    <input disabled id="ddlPartOfDay" asp-for="objPartOfDay.PartOfDayValue" asp-items="@Model.objPartOfDay.PartOfDayValue" class="form-control border-0 shadow">
                 </div>
                 <div class="row pt-2 mt-3">
                     <div class="col-6">

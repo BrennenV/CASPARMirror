@@ -15,7 +15,7 @@ namespace Infrastructure.Models
 
         [Required]
         [DisplayName("Days of Week")]
-        public string? DaysOfWeekTitle { get; set; }
+        public string? DaysOfWeekValue { get; set; }
 
         public bool? IsArchived { get; set; }
     }

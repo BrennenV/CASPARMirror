@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CASPARWeb.Areas.Stud.Pages.WishlistsOLD
 {
-	public class UpdateModel : PageModel
+    public class UpdateModel : PageModel
 	{
 		private readonly UnitOfWork _unitOfWork;
-		[BindProperty]
-		public WishlistDetailModality objWishlistDetailModality { get; set; }
+		//[BindProperty]
+		//public WishlistDetailModality objWishlistDetailModality { get; set; }
 		[BindProperty]
 		public int CourseId { get; set; }
 		[BindProperty]
@@ -25,7 +25,7 @@ namespace CASPARWeb.Areas.Stud.Pages.WishlistsOLD
 		public UpdateModel(UnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
-			objWishlistDetailModality = new WishlistDetailModality();
+			//objWishlistDetailModality = new WishlistDetailModality();
 			CourseList = new List<SelectListItem>();
 			ModalityList = new List<SelectListItem>();
 			CampusList = new List<SelectListItem>();
@@ -33,6 +33,7 @@ namespace CASPARWeb.Areas.Stud.Pages.WishlistsOLD
 		}
 		public IActionResult OnGet(int id, int semesterInstanceId)
 		{
+			/*
 			objWishlistDetailModality = _unitOfWork.WishlistDetailModality.GetById(id);
 			WishlistDetail objWishlistDetail = _unitOfWork.WishlistDetail.GetById(objWishlistDetailModality.WishlistDetailId);
 			CourseId = objWishlistDetail.CourseId;
@@ -70,9 +71,11 @@ namespace CASPARWeb.Areas.Stud.Pages.WishlistsOLD
 								Text = c.PartOfDay,
 								Value = c.Id.ToString()
 							});
-
+			*/
 			return Page();
 		}
+
+		/*
 		public IActionResult OnPost()
 		{
 			if (!ModelState.IsValid)
@@ -122,16 +125,19 @@ namespace CASPARWeb.Areas.Stud.Pages.WishlistsOLD
 			_unitOfWork.Commit();
 			return RedirectToPage("./Index", new { selectedSemesterId = currentSemesterInstanceId });
 		}
+		*/
 
 		private void emptyLocaleAndDateIfOnline()
 		{
 			//If the user chooses online as their modality, it can lead to a case where the dates and location are set on an online modality
 			//this ensures that those are cleared before updating the WishlistDetailModality
+			/*
 			if (_unitOfWork.Modality.GetById(objWishlistDetailModality.ModalityId).ModalityName == "Online")
 			{
 				objWishlistDetailModality.CampusId = null;
 				objWishlistDetailModality.TimeOfDayId = null;
 			}
+			*/
 		}
 	}
 }

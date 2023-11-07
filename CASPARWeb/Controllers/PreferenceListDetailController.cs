@@ -19,7 +19,8 @@ namespace CASPARWeb.Controllers
         public IActionResult Get(int? id)
         {
             //TODO: this will eventually need to get only details from the currently logged in instructor
-            return Json(new { data = _unitOfWork.PreferenceListDetail.GetAll(c => c.PreferenceListId == id, null, "Course,PreferenceList") });
+            //THIS CONTROLLER WILL LIKELY NEED TO BE DELETED
+            return Json(new { data = _unitOfWork.Wishlist.GetAll(null, null, "Course") });
         }
     }
 }

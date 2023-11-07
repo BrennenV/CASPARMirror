@@ -11,8 +11,8 @@ namespace CASPARWeb.Areas.Stud.Pages.WishListsOLD
         private readonly UnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        [BindProperty]
-        public WishlistDetailModality objWishlistDetailModality { get; set; }
+        //[BindProperty]
+        //public WishlistDetailModality objWishlistDetailModality { get; set; }
 		[BindProperty]
 		public int CourseId { get; set; }
 		[BindProperty]
@@ -27,7 +27,7 @@ namespace CASPARWeb.Areas.Stud.Pages.WishListsOLD
         public DeleteModel(UnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
-			objWishlistDetailModality = new WishlistDetailModality();
+			//objWishlistDetailModality = new WishlistDetailModality();
 			CourseList = new List<SelectListItem>();
 			ModalityList = new List<SelectListItem>();
 			CampusList = new List<SelectListItem>();
@@ -36,6 +36,7 @@ namespace CASPARWeb.Areas.Stud.Pages.WishListsOLD
 
 		public IActionResult OnGet(int id, int semesterInstanceId)
         {
+			/*
 			objWishlistDetailModality = _unitOfWork.WishlistDetailModality.GetById(id);
 			WishlistDetail objWishlistDetail = _unitOfWork.WishlistDetail.GetById(objWishlistDetailModality.WishlistDetailId);
 			CourseId = objWishlistDetail.CourseId;
@@ -74,9 +75,11 @@ namespace CASPARWeb.Areas.Stud.Pages.WishListsOLD
 								Value = c.Id.ToString()
 							});
 
+			*/
             return Page();
         }
 
+		/*
         public IActionResult OnPost(int? id)
         {
 			var wishlistDetailModality = _unitOfWork.WishlistDetailModality.GetById(id);
@@ -89,5 +92,6 @@ namespace CASPARWeb.Areas.Stud.Pages.WishListsOLD
             _unitOfWork.Commit();
 			return RedirectToPage("./Index", new { selectedSemesterId = currentSemesterInstanceId });
         }
+		*/
     }
 }

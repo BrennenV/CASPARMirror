@@ -7,16 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Models
+namespace Infrastructure.ArchivedModels
 {
-	public class TimeOfDay
-	{
-		[Key]
-		public int Id { get; set; }
+    public class TimeOfDay
+    {
+        [Key]
+        public int Id { get; set; }
 
-		[Required]
-		[DisplayName("Time of Day")]
-		public string? PartOfDay { get; set; }
+        [Required]
+        [DisplayName("Time of Day")]
+        public string? PartOfDay { get; set; }
 
         public bool? IsArchived { get; set; }
     }

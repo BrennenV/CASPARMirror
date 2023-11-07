@@ -19,7 +19,8 @@ namespace CASPARWeb.Controllers
 		public IActionResult Get()
 		{
 			//TODO: this will need to return the details for the logged in instructor.
-			return Json(new { data = _unitOfWork.PreferenceListDetailModality.GetAll(c => c.PreferenceListDetail.PreferenceList.InstructorId == 1, null, "PreferenceListDetail,Modality,TimeBlock,DaysOfWeek,PreferenceListDetail.PreferenceList,PreferenceListDetail.Course,Campus,PreferenceListDetail.PreferenceList.SemesterInstance,PreferenceListDetail.Course.AcademicProgram") });
+			//THIS CONTROLLER WILL LIKELY NEED TO BE DELETED
+			return Json(new { data = _unitOfWork.Wishlist.GetAll(null, null, "PreferenceListDetail,Modality,TimeBlock,DaysOfWeek,PreferenceListDetail.PreferenceList,PreferenceListDetail.Course,Campus,PreferenceListDetail.PreferenceList.SemesterInstance,PreferenceListDetail.Course.AcademicProgram") });
 		}
 	}
 }

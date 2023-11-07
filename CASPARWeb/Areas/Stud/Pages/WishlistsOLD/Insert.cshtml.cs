@@ -1,12 +1,13 @@
 using DataAccess;
 using Infrastructure.Models;
+using Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CASPARWeb.Areas.Stud.Pages.WishListsOLD
 {
-	public class InsertModel : PageModel
+    public class InsertModel : PageModel
 	{
 		private readonly UnitOfWork _unitOfWork;
 
@@ -63,10 +64,10 @@ namespace CASPARWeb.Areas.Stud.Pages.WishListsOLD
 							   Text = c.CampusName,
 							   Value = c.Id.ToString()
 						   });
-			TimeOfDayList = _unitOfWork.TimeOfDay.GetAll(null)
+			TimeOfDayList = _unitOfWork.PartOfDay.GetAll(null)
 							.Select(c => new SelectListItem
 							{
-								Text = c.PartOfDay,
+								Text = c.PartOfDayValue,
 								Value = c.Id.ToString()
 							});
 
@@ -76,6 +77,7 @@ namespace CASPARWeb.Areas.Stud.Pages.WishListsOLD
 			return Page();
 		}
 
+		/*
 		public IActionResult OnPost()
 		{
 			Wishlist objWishlist = new Wishlist();
@@ -136,5 +138,6 @@ namespace CASPARWeb.Areas.Stud.Pages.WishListsOLD
 			////Redirect to the preferences page
 			return RedirectToPage("./Index", new { selectedSemesterId = SemesterInstanceId });
 		}
+		*/
 	}
 }

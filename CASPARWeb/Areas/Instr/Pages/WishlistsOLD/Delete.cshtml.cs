@@ -9,8 +9,8 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
     public class DeleteModel : PageModel
     {
 		private readonly UnitOfWork _unitOfWork;
-		[BindProperty]
-		public PreferenceListDetailModality objPreferenceListDetailModality { get; set; }
+		//[BindProperty]
+		//public PreferenceListDetailModality objPreferenceListDetailModality { get; set; }
 		[BindProperty]
 		public int CourseId { get; set; }
 		[BindProperty]
@@ -26,7 +26,7 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
 		public DeleteModel(UnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
-			objPreferenceListDetailModality = new PreferenceListDetailModality();
+			//objPreferenceListDetailModality = new PreferenceListDetailModality();
 			CourseList = new List<SelectListItem>();
 			ModalityList = new List<SelectListItem>();
 			CampusList = new List<SelectListItem>();
@@ -35,6 +35,7 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
 		}
 		public IActionResult OnGet(int id, int semesterInstanceId)
 		{
+			/*
 			objPreferenceListDetailModality = _unitOfWork.PreferenceListDetailModality.GetById(id);
 			PreferenceListDetail objPreferenceListDetail = _unitOfWork.PreferenceListDetail.GetById(objPreferenceListDetailModality.PreferenceListDetailId);
 			CourseId = objPreferenceListDetail.CourseId;
@@ -69,7 +70,7 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
 			DaysOfWeekList = _unitOfWork.DaysOfWeek.GetAll(null)
 							.Select(c => new SelectListItem
 							{
-								Text = c.DaysOfWeekTitle,
+								Text = c.DaysOfWeekValue,
 								Value = c.Id.ToString()
 							});
 			TimeBlockList = _unitOfWork.TimeBlock.GetAll(null)
@@ -78,11 +79,13 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
 								Text = c.TimeBlockValue,
 								Value = c.Id.ToString()
 							});
-
+			*/
 			return Page();
 		}
+		/*
 		public IActionResult OnPost(int? id)
 		{
+			
 			var preferenceListDetailModality = _unitOfWork.PreferenceListDetailModality.GetById(id);
 			if (preferenceListDetailModality == null)
 			{
@@ -92,6 +95,8 @@ namespace CASPARWeb.Areas.Instr.Pages.WishListsOLD
 			TempData["success"] = "Modality Deleted Successfully";
 			_unitOfWork.Commit();
 			return RedirectToPage("./Index", new { selectedSemesterId = currentSemesterInstanceId }); 
+			
 		}
+		*/
 	}
 }

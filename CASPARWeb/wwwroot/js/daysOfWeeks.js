@@ -11,7 +11,7 @@ function loadList() {
         },
         "columns": [
             //should not be capital
-            { "data": "daysOfWeekTitle", "width": "70%" },
+            { "data": "daysOfWeekValue", "width": "70%" },
             {
                 "data": "id",
                 "render": function (data) {

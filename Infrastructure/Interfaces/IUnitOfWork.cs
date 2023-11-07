@@ -32,17 +32,13 @@ namespace Infrastructure.Interfaces
 
         public IGenericRepository<Modality> Modality { get; }
 
+        public IGenericRepository<PartOfDay> PartOfDay { get; }
+
         public IGenericRepository<PartOfTerm> PartOfTerm { get; }
 
         public IGenericRepository<PayModel> PayModel { get; }
 
         public IGenericRepository<PayOrganization> PayOrganization { get; }
-
-        public IGenericRepository<PreferenceList> PreferenceList { get; }
-
-        public IGenericRepository<PreferenceListDetail> PreferenceListDetail { get; }
-
-        public IGenericRepository<PreferenceListDetailModality> PreferenceListDetailModality { get; }
 
         public IGenericRepository<ProgramAssignment> ProgramAssignment { get; }
 
@@ -62,13 +58,19 @@ namespace Infrastructure.Interfaces
 
         public IGenericRepository<TimeBlock> TimeBlock { get; }
 
-		public IGenericRepository<TimeOfDay> TimeOfDay { get; }
-
 		public IGenericRepository<Wishlist> Wishlist { get; }
 
-        public IGenericRepository<WishlistDetail> WishlistDetail { get; }
+		public IGenericRepository<WishlistCampus> WishlistCampus { get; }
 
-        public IGenericRepository<WishlistDetailModality> WishlistDetailModality { get; }
+		public IGenericRepository<WishlistCourse> WishlistCourse { get; }
+
+		public IGenericRepository<WishlistDaysOfWeek> WishlistDaysOfWeek { get; }
+
+		public IGenericRepository<WishlistModality> WishlistModality { get; }
+
+		public IGenericRepository<WishlistPartOfDay> WishlistPartOfDay { get; }
+
+		public IGenericRepository<WishlistTimeBlock> WishlistTimeBlock { get; }
 
         //Added After Identity Framework Scaffolding
         public IGenericRepository<ApplicationUser> ApplicationUser { get; }

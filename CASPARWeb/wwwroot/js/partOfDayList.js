@@ -3,21 +3,21 @@ $(document).ready(function () {
     loadList();
 });
 function loadList() {
-    dataTable = $('#DT_TimeOfDay').DataTable({
+    dataTable = $('#DT_PartOfDays').DataTable({
         "ajax": {
-            "url": "/api/timeOfDayList",
+            "url": "/api/partOfDayList",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
             //should not be capital
-            { "data": "partOfDay", "width": "70%" },
+            { "data": "partOfDayValue", "width": "70%" },
             {
                 "data": "id", "render": function (data) {
                     return `<div class="text-center">
-                    <a href="/Admin/TimeOfDays/Upsert?id=${data}" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; style="cursor:pointer; width: 100px;">
+                    <a href="/Admin/PartOfDays/Upsert?id=${data}" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; style="cursor:pointer; width: 100px;">
                         <i class="bi bi-pencil-square"></i> Edit </a>
-                    <a href="/Admin/TimeOfDays/Delete?id=${data}" class="btn btn-outline-danger mt-1 rounded" style="cursor:pointer; style="cursor:pointer; width: 100px;">
+                    <a href="/Admin/PartOfDays/Delete?id=${data}" class="btn btn-outline-danger mt-1 rounded" style="cursor:pointer; style="cursor:pointer; width: 100px;">
                         <i class="bi bi-trash"></i> Delete </a>
                     </div >`;
                 }, "width": "30%"

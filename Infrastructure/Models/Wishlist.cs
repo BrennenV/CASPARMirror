@@ -16,16 +16,16 @@ namespace Infrastructure.Models
 
         public bool? IsArchived { get; set; }
 
-        [Required]
-        [DisplayName("Student")]
-        public int StudentId { get; set; }
+		[Required]
+        [DisplayName("User")]
+        public string? UserId { get; set; }
 
         [Required]
         [DisplayName("Semester Instance")]
         public int SemesterInstanceId { get; set; }
 
-        [ForeignKey("StudentId")]
-        public Student? Student { get; set; }
+        [ForeignKey("UserId")]
+        public ApplicationUser? ApplicationUser { get; set; }
 
         [ForeignKey("SemesterInstanceId")]
         public SemesterInstance? SemesterInstance { get; set; }

@@ -13,8 +13,8 @@
     <div class="card-body p-4">
         <form method="post" class="row">
 
-            <input type="hidden" asp-for="objPreferenceListDetailModality.Id">
-            <input type="hidden" asp-for="objPreferenceListDetailModality.PreferenceListDetailId">
+            <input type="hidden" >
+            <input type="hidden" >
             <input type="hidden" asp-for="originalCourseId">
             <input type="hidden" asp-for="currentSemesterInstanceId">
 			<div class="form-control row">
@@ -27,28 +27,28 @@
 							</select>
 						</div>
 						<div class="col-6">
-							<label asp-for="objPreferenceListDetailModality.ModalityId"></label>
-							<select id="ddlModality" asp-for="objPreferenceListDetailModality.ModalityId" asp-items="@Model.ModalityList" onchange="UpdateLocaleAndDateOptions()" class="form-select">
+							<label></label>
+							<select id="ddlModality" asp-items="@Model.ModalityList" onchange="UpdateLocaleAndDateOptions()" class="form-select">
 								<option disabled selected>--Select Modality--</option>
 							</select>
 						</div>
 					</div>
 					<div class="row mb-3">
 						<div style="visibility:hidden" id="" class="col-4 hidetoggle">
-							<label asp-for="objPreferenceListDetailModality.CampusId"></label>
-							<select id="ddlCampus" asp-for="objPreferenceListDetailModality.CampusId" asp-items="@Model.CampusList" class="form-select">
+							<label></label>
+							<select id="ddlCampus" asp-items="@Model.CampusList" class="form-select">
 								<option disabled selected>--Select Campus--</option>
 							</select>
 						</div>
 						<div style="visibility:hidden" class="col-4 hidetoggle">
-							<label asp-for="objPreferenceListDetailModality.DaysOfWeekId"></label>
-							<select id="ddlDaysOfWeek" asp-for="objPreferenceListDetailModality.DaysOfWeekId" asp-items="@Model.DaysOfWeekList" class="form-select">
+							<label></label>
+							<select id="ddlDaysOfWeek" asp-items="@Model.DaysOfWeekList" class="form-select">
 								<option disabled selected>--Select Days of Week--</option>
 							</select>
 						</div>
 						<div style="visibility:hidden" class="col-4 hidetoggle">
-							<label asp-for="objPreferenceListDetailModality.TimeBlockId"></label>
-							<select id="ddlTimeBlock" asp-for="objPreferenceListDetailModality.TimeBlockId" asp-items="@Model.TimeBlockList" class="form-select">
+							<label></label>
+							<select id="ddlTimeBlock" asp-items="@Model.TimeBlockList" class="form-select">
 								<option disabled selected>--Select Time Block--</option>
 							</select>
 						</div>

@@ -11,7 +11,7 @@ using Utility;
 
 namespace DataAccess
 {
-	public class DbInitializer : IDbInitializer
+    public class DbInitializer : IDbInitializer
 	{
 		private readonly ApplicationDbContext _db;
 		private readonly UserManager<ApplicationUser> _userManager;
@@ -456,13 +456,13 @@ namespace DataAccess
 
 			var DaysOfWeeks = new List<DaysOfWeek>
 			{
-				new DaysOfWeek { DaysOfWeekTitle = "Monday" },
-				new DaysOfWeek { DaysOfWeekTitle = "Tuesday" },
-				new DaysOfWeek { DaysOfWeekTitle = "Wednesday" },
-				new DaysOfWeek { DaysOfWeekTitle = "Thursday" },
-				new DaysOfWeek { DaysOfWeekTitle = "Friday" },
-				new DaysOfWeek { DaysOfWeekTitle = "Saturday" },
-				new DaysOfWeek { DaysOfWeekTitle = "Sunday" }
+				new DaysOfWeek { DaysOfWeekValue = "Monday" },
+				new DaysOfWeek { DaysOfWeekValue = "Tuesday" },
+				new DaysOfWeek { DaysOfWeekValue = "Wednesday" },
+				new DaysOfWeek { DaysOfWeekValue = "Thursday" },
+				new DaysOfWeek { DaysOfWeekValue = "Friday" },
+				new DaysOfWeek { DaysOfWeekValue = "Saturday" },
+				new DaysOfWeek { DaysOfWeekValue = "Sunday" }
 			};
 
 			foreach (var d in DaysOfWeeks)
@@ -769,24 +769,20 @@ namespace DataAccess
 			//****************************************************************************** Templates
 
 			// Seed the Wishlist
-			// - StudentId (FK)
+			// - UserId (FK)
 			// - SemesterInstanceId (FK)
 
-			var Wishlists = new List<Wishlist>
+			var instr = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
+			var stud = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
+            var Wishlists = new List<Wishlist>
 			{
-				new Wishlist { StudentId = 1, SemesterInstanceId = 1 },
-				new Wishlist { StudentId = 1, SemesterInstanceId = 2 },
-				new Wishlist { StudentId = 1, SemesterInstanceId = 3 },
-				new Wishlist { StudentId = 2, SemesterInstanceId = 1 },
-				new Wishlist { StudentId = 2, SemesterInstanceId = 2 },
-				new Wishlist { StudentId = 2, SemesterInstanceId = 3 },
-				new Wishlist { StudentId = 3, SemesterInstanceId = 1 },
-				new Wishlist { StudentId = 3, SemesterInstanceId = 2 },
-				new Wishlist { StudentId = 3, SemesterInstanceId = 3 },
-				new Wishlist { StudentId = 4, SemesterInstanceId = 1 },
-				new Wishlist { StudentId = 4, SemesterInstanceId = 2 },
-				new Wishlist { StudentId = 4, SemesterInstanceId = 3 }
-			};
+				new Wishlist { UserId = instr.Id, SemesterInstanceId = 1 },
+				new Wishlist { UserId = instr.Id, SemesterInstanceId = 2 },
+				new Wishlist { UserId = instr.Id, SemesterInstanceId = 3 },
+                new Wishlist { UserId = stud.Id, SemesterInstanceId = 1 },
+                new Wishlist { UserId = stud.Id, SemesterInstanceId = 2 },
+                new Wishlist { UserId = stud.Id, SemesterInstanceId = 3 },
+            };
 
 			foreach (var w in Wishlists)
 			{
@@ -800,151 +796,250 @@ namespace DataAccess
 			// - WishlistId (FK)
 			// - CourseId (FK)
 
-			var WishlistDetails = new List<WishlistDetail>
-			{ 
-				new WishlistDetail { WishlistId = 1, CourseId = 1 },
-				new WishlistDetail { WishlistId = 1, CourseId = 2 },
-				new WishlistDetail { WishlistId = 1, CourseId = 3 },
-				new WishlistDetail { WishlistId = 2, CourseId = 1 },
-				new WishlistDetail { WishlistId = 2, CourseId = 2 },
-				new WishlistDetail { WishlistId = 2, CourseId = 3 },
-				new WishlistDetail { WishlistId = 3, CourseId = 1 },
-				new WishlistDetail { WishlistId = 3, CourseId = 2 },
-				new WishlistDetail { WishlistId = 3, CourseId = 3 },
-				new WishlistDetail { WishlistId = 4, CourseId = 1 },
-				new WishlistDetail { WishlistId = 4, CourseId = 2 },
-				new WishlistDetail { WishlistId = 4, CourseId = 3 }
-			};
+			//var WishlistDetails = new List<WishlistDetail>
+			//{ 
+			//	new WishlistDetail { WishlistId = 1, CourseId = 1 },
+			//	new WishlistDetail { WishlistId = 1, CourseId = 2 },
+			//	new WishlistDetail { WishlistId = 1, CourseId = 3 },
+			//	new WishlistDetail { WishlistId = 2, CourseId = 1 },
+			//	new WishlistDetail { WishlistId = 2, CourseId = 2 },
+			//	new WishlistDetail { WishlistId = 2, CourseId = 3 },
+			//	new WishlistDetail { WishlistId = 3, CourseId = 1 },
+			//	new WishlistDetail { WishlistId = 3, CourseId = 2 },
+			//	new WishlistDetail { WishlistId = 3, CourseId = 3 },
+			//	new WishlistDetail { WishlistId = 4, CourseId = 1 },
+			//	new WishlistDetail { WishlistId = 4, CourseId = 2 },
+			//	new WishlistDetail { WishlistId = 4, CourseId = 3 }
+			//};
 
-			foreach (var w in WishlistDetails)
-			{
-				_db.WishlistDetails.Add(w);
-			}
-			_db.SaveChanges();
+			//foreach (var w in WishlistDetails)
+			//{
+			//	_db.WishlistDetails.Add(w);
+			//}
+			//_db.SaveChanges();
 
 			//****************************************************************************** WishlistDetails
-			// Seed the TimeOfDay
+			// Seed the PartOfDay
 			// - PartOfDay (FK)
 
-			var TimeOfDay = new List<TimeOfDay>
+			var PartOfDay = new List<PartOfDay>
 			{
-				new TimeOfDay { PartOfDay = "Morning" },
-				new TimeOfDay { PartOfDay = "Afternoon" },
-				new TimeOfDay { PartOfDay = "Evening" }
+				new PartOfDay { PartOfDayValue = "Morning" },
+				new PartOfDay { PartOfDayValue = "Afternoon" },
+				new PartOfDay { PartOfDayValue = "Evening" }
 			};
 
-			foreach (var t in TimeOfDay)
+			foreach (var t in PartOfDay)
 			{
-				_db.TimeOfDays.Add(t);
+				_db.PartOfDays.Add(t);
 			}
 			_db.SaveChanges();
 
-			//****************************************************************************** TimeOfDay
+            //****************************************************************************** PartOfDay
 
-			// Seed the WishlistDetailModalities
-			// - PartOfDay (FK) 
-			// - WishlistDetailId (FK)
-			// - ModalityId (FK)
-			// - DaysOfWeekId (FK)
+            var WishlistCampuses = new List<WishlistCampus>
+            {
+                new WishlistCampus { WishlistId = 1, CampusId = 1 },
+                new WishlistCampus { WishlistId = 2, CampusId = 2 },
+                new WishlistCampus { WishlistId = 3, CampusId = 3 },
+                new WishlistCampus { WishlistId = 4, CampusId = 1 },
+                new WishlistCampus { WishlistId = 5, CampusId = 1 },
+                new WishlistCampus { WishlistId = 6, CampusId = 1 },
+            };
 
-			var WishlistDetailModalities = new List<WishlistDetailModality>
-			{ 
-				new WishlistDetailModality { TimeOfDayId = 1, WishlistDetailId = 1, ModalityId = 1, CampusId = 1 },
-				new WishlistDetailModality { TimeOfDayId = 1, WishlistDetailId = 1, ModalityId = 2, CampusId = 2 },
-				new WishlistDetailModality { TimeOfDayId = 1, WishlistDetailId = 1, ModalityId = 1, CampusId = 3 },
-				new WishlistDetailModality { TimeOfDayId = 1, WishlistDetailId = 1, ModalityId = 2, CampusId = 4 },
-				new WishlistDetailModality { TimeOfDayId = 3, WishlistDetailId = 1, ModalityId = 1, CampusId = 1 },
-				new WishlistDetailModality { TimeOfDayId = 2, WishlistDetailId = 2, ModalityId = 3, CampusId = 1 },
-				new WishlistDetailModality { TimeOfDayId = 3, WishlistDetailId = 2, ModalityId = 4, CampusId = 2 },
-				new WishlistDetailModality { TimeOfDayId = 2, WishlistDetailId = 3, ModalityId = 3, CampusId = 3 },
-				new WishlistDetailModality { TimeOfDayId = 3, WishlistDetailId = 3, ModalityId = 1, CampusId = 4 },
-				new WishlistDetailModality { TimeOfDayId = 2, WishlistDetailId = 4, ModalityId = 3, CampusId = 1 }
-			};
+            foreach (var w in WishlistCampuses)
+            {
+                _db.WishlistCampuses.Add(w);
+            }
+            _db.SaveChanges();
 
-			foreach (var w in WishlistDetailModalities)
-			{
-				_db.WishlistDetailModalities.Add(w);
-			}
-			_db.SaveChanges();
+            //****************************************************************************** WishlistCampuses
 
-			//****************************************************************************** WishlistDetailModalities
+            var WishlistCourses = new List<WishlistCourse>
+            {
+                new WishlistCourse { WishlistId = 1, CourseId = 1, PreferenceRank = 1 },
+                new WishlistCourse { WishlistId = 2, CourseId = 2, PreferenceRank = 2 },
+                new WishlistCourse { WishlistId = 3, CourseId = 3, PreferenceRank = 3 },
+                new WishlistCourse { WishlistId = 4, CourseId = 1 },
+                new WishlistCourse { WishlistId = 5, CourseId = 2 },
+                new WishlistCourse { WishlistId = 6, CourseId = 3 }
+            };
 
-			// Seed the PreferenceLists
-			// - InstructorId (FK)
-			// - SemesterInstanceId (FK)
+            foreach (var w in WishlistCourses)
+            {
+                _db.WishlistCourses.Add(w);
+            }
+            _db.SaveChanges();
 
-			var PreferenceLists = new List<PreferenceList>
-			{ 
-				new PreferenceList { InstructorId = 1, SemesterInstanceId = 1 },
-				new PreferenceList { InstructorId = 1, SemesterInstanceId = 2 },
-				new PreferenceList { InstructorId = 1, SemesterInstanceId = 3 },
-				new PreferenceList { InstructorId = 2, SemesterInstanceId = 1 },
-				new PreferenceList { InstructorId = 2, SemesterInstanceId = 2 },
-				new PreferenceList { InstructorId = 2, SemesterInstanceId = 3 }
-			};
+            //****************************************************************************** WishlistCourses
 
-			foreach (var p in PreferenceLists)
-			{
-				_db.PreferenceLists.Add(p);
-			}
-			_db.SaveChanges();
+            var WishlistDaysOfWeeks = new List<WishlistDaysOfWeek>
+            {
+                new WishlistDaysOfWeek { WishlistId = 1, DaysOfWeekId = 1},
+                new WishlistDaysOfWeek { WishlistId = 2, DaysOfWeekId = 2 },
+                new WishlistDaysOfWeek { WishlistId = 3, DaysOfWeekId = 3 }
+            };
 
-			//****************************************************************************** PreferenceLists
+            foreach (var w in WishlistDaysOfWeeks)
+            {
+                _db.WishlistDaysOfWeeks.Add(w);
+            }
+            _db.SaveChanges();
 
-			// Seed the PreferenceListDetails
-			// - PreferenceRank
-			// - PreferenceListId (FK)
-			// - CourseId (FK)
+            //****************************************************************************** WishlistDaysOfWeeks
 
-			var PreferenceListDetails = new List<PreferenceListDetail>
-			{
-				new PreferenceListDetail { PreferenceRank = 1, PreferenceListId = 1, CourseId = 1 },
-				new PreferenceListDetail { PreferenceRank = 2, PreferenceListId = 1, CourseId = 2 },
-				new PreferenceListDetail { PreferenceRank = 3, PreferenceListId = 1, CourseId = 3 },
-				new PreferenceListDetail { PreferenceRank = 2, PreferenceListId = 2, CourseId = 1 },
-				new PreferenceListDetail { PreferenceRank = 3, PreferenceListId = 2, CourseId = 2 },
-				new PreferenceListDetail { PreferenceRank = 1, PreferenceListId = 2, CourseId = 3 },
-				new PreferenceListDetail { PreferenceRank = 3, PreferenceListId = 3, CourseId = 1 },
-				new PreferenceListDetail { PreferenceRank = 1, PreferenceListId = 3, CourseId = 2 },
-				new PreferenceListDetail { PreferenceRank = 2, PreferenceListId = 3, CourseId = 3 },
-				new PreferenceListDetail { PreferenceRank = 1, PreferenceListId = 4, CourseId = 1 },
-				new PreferenceListDetail { PreferenceRank = 3, PreferenceListId = 4, CourseId = 2 },
-				new PreferenceListDetail { PreferenceRank = 2, PreferenceListId = 4, CourseId = 3 }
-			};
+            var WishlistModalities = new List<WishlistModality>
+            {
+                new WishlistModality { WishlistId = 1, ModalityId = 1 },
+                new WishlistModality { WishlistId = 2, ModalityId = 2 },
+                new WishlistModality { WishlistId = 3, ModalityId = 3 },
+                new WishlistModality { WishlistId = 4, ModalityId = 1 },
+                new WishlistModality { WishlistId = 5, ModalityId = 2 },
+                new WishlistModality { WishlistId = 6, ModalityId = 3 }
+            };
 
-			foreach (var p in PreferenceListDetails)
-			{
-				_db.PreferenceListDetails.Add(p);
-			}
-			_db.SaveChanges();
+            foreach (var w in WishlistModalities)
+            {
+                _db.WishlistModalities.Add(w);
+            }
+            _db.SaveChanges();
 
-			//****************************************************************************** PreferenceListDetails
+            //****************************************************************************** WishlistModalities
 
-			// Seed the PreferenceListDetailModalities
-			// - PreferenceListDetailId (FK)
-			// - ModalityId (FK)
-			// - DaysOfWeekId (FK)
-			// - TimeBlockId (FK)
+            var WishlistPartOfDays = new List<WishlistPartOfDay>
+            {
+                new WishlistPartOfDay { WishlistId = 4, PartOfDayId = 1 },
+                new WishlistPartOfDay { WishlistId = 5, PartOfDayId = 2 },
+                new WishlistPartOfDay { WishlistId = 6, PartOfDayId = 3 }
+            };
 
-			var PreferenceListDetailModalities = new List<PreferenceListDetailModality>
-			{
-				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 1, DaysOfWeekId = 1, TimeBlockId = 1, CampusId = 3 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 2, DaysOfWeekId = 2, TimeBlockId = 2, CampusId = 2 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 1, DaysOfWeekId = 3, TimeBlockId = 3, CampusId = 1 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 2, DaysOfWeekId = 4, TimeBlockId = 1, CampusId = 3 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 1, DaysOfWeekId = 5, TimeBlockId = 2, CampusId = 2 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 2, ModalityId = 3, DaysOfWeekId = 1, TimeBlockId = 3, CampusId = 1 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 2, ModalityId = 4, DaysOfWeekId = 2, TimeBlockId = 1, CampusId = 3 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 3, ModalityId = 3, DaysOfWeekId = 3, TimeBlockId = 2, CampusId = 2 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 3, ModalityId = 1, DaysOfWeekId = 4, TimeBlockId = 3, CampusId = 1 },
-				new PreferenceListDetailModality { PreferenceListDetailId = 4, ModalityId = 3, DaysOfWeekId = 5, TimeBlockId = 1, CampusId = 3 }
-			};
+            foreach (var w in WishlistPartOfDays)
+            {
+                _db.WishlistPartOfDays.Add(w);
+            }
+            _db.SaveChanges();
 
-			foreach (var p in PreferenceListDetailModalities)
-			{
-				_db.PreferenceListDetailModalities.Add(p);
-			}
-			_db.SaveChanges();
-		}
-	}
+            //****************************************************************************** WishlistPartOfDays
+
+            var WishlistTimeBlocks = new List<WishlistTimeBlock>
+            {
+                new WishlistTimeBlock { WishlistId = 1, TimeBlockId = 1 },
+                new WishlistTimeBlock { WishlistId = 2, TimeBlockId = 2 },
+                new WishlistTimeBlock { WishlistId = 3, TimeBlockId = 3 }
+            };
+
+            foreach (var w in WishlistTimeBlocks)
+            {
+                _db.WishlistTimeBlocks.Add(w);
+            }
+            _db.SaveChanges();
+
+            //****************************************************************************** WishlistPartOfDays
+
+            // Seed the WishlistDetailModalities
+            // - PartOfDay (FK) 
+            // - WishlistDetailId (FK)
+            // - ModalityId (FK)
+            // - DaysOfWeekId (FK)
+
+            //var WishlistDetailModalities = new List<WishlistDetailModality>
+            //{ 
+            //	new WishlistDetailModality { TimeOfDayId = 1, WishlistDetailId = 1, ModalityId = 1, CampusId = 1 },
+            //	new WishlistDetailModality { TimeOfDayId = 1, WishlistDetailId = 1, ModalityId = 2, CampusId = 2 },
+            //	new WishlistDetailModality { TimeOfDayId = 1, WishlistDetailId = 1, ModalityId = 1, CampusId = 3 },
+            //	new WishlistDetailModality { TimeOfDayId = 1, WishlistDetailId = 1, ModalityId = 2, CampusId = 4 },
+            //	new WishlistDetailModality { TimeOfDayId = 3, WishlistDetailId = 1, ModalityId = 1, CampusId = 1 },
+            //	new WishlistDetailModality { TimeOfDayId = 2, WishlistDetailId = 2, ModalityId = 3, CampusId = 1 },
+            //	new WishlistDetailModality { TimeOfDayId = 3, WishlistDetailId = 2, ModalityId = 4, CampusId = 2 },
+            //	new WishlistDetailModality { TimeOfDayId = 2, WishlistDetailId = 3, ModalityId = 3, CampusId = 3 },
+            //	new WishlistDetailModality { TimeOfDayId = 3, WishlistDetailId = 3, ModalityId = 1, CampusId = 4 },
+            //	new WishlistDetailModality { TimeOfDayId = 2, WishlistDetailId = 4, ModalityId = 3, CampusId = 1 }
+            //};
+
+            //foreach (var w in WishlistDetailModalities)
+            //{
+            //	_db.WishlistDetailModalities.Add(w);
+            //}
+            //_db.SaveChanges();
+
+            //****************************************************************************** WishlistDetailModalities
+
+            // Seed the PreferenceLists
+            // - InstructorId (FK)
+            // - SemesterInstanceId (FK)
+
+            //var PreferenceLists = new List<PreferenceList>
+            //{ 
+            //	new PreferenceList { InstructorId = 1, SemesterInstanceId = 1 },
+            //	new PreferenceList { InstructorId = 1, SemesterInstanceId = 2 },
+            //	new PreferenceList { InstructorId = 1, SemesterInstanceId = 3 },
+            //	new PreferenceList { InstructorId = 2, SemesterInstanceId = 1 },
+            //	new PreferenceList { InstructorId = 2, SemesterInstanceId = 2 },
+            //	new PreferenceList { InstructorId = 2, SemesterInstanceId = 3 }
+            //};
+
+            //foreach (var p in PreferenceLists)
+            //{
+            //	_db.PreferenceLists.Add(p);
+            //}
+            //_db.SaveChanges();
+
+            //****************************************************************************** PreferenceLists
+
+            // Seed the PreferenceListDetails
+            // - PreferenceRank
+            // - PreferenceListId (FK)
+            // - CourseId (FK)
+
+            //var PreferenceListDetails = new List<PreferenceListDetail>
+            //{
+            //	new PreferenceListDetail { PreferenceRank = 1, PreferenceListId = 1, CourseId = 1 },
+            //	new PreferenceListDetail { PreferenceRank = 2, PreferenceListId = 1, CourseId = 2 },
+            //	new PreferenceListDetail { PreferenceRank = 3, PreferenceListId = 1, CourseId = 3 },
+            //	new PreferenceListDetail { PreferenceRank = 2, PreferenceListId = 2, CourseId = 1 },
+            //	new PreferenceListDetail { PreferenceRank = 3, PreferenceListId = 2, CourseId = 2 },
+            //	new PreferenceListDetail { PreferenceRank = 1, PreferenceListId = 2, CourseId = 3 },
+            //	new PreferenceListDetail { PreferenceRank = 3, PreferenceListId = 3, CourseId = 1 },
+            //	new PreferenceListDetail { PreferenceRank = 1, PreferenceListId = 3, CourseId = 2 },
+            //	new PreferenceListDetail { PreferenceRank = 2, PreferenceListId = 3, CourseId = 3 },
+            //	new PreferenceListDetail { PreferenceRank = 1, PreferenceListId = 4, CourseId = 1 },
+            //	new PreferenceListDetail { PreferenceRank = 3, PreferenceListId = 4, CourseId = 2 },
+            //	new PreferenceListDetail { PreferenceRank = 2, PreferenceListId = 4, CourseId = 3 }
+            //};
+
+            //foreach (var p in PreferenceListDetails)
+            //{
+            //	_db.PreferenceListDetails.Add(p);
+            //}
+            //_db.SaveChanges();
+
+            //****************************************************************************** PreferenceListDetails
+
+            // Seed the PreferenceListDetailModalities
+            // - PreferenceListDetailId (FK)
+            // - ModalityId (FK)
+            // - DaysOfWeekId (FK)
+            // - TimeBlockId (FK)
+
+            //var PreferenceListDetailModalities = new List<PreferenceListDetailModality>
+            //{
+            //	new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 1, DaysOfWeekId = 1, TimeBlockId = 1, CampusId = 3 },
+            //	new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 2, DaysOfWeekId = 2, TimeBlockId = 2, CampusId = 2 },
+            //	new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 1, DaysOfWeekId = 3, TimeBlockId = 3, CampusId = 1 },
+            //	new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 2, DaysOfWeekId = 4, TimeBlockId = 1, CampusId = 3 },
+            //	new PreferenceListDetailModality { PreferenceListDetailId = 1, ModalityId = 1, DaysOfWeekId = 5, TimeBlockId = 2, CampusId = 2 },
+            //	new PreferenceListDetailModality { PreferenceListDetailId = 2, ModalityId = 3, DaysOfWeekId = 1, TimeBlockId = 3, CampusId = 1 },
+            //	new PreferenceListDetailModality { PreferenceListDetailId = 2, ModalityId = 4, DaysOfWeekId = 2, TimeBlockId = 1, CampusId = 3 },
+            //	new PreferenceListDetailModality { PreferenceListDetailId = 3, ModalityId = 3, DaysOfWeekId = 3, TimeBlockId = 2, CampusId = 2 },
+            //	new PreferenceListDetailModality { PreferenceListDetailId = 3, ModalityId = 1, DaysOfWeekId = 4, TimeBlockId = 3, CampusId = 1 },
+            //	new PreferenceListDetailModality { PreferenceListDetailId = 4, ModalityId = 3, DaysOfWeekId = 5, TimeBlockId = 1, CampusId = 3 }
+            //};
+
+            //foreach (var p in PreferenceListDetailModalities)
+            //{
+            //	_db.PreferenceListDetailModalities.Add(p);
+            //}
+            //_db.SaveChanges();
+        }
+    }
 }

@@ -41,17 +41,13 @@ namespace DataAccess
 
         public IGenericRepository<Modality> _Modality;
 
+        public IGenericRepository<PartOfDay> _PartOfDay;
+
         public IGenericRepository<PartOfTerm> _PartOfTerm;
 
         public IGenericRepository<PayModel> _PayModel;
 
         public IGenericRepository<PayOrganization> _PayOrganization;
-
-        public IGenericRepository<PreferenceList> _PreferenceList;
-
-        public IGenericRepository<PreferenceListDetail> _PreferenceListDetail;
-
-        public IGenericRepository<PreferenceListDetailModality> _PreferenceListDetailModality;
 
         public IGenericRepository<ProgramAssignment> _ProgramAssignment;
 
@@ -71,13 +67,19 @@ namespace DataAccess
 
         public IGenericRepository<TimeBlock> _TimeBlock;
 
-		public IGenericRepository<TimeOfDay> _TimeOfDay;
-
 		public IGenericRepository<Wishlist> _Wishlist;
 
-        public IGenericRepository<WishlistDetail> _WishlistDetail;
+		public IGenericRepository<WishlistCampus> _WishlistCampus;
 
-        public IGenericRepository<WishlistDetailModality> _WishlistDetailModality;
+		public IGenericRepository<WishlistCourse> _WishlistCourse;
+
+		public IGenericRepository<WishlistDaysOfWeek> _WishlistDaysOfWeek;
+
+		public IGenericRepository<WishlistModality> _WishlistModality;
+
+		public IGenericRepository<WishlistPartOfDay> _WishlistPartOfDay;
+
+        public IGenericRepository<WishlistTimeBlock> _WishlistTimeBlock;
 
         //Added After Identity Framework Scaffolding
         public IGenericRepository<ApplicationUser> _ApplicationUser;
@@ -243,7 +245,20 @@ namespace DataAccess
             }
         }
 
-        public IGenericRepository<PartOfTerm> PartOfTerm
+		public IGenericRepository<PartOfDay> PartOfDay
+		{
+			get
+			{
+				if (_PartOfDay == null)
+				{
+					_PartOfDay = new GenericRepository<PartOfDay>(_dbContext);
+				}
+
+				return _PartOfDay;
+			}
+		}
+
+		public IGenericRepository<PartOfTerm> PartOfTerm
         {
             get
             {
@@ -279,45 +294,6 @@ namespace DataAccess
                 }
 
                 return _PayOrganization;
-            }
-        }
-
-        public IGenericRepository<PreferenceList> PreferenceList
-        {
-            get
-            {
-                if (_PreferenceList == null)
-                {
-                    _PreferenceList = new GenericRepository<PreferenceList>(_dbContext);
-                }
-
-                return _PreferenceList;
-            }
-        }
-
-        public IGenericRepository<PreferenceListDetail> PreferenceListDetail
-        {
-            get
-            {
-                if (_PreferenceListDetail == null)
-                {
-                    _PreferenceListDetail = new GenericRepository<PreferenceListDetail>(_dbContext);
-                }
-
-                return _PreferenceListDetail;
-            }
-        }
-
-        public IGenericRepository<PreferenceListDetailModality> PreferenceListDetailModality
-        {
-            get
-            {
-                if (_PreferenceListDetailModality == null)
-                {
-                    _PreferenceListDetailModality = new GenericRepository<PreferenceListDetailModality>(_dbContext);
-                }
-
-                return _PreferenceListDetailModality;
             }
         }
 
@@ -425,19 +401,6 @@ namespace DataAccess
             }
         }
 
-        public IGenericRepository<TimeOfDay> TimeOfDay
-        {
-			get
-            {
-				if (_TimeOfDay == null)
-                {
-					_TimeOfDay = new GenericRepository<TimeOfDay>(_dbContext);
-				}
-
-				return _TimeOfDay;
-			}
-		}
-
         public IGenericRepository<Wishlist> Wishlist
         {
             get
@@ -451,33 +414,85 @@ namespace DataAccess
             }
         }
 
-        public IGenericRepository<WishlistDetail> WishlistDetail
-        {
-            get
-            {
-                if (_WishlistDetail == null)
-                {
-                    _WishlistDetail = new GenericRepository<WishlistDetail>(_dbContext);
-                }
+		public IGenericRepository<WishlistCampus> WishlistCampus
+		{
+			get
+			{
+				if (_WishlistCampus == null)
+				{
+					_WishlistCampus = new GenericRepository<WishlistCampus>(_dbContext);
+				}
 
-                return _WishlistDetail;
-            }
-        }
+				return _WishlistCampus;
+			}
+		}
 
-        public IGenericRepository<WishlistDetailModality> WishlistDetailModality
-        {
-            get
-            {
-                if (_WishlistDetailModality == null)
-                {
-                    _WishlistDetailModality = new GenericRepository<WishlistDetailModality>(_dbContext);
-                }
+		public IGenericRepository<WishlistCourse> WishlistCourse
+		{
+			get
+			{
+				if (_WishlistCourse == null)
+				{
+					_WishlistCourse = new GenericRepository<WishlistCourse>(_dbContext);
+				}
 
-                return _WishlistDetailModality;
-            }
-        }
+				return _WishlistCourse;
+			}
+		}
 
-        public IGenericRepository<ApplicationUser> ApplicationUser
+		public IGenericRepository<WishlistDaysOfWeek> WishlistDaysOfWeek
+		{
+			get
+			{
+				if (_WishlistDaysOfWeek == null)
+				{
+					_WishlistDaysOfWeek = new GenericRepository<WishlistDaysOfWeek>(_dbContext);
+				}
+
+				return _WishlistDaysOfWeek;
+			}
+		}
+
+		public IGenericRepository<WishlistModality> WishlistModality
+		{
+			get
+			{
+				if (_WishlistModality == null)
+				{
+					_WishlistModality = new GenericRepository<WishlistModality>(_dbContext);
+				}
+
+				return _WishlistModality;
+			}
+		}
+
+		public IGenericRepository<WishlistPartOfDay> WishlistPartOfDay
+		{
+			get
+			{
+				if (_WishlistPartOfDay == null)
+				{
+					_WishlistPartOfDay = new GenericRepository<WishlistPartOfDay>(_dbContext);
+				}
+
+				return _WishlistPartOfDay;
+			}
+		}
+
+		public IGenericRepository<WishlistTimeBlock> WishlistTimeBlock
+		{
+			get
+			{
+				if (_WishlistTimeBlock == null)
+				{
+					_WishlistTimeBlock = new GenericRepository<WishlistTimeBlock>(_dbContext);
+				}
+
+				return _WishlistTimeBlock;
+			}
+		}
+
+		public IGenericRepository<ApplicationUser> ApplicationUser
         {
             get
             {
@@ -551,17 +566,13 @@ namespace DataAccess
 
 		IGenericRepository<Modality> IUnitOfWork.Modality => throw new NotImplementedException();
 
+		IGenericRepository<PartOfDay> IUnitOfWork.PartOfDay => throw new NotImplementedException();
+
 		IGenericRepository<PartOfTerm> IUnitOfWork.PartOfTerm => throw new NotImplementedException();
 
 		IGenericRepository<PayModel> IUnitOfWork.PayModel => throw new NotImplementedException();
 
 		IGenericRepository<PayOrganization> IUnitOfWork.PayOrganization => throw new NotImplementedException();
-
-		IGenericRepository<PreferenceList> IUnitOfWork.PreferenceList => throw new NotImplementedException();
-
-		IGenericRepository<PreferenceListDetail> IUnitOfWork.PreferenceListDetail => throw new NotImplementedException();
-
-		IGenericRepository<PreferenceListDetailModality> IUnitOfWork.PreferenceListDetailModality => throw new NotImplementedException();
 
 		IGenericRepository<ProgramAssignment> IUnitOfWork.ProgramAssignment => throw new NotImplementedException();
 
@@ -581,13 +592,19 @@ namespace DataAccess
 
 		IGenericRepository<TimeBlock> IUnitOfWork.TimeBlock => throw new NotImplementedException();
 
-		IGenericRepository<TimeOfDay> IUnitOfWork.TimeOfDay => throw new NotImplementedException();
-
 		IGenericRepository<Wishlist> IUnitOfWork.Wishlist => throw new NotImplementedException();
 
-		IGenericRepository<WishlistDetail> IUnitOfWork.WishlistDetail => throw new NotImplementedException();
+		IGenericRepository<WishlistCampus> IUnitOfWork.WishlistCampus => throw new NotImplementedException();
 
-		IGenericRepository<WishlistDetailModality> IUnitOfWork.WishlistDetailModality => throw new NotImplementedException();
+		IGenericRepository<WishlistCourse> IUnitOfWork.WishlistCourse => throw new NotImplementedException();
+
+		IGenericRepository<WishlistDaysOfWeek> IUnitOfWork.WishlistDaysOfWeek => throw new NotImplementedException();
+
+		IGenericRepository<WishlistModality> IUnitOfWork.WishlistModality => throw new NotImplementedException();
+
+		IGenericRepository<WishlistPartOfDay> IUnitOfWork.WishlistPartOfDay => throw new NotImplementedException();
+
+		IGenericRepository<WishlistTimeBlock> IUnitOfWork.WishlistTimeBlock => throw new NotImplementedException();
 
 		IGenericRepository<Role> IUnitOfWork.Role => throw new NotImplementedException();
 
