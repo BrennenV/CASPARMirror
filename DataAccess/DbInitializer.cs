@@ -584,11 +584,11 @@ namespace DataAccess
 
 			var ProgramAssignments = new List<ProgramAssignment>
 			{
-				new ProgramAssignment { InstructorId = 1, ProgramId = 4, IsArchived = false },
+				new ProgramAssignment { InstructorId = 1, ProgramId = 2, IsArchived = false },
 				new ProgramAssignment { InstructorId = 1, ProgramId = 2, IsArchived = false },
 				new ProgramAssignment { InstructorId = 2, ProgramId = 1, IsArchived = false },
 				new ProgramAssignment { InstructorId = 2, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 2, ProgramId = 5, IsArchived = false },
+				new ProgramAssignment { InstructorId = 2, ProgramId = 1, IsArchived = false },
 				new ProgramAssignment { InstructorId = 3, ProgramId = 1, IsArchived = false },
 				new ProgramAssignment { InstructorId = 3, ProgramId = 2, IsArchived = false },
 				new ProgramAssignment { InstructorId = 3, ProgramId = 3, IsArchived = false },
@@ -1196,36 +1196,18 @@ namespace DataAccess
 			var stud = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
 			var Wishlists = new List<Wishlist>
 			{
-				new Wishlist { UserId = 1, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = 1, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = 1, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = 2, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = 2, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = 2, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = 3, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = 3, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = 3, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = 4, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = 4, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = 4, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = 5, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = 5, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = 5, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = 6, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = 6, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = 6, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = 7, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = 7, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = 7, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = 8, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = 8, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = 8, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = 9, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = 9, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = 9, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = 10, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = 10, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = 10, SemesterInstanceId = 3, IsArchived = false }
+				new Wishlist { UserId = instr.Id, SemesterInstanceId = 1, IsArchived = false },
+				new Wishlist { UserId = instr.Id, SemesterInstanceId = 2, IsArchived = false },
+				new Wishlist { UserId = instr.Id, SemesterInstanceId = 3, IsArchived = false },
+				new Wishlist { UserId = stud.Id, SemesterInstanceId = 1, IsArchived = false },
+				new Wishlist { UserId = stud.Id, SemesterInstanceId = 2, IsArchived = false },
+				new Wishlist { UserId = stud.Id, SemesterInstanceId = 3, IsArchived = false },
+				new Wishlist { UserId = stud.Id, SemesterInstanceId = 1, IsArchived = false },
+				new Wishlist { UserId = stud.Id, SemesterInstanceId = 2, IsArchived = false },
+				new Wishlist { UserId = stud.Id, SemesterInstanceId = 3, IsArchived = false },
+				new Wishlist { UserId = stud.Id, SemesterInstanceId = 1, IsArchived = false },
+				new Wishlist { UserId = stud.Id, SemesterInstanceId = 2, IsArchived = false },
+				new Wishlist { UserId = stud.Id, SemesterInstanceId = 3, IsArchived = false }
 			};
 
 			foreach (var w in Wishlists)
