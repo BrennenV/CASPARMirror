@@ -14,8 +14,6 @@ namespace Infrastructure.Models
         [Key]
         public int Id { get; set; }
 
-        public bool? IsArchived { get; set; }
-
         [Required]
         [DisplayName("Instructor")]
         public int InstructorId { get; set; }
@@ -24,10 +22,12 @@ namespace Infrastructure.Models
         [DisplayName("Program")]
         public int ProgramId { get; set; }
 
-        [ForeignKey("InstructorId")]
+		public bool? IsArchived { get; set; }
+
+		[ForeignKey("InstructorId")]
         public Instructor? Instructor { get; set; }
 
-        [ForeignKey("ProgramId")]
-        public AcademicProgram? Program { get; set; }
-    }
+		[ForeignKey("ProgramId")]
+		public AcademicProgram? AcademicProgram { get; set; }
+	}
 }

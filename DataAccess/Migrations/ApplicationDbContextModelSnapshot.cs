@@ -1331,15 +1331,15 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Models.AcademicProgram", "Program")
+                    b.HasOne("Infrastructure.Models.AcademicProgram", "AcademicProgram")
                         .WithMany()
                         .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Instructor");
+                    b.Navigation("AcademicProgram");
 
-                    b.Navigation("Program");
+                    b.Navigation("Instructor");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.ReleaseTime", b =>
