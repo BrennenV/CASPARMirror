@@ -18,7 +18,7 @@ namespace Infrastructure.Models
 
 		[Required]
         [DisplayName("User")]
-        public string? UserId { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         [DisplayName("Semester Instance")]
