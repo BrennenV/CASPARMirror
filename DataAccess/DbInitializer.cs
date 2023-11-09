@@ -1192,8 +1192,8 @@ namespace DataAccess
 			// - SemesterInstanceId (FK)
 			// - IsArchived
 
-			//var instr = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
-			//var stud = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
+			var instr = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
+			var stud = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
 			var Wishlists = new List<Wishlist>
 			{
 				new Wishlist { UserId = 1, SemesterInstanceId = 1, IsArchived = false },
