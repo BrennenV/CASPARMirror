@@ -55,7 +55,7 @@ function loadList() {
             "dataSrc": function (json) {
                 var selectedSemester = Number($('#ddlSemesterInstance').val());
                 var filteredData = $.grep(json.data, function (row) {
-                    return Number(row.preferenceListDetail.preferenceList.semesterInstanceId) === selectedSemester;
+                    return Number(row.wishlist) === selectedSemester;
                 });
                 return filteredData;
             },
@@ -64,26 +64,22 @@ function loadList() {
             }
         },
         "columns": [
+            { "data": "wishlistCourse.preferenceRank", "width": "5%" },
             {
-                "data": "preferenceListDetail",
+                "data": "wishlistCourse",
                 "render": function (data) {
                     return `${data.course.academicProgram.programCode} ${data.course.courseNumber} ${data.course.courseTitle}`
                 },
                 "width": "25%"
             },
-            { "data": "preferenceListDetail.preferenceRank", "width": "5%"},
-            { "data": "modality.modalityName", "width": "15%" },
-            { "data": "campus.campusName", "width": "15%" },
-            { "data": "daysOfWeek.daysOfWeekValue", "width": "10%" },
-            { "data": "timeBlock.timeBlockValue", "width": "10%" },
             {
                 "data": "id",
                 "render": function (data, type, row, meta) {
                     return `<div class="text-center">
-                                <a href="/Instr/WishlistsOLD/Update?id=${data}&semesterInstanceId=${row.preferenceListDetail.preferenceList.semesterInstanceId}" class="btn btn-outline-primary mb-1 rounded" style="cursor:pointer; width: 100px;">
-                                    <i class="bi bi-pencil-square"></i> Edit </a>
-                                <a href="/Instr/WishlistsOLD/Delete?id=${data}&semesterInstanceId=${row.preferenceListDetail.preferenceList.semesterInstanceId}" class="btn btn-outline-danger mb-1 rounded" style="cursor:pointer; width: 100px;">
-                                    <i class="bi bi-trash"></i> Delete </a>   
+                                <a href="/Instr/Wishlists/Update?id=${data}&semesterInstanceId=${row.preferenceListDetail.preferenceList.semesterInstanceId}" class="btn btn-outline-primary mb-1 rounded" style="cursor:pointer; width: 100px;">
+                                    <i class="bi bi-pencil-square"></i></a>
+                                <a href="/Instr/Wishlists/Delete?id=${data}&semesterInstanceId=${row.preferenceListDetail.preferenceList.semesterInstanceId}" class="btn btn-outline-danger mb-1 rounded" style="cursor:pointer; width: 100px;">
+                                    <i class="bi bi-trash"></i></a>   
                             </div>`;
                 }, "width": "20%"
             }
