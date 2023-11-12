@@ -44,6 +44,18 @@ function loadCheckBoxes() {
             alert('Ajax error:' + xhr.responseText);
         }
     });
+
+    // Load the time blocks
+    loadTimeBlocks();
+
+    // Load the days of the week
+    loadDaysOfWeek();
+
+    // Load the campuses
+    loadCampuses();
+}
+
+function loadTimeBlocks() {
     $.ajax({
         url: "/api/timeBlockList",
         type: "GET",
@@ -53,6 +65,12 @@ function loadCheckBoxes() {
             var container2 = $("#timeBlocks2");
             container1.empty();
             container2.empty();
+
+            // Sort the data from least to greatest
+            data.data.sort(function (a, b) {
+                return new Date('1970/01/01 ' + a.timeBlockValue) - new Date('1970/01/01 ' + b.timeBlockValue);
+            });
+
             $.each(data.data, function (index, timeBlock) {
                 if (!timeBlock.isArchived) {
                     var div = $('<div>').addClass('form-check');
@@ -84,7 +102,9 @@ function loadCheckBoxes() {
             alert('Ajax error:' + xhr.responseText);
         }
     });
+}
 
+function loadDaysOfWeek() {
     $.ajax({
         url: "/api/daysOfWeek",
         type: "GET",
@@ -117,6 +137,9 @@ function loadCheckBoxes() {
             alert('Ajax error:' + xhr.responseText);
         }
     });
+}
+
+function loadCampuses() {
     $.ajax({
         url: "/api/campusList",
         type: "GET",
