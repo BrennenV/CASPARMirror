@@ -20,7 +20,7 @@ namespace CASPARWeb.Controllers
 		{
 			//TODO: this will need to return the details for the logged in instructor.
 			//THIS CONTROLLER WILL LIKELY NEED TO BE DELETED
-			return Json(new { data = _unitOfWork.Wishlist.GetAll(null, null, "Wiishlist,WishlistModality,Modality,WishlistTimeBlock,TimeBlock,WishlistDaysOfWeek,DaysOfWeek,WishListCourse,Course,WishlistCampus,Campus,WishList.SemesterInstance,SemesterInstance,WishListCourse.Course.AcedemicProgram") });
+			return Json(new { data = _unitOfWork.Wishlist.GetAll(null, null, "WishlistModality,Modality,WishlistTimeBlock,TimeBlock,WishlistDaysOfWeek,DaysOfWeek,WishListCourse,Course,WishlistCourse.Wishlist.SemesterInstance,WishlistCampus,Campus,SemesterInstance,SemesterInstance,WishListCourse.Course.AcedemicProgram") });
 		}
 	}
 }

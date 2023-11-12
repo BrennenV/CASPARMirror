@@ -20,224 +20,55 @@
 	</div> <!--End Row-->
 	<div id="accordion">
 		<div class="card">
-			<a class="btn-primary" data-bs-toggle="collapse" href="#collapseOne">
+			<a class="btn-primary" data-bs-toggle="collapse" href="#collapseOne" style="text-decoration: none;">
 				<div class="card-header">
-						Details
+					<h5>Details</h5>
 				</div>
 			</a>
 			<div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
 				<div class="card-body">
 					<div class="row pt=4">
-						<div class="col-3">
-							<label>Modalities</label>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check1" name="option1" value="something">
-								<label class="form-check-label">Face to Face</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check2" name="option2" value="something">
-								<label class="form-check-label">Online</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check3" name="option3" value="something">
-								<label class="form-check-label">Hybrid</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check4" name="option4" value="something">
-								<label class="form-check-label">CS Flex</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check5" name="option5" value="something">
-								<label class="form-check-label">WSU Flex</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check6" name="option6" value="something">
-								<label class="form-check-label">Release</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check7" name="option7" value="something">
-								<label class="form-check-label">SWI</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check8" name="option8" value="something">
-								<label class="form-check-label">Virtual</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check9" name="option9" value="something">
-								<label class="form-check-label">Virtual Hybrid</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check10" name="option10" value="something">
-								<label class="form-check-label">TBD</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check11" name="option11" value="something">
-								<label class="form-check-label">Stipend</label>
+						<div class="col-2">
+							<label><h6>Modalities</h6></label>
+							<hr />
+							<div class="col-12 px-2" id="modalities">
 							</div>
 						</div>
 
 						<div class="col-4">
-							<label>Time Blocks</label>
+							<label><h6>Time Blocks</h6></label>
+							<hr />
 							<div class="row">
-								<div class="col-6">
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check1" name="option1" value="something">
-										<label class="form-check-label">9:30 - 10:20</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check2" name="option2" value="something">
-										<label class="form-check-label">9:30 - 11:20</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check3" name="option3" value="something">
-										<label class="form-check-label">10:30 - 11:20</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check4" name="option4" value="something">
-										<label class="form-check-label">11:30 - 12:45</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check5" name="option5" value="something">
-										<label class="form-check-label">17:30 - 18:45</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check6" name="option6" value="something">
-										<label class="form-check-label">17:30 - 19:20</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check7" name="option7" value="something">
-										<label class="form-check-label">17:30 - 20:10</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check8" name="option8" value="something">
-										<label class="form-check-label">19:30 - 20:45</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check9" name="option9" value="something">
-										<label class="form-check-label">7:30 - 9:20</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check10" name="option10" value="something">
-										<label class="form-check-label">9:30 - 10:45</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check11" name="option11" value="something">
-										<label class="form-check-label">12:00 - 13:20</label>
-									</div>
+								<div class="col-6" id="timeBlocks1">
+									
 								</div>
-								<div class="col-6">
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check1" name="option1" value="something">
-										<label class="form-check-label">9:30 - 10:20</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check2" name="option2" value="something">
-										<label class="form-check-label">9:30 - 11:20</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check3" name="option3" value="something">
-										<label class="form-check-label">10:30 - 11:20</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check4" name="option4" value="something">
-										<label class="form-check-label">11:30 - 12:45</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check5" name="option5" value="something">
-										<label class="form-check-label">17:30 - 18:45</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check6" name="option6" value="something">
-										<label class="form-check-label">17:30 - 19:20</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check7" name="option7" value="something">
-										<label class="form-check-label">17:30 - 20:10</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check8" name="option8" value="something">
-										<label class="form-check-label">19:30 - 20:45</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check9" name="option9" value="something">
-										<label class="form-check-label">7:30 - 9:20</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check10" name="option10" value="something">
-										<label class="form-check-label">9:30 - 10:45</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="check11" name="option11" value="something">
-										<label class="form-check-label">12:00 - 13:20</label>
-									</div>
+								<div class="col-6" id="timeBlocks2">
+									
 								</div>
 							</div>
 						</div>
 
 						<div class="col-2">
-							<label>Days of Week</label>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check1" name="option1" value="something">
-								<label class="form-check-label">Monday</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check2" name="option2" value="something">
-								<label class="form-check-label">Tuesday</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check3" name="option3" value="something">
-								<label class="form-check-label">Wednesday</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check4" name="option4" value="something">
-								<label class="form-check-label">Thursday</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check5" name="option5" value="something">
-								<label class="form-check-label">Friday</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check6" name="option6" value="something">
-								<label class="form-check-label">Saturday</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check7" name="option7" value="something">
-								<label class="form-check-label">Sunday</label>
+							<label><h6>Days of Week</h6></label>
+							<hr />
+							<div class="col-12 px-2" id="daysOfWeek">
 							</div>
 						</div>
 
 						<div class="col-3">
-							<label>Campuses</label>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check1" name="option1" value="something">
-								<label class="form-check-label">WSU Weber Main Campus</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check2" name="option2" value="something">
-								<label class="form-check-label">WSD Weber Davis Campus</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check3" name="option3" value="something">
-								<label class="form-check-label">SLCC Salt Lake Community College</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check4" name="option4" value="something">
-								<label class="form-check-label">WSF Farmington</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="check5" name="option5" value="something">
-								<label class="form-check-label">High School</label>
+							<label><h6>Campuses</h6></label>
+							<hr />
+							<div class="col-12 px-2" id="campuses">
 							</div>
 						</div>
-					</div>
 				</div>
 			</div>
 		</div>
 
 		<div class="card">
-			<a class="btn-primary" data-bs-toggle="collapse" href="#collapseTwo">
+			<a class="btn-primary" data-bs-toggle="collapse" href="#collapseTwo" style="text-decoration: none;">
 				<div class="card-header">
-					Courses
+					<h5>Courses</h5>
 				</div>
 			</a>
 			<div id="collapseTwo" class="collapse show" data-bs-parent="#accordion">
