@@ -97,6 +97,9 @@ namespace DataAccess
 			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
 			_userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
 
+			var instr = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
+			var stud = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
+
 			//****************************************************************************** Super Admin
 
 			//START - THIS BLOCK OF USERS, ROLES, AND ROLEASSIGNMENTS WILL BE HANDLED BY THE IDENTITY FRAMEWORK
@@ -1192,8 +1195,6 @@ namespace DataAccess
 			// - SemesterInstanceId (FK)
 			// - IsArchived
 
-			var instr = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
-			var stud = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
 			var Wishlists = new List<Wishlist>
 			{
 				new Wishlist { UserId = instr.Id, SemesterInstanceId = 1, IsArchived = false },

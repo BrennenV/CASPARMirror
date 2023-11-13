@@ -3,7 +3,7 @@
 $(document).ready(function () {
     loadddl();
     loadCheckBoxes();
-    //loadList();
+    loadList();
 
     $('#ddlSemesterInstance').change(function () {
         setSemesterInstanceIdForQueryString();
@@ -212,7 +212,7 @@ function setSemesterInstanceIdForQueryString() {
 function loadList() {
     dataTable = $('#DT_PreferenceDetails').DataTable({
         "ajax": {
-            "url": "/api/preferenceDetail",
+            "url": "/api/wishlist",
             "type": "GET",
             "datatype": "json",
             "dataSrc": function (json) {

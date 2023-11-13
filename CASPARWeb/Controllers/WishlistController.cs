@@ -1,16 +1,14 @@
 ﻿using DataAccess;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CASPARWeb.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class PreferenceDetailController : Controller
+	public class WishlistController : Controller
 	{
 		private readonly UnitOfWork _unitOfWork;
-
-		public PreferenceDetailController(UnitOfWork unitOfWork)
+		public WishlistController(UnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
 		}
@@ -18,9 +16,8 @@ namespace CASPARWeb.Controllers
 		[HttpGet]
 		public IActionResult Get()
 		{
-			//TODO: this will need to return the details for the logged in instructor.
 			//THIS CONTROLLER WILL LIKELY NEED TO BE DELETED
-			return Json(new { data = _unitOfWork.Wishlist.GetAll(null, null, "Wishlist") });
+			return Json(new { data = _unitOfWork.WishlistCourse.GetAll(null, null, "Wishlist,Course,Course.AcedemicProgram") });
 		}
 	}
 }
