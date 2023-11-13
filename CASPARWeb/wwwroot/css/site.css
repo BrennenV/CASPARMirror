@@ -41,3 +41,8 @@ body {
     border-radius: 10px;
     border: none;
 }
+
+input[type="checkbox"] {
+    outline: 1px solid #593196;
+    border-radius: 25%;
+}

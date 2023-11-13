@@ -28,9 +28,6 @@ function loadCheckBoxes() {
                         id: 'check' + (index + 1),
                         name: 'option' + (index + 1),
                         value: modality.modalityName
-                    }).css({
-                        'outline': '1px solid #593196',
-                        'border-radius': '25%' // Add this line
                     });
 
                     var label = $('<label>').addClass('form-check-label').attr('for', input.attr('id')).text(modality.modalityName);
@@ -68,8 +65,17 @@ function loadTimeBlocks() {
 
             // Sort the data from least to greatest
             data.data.sort(function (a, b) {
-                return new Date('1970/01/01 ' + a.timeBlockValue) - new Date('1970/01/01 ' + b.timeBlockValue);
+                var aTimes = a.timeBlockValue.split(' - ');
+                var bTimes = b.timeBlockValue.split(' - ');
+                var aStart = new Date('1970/01/01 ' + aTimes[0]);
+                var aEnd = new Date('1970/01/01 ' + aTimes[1]);
+                var bStart = new Date('1970/01/01 ' + bTimes[0]);
+                var bEnd = new Date('1970/01/01 ' + bTimes[1]);
+
+                // Compare start times first, then end times if start times are equal
+                return aStart - bStart || aEnd - bEnd;
             });
+
 
             $.each(data.data, function (index, timeBlock) {
                 if (!timeBlock.isArchived) {
@@ -80,9 +86,6 @@ function loadTimeBlocks() {
                         id: 'check' + (index + 1),
                         name: 'option' + (index + 1),
                         value: timeBlock.timeBlockValue
-                    }).css({
-                        'outline': '1px solid #593196',
-                        'border-radius': '25%' // Add this line
                     });
 
                     var label = $('<label>').addClass('form-check-label').attr('for', input.attr('id')).text(timeBlock.timeBlockValue);
@@ -121,9 +124,6 @@ function loadDaysOfWeek() {
                         id: 'check' + (index + 1),
                         name: 'option' + (index + 1),
                         value: day.daysOfWeekValue
-                    }).css({
-                        'outline': '1px solid #593196',
-                        'border-radius': '25%' // Add this line
                     });
 
                     var label = $('<label>').addClass('form-check-label').attr('for', input.attr('id')).text(day.daysOfWeekValue);
@@ -156,9 +156,6 @@ function loadCampuses() {
                         id: 'check' + (index + 1),
                         name: 'option' + (index + 1),
                         value: campus.campusName
-                    }).css({
-                        'outline': '1px solid #593196',
-                        'border-radius': '25%' // Add this line
                     });
 
                     var label = $('<label>').addClass('form-check-label').attr('for', input.attr('id')).text(campus.campusName);
