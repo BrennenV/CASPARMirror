@@ -27,13 +27,13 @@ namespace CASPARWeb.Areas.Admin.Pages.Templates
             CourseList = new List<SelectListItem>();
             SemesterList = new List<SelectListItem>();
             //Populate the foreign keys to avoid foreign key conflicts
-            CourseList = _unitOfWork.Course.GetAll()
+            CourseList = _unitOfWork.Course.GetAll(c => c.IsArchived != true)
                             .Select(c => new SelectListItem
                             {
                                 Text = c.CourseTitle,
                                 Value = c.Id.ToString()
                             });
-            SemesterList = _unitOfWork.Semester.GetAll()
+            SemesterList = _unitOfWork.Semester.GetAll(c => c.IsArchived != true)
                             .Select(c => new SelectListItem
                             {
                                 Text = c.SemesterName,

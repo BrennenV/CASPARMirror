@@ -20,7 +20,7 @@ namespace CASPARWeb.Controllers
         {
             //TODO: this will eventually need to get only details from the currently logged in instructor
             //THIS CONTROLLER WILL LIKELY NEED TO BE DELETED
-            return Json(new { data = _unitOfWork.Wishlist.GetAll(null, null, "Modality,TimeBlock,DaysOfWeek,Campus") });
+            return Json(new { data = _unitOfWork.Wishlist.GetAll(c => c.IsArchived != true, null, "Modality,TimeBlock,DaysOfWeek,Campus") });
         }
     }
 }

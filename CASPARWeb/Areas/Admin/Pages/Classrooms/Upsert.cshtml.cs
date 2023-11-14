@@ -30,7 +30,7 @@ namespace CASPARWeb.Areas.Admin.Pages.Classrooms
         public IActionResult OnGet(int? id)
         {
             //Populate the foreign keys to avoid foreign key conflicts
-            BuildingList = _unitOfWork.Building.GetAll()
+            BuildingList = _unitOfWork.Building.GetAll(c => c.IsArchived != true)
                             .Select(c => new SelectListItem
                             {
                                 Text = c.BuildingName,
