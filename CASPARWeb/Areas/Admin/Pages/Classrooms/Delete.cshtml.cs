@@ -35,7 +35,9 @@ namespace CASPARWeb.Areas.Admin.Pages.Classrooms
             {
                 return NotFound();
             }
-            _unitOfWork.Classroom.Delete(objClassroom);
+            User temp = new User();
+            _unitOfWork.User.Delete(temp);
+            //_unitOfWork.Classroom.Delete(objClassroom);
             TempData["success"] = "Classroom Deleted Successfully";
             _unitOfWork.Commit();
             return RedirectToPage("./Index");
