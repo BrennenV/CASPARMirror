@@ -28,12 +28,12 @@ namespace Infrastructure.Models
 
         [Required]
         [DisplayName("Instructor")]
-        public int InstructorId { get; set; }
+        public string? InstructorId { get; set; }
 
         [ForeignKey("SemesterInstanceId")]
         public SemesterInstance? SemesterInstance { get; set; }
 
         [ForeignKey("InstructorId")]
-        public Instructor? Instructor { get; set; }
+        public ApplicationUser? ApplicationUser { get; set; }
     }
 }

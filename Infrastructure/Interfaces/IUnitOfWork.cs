@@ -26,8 +26,6 @@ namespace Infrastructure.Interfaces
 
         public IGenericRepository<DaysOfWeek> DaysOfWeek { get; }
 
-        public IGenericRepository<Instructor> Instructor { get; }
-
         public IGenericRepository<LoadReq> LoadReq { get; }
 
         public IGenericRepository<Modality> Modality { get; }
@@ -52,8 +50,6 @@ namespace Infrastructure.Interfaces
 
         public IGenericRepository<SemesterInstance> SemesterInstance { get; }
 
-        public IGenericRepository<Student> Student { get; }
-
         public IGenericRepository<Template> Template { get; }
 
         public IGenericRepository<TimeBlock> TimeBlock { get; }
@@ -76,9 +72,9 @@ namespace Infrastructure.Interfaces
         public IGenericRepository<ApplicationUser> ApplicationUser { get; }
 
         //These ones will eventually not be needed
-        public IGenericRepository<Role> Role { get; }
-        public IGenericRepository<User> User { get; }
-        public IGenericRepository<RoleAssignment> RoleAssignment { get; }
+        //public IGenericRepository<Role> Role { get; }
+        //public IGenericRepository<User> User { get; }
+        //public IGenericRepository<RoleAssignment> RoleAssignment { get; }
 
         //Add other models/tables here as you create them
         //so UnitOfWork has access to them

@@ -19,10 +19,6 @@ namespace Infrastructure.Models
         public string? SemesterInstanceName { get; set; }
 
         [Required]
-        [DisplayName("Schedule Status")]
-        public string? ScheduleStatus { get; set; }
-
-        [Required]
         [DisplayName("Start Date")]
         public DateTime? StartDate { get; set; }
 

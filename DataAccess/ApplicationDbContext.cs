@@ -32,8 +32,6 @@ namespace DataAccess
 
         public DbSet<DaysOfWeek> DaysOfWeeks { get; set; }
 
-        public DbSet<Instructor> Instructors { get; set; }
-
         public DbSet<LoadReq> LoadReqs { get; set; }
 
         public DbSet<Modality> Modalities { get; set; }
@@ -58,8 +56,6 @@ namespace DataAccess
 
         public DbSet<SemesterInstance> SemesterInstances { get; set; }
 
-        public DbSet<Student> Students { get; set; }
-
         public DbSet<Template> Templates { get; set; }
 
         public DbSet<TimeBlock> TimeBlocks { get; set; }
@@ -82,9 +78,9 @@ namespace DataAccess
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         //These ones will eventually not be needed
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<RoleAssignment> RoleAssignments { get; set; }
+        //public DbSet<Role> Roles { get; set; }
+        //public DbSet<User> Users { get; set; }
+        //public DbSet<RoleAssignment> RoleAssignments { get; set; }
 
     }
 }

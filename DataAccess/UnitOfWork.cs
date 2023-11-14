@@ -35,8 +35,6 @@ namespace DataAccess
 
         public IGenericRepository<DaysOfWeek> _DaysOfWeek;
 
-        public IGenericRepository<Instructor> _Instructor;
-
         public IGenericRepository<LoadReq> _LoadReq;
 
         public IGenericRepository<Modality> _Modality;
@@ -61,8 +59,6 @@ namespace DataAccess
 
         public IGenericRepository<SemesterInstance> _SemesterInstance;
 
-        public IGenericRepository<Student> _Student;
-
         public IGenericRepository<Template> _Template;
 
         public IGenericRepository<TimeBlock> _TimeBlock;
@@ -85,9 +81,9 @@ namespace DataAccess
         public IGenericRepository<ApplicationUser> _ApplicationUser;
 
         //These ones will eventually not be needed
-        public IGenericRepository<Role> _Role;
-        public IGenericRepository<User> _User;
-        public IGenericRepository<RoleAssignment> _RoleAssignment;
+        //public IGenericRepository<Role> _Role;
+        //public IGenericRepository<User> _User;
+        //public IGenericRepository<RoleAssignment> _RoleAssignment;
 
         public IGenericRepository<AcademicProgram> AcademicProgram
         {
@@ -203,19 +199,6 @@ namespace DataAccess
                 }
 
                 return _DaysOfWeek;
-            }
-        }
-
-        public IGenericRepository<Instructor> Instructor
-        {
-            get
-            {
-                if (_Instructor == null)
-                {
-                    _Instructor = new GenericRepository<Instructor>(_dbContext);
-                }
-
-                return _Instructor;
             }
         }
 
@@ -362,19 +345,6 @@ namespace DataAccess
             }
         }
 
-        public IGenericRepository<Student> Student
-        {
-            get
-            {
-                if (_Student == null)
-                {
-                    _Student = new GenericRepository<Student>(_dbContext);
-                }
-
-                return _Student;
-            }
-        }
-
         public IGenericRepository<Template> Template
         {
             get
@@ -505,44 +475,44 @@ namespace DataAccess
             }
         }
 
-        public IGenericRepository<User> User
-        {
-            get
-            {
-                if (_User == null)
-                {
-                    _User = new GenericRepository<User>(_dbContext);
-                }
+        //public IGenericRepository<User> User
+        //{
+        //    get
+        //    {
+        //        if (_User == null)
+        //        {
+        //            _User = new GenericRepository<User>(_dbContext);
+        //        }
 
-                return _User;
-            }
-        }
+        //        return _User;
+        //    }
+        //}
 
-        public IGenericRepository<RoleAssignment> RoleAssignment
-        {
-            get
-            {
-                if (_RoleAssignment == null)
-                {
-                    _RoleAssignment = new GenericRepository<RoleAssignment>(_dbContext);
-                }
+        //public IGenericRepository<RoleAssignment> RoleAssignment
+        //{
+        //    get
+        //    {
+        //        if (_RoleAssignment == null)
+        //        {
+        //            _RoleAssignment = new GenericRepository<RoleAssignment>(_dbContext);
+        //        }
 
-                return _RoleAssignment;
-            }
-        }
+        //        return _RoleAssignment;
+        //    }
+        //}
 
-        public IGenericRepository<Role> Role
-        {
-            get
-            {
-                if (_Role == null)
-                {
-                    _Role = new GenericRepository<Role>(_dbContext);
-                }
+        //public IGenericRepository<Role> Role
+        //{
+        //    get
+        //    {
+        //        if (_Role == null)
+        //        {
+        //            _Role = new GenericRepository<Role>(_dbContext);
+        //        }
 
-                return _Role;
-            }
-        }
+        //        return _Role;
+        //    }
+        //}
 
 		IGenericRepository<AcademicProgram> IUnitOfWork.AcademicProgram => throw new NotImplementedException();
 
@@ -559,8 +529,6 @@ namespace DataAccess
 		IGenericRepository<Course> IUnitOfWork.Course => throw new NotImplementedException();
 
 		IGenericRepository<DaysOfWeek> IUnitOfWork.DaysOfWeek => throw new NotImplementedException();
-
-		IGenericRepository<Instructor> IUnitOfWork.Instructor => throw new NotImplementedException();
 
 		IGenericRepository<LoadReq> IUnitOfWork.LoadReq => throw new NotImplementedException();
 
@@ -586,8 +554,6 @@ namespace DataAccess
 
 		IGenericRepository<SemesterInstance> IUnitOfWork.SemesterInstance => throw new NotImplementedException();
 
-		IGenericRepository<Student> IUnitOfWork.Student => throw new NotImplementedException();
-
 		IGenericRepository<Template> IUnitOfWork.Template => throw new NotImplementedException();
 
 		IGenericRepository<TimeBlock> IUnitOfWork.TimeBlock => throw new NotImplementedException();
@@ -606,11 +572,11 @@ namespace DataAccess
 
 		IGenericRepository<WishlistTimeBlock> IUnitOfWork.WishlistTimeBlock => throw new NotImplementedException();
 
-		IGenericRepository<Role> IUnitOfWork.Role => throw new NotImplementedException();
+		//IGenericRepository<Role> IUnitOfWork.Role => throw new NotImplementedException();
 
-		IGenericRepository<User> IUnitOfWork.User => throw new NotImplementedException();
+		//IGenericRepository<User> IUnitOfWork.User => throw new NotImplementedException();
 
-		IGenericRepository<RoleAssignment> IUnitOfWork.RoleAssignment => throw new NotImplementedException();
+		//IGenericRepository<RoleAssignment> IUnitOfWork.RoleAssignment => throw new NotImplementedException();
 
 		public int Commit()
         {

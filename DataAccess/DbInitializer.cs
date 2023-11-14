@@ -58,6 +58,7 @@ namespace DataAccess
 			//****************************************************************************** Roles
 
 			// Seed Users and their roles including a super admin
+			//Creating the admin will all roles
 			_userManager.CreateAsync(new ApplicationUser
 			{
 				UserName = "admin@admin.com",
@@ -75,6 +76,7 @@ namespace DataAccess
 			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@admin.com");
 			_userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
 
+			//Creating Instructors
 			_userManager.CreateAsync(new ApplicationUser
 			{
 				UserName = "instructor@instructor.com",
@@ -86,7 +88,30 @@ namespace DataAccess
 			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
 			_userManager.AddToRoleAsync(user, SD.INSTRUCTOR_ROLE).GetAwaiter().GetResult();
 
-			_userManager.CreateAsync(new ApplicationUser
+            _userManager.CreateAsync(new ApplicationUser
+            {
+                UserName = "instructor2@instructor.com",
+                Email = "instructor2@instructor.com",
+                FirstName = "Instructor2",
+                LastName = "Doe",
+            }, "Instructor123*").GetAwaiter().GetResult();
+
+            user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor2@instructor.com");
+            _userManager.AddToRoleAsync(user, SD.INSTRUCTOR_ROLE).GetAwaiter().GetResult();
+
+            _userManager.CreateAsync(new ApplicationUser
+            {
+                UserName = "instructor3@instructor.com",
+                Email = "instructor3@instructor.com",
+                FirstName = "Instructor3",
+                LastName = "Doe",
+            }, "Instructor123*").GetAwaiter().GetResult();
+
+            user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor3@instructor.com");
+            _userManager.AddToRoleAsync(user, SD.INSTRUCTOR_ROLE).GetAwaiter().GetResult();
+
+            //Creating Students
+            _userManager.CreateAsync(new ApplicationUser
 			{
 				UserName = "student@student.com",
 				Email = "student@student.com",
@@ -97,162 +122,134 @@ namespace DataAccess
 			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
 			_userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
 
-			var instr = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
+            _userManager.CreateAsync(new ApplicationUser
+            {
+                UserName = "student2@student.com",
+                Email = "student2@student.com",
+                FirstName = "Student2",
+                LastName = "Doe",
+            }, "Student123*").GetAwaiter().GetResult();
+
+            user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student2@student.com");
+            _userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
+
+            _userManager.CreateAsync(new ApplicationUser
+            {
+                UserName = "student3@student.com",
+                Email = "student3@student.com",
+                FirstName = "Student3",
+                LastName = "Doe",
+            }, "Student123*").GetAwaiter().GetResult();
+
+            user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student3@student.com");
+            _userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
+
+            //Get some of the instructors and students for seeding further records
+            var instr = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
+            var instr2 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor2@instructor.com");
+            var instr3 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor3@instructor.com");
 			var stud = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
+			var stud2 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student2@student.com");
+			var stud3 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student3@student.com");
 
 			//****************************************************************************** Super Admin
 
 			//START - THIS BLOCK OF USERS, ROLES, AND ROLEASSIGNMENTS WILL BE HANDLED BY THE IDENTITY FRAMEWORK
 			// HOWEVER, THIS NEEDS TO BE HERE FOR THE REST OF THE SEED DATA TO WORK
 
-			var Users = new List<User>
-			{
-				new User { UserFirstName = "Chris", UserLastName = "Jensen", UserEmail = "chrisjensen3@mail.weber.edu", UserPassword = "password"},
-				new User { UserFirstName = "Joseph", UserLastName = "Brower", UserEmail = "josephbrower@mail.weber.edu", UserPassword = "wordpass"},
-				new User { UserFirstName = "Jaeden", UserLastName = "Fisher", UserEmail = "jaedenfisher@mail.weber.edu", UserPassword = "pass"},
-				new User { UserFirstName = "Brennen", UserLastName = "Vanderpool", UserEmail = "brennenvanderpool@mail.weber.edu", UserPassword = "word"},
-				new User { UserFirstName = "Richard", UserLastName = "Fry", UserEmail = "rfry@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Abdulmalek", UserLastName = "Al-Gahmi", UserEmail = "aal-gahmi@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "AJ", UserLastName = "Hepler", UserEmail = "ahepler@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Alison", UserLastName = "Sunderland", UserEmail = "asunderland@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Allyson", UserLastName = "Saunders", UserEmail = "asaunders@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Andrew", UserLastName = "Drake", UserEmail = "adrake@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Angela", UserLastName = "Christensen", UserEmail = "achristensen@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Arpit", UserLastName = "Christi", UserEmail = "achristi@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Bob", UserLastName = "Ball", UserEmail = "bball@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Brad", UserLastName = "Peterson", UserEmail = "bpeterson@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Brian", UserLastName = "Rague", UserEmail = "brague@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Chimobi", UserLastName = "Ucha", UserEmail = "cucha@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Cody", UserLastName = "Squadroni", UserEmail = "csquadroni@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "David", UserLastName = "Ferro", UserEmail = "dferro@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Delroy", UserLastName = "Brinkerhoff", UserEmail = "dbrinkerhoff@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Drew", UserLastName = "Weidman", UserEmail = "dweidman@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Garth", UserLastName = "Tuck", UserEmail = "gtuck@weber.edu", UserPassword = "temp1234"},
-				new User { UserFirstName = "Hugo", UserLastName = "Valle", UserEmail = "hvalle@weber.edu", UserPassword = "temp1234"}
-			};
+			//var Users = new List<User>
+			//{
+			//	new User { UserFirstName = "Chris", UserLastName = "Jensen", UserEmail = "chrisjensen3@mail.weber.edu", UserPassword = "password"},
+			//	new User { UserFirstName = "Joseph", UserLastName = "Brower", UserEmail = "josephbrower@mail.weber.edu", UserPassword = "wordpass"},
+			//	new User { UserFirstName = "Jaeden", UserLastName = "Fisher", UserEmail = "jaedenfisher@mail.weber.edu", UserPassword = "pass"},
+			//	new User { UserFirstName = "Brennen", UserLastName = "Vanderpool", UserEmail = "brennenvanderpool@mail.weber.edu", UserPassword = "word"},
+			//	new User { UserFirstName = "Richard", UserLastName = "Fry", UserEmail = "rfry@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Abdulmalek", UserLastName = "Al-Gahmi", UserEmail = "aal-gahmi@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "AJ", UserLastName = "Hepler", UserEmail = "ahepler@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Alison", UserLastName = "Sunderland", UserEmail = "asunderland@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Allyson", UserLastName = "Saunders", UserEmail = "asaunders@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Andrew", UserLastName = "Drake", UserEmail = "adrake@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Angela", UserLastName = "Christensen", UserEmail = "achristensen@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Arpit", UserLastName = "Christi", UserEmail = "achristi@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Bob", UserLastName = "Ball", UserEmail = "bball@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Brad", UserLastName = "Peterson", UserEmail = "bpeterson@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Brian", UserLastName = "Rague", UserEmail = "brague@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Chimobi", UserLastName = "Ucha", UserEmail = "cucha@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Cody", UserLastName = "Squadroni", UserEmail = "csquadroni@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "David", UserLastName = "Ferro", UserEmail = "dferro@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Delroy", UserLastName = "Brinkerhoff", UserEmail = "dbrinkerhoff@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Drew", UserLastName = "Weidman", UserEmail = "dweidman@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Garth", UserLastName = "Tuck", UserEmail = "gtuck@weber.edu", UserPassword = "temp1234"},
+			//	new User { UserFirstName = "Hugo", UserLastName = "Valle", UserEmail = "hvalle@weber.edu", UserPassword = "temp1234"}
+			//};
 
-			foreach (var u in Users)
-			{
-				_db.Users.Add(u);
-			}
-			_db.SaveChanges();
+			//foreach (var u in Users)
+			//{
+			//	_db.Users.Add(u);
+			//}
+			//_db.SaveChanges();
 
-			//****************************************************************************** Users
+			////****************************************************************************** Users
 
-			// Seed the Roles
-			// - RoleName
+			//// Seed the Roles
+			//// - RoleName
 
-			var Roles = new List<Role>
-			{
-				new Role { RoleName = "Admin" },
-				new Role { RoleName = "Instructor" },
-				new Role { RoleName = "Student" }
-			};
+			//var Roles = new List<Role>
+			//{
+			//	new Role { RoleName = "Admin" },
+			//	new Role { RoleName = "Instructor" },
+			//	new Role { RoleName = "Student" }
+			//};
 
-			foreach (var r in Roles)
-			{
-				_db.Roles.Add(r);
-			}
-			_db.SaveChanges();
+			//foreach (var r in Roles)
+			//{
+			//	_db.Roles.Add(r);
+			//}
+			//_db.SaveChanges();
 
-			//****************************************************************************** Roles
+			////****************************************************************************** Roles
 
-			// Seed the RoleAssignments
-			// - RoleId (FK)
-			// - UserId (FK)
+			//// Seed the RoleAssignments
+			//// - RoleId (FK)
+			//// - UserId (FK)
 
-			var RoleAssignments = new List<RoleAssignment>
-			{
-				new RoleAssignment { RoleId = 1, UserId = 1 },
-				new RoleAssignment { RoleId = 2, UserId = 5 },
-				new RoleAssignment { RoleId = 2, UserId = 6 },
-				new RoleAssignment { RoleId = 3, UserId = 2 },
-				new RoleAssignment { RoleId = 3, UserId = 3 },
-				new RoleAssignment { RoleId = 3, UserId = 4 },
-				new RoleAssignment { RoleId = 2, UserId = 7 },
-				new RoleAssignment { RoleId = 2, UserId = 8 },
-				new RoleAssignment { RoleId = 2, UserId = 9 },
-				new RoleAssignment { RoleId = 2, UserId = 10 },
-				new RoleAssignment { RoleId = 2, UserId = 11 },
-				new RoleAssignment { RoleId = 2, UserId = 12 },
-				new RoleAssignment { RoleId = 2, UserId = 13 },
-				new RoleAssignment { RoleId = 2, UserId = 14 },
-				new RoleAssignment { RoleId = 2, UserId = 15 },
-				new RoleAssignment { RoleId = 2, UserId = 16 },
-				new RoleAssignment { RoleId = 2, UserId = 17 },
-				new RoleAssignment { RoleId = 2, UserId = 18 },
-				new RoleAssignment { RoleId = 2, UserId = 19 },
-				new RoleAssignment { RoleId = 2, UserId = 20 },
-				new RoleAssignment { RoleId = 2, UserId = 21 },
-				new RoleAssignment { RoleId = 2, UserId = 22 }
-			};
+			//var RoleAssignments = new List<RoleAssignment>
+			//{
+			//	new RoleAssignment { RoleId = 1, UserId = 1 },
+			//	new RoleAssignment { RoleId = 2, UserId = 5 },
+			//	new RoleAssignment { RoleId = 2, UserId = 6 },
+			//	new RoleAssignment { RoleId = 3, UserId = 2 },
+			//	new RoleAssignment { RoleId = 3, UserId = 3 },
+			//	new RoleAssignment { RoleId = 3, UserId = 4 },
+			//	new RoleAssignment { RoleId = 2, UserId = 7 },
+			//	new RoleAssignment { RoleId = 2, UserId = 8 },
+			//	new RoleAssignment { RoleId = 2, UserId = 9 },
+			//	new RoleAssignment { RoleId = 2, UserId = 10 },
+			//	new RoleAssignment { RoleId = 2, UserId = 11 },
+			//	new RoleAssignment { RoleId = 2, UserId = 12 },
+			//	new RoleAssignment { RoleId = 2, UserId = 13 },
+			//	new RoleAssignment { RoleId = 2, UserId = 14 },
+			//	new RoleAssignment { RoleId = 2, UserId = 15 },
+			//	new RoleAssignment { RoleId = 2, UserId = 16 },
+			//	new RoleAssignment { RoleId = 2, UserId = 17 },
+			//	new RoleAssignment { RoleId = 2, UserId = 18 },
+			//	new RoleAssignment { RoleId = 2, UserId = 19 },
+			//	new RoleAssignment { RoleId = 2, UserId = 20 },
+			//	new RoleAssignment { RoleId = 2, UserId = 21 },
+			//	new RoleAssignment { RoleId = 2, UserId = 22 }
+			//};
 
-			foreach (var r in RoleAssignments)
-			{
-				_db.RoleAssignments.Add(r);
-			}
-			_db.SaveChanges();
+			//foreach (var r in RoleAssignments)
+			//{
+			//	_db.RoleAssignments.Add(r);
+			//}
+			//_db.SaveChanges();
 
-			//****************************************************************************** RoleAssignments
+			////****************************************************************************** RoleAssignments
 
-			//END - DELETE BLOCK FOR LATER
+			////END - DELETE BLOCK FOR LATER
 
-			// Seed the Instructors
-			// - InstructorName
-			// - UserId (FK)
-			// - IsArchived
-
-			var Instructors = new List<Instructor>
-			{
-				new Instructor { InstructorName = "Stacey Smom", UserId = 5, IsArchived = false },
-				new Instructor { InstructorName = "Richard Fry", UserId = 6, IsArchived = false },
-				new Instructor { InstructorName = "Abdulmalek Al-Gahmi", UserId = 7, IsArchived = false },
-				new Instructor { InstructorName = "AJ Hepler", UserId = 8, IsArchived = false },
-				new Instructor { InstructorName = "Alison Sunderland", UserId = 9, IsArchived = false },
-				new Instructor { InstructorName = "Allyson Saunders", UserId = 10, IsArchived = false },
-				new Instructor { InstructorName = "Andrew Drake", UserId = 11, IsArchived = false },
-				new Instructor { InstructorName = "Angela Christensen", UserId = 12, IsArchived = false },
-				new Instructor { InstructorName = "Arpit Christi", UserId = 13, IsArchived = false },
-				new Instructor { InstructorName = "Bob Ball", UserId = 14, IsArchived = false },
-				new Instructor { InstructorName = "Brad Peterson", UserId = 15, IsArchived = false },
-				new Instructor { InstructorName = "Brian Rague", UserId = 16, IsArchived = false },
-				new Instructor { InstructorName = "Chimobi Ucha", UserId = 17, IsArchived = false },
-				new Instructor { InstructorName = "Cody Squadroni", UserId = 18, IsArchived = false },
-				new Instructor { InstructorName = "David Ferro", UserId = 19, IsArchived = false },
-				new Instructor { InstructorName = "Delroy Brinkerhoff", UserId = 20, IsArchived = false },
-				new Instructor { InstructorName = "Drew Weidman", UserId = 21, IsArchived = false },
-				new Instructor { InstructorName = "Garth Tuck", UserId = 22, IsArchived = false }
-			};
-
-			foreach (var i in Instructors)
-			{
-				_db.Instructors.Add(i);
-			}
-			_db.SaveChanges();
-
-			//****************************************************************************** Instructors
-
-			// Seed the Students
-			// - StudentMajor
-			// - StudentGradYear
-			// - UserId (FK)
-			// - IsArchived
-
-			var Students = new List<Student>
-			{
-				new Student { StudentMajor = "Computer Science", StudentGradYear = "2023", UserId = 1, IsArchived = false },
-				new Student { StudentMajor = "Web Development", StudentGradYear = "2024", UserId = 2, IsArchived = false },
-				new Student { StudentMajor = "Networking", StudentGradYear = "2024", UserId = 3, IsArchived = false },
-				new Student { StudentMajor = "Computer Science", StudentGradYear = "2025", UserId = 4, IsArchived = false }
-			};
-
-			foreach (var s in Students)
-			{
-				_db.Students.Add(s);
-			}
-			_db.SaveChanges();
-
-			//****************************************************************************** Students
+			//Student and Instructor tables were deleted 11/14/2023
 
 			// Seed the Campuses
 			// - CampusName
@@ -587,50 +584,15 @@ namespace DataAccess
 
 			var ProgramAssignments = new List<ProgramAssignment>
 			{
-				new ProgramAssignment { InstructorId = 1, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 1, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 2, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 2, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 2, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 3, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 3, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 3, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 4, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 4, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 4, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 5, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 5, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 5, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 6, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 6, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 6, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 7, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 7, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 7, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 8, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 8, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 8, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 9, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 9, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 9, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 10, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 10, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 10, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 11, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 11, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 11, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 12, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 12, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 12, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 13, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 13, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 13, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 14, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 14, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 14, ProgramId = 3, IsArchived = false },
-				new ProgramAssignment { InstructorId = 15, ProgramId = 1, IsArchived = false },
-				new ProgramAssignment { InstructorId = 15, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = 15, ProgramId = 3, IsArchived = false }
+				new ProgramAssignment { InstructorId = instr.Id, ProgramId = 1, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr.Id, ProgramId = 2, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr.Id, ProgramId = 3, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr2.Id, ProgramId = 1, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr2.Id, ProgramId = 2, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr2.Id, ProgramId = 3, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr3.Id, ProgramId = 1, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr3.Id, ProgramId = 2, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr3.Id, ProgramId = 3, IsArchived = false }
 			};
 
 			foreach (var p in ProgramAssignments)
@@ -829,7 +791,6 @@ namespace DataAccess
 
 			// Seed the SemestersInstances
 			// - SemesterInstanceName
-			// - ScheduleStatus
 			// - StartDate
 			// - EndDate
 			// - RegistrationDate
@@ -841,7 +802,6 @@ namespace DataAccess
 			{
 				new SemesterInstance {
 					SemesterInstanceName = "Fall 2024",
-					ScheduleStatus = "Active",
 					StartDate = new DateTime(2024, 8, 23),
 					EndDate = new DateTime(2024, 12, 10),
 					RegistrationDate = new DateTime(2024, 4, 1),
@@ -852,7 +812,6 @@ namespace DataAccess
 				new SemesterInstance
 				{
 					SemesterInstanceName = "Spring 2024",
-					ScheduleStatus = "Active",
 					StartDate = new DateTime(2024, 1, 10),
 					EndDate = new DateTime(2024, 4, 29),
 					RegistrationDate = new DateTime(2024, 10, 1),
@@ -863,7 +822,6 @@ namespace DataAccess
 				new SemesterInstance
 				{
 					SemesterInstanceName = "Summer 2024",
-					ScheduleStatus = "Active",
 					StartDate = new DateTime(2024, 5, 9),
 					EndDate = new DateTime(2024, 8, 5),
 					RegistrationDate = new DateTime(2024, 1, 1),
@@ -940,7 +898,7 @@ namespace DataAccess
 					SectionBannerUpdated = new DateTime(2021, 8, 23),
 					CourseId = 1,
 					SemesterInstanceId = 1,
-					InstructorId = 1,
+					InstructorId = instr.Id,
 					ModalityId = 1,
 					ClassroomId = 1,
 					TimeBlockId = 1,
@@ -961,7 +919,7 @@ namespace DataAccess
 					SectionBannerUpdated = new DateTime(2024, 8, 23),
 					CourseId = 2,
 					SemesterInstanceId = 1,
-					InstructorId = 1,
+					InstructorId = instr.Id,
 					ModalityId = 1,
 					ClassroomId = 2,
 					TimeBlockId = 2,
@@ -982,7 +940,7 @@ namespace DataAccess
 					SectionBannerUpdated = new DateTime(2024, 8, 23),
 					CourseId = 3,
 					SemesterInstanceId = 1,
-					InstructorId = 1,
+					InstructorId = instr.Id,
 					ModalityId = 1,
 					ClassroomId = 3,
 					TimeBlockId = 3,
@@ -1003,7 +961,7 @@ namespace DataAccess
 					SectionBannerUpdated = new DateTime(2024, 8, 23),
 					CourseId = 4,
 					SemesterInstanceId = 2,
-					InstructorId = 1,
+					InstructorId = instr.Id,
 					ModalityId = 1,
 					ClassroomId = 3,
 					TimeBlockId = 3,
@@ -1024,7 +982,7 @@ namespace DataAccess
 					SectionBannerUpdated = new DateTime(2024, 8, 23),
 					CourseId = 5,
 					SemesterInstanceId = 2,
-					InstructorId = 1,
+					InstructorId = instr.Id,
 					ModalityId = 1,
 					ClassroomId = 4,
 					TimeBlockId = 4,
@@ -1045,7 +1003,7 @@ namespace DataAccess
 					SectionBannerUpdated = new DateTime(2024, 8, 23),
 					CourseId = 6,
 					SemesterInstanceId = 2,
-					InstructorId = 1,
+					InstructorId = instr.Id,
 					ModalityId = 1,
 					ClassroomId = 5,
 					TimeBlockId = 5,
@@ -1066,7 +1024,7 @@ namespace DataAccess
 					SectionBannerUpdated = new DateTime(2024, 8, 23),
 					CourseId = 7,
 					SemesterInstanceId = 2,
-					InstructorId = 1,
+					InstructorId = instr.Id,
 					ModalityId = 1,
 					ClassroomId = 6,
 					TimeBlockId = 6,
@@ -1096,21 +1054,15 @@ namespace DataAccess
 
 			var ReleaseTimes = new List<ReleaseTime>
 			{
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = 1, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = 1, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = 1, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = 2, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = 2, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = 2, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = 3, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = 3, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = 3, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = 4, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = 4, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = 4, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = 5, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = 5, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = 5, IsArchived = false }
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = instr.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = instr.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = instr.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = instr2.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = instr2.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = instr2.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = instr3.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = instr3.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = instr3.Id, IsArchived = false }
 			};
 
 			foreach (var r in ReleaseTimes)
@@ -1129,21 +1081,15 @@ namespace DataAccess
 
 			var LoadReqs = new List<LoadReq>
 			{
-				new LoadReq { LoadReqAmount = 12, InstructorId = 1, SemesterInstanceId = 1, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 1, SemesterInstanceId = 2, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 1, SemesterInstanceId = 3, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 2, SemesterInstanceId = 1, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 2, SemesterInstanceId = 2, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 2, SemesterInstanceId = 3, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 3, SemesterInstanceId = 1, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 3, SemesterInstanceId = 2, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 3, SemesterInstanceId = 3, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 4, SemesterInstanceId = 1, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 4, SemesterInstanceId = 2, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 4, SemesterInstanceId = 3, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 5, SemesterInstanceId = 1, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 5, SemesterInstanceId = 2, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = 5, SemesterInstanceId = 3, IsArchived = false }
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr.Id, SemesterInstanceId = 1, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr.Id, SemesterInstanceId = 2, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr.Id, SemesterInstanceId = 3, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr2.Id, SemesterInstanceId = 1, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr2.Id, SemesterInstanceId = 2, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr2.Id, SemesterInstanceId = 3, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr3.Id, SemesterInstanceId = 1, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr3.Id, SemesterInstanceId = 2, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr3.Id, SemesterInstanceId = 3, IsArchived = false }
 			};
 
 			foreach (var l in LoadReqs)
