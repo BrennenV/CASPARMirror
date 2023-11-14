@@ -119,18 +119,6 @@ namespace DataAccess
                     temp.IsArchived = false;
                 }
                 _dbContext.Set<DaysOfWeek>().Update(temp);
-            } else if (typeof(T) == typeof(Instructor)) {
-                Instructor temp;
-                temp = entity as Instructor;
-                if (temp == null) {
-                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
-                }
-                if (temp.IsArchived != true) {
-                    temp.IsArchived = true;
-                } else {
-                    temp.IsArchived = false;
-                }
-                _dbContext.Set<Instructor>().Update(temp);
             } else if (typeof(T) == typeof(LoadReq)) {
                 LoadReq temp;
                 temp = entity as LoadReq;
@@ -227,31 +215,7 @@ namespace DataAccess
                     temp.IsArchived = false;
                 }
                 _dbContext.Set<ReleaseTime>().Update(temp);
-            } /*else if (typeof(T) == typeof(RoleAssignment)) {
-                RoleAssignment temp;
-                temp = entity as RoleAssignment;
-                if (temp == null) {
-                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
-                }
-                if (temp.IsArchived != true) {
-                    temp.IsArchived = true;
-                } else {
-                    temp.IsArchived = false;
-                }
-                _dbContext.Set<RoleAssignment>().Update(temp);
-            }*//*else if (typeof(T) == typeof(Role)) {
-                Role temp;
-                temp = entity as Role;
-                if (temp == null) {
-                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
-                }
-                if (temp.IsArchived != true) {
-                    temp.IsArchived = true;
-                } else {
-                    temp.IsArchived = false;
-                }
-                _dbContext.Set<Role>().Update(temp);
-            }*/else if (typeof(T) == typeof(SectionStatus)) {
+            } else if (typeof(T) == typeof(SectionStatus)) {
                 SectionStatus temp;
                 temp = entity as SectionStatus;
                 if (temp == null) {
@@ -287,18 +251,6 @@ namespace DataAccess
                     temp.IsArchived = false;
                 }
                 _dbContext.Set<Semester>().Update(temp);
-            } else if (typeof(T) == typeof(Student)) {
-                Student temp;
-                temp = entity as Student;
-                if (temp == null) {
-                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
-                }
-                if (temp.IsArchived != true) {
-                    temp.IsArchived = true;
-                } else {
-                    temp.IsArchived = false;
-                }
-                _dbContext.Set<Student>().Update(temp);
             } else if (typeof(T) == typeof(Template)) {
                 Template temp;
                 temp = entity as Template;
@@ -323,19 +275,7 @@ namespace DataAccess
                     temp.IsArchived = false;
                 }
                 _dbContext.Set<TimeBlock>().Update(temp);
-            }/* else if (typeof(T) == typeof(User)) {
-                User temp;
-                temp = entity as User;
-                if (temp == null) {
-                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
-                }
-                if (temp.IsArchived != true) {
-                    temp.IsArchived = true;
-                } else {
-                    temp.IsArchived = false;
-                }
-                _dbContext.Set<User>().Update(temp);
-            }*/else if (typeof(T) == typeof(WishlistCampus)) {
+            }else if (typeof(T) == typeof(WishlistCampus)) {
                 WishlistCampus temp;
                 temp = entity as WishlistCampus;
                 if (temp == null) {
