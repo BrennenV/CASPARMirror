@@ -97,6 +97,9 @@ namespace DataAccess
 			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
 			_userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
 
+			var instr = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
+			var stud = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
+
 			//****************************************************************************** Super Admin
 
 			//START - THIS BLOCK OF USERS, ROLES, AND ROLEASSIGNMENTS WILL BE HANDLED BY THE IDENTITY FRAMEWORK
@@ -767,29 +770,29 @@ namespace DataAccess
 
 			var TimeBlocks = new List<TimeBlock>
 			{
-				new TimeBlock { TimeBlockValue = "9:30 - 10:20", IsArchived = false  },
-				new TimeBlock { TimeBlockValue = "9:30 - 11:20", IsArchived = false },
+				new TimeBlock { TimeBlockValue = "09:30 - 10:20", IsArchived = false  },
+				new TimeBlock { TimeBlockValue = "09:30 - 11:20", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "10:30 - 11:20", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "11:30 - 12:45", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "17:30 - 18:45", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "17:30 - 19:20", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "17:30 - 20:10", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "19:30 - 20:45", IsArchived = false },
-				new TimeBlock { TimeBlockValue = "7:30 - 9:20", IsArchived = false },
-				new TimeBlock { TimeBlockValue = "9:30 - 10:45", IsArchived = false },
+				new TimeBlock { TimeBlockValue = "07:30 - 09:20", IsArchived = false },
+				new TimeBlock { TimeBlockValue = "09:30 - 10:45", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "12:00 - 13:20", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "10:30 - 12:20", IsArchived = false },
-				new TimeBlock { TimeBlockValue = "8:00 - 9:15", IsArchived = false },
-				new TimeBlock { TimeBlockValue = "8:30 - 10:20", IsArchived = false },
+				new TimeBlock { TimeBlockValue = "08:00 - 09:15", IsArchived = false },
+				new TimeBlock { TimeBlockValue = "08:30 - 10:20", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "11:30 - 13:20", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "19:30 - 21:20", IsArchived = false },
-				new TimeBlock { TimeBlockValue = "7:40 - 8:40", IsArchived = false },
+				new TimeBlock { TimeBlockValue = "07:40 - 08:40", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "11:30 - 12:20", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "12:30 - 13:20", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "13:00 - 13:50", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "19:00 - 20:15", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "16:30 - 17:20", IsArchived = false },
-				new TimeBlock { TimeBlockValue = "9:00 - 10:15", IsArchived = false },
+				new TimeBlock { TimeBlockValue = "09:00 - 10:15", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "10:30 - 11:45", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "18:00 - 19:15", IsArchived = false },
 				new TimeBlock { TimeBlockValue = "14:30 - 16:20", IsArchived = false },
@@ -1192,8 +1195,6 @@ namespace DataAccess
 			// - SemesterInstanceId (FK)
 			// - IsArchived
 
-			var instr = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
-			var stud = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
 			var Wishlists = new List<Wishlist>
 			{
 				new Wishlist { UserId = instr.Id, SemesterInstanceId = 1, IsArchived = false },

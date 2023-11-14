@@ -1,0 +1,94 @@
+﻿@page
+@model CASPARWeb.Areas.Instr.Pages.Wishlists.IndexModel
+@{
+}
+<div class="container">
+	<div class="row pt=4">
+		<!--Start Row-->
+		<div class="col-4">
+			<!--50% of row-->
+			<h2 class="text-primary">
+				Instructor Preferences
+			</h2>
+		</div><!-- End 1st Column-->
+		<div class="col-3 text-end">
+			<!--25% row right justified-->
+			<span style="display:none" id="selectedSemesterId">@(Model.SelectedSemesterId != 0 ? Model.SelectedSemesterId : "0")</span>
+			<select id="ddlSemesterInstance" class="form-select rounded">
+			</select>
+		</div> <!--End 2nd Column-->
+	</div> <!--End Row-->
+	<div id="accordion">
+		<div class="card">
+			<a class="btn-primary" data-bs-toggle="collapse" href="#collapseOne" style="text-decoration: none;">
+				<div class="card-header">
+					<h5>Details</h5>
+				</div>
+			</a>
+			<div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+				<div class="card-body">
+					<div class="row pt=4">
+						<div class="col-2">
+							<label><h6>Modalities</h6></label>
+							<hr />
+							<div class="col-12 px-2" id="modalities">
+							</div>
+						</div>
+
+						<div class="col-4">
+							<label><h6>Time Blocks</h6></label>
+							<hr />
+							<div class="row">
+								<div class="col-6" id="timeBlocks1">
+									
+								</div>
+								<div class="col-6" id="timeBlocks2">
+									
+								</div>
+							</div>
+						</div>
+
+						<div class="col-2">
+							<label><h6>Days of Week</h6></label>
+							<hr />
+							<div class="col-12 px-2" id="daysOfWeek">
+							</div>
+						</div>
+
+						<div class="col-3">
+							<label><h6>Campuses</h6></label>
+							<hr />
+							<div class="col-12 px-2" id="campuses">
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="card">
+			<a class="btn-primary" data-bs-toggle="collapse" href="#collapseTwo" style="text-decoration: none;">
+				<div class="card-header">
+					<h5>Courses</h5>
+				</div>
+			</a>
+			<div id="collapseTwo" class="collapse show" data-bs-parent="#accordion">
+				<table class="table table-bordered table-striped p-3" id="DT_PreferenceDetails" style="width:100%">
+					<thead>
+						<tr>
+							<th>
+								Rank
+							</th>
+							<th>
+								Description
+							</th>
+							<th>&nbsp;</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+</div> <!--Close Container-->
+@section Scripts{
+	<script src="~/js/preferenceLists.js"></script>
+}
