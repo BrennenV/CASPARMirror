@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Interfaces;
+using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -22,7 +23,408 @@ namespace DataAccess
 
         public void Delete(T entity)
         {
-            _dbContext.Set<T>().Remove(entity);
+            if (typeof(T) == typeof(Campus)) {
+                Campus temp;
+                temp = entity as Campus;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<Campus>().Update(temp);
+            } else if (typeof(T) == typeof(Building)) {
+                Building temp;
+                temp = entity as Building;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<Building>().Update(temp);
+            } else if (typeof(T) == typeof(ClassroomAmenity)) {
+                ClassroomAmenity temp;
+                temp = entity as ClassroomAmenity;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<ClassroomAmenity>().Update(temp);
+            } else if (typeof(T) == typeof(ClassroomAmenityPossession)) {
+                ClassroomAmenityPossession temp;
+                temp = entity as ClassroomAmenityPossession;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<ClassroomAmenityPossession>().Update(temp);
+            } else if (typeof(T) == typeof(Classroom)) {
+                Classroom temp;
+                temp = entity as Classroom;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<Classroom>().Update(temp);
+            } else if (typeof(T) == typeof(Course)) {
+                Course temp;
+                temp = entity as Course;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<Course>().Update(temp);
+            } else if (typeof(T) == typeof(CourseSection)) {
+                CourseSection temp;
+                temp = entity as CourseSection;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<CourseSection>().Update(temp);
+            } else if (typeof(T) == typeof(DaysOfWeek)) {
+                DaysOfWeek temp;
+                temp = entity as DaysOfWeek;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<DaysOfWeek>().Update(temp);
+            } else if (typeof(T) == typeof(Instructor)) {
+                Instructor temp;
+                temp = entity as Instructor;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<Instructor>().Update(temp);
+            } else if (typeof(T) == typeof(LoadReq)) {
+                LoadReq temp;
+                temp = entity as LoadReq;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<LoadReq>().Update(temp);
+            } else if (typeof(T) == typeof(Modality)) {
+                Modality temp;
+                temp = entity as Modality;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<Modality>().Update(temp);
+            } else if (typeof(T) == typeof(PartOfDay)) {
+                PartOfDay temp;
+                temp = entity as PartOfDay;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<PartOfDay>().Update(temp);
+            } else if (typeof(T) == typeof(PartOfTerm)) {
+                PartOfTerm temp;
+                temp = entity as PartOfTerm;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<PartOfTerm>().Update(temp);
+            } else if (typeof(T) == typeof(PayModel)) {
+                PayModel temp;
+                temp = entity as PayModel;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<PayModel>().Update(temp);
+            } else if (typeof(T) == typeof(PayOrganization)) {
+                PayOrganization temp;
+                temp = entity as PayOrganization;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<PayOrganization>().Update(temp);
+            } else if (typeof(T) == typeof(ProgramAssignment)) {
+                ProgramAssignment temp;
+                temp = entity as ProgramAssignment;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<ProgramAssignment>().Update(temp);
+            } else if (typeof(T) == typeof(ReleaseTime)) {
+                ReleaseTime temp;
+                temp = entity as ReleaseTime;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<ReleaseTime>().Update(temp);
+            } /*else if (typeof(T) == typeof(RoleAssignment)) {
+                RoleAssignment temp;
+                temp = entity as RoleAssignment;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<RoleAssignment>().Update(temp);
+            }*//*else if (typeof(T) == typeof(Role)) {
+                Role temp;
+                temp = entity as Role;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<Role>().Update(temp);
+            }*/else if (typeof(T) == typeof(SectionStatus)) {
+                SectionStatus temp;
+                temp = entity as SectionStatus;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<SectionStatus>().Update(temp);
+            } else if (typeof(T) == typeof(SemesterInstance)) {
+                SemesterInstance temp;
+                temp = entity as SemesterInstance;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<SemesterInstance>().Update(temp);
+            } else if (typeof(T) == typeof(Semester)) {
+                Semester temp;
+                temp = entity as Semester;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<Semester>().Update(temp);
+            } else if (typeof(T) == typeof(Student)) {
+                Student temp;
+                temp = entity as Student;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<Student>().Update(temp);
+            } else if (typeof(T) == typeof(Template)) {
+                Template temp;
+                temp = entity as Template;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<Template>().Update(temp);
+            } else if (typeof(T) == typeof(TimeBlock)) {
+                TimeBlock temp;
+                temp = entity as TimeBlock;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<TimeBlock>().Update(temp);
+            }/* else if (typeof(T) == typeof(User)) {
+                User temp;
+                temp = entity as User;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<User>().Update(temp);
+            }*/else if (typeof(T) == typeof(WishlistCampus)) {
+                WishlistCampus temp;
+                temp = entity as WishlistCampus;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<WishlistCampus>().Update(temp);
+            } else if (typeof(T) == typeof(WishlistCourse)) {
+                WishlistCourse temp;
+                temp = entity as WishlistCourse;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<WishlistCourse>().Update(temp);
+            } else if (typeof(T) == typeof(WishlistDaysOfWeek)) {
+                WishlistDaysOfWeek temp;
+                temp = entity as WishlistDaysOfWeek;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<WishlistDaysOfWeek>().Update(temp);
+            } else if (typeof(T) == typeof(WishlistModality)) {
+                WishlistModality temp;
+                temp = entity as WishlistModality;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<WishlistModality>().Update(temp);
+            } else if (typeof(T) == typeof(WishlistPartOfDay)) {
+                WishlistPartOfDay temp;
+                temp = entity as WishlistPartOfDay;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<WishlistPartOfDay>().Update(temp);
+            } else if (typeof(T) == typeof(Wishlist)) {
+                Wishlist temp;
+                temp = entity as Wishlist;
+                if (temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<Wishlist>().Update(temp);
+            } else if (typeof(T) == typeof(WishlistTimeBlock)) {
+                WishlistTimeBlock temp;
+                temp = entity as WishlistTimeBlock;
+                if(temp == null) {
+                    throw new("Null value. Unable to Archive a value of type: '" + typeof(T) + "' Type casting returned null.");
+                }
+                if (temp.IsArchived != true) {
+                    temp.IsArchived = true;
+                } else {
+                    temp.IsArchived = false;
+                }
+                _dbContext.Set<WishlistTimeBlock>().Update(temp);
+            } else {
+                throw new("Unable to Archive a value of type: '" + typeof(T) + "'");
+            }
+
+
+            //_dbContext.Set<T>().Remove(entity);
         }
 
         public void Delete(IEnumerable<T> entities)
