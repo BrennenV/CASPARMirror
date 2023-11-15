@@ -5,10 +5,10 @@ namespace CASPARWeb.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class WishlistController : Controller
+	public class WishlistCourseController : Controller
 	{
 		private readonly UnitOfWork _unitOfWork;
-		public WishlistController(UnitOfWork unitOfWork)
+		public WishlistCourseController(UnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
 		}

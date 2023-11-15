@@ -3,7 +3,6 @@
 $(document).ready(function () {
     loadddl();
     loadCheckBoxes();
-    loadList();
 
     $('#ddlSemesterInstance').change(function () {
         setSemesterInstanceIdForQueryString();
@@ -209,48 +208,6 @@ function setSemesterInstanceIdForQueryString() {
     btn.attr("href", newHref);
 }
 
-function loadList() {
-    dataTable = $('#DT_PreferenceDetails').DataTable({
-        "ajax": {
-            "url": "/api/wishlist",
-            "type": "GET",
-            "datatype": "json",
-            "dataSrc": function (json) {
-                var selectedSemester = Number($('#ddlSemesterInstance').val());
-                var filteredData = $.grep(json.data, function (row) {
-                    return Number(row.wishlist) === selectedSemester;
-                });
-                return filteredData;
-            },
-            "error": function (xhr, error, thrown) {
-                alert('Ajax error:' + xhr.responseText);
-            }
-        },
-        "columns": [
-            { "data": "wishlistCourse.preferenceRank", "width": "5%" },
-            {
-                "data": "wishlistCourse",
-                "render": function (data) {
-                    return `${data.course.academicProgram.programCode} ${data.course.courseNumber} ${data.course.courseTitle}`
-                },
-                "width": "25%"
-            },
-            {
-                "data": "id",
-                "render": function (data, type, row, meta) {
-                    return `<div class="text-center">
-                                <a href="/Instr/Wishlists/Update?id=${data}&semesterInstanceId=${row.wishlistCourse.wishList.semesterInstanceId}" class="btn btn-outline-primary mb-1 rounded" style="cursor:pointer; width: 100px;">
-                                    <i class="bi bi-pencil-square"></i></a>
-                                <a href="/Instr/Wishlists/Delete?id=${data}&semesterInstanceId=${row.wishlistCourse.wishList.semesterInstanceId}" class="btn btn-outline-danger mb-1 rounded" style="cursor:pointer; width: 100px;">
-                                    <i class="bi bi-trash"></i></a>   
-                            </div>`;
-                }, "width": "20%"
-            }
-        ],
-        "language": {
-            "emptyTable": "No data found."
-        },
-        "width": "100%",
-        "order": [[0, "asc"]]
-    });
+function loadTemplate() {
+    
 }

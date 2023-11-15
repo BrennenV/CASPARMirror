@@ -71,6 +71,15 @@
 					<h5>Courses</h5>
 				</div>
 			</a>
+				<div class="row pt=4">
+					<!--Start Row-->
+					<div class="col-5">
+						<!--25% row right justified-->
+						<span style="display:none" id="selectedSemesterId">@(Model.SelectedSemesterId != 0 ? Model.SelectedSemesterId : "0")</span>
+						<select id="ddlTemplateCourses" class="form-select rounded">
+						</select>
+					</div> <!--End 2nd Column-->
+				</div> <!--End Row-->
 			<div id="collapseTwo" class="collapse show" data-bs-parent="#accordion">
 				<table class="table table-bordered table-striped p-3" id="DT_PreferenceDetails" style="width:100%">
 					<thead>
@@ -79,7 +88,7 @@
 								Rank
 							</th>
 							<th>
-								Description
+								Title
 							</th>
 							<th>&nbsp;</th>
 						</tr>
