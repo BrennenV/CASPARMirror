@@ -19,7 +19,7 @@ namespace CASPARWeb.Controllers
         public IActionResult Get(int? id)
         {
             Expression<Func<Template, bool>> predicate = c => c.SemesterId == id && c.IsArchived != true;
-            return Json(new { data = _unitOfWork.Template.GetAll(predicate, null, "Course,Semester") });
+            return Json(new { data = _unitOfWork.Template.GetAll(predicate, null, "Course,Semester,Course.AcademicProgram") });
         }
     }
 }

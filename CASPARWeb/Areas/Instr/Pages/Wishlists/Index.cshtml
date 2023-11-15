@@ -1,7 +1,9 @@
 ﻿@page
+@using System.Security.Claims;
 @model CASPARWeb.Areas.Instr.Pages.Wishlists.IndexModel
 @{
 }
+<input type="hidden" asp-for="WishlistId">
 <div class="container">
 	<div class="row pt=4">
 		<!--Start Row-->
@@ -71,33 +73,51 @@
 					<h5>Courses</h5>
 				</div>
 			</a>
-				<div class="row pt=4">
-					<!--Start Row-->
-					<div class="col-5">
-						<!--25% row right justified-->
-						<span style="display:none" id="selectedSemesterId">@(Model.SelectedSemesterId != 0 ? Model.SelectedSemesterId : "0")</span>
-						<select id="ddlTemplateCourses" class="form-select rounded">
-						</select>
-					</div> <!--End 2nd Column-->
-				</div> <!--End Row-->
 			<div id="collapseTwo" class="collapse show" data-bs-parent="#accordion">
+					<div class="row p-3">
+						<!--Start Row-->
+						<div class="col-5">
+							@* <span style="display:none" id="selectedSemesterId">@(Model.SelectedSemesterId != 0 ? Model.SelectedSemesterId : "0")</span> *@
+							<select id="ddlTemplateCourses" class="form-select rounded">
+							</select>
+						</div> <!--End 1stColumn-->
+						<div class="col-2">
+							<button type="button" class="btn btn-outline-primary rounded" id="btnAddCourse"><i class="bi bi-plus-circle"></i></button>
+						</div>
+					</div> <!--End Row-->
 				<table class="table table-bordered table-striped p-3" id="DT_PreferenceDetails" style="width:100%">
 					<thead>
 						<tr>
-							<th>
-								Rank
-							</th>
-							<th>
-								Title
-							</th>
-							<th>&nbsp;</th>
+							<th style="width: 10%;">Rank</th>
+							<th style="width: 80%;">Title</th>
+							<th style="width: 10%">&nbsp;</th>
 						</tr>
 					</thead>
 				</table>
+
+					<table class="table table-bordered table-striped" style="width:100%">
+						<tbody>
+							<!--Loop Here-->
+							@foreach (var obj in Model.objCourseList)
+							{
+								<tr>
+									<td width="10%">@obj.PreferenceRank</td>
+									<td width="70%">@obj.Course.AcademicProgram.ProgramCode @obj.Course.CourseNumber @obj.Course.CourseTitle</td>
+									<td>
+										<button class="btn btn-outline-danger rounded" id="btnRemoveCourse"><i class="bi bi-trash-fill"></i></button>
+									</td>
+								</tr>
+							}
+							<!--End Loop Here-->
+						</tbody>
+					</table>
 			</div>
 		</div>
 	</div>
 </div> <!--Close Container-->
-@section Scripts{
-	<script src="~/js/preferenceLists.js"></script>
-}
+	@section Scripts{
+		<script type="text/javascript">
+			var userId = '@User.FindFirstValue(ClaimTypes.NameIdentifier)';
+		</script>
+		<script src="~/js/preferenceLists.js"></script>
+	}

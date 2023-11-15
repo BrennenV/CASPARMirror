@@ -1,14 +1,28 @@
 ﻿var dataTable;
 
 $(document).ready(function () {
-    loadddl();
+    loadSemesterInstances();
     loadCheckBoxes();
 
     $('#ddlSemesterInstance').change(function () {
         setSemesterInstanceIdForQueryString();
-        dataTable.ajax.reload();
+        loadTemplateCourses();
+
+        // Make an AJAX request to the server
+        $.ajax({
+            url: '/CourseWishllist/OnGetTableData?selectedSemesterId=' + $('#ddlSemesterInstance').val(), // Replace 'YourController' with your actual controller name
+            type: 'GET',
+            success: function (data) {
+                // Replace the old table body with the new one
+                $('#DT_PreferenceDetails tbody').html(data);
+            }
+        });
     });
 });
+
+function getWishlistId() {
+    return $("#wishlistId").text();
+}
 
 function loadCheckBoxes() {
     $.ajax({
@@ -170,9 +184,7 @@ function loadCampuses() {
     });
 }
 
-
-
-function loadddl() {
+function loadSemesterInstances() {
     $.ajax({
         url: "/api/semesterInstance",
         type: "GET",
@@ -189,8 +201,32 @@ function loadddl() {
                 }
             });
 
-            //This is to add the semester instance to the query string when the add preference button is clicked
-            setSemesterInstanceIdForQueryString();
+            loadTemplateCourses();
+        },
+        error: function (xhr, error, thrown) {
+            alert('Ajax error:' + xhr.responseText);
+        }
+    });
+}
+
+function loadTemplateCourses() {
+    var selectedSemesterId = $("#ddlSemesterInstance").val(); // get the selected semester ID
+
+    $.ajax({
+        url: "/api/template?id=" + selectedSemesterId, // pass the semester ID to the API
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            var dropdown = $("#ddlTemplateCourses");
+            dropdown.empty();
+            dropdown.append($("<option />").val("").text("Add Courses")); // default option
+
+            $.each(data.data, function (index, item) {
+                var courseInfo = item.course.academicProgram.programCode + ' ' +
+                    item.course.courseNumber + ' ' +
+                    item.course.courseTitle;
+                dropdown.append($("<option />").val(item.id).text(courseInfo));
+            });
         },
         error: function (xhr, error, thrown) {
             alert('Ajax error:' + xhr.responseText);
