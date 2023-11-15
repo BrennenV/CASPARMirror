@@ -21,7 +21,7 @@ namespace CASPARWeb.Areas.Admin.Pages.Courses
         public IActionResult OnGet(int? id)
         {
             //Populate the foreign keys to avoid foreign key conflicts
-            AcademicProgramList = _unitOfWork.AcademicProgram.GetAll()
+            AcademicProgramList = _unitOfWork.AcademicProgram.GetAll(c => c.IsArchived != true)
                             .Select(c => new SelectListItem
                             {
                                 Text = c.ProgramName,

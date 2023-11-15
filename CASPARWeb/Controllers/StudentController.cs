@@ -18,7 +18,7 @@ namespace CASPARWeb.Controllers
 		public IActionResult Get()
 		{
 			//THIS CONTROLLER WILL LIKELY NEED TO BE DELETED
-			return Json(new { data = _unitOfWork.Wishlist.GetAll(null, null, "WishlistDetail,Modality,TimeOfDay,WishlistDetail.Wishlist,WishlistDetail.Course,Campus,WishlistDetail.Wishlist.SemesterInstance,WishlistDetail.Course.AcademicProgram") });
+			return Json(new { data = _unitOfWork.Wishlist.GetAll(c => c.IsArchived != true, null, "WishlistDetail,Modality,TimeOfDay,WishlistDetail.Wishlist,WishlistDetail.Course,Campus,WishlistDetail.Wishlist.SemesterInstance,WishlistDetail.Course.AcademicProgram") });
 		}
 	}
 }

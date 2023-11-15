@@ -2,6 +2,7 @@
 @model CASPARWeb.Areas.Admin.Pages.Classrooms.UpsertModel
 @{
 }
+
 <div class="card shadow border-0 mt-4 col-6 mx-auto">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
@@ -12,27 +13,48 @@
     </div>
     <div class="card-body p-4">
         <form method="post" class="row">
-            <input type="hidden" asp-for="objClassroom.Id">
-            <div class="border p-3">
-                <label class="form-label">Building</label>
-                <select id="inputBuilding" asp-for="objClassroom.BuildingId" asp-items="@Model.BuildingList" class="form-select border-0 shadow">
-                    <option disabled selected>--Select Building--</option>
-                </select>
-                <label class="form-label mt-4">Classroom Number</label>
-                <div class="form-group mt-1">
-                    <input id="inputClassroomNumber" asp-for="objClassroom.ClassroomNumber" class="form-control border-0 shadow" />
+            <div class="col-6">
+                <input type="hidden" asp-for="objClassroom.Id">
+
+                <div class="border p-3">
+                    <label class="form-label">Building</label>
+                    <select id="inputBuilding" asp-for="objClassroom.BuildingId" asp-items="@Model.BuildingList" class="form-select border-0 shadow">
+                        <option disabled selected>--Select Building--</option>
+                    </select>
+                    <label class="form-label mt-4">Classroom Number</label>
+                    <div class="form-group mt-1">
+                        <input id="inputClassroomNumber" asp-for="objClassroom.ClassroomNumber" class="form-control border-0 shadow" />
+                    </div>
+                    <label class="form-label mt-4">Number of Seats</label>
+                    <div class="form-group mt-1">
+                        <input id="inputNumberOfSeats" asp-for="objClassroom.ClassroomSeats" class="form-control border-0 shadow" />
+                    </div>
+                    <label class="form-label mt-4">Classroom Details</label>
+                    <div class="form-group mt-1">
+                        <input id="inputClassroomDetails" asp-for="objClassroom.ClassroomDetail" class="form-control border-0 shadow" />
+                    </div>
                 </div>
-                <label class="form-label mt-4">Number of Seats</label>
-                <div class="form-group mt-1">
-                    <input id="inputNumberOfSeats" asp-for="objClassroom.ClassroomSeats" class="form-control border-0 shadow" />
+            </div>
+            <div class="col-6">
+                <div class="border p-3">
+                    <p class="align-content-center">Amenities</p>
+                @foreach (var amenity in Model.AttachedAmenityList) {
+                    <div>
+                            <input class="form-check-input" onchange="updateCheckbox()" type="checkbox" value="@amenity" checked />
+                        <label>@amenity</label>
+                    </div>
+                }
+                @foreach (var amenity in Model.UnattachedAmenityList) {
+                    <div>
+                            <input class="form-check-input" onchange="updateCheckbox()" type="checkbox" value="@amenity" />
+                        <label>@amenity</label>
+                    </div>
+                }
                 </div>
-                <label class="form-label mt-4">Classroom Details</label>
-                <div class="form-group mt-1">
-                    <input id="inputClassroomDetails" asp-for="objClassroom.ClassroomDetail" class="form-control border-0 shadow" />
-                </div>
+            </div>
                 <div class="row pt-2 mt-3">
                     <div class="col-6">
-                        <button type="submit" onclick="return ValidateInput()" class="btn btn-primary form-control">@(Model.objClassroom.Id != 0 ? "Update " : "Add ")</button>
+                    <button onclick="return ValidateInput(event)" type="submit" class="btn btn-primary form-control">@(Model.objClassroom.Id != 0 ? "Update " : "Add ")</button>
                     </div>
                     <div class="col-6">
                         <a asp-page="./Index" class=" btn btn-outline-primary border form-control">
@@ -40,12 +62,39 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            <input type="hidden" id="amenityArrayInput" asp-for="returnedAttachedAmenity" value="" />
         </form>
     </div>
 </div>
 <script>
-    function ValidateInput() {
+    function updateCheckbox() {
+        //get all "checked" checkbox values
+        var checkboxes = document.querySelectorAll('.form-check-input');
+        var checkedValues = [];
+        console.log("TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+
+        //swal.fire('Error', 'TEST', 'error');
+        // Loop through each checkbox
+        checkboxes.forEach(function (checkbox) {
+            if (checkbox.checked) {
+                console.log(checkbox.value);
+                checkedValues.push(checkbox.value);
+            }
+        });
+
+        //generate the comma separated return list
+        var returnList = "";
+        for (var i = 0; i < checkedValues.length; i++) {
+            returnList = returnList + checkedValues[i];
+            if (i < checkedValues.length - 1) {
+                returnList = returnList + ",";
+            }
+        }
+        document.getElementById('amenityArrayInput').value = returnList;
+        console.log(document.getElementById('amenityArrayInput').value);
+    }
+
+    function ValidateInput(event) {
         if (document.getElementById('inputBuilding').value == "--Select Building--") {
             swal.fire('Error', 'Please Select a Building', 'error');
             return false;
@@ -65,5 +114,6 @@
             swal.fire('Error', 'Please enter Classroom Details', 'error');
             return false;
         }
+
     }
 </script>

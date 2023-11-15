@@ -16,7 +16,7 @@ namespace CASPARWeb.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.DaysOfWeek.GetAll() });
+            return Json(new { data = _unitOfWork.DaysOfWeek.GetAll(c => c.IsArchived != true) });
         }
     }
 }

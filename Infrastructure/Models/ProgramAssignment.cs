@@ -16,7 +16,7 @@ namespace Infrastructure.Models
 
         [Required]
         [DisplayName("Instructor")]
-        public int InstructorId { get; set; }
+        public string? InstructorId { get; set; }
 
         [Required]
         [DisplayName("Program")]
@@ -25,7 +25,7 @@ namespace Infrastructure.Models
 		public bool? IsArchived { get; set; }
 
 		[ForeignKey("InstructorId")]
-        public Instructor? Instructor { get; set; }
+        public ApplicationUser? ApplicationUser { get; set; }
 
 		[ForeignKey("ProgramId")]
 		public AcademicProgram? AcademicProgram { get; set; }

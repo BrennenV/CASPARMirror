@@ -23,7 +23,7 @@ namespace CASPARWeb.Areas.Admin.Pages.SemesterInstances
         public IActionResult OnGet(int? id)
         {
             //Populate the foreign keys to avoid foreign key conflicts
-            SemesterList = _unitOfWork.Semester.GetAll()
+            SemesterList = _unitOfWork.Semester.GetAll(c => c.IsArchived != true)
                             .Select(c => new SelectListItem
                             {
                                 Text = c.SemesterName,
@@ -56,7 +56,7 @@ namespace CASPARWeb.Areas.Admin.Pages.SemesterInstances
 				_unitOfWork.Commit();
 
 				//get the <list> of templates that have a semesterId equal to the selected semesterId 
-				IEnumerable<Template> templates = _unitOfWork.Template.GetAll(t => t.SemesterId == objSemesterInstance.SemesterId);
+				IEnumerable<Template> templates = _unitOfWork.Template.GetAll(t => t.SemesterId == objSemesterInstance.SemesterId && t.IsArchived != true);
 
 				//create all courseSections based on the templates
 				foreach (Template template in templates)

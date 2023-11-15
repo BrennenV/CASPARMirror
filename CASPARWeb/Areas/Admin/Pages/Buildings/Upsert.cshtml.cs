@@ -22,7 +22,7 @@ namespace CASPARWeb.Areas.Admin.Pages.Buildings
         public IActionResult OnGet(int? id)
         {
             //Populate the foreign keys to avoid foreign key conflicts
-            CampusList = _unitOfWork.Campus.GetAll()
+            CampusList = _unitOfWork.Campus.GetAll(c => c.IsArchived != true)
                             .Select(c => new SelectListItem
                             {
                                 Text = c.CampusName,

@@ -12,7 +12,7 @@ namespace CASPARWeb.Controllers {
         }
         [HttpGet]
         public IActionResult Get() {
-            return Json(new { data = _unitOfWork.SemesterInstance.GetAll(null, null) });
+            return Json(new { data = _unitOfWork.SemesterInstance.GetAll(c => c.IsArchived != true, null) });
         }
     }
 }

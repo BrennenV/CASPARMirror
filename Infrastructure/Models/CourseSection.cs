@@ -36,7 +36,7 @@ namespace Infrastructure.Models
         public int SemesterInstanceId { get; set; }
 
         [DisplayName("Instructor")]
-        public int? InstructorId { get; set; }
+        public string? InstructorId { get; set; }
 
         [DisplayName("Modality")]
         public int? ModalityId { get; set; }
@@ -69,7 +69,7 @@ namespace Infrastructure.Models
         public SemesterInstance? SemesterInstance { get; set; }
 
         [ForeignKey("InstructorId")]
-        public Instructor? Instructor { get; set; }
+        public ApplicationUser? ApplicationUser { get; set; }
 
         [ForeignKey("ModalityId")]
         public Modality? Modality { get; set; }

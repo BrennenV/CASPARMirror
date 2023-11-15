@@ -16,7 +16,7 @@ namespace CASPARWeb.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(new { data = _unitOfWork.PayModel.GetAll(null) });
+            return Json(new { data = _unitOfWork.PayModel.GetAll(c => c.IsArchived != true) });
         }
     }
 }

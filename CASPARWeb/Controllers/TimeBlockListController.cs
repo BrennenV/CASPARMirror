@@ -11,7 +11,7 @@ namespace CASPARWeb.Controllers {
         }
         [HttpGet]
         public IActionResult Get() {
-            return Json(new { data = _unitOfWork.TimeBlock.GetAll(null, null) });
+            return Json(new { data = _unitOfWork.TimeBlock.GetAll(c => c.IsArchived != true, null) });
         }
     }
 }

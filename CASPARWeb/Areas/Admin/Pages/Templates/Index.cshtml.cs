@@ -21,7 +21,7 @@ namespace CASPARWeb.Areas.Admin.Pages.Templates
         {
             if (id != null && id != 0)
             {
-                Expression<Func<Semester, bool>> predicate = c => c.Id == id;
+                Expression<Func<Semester, bool>> predicate = c => c.Id == id && c.IsArchived != true;
                 objSemester = _unitOfWork.Semester.Get(predicate, true, "Course,Semester");
             }
         }

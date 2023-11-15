@@ -16,7 +16,7 @@ namespace CASPARWeb.Controllers
         [HttpGet]
         public IActionResult Get(int? id)
         {
-            return Json(new { data = _unitOfWork.ReleaseTime.GetAll(null, null, "Semester,Instructor") });
+            return Json(new { data = _unitOfWork.ReleaseTime.GetAll(c => c.IsArchived != true, null, "Semester,Instructor") });
         }
     }
 }
