@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+@using Utility;
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -23,105 +24,123 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li>
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Student
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" asp-area="Stud" asp-page="/WishlistsOLD/Index">Schedule Preferences</a></li>
-                                    <!-- Add more dropdown items as needed -->
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Instructor
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" asp-area="Instr" asp-page="/Wishlists/Index">Schedule Preferences</a></li>
-                                    <li><a class="dropdown-item" href="#">View Your Schedule</a></li>
-                                    <!-- Add more dropdown items as needed -->
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Administrator
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/Semesters/Index">Semester Templates</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/SemesterInstances/Index">Semesters</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/PartOfTerms/Index">Part of Terms</a></li>
-                                    <div class="dropdown-divider"></div>
-                                    <li><a class="dropdown-item" href="#">Instructor Load Requirements</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/ReleaseTimes/Index">Instructor Release Times</a></li>
-                                    <div class="dropdown-divider"></div>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/PayModels/Index">Pay Models</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/PayOrganizations/Index">Pay Organizations</a></li>
-                                    <div class="dropdown-divider"></div>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/Campuses/Index">Campus</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/Buildings/Index">Buildings</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/Classrooms/Index">Classrooms</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/Amenity/Index">Classroom Amenities</a></li>
-                                    <div class="dropdown-divider"></div>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/AcademicPrograms/Index">Academic Programs</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/Courses/Index">Courses</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/Modalities/Index">Modalities</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/SectionStatuses/Index">Section Statuses</a></li>
-                                    <div class="dropdown-divider"></div>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/DaysOfWeeks/Index">Days</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/TimeBlocks/Index">Time Slots</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/PartOfDays/Index">Part of Days</a></li>
-                                    <div class="dropdown-divider"></div>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/Users/Index">Users</a></li>
-                                    <li><a class="dropdown-item" asp-area="Admin" asp-page="/Roles/Index">Roles</a></li>
-                                    <!-- Add more dropdown items as needed -->
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Program Coordinator
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Semester Schedule</a></li> 
-                                    <li><a class="dropdown-item" href="#">Instructor Release Requests</a></li>
-                                    <!-- Add more dropdown items as needed -->
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Secretary
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="#">Edit Schedule</a></li>
-                                    <!-- Add more dropdown items as needed -->
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Reports
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <!--Secretary Reports-->
-                                    <li><a class="dropdown-item" href="#">Offered Courses</a></li>
-                                    <!--Administrator Reports-->
-                                    <li><a class="dropdown-item" href="#">1st, 3rd week enrollment data</a></li>
-                                    <!--Program Coordinator Reports-->
-                                    <li><a class="dropdown-item" href="#">Student Course Preferences</a></li>
-                                    <li><a class="dropdown-item" href="#">Instructor Overview</a></li> <!-- Shows the final load and overload for each instructor -->
-                                    <!-- Add more dropdown items as needed -->
-                                </ul>
-                            </div>
-                        </li>
+                        @if (User.IsInRole(SD.STUDENT_ROLE))
+                        {
+                            <li>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Student
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" asp-area="Stud" asp-page="/WishlistsOLD/Index">Schedule Preferences</a></li>
+                                        <!-- Add more dropdown items as needed -->
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole(SD.INSTRUCTOR_ROLE))
+                        {
+                            <li>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Instructor
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" asp-area="Instr" asp-page="/Wishlists/Index">Schedule Preferences</a></li>
+                                        <li><a class="dropdown-item" href="#">View Your Schedule</a></li>
+                                        <!-- Add more dropdown items as needed -->
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole(SD.ADMIN_ROLE))
+                        {
+                            <li>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Administrator
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Semesters/Index">Semester Templates</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/SemesterInstances/Index">Semesters</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/PartOfTerms/Index">Part of Terms</a></li>
+                                        <div class="dropdown-divider"></div>
+                                        <li><a class="dropdown-item" href="#">Instructor Load Requirements</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/ReleaseTimes/Index">Instructor Release Times</a></li>
+                                        <div class="dropdown-divider"></div>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/PayModels/Index">Pay Models</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/PayOrganizations/Index">Pay Organizations</a></li>
+                                        <div class="dropdown-divider"></div>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Campuses/Index">Campus</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Buildings/Index">Buildings</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Classrooms/Index">Classrooms</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Amenity/Index">Classroom Amenities</a></li>
+                                        <div class="dropdown-divider"></div>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/AcademicPrograms/Index">Academic Programs</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Courses/Index">Courses</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Modalities/Index">Modalities</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/SectionStatuses/Index">Section Statuses</a></li>
+                                        <div class="dropdown-divider"></div>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/DaysOfWeeks/Index">Days</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/TimeBlocks/Index">Time Slots</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/PartOfDays/Index">Part of Days</a></li>
+                                        <div class="dropdown-divider"></div>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Users/Index">Users</a></li>
+                                        <li><a class="dropdown-item" asp-area="Admin" asp-page="/Roles/Index">Roles</a></li>
+                                        <!-- Add more dropdown items as needed -->
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole(SD.PROGRAM_COORDINATOR_ROLE))
+                        {
+                            <li>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Program Coordinator
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="#">Semester Schedule</a></li> 
+                                        <li><a class="dropdown-item" href="#">Instructor Release Requests</a></li>
+                                        <!-- Add more dropdown items as needed -->
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole(SD.SECRETARY_ROLE))
+                        {
+                            <li>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Secretary
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="#">Edit Schedule</a></li>
+                                        <!-- Add more dropdown items as needed -->
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole(SD.PROGRAM_COORDINATOR_ROLE))
+                        {
+                            <li>
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Reports
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <!--Secretary Reports-->
+                                        <li><a class="dropdown-item" href="#">Offered Courses</a></li>
+                                        <!--Administrator Reports-->
+                                        <li><a class="dropdown-item" href="#">1st, 3rd week enrollment data</a></li>
+                                        <!--Program Coordinator Reports-->
+                                        <li><a class="dropdown-item" href="#">Student Course Preferences</a></li>
+                                        <li><a class="dropdown-item" href="#">Instructor Overview</a></li> <!-- Shows the final load and overload for each instructor -->
+                                        <!-- Add more dropdown items as needed -->
+                                    </ul>
+                                </div>
+                            </li>
+                        }
                         <li class="nav-item rounded">
                             <a class="nav-link text-light" asp-page="/About">About</a>
                         </li>
