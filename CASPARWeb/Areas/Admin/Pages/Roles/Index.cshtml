@@ -18,7 +18,7 @@
         <thead>
             <tr>
                 <th scope="col">Role</th>
-                <th scope="col">Actions</th>
+                @* <th scope="col">Actions</th> *@
             </tr>
         </thead>
         <tbody>
@@ -28,10 +28,10 @@
                 {
                     <tr>
                         <td>@role.Name</td>
-                        <td>
-                            <a class="btn btn-outline-success" asp-page="/Roles/Upsert" asp-route-id="@role.Id.ToString()">Update</a>
+                        <!-- <td>
+                           <a class="btn btn-outline-success" asp-page="/Roles/Upsert" asp-route-id="@role.Id.ToString()">Update</a> 
 
-                        </td>
+                        </td> -->
                     </tr>
                 }
             }

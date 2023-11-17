@@ -19,6 +19,9 @@ builder.Services.AddAuthorization(options =>
 
     options.AddPolicy("ReqStudentRole",
          policy => policy.RequireRole(SD.STUDENT_ROLE));
+    
+    options.AddPolicy("ReqProgramCoordinatorROle",
+         policy => policy.RequireRole(SD.PROGRAM_COORDINATOR_ROLE));
 });
 
 // Add services to the container.

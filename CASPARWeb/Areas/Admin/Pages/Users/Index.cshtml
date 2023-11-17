@@ -38,7 +38,11 @@
                             @{
                                 if (Model.UserRoles[user.Id].Count() == 1)
                                 {
-                                    @Model.UserRoles[user.Id].First()
+                                    <ul>
+                                        <li>
+                                            @Model.UserRoles[user.Id].First()
+                                        </li>
+                                    </ul>
                                 }
                                 else
                                 {
@@ -61,17 +65,17 @@
                                 @{
                                     if (user.LockoutEnd > DateTime.Now)
                                     {
-                                        <button type="submit" class="btn btn-outline-warning" asp-page-handler="lockUnlock" asp-route-id="@user.Id"><i class="bi bi-unlock"></i> Unlock</button>
+                                        <button type="submit" class="btn btn-outline-success rounded" asp-page-handler="lockUnlock" asp-route-id="@user.Id"><i class="bi bi-unlock"></i> Unlock</button>
                                     }
                                     else
                                     {
-                                        <button type="submit" class="btn btn-outline-warning" asp-page-handler="lockUnlock" asp-route-id="@user.Id"><i class="bi bi-lock"></i> Lock</button>
+                                        <button type="submit" class="btn btn-outline-danger rounded" asp-page-handler="lockUnlock" asp-route-id="@user.Id"><i class="bi bi-lock"></i> Lock</button>
                                     }
                                 }
                             </form>
                         </td>
                         <td>
-                            <a class="btn btn-outline-success" asp-page="/Administrator/Users/Update" asp-route-id="@user.Id">Update</a>
+                            <a class="btn btn-outline-primary rounded" asp-area="Admin" asp-page="/Users/Update" asp-route-id="@user.Id"><i class="bi bi-box-arrow-in-right"></i> Update</a>
 
                         </td>
                     </tr>
