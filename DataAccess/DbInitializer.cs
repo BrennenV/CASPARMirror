@@ -54,6 +54,9 @@ namespace DataAccess
 			_roleManager.CreateAsync(new IdentityRole(SD.ADMIN_ROLE)).GetAwaiter().GetResult();
 			_roleManager.CreateAsync(new IdentityRole(SD.INSTRUCTOR_ROLE)).GetAwaiter().GetResult();
 			_roleManager.CreateAsync(new IdentityRole(SD.STUDENT_ROLE)).GetAwaiter().GetResult();
+			_roleManager.CreateAsync(new IdentityRole(SD.PROGRAM_COORDINATOR_ROLE)).GetAwaiter().GetResult();
+			//This role might not even be used, but I added it just in case
+			_roleManager.CreateAsync(new IdentityRole(SD.SECRETARY_ROLE)).GetAwaiter().GetResult();
 
 			//****************************************************************************** Roles
 
@@ -76,8 +79,14 @@ namespace DataAccess
 			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@admin.com");
 			_userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
 
-			//Creating Instructors
-			_userManager.CreateAsync(new ApplicationUser
+            user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@admin.com");
+            _userManager.AddToRoleAsync(user, SD.PROGRAM_COORDINATOR_ROLE).GetAwaiter().GetResult();
+
+            user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@admin.com");
+            _userManager.AddToRoleAsync(user, SD.SECRETARY_ROLE).GetAwaiter().GetResult();
+
+            //Creating Instructors
+            _userManager.CreateAsync(new ApplicationUser
 			{
 				UserName = "instructor@instructor.com",
 				Email = "instructor@instructor.com",
