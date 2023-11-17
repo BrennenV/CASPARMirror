@@ -71,7 +71,7 @@
         //get all "checked" checkbox values
         var checkboxes = document.querySelectorAll('.form-check-input');
         var checkedValues = [];
-        console.log("TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+        console.log("");
 
         //swal.fire('Error', 'TEST', 'error');
         // Loop through each checkbox
@@ -81,7 +81,7 @@
                 checkedValues.push(checkbox.value);
             }
         });
-
+        console.log("Checked Boxes: " + checkedValues.length);
         //generate the comma separated return list
         var returnList = "";
         for (var i = 0; i < checkedValues.length; i++) {
@@ -91,7 +91,11 @@
             }
         }
         document.getElementById('amenityArrayInput').value = returnList;
-        console.log(document.getElementById('amenityArrayInput').value);
+        //if the list is empty set the return string to '_'
+        if (checkedValues.length == 0) {
+            document.getElementById('amenityArrayInput').value = "_";
+        }
+        console.log("Return string: " + document.getElementById('amenityArrayInput').value);
     }
 
     function ValidateInput(event) {
@@ -114,6 +118,8 @@
             swal.fire('Error', 'Please enter Classroom Details', 'error');
             return false;
         }
+        updateCheckbox();
+        return true;
 
     }
 </script>

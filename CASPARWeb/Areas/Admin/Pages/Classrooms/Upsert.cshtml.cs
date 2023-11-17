@@ -109,13 +109,16 @@ namespace CASPARWeb.Areas.Admin.Pages.Classrooms
                     ap.IsArchived = true;
                     _unitOfWork.ClassroomAmenityPossession.Update(ap);
                 }
-                //add the checked amenities to the classroom
-                foreach (String s in checkedAmenityList) {
-                    ClassroomAmenityPossession temp = new ClassroomAmenityPossession();
-                    temp.ClassroomId = objClassroom.Id;
-                    temp.ClassroomAmenityId = _unitOfWork.ClassroomAmenity.Get(c => c.ClassroomAmenityName == s && c.IsArchived != true).Id;
+                //if the user assigned no amenities or "_"
+                if (checkedAmenityList[0] != "_") {
+                    //add the checked amenities to the classroom
+                    foreach (String s in checkedAmenityList) {
+                        ClassroomAmenityPossession temp = new ClassroomAmenityPossession();
+                        temp.ClassroomId = objClassroom.Id;
+                        temp.ClassroomAmenityId = _unitOfWork.ClassroomAmenity.Get(c => c.ClassroomAmenityName == s && c.IsArchived != true).Id;
 
-                    _unitOfWork.ClassroomAmenityPossession.Add(temp);
+                        _unitOfWork.ClassroomAmenityPossession.Add(temp);
+                    }
                 }
                 _unitOfWork.Classroom.Update(objClassroom);
                 TempData["success"] = "Classroom updated Successfully";
