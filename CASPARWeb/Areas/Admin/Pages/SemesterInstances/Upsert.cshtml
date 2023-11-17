@@ -20,6 +20,7 @@
             <div class="form-row">
                 @*<div asp-validation-summary="ModelOnly"></div>*@
                 <input type="hidden" asp-for="objSemesterInstance.Id">
+                <input type="hidden" asp-for="oldSemesterValue">
                 <div class="form-group mt-1">
                     <label class="ms-2">Semester Name</label>
                     <input asp-for="objSemesterInstance.SemesterInstanceName" id="inputSemesterName" class="form-control border-0 shadow mt-3"/>
