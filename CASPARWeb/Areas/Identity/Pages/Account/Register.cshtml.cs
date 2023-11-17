@@ -147,6 +147,7 @@ namespace CASPARWeb.Areas.Identity.Pages.Account
                 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
+                //This is to make the default role Student when someone registers in the system
                 if(Input.Role != null)
                 {
                     //Then an adminstrator has selected a role
