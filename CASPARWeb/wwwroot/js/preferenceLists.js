@@ -18,11 +18,11 @@ $(document).ready(function () {
             }
         });
     });
-});
 
-function getWishlistId() {
-    return $("#wishlistId").text();
-}
+$(document).on('click', '#btnRemoveCourse', function () {
+    var courseId = $(this).data('course-id');
+    // Now you can use courseId in your function
+});
 
 function loadCheckBoxes() {
     $.ajax({
