@@ -1,7 +1,9 @@
 ﻿@page
+@using System.Security.Claims;
 @model CASPARWeb.Areas.Instr.Pages.Wishlists.IndexModel
 @{
 }
+@* <input type="hidden" asp-for="WishlistId"> *@
 <div class="container">
 	<div class="row pt=4">
 		<!--Start Row-->
@@ -72,23 +74,36 @@
 				</div>
 			</a>
 			<div id="collapseTwo" class="collapse show" data-bs-parent="#accordion">
-				<table class="table table-bordered table-striped p-3" id="DT_PreferenceDetails" style="width:100%">
-					<thead>
-						<tr>
-							<th>
-								Rank
-							</th>
-							<th>
-								Description
-							</th>
-							<th>&nbsp;</th>
-						</tr>
-					</thead>
-				</table>
+					<div class="row p-3">
+						<!--Start Row-->
+						<form class="row" method="post">
+							<div class="col-1">
+								<label for="rank">Rank:</label><br>
+								<input type="number" id="rank" name="rank" min="1" style="width: 60%;">
+							</div>
+							<div class="col-5">
+								<select id="ddlTemplateCourses" class="form-select rounded">
+								</select>
+
+								<input type="hidden" id="selectedCourse" name="selectedCourse">
+							</div>
+							<div class="col-2">
+								<button type="submit" asp-page-handler="add" asp-route-selectedSemesterId="@Model.SelectedSemesterId" class="btn btn-outline-primary rounded" id="btnAddCourse"><i class="bi bi-plus-circle"></i></button>
+							</div>
+						</form>
+					</div> <!--End Row-->
+
+
+					<table class="table table-bordered table-striped p-3" id="T_WishlistCourses" style="width:100%">
+						
+					</table>
 			</div>
 		</div>
 	</div>
 </div> <!--Close Container-->
-@section Scripts{
-	<script src="~/js/preferenceLists.js"></script>
-}
+	@section Scripts{
+		<script type="text/javascript">
+			var userId = '@User.FindFirstValue(ClaimTypes.NameIdentifier)';
+		</script>
+		<script src="~/js/preferenceLists.js"></script>
+	}

@@ -5,10 +5,10 @@ namespace CASPARWeb.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class WishlistController : Controller
+	public class WishlistCourseController : Controller
 	{
 		private readonly UnitOfWork _unitOfWork;
-		public WishlistController(UnitOfWork unitOfWork)
+		public WishlistCourseController(UnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
 		}
@@ -16,8 +16,7 @@ namespace CASPARWeb.Controllers
 		[HttpGet]
 		public IActionResult Get()
 		{
-			//THIS CONTROLLER WILL LIKELY NEED TO BE DELETED
-			return Json(new { data = _unitOfWork.Wishlist.GetAll(c => c.IsArchived != true, null, "SemesterInstance") });
+			return Json(new { data = _unitOfWork.WishlistCourse.GetAll(c => c.IsArchived != true, null, "Wishlist,Course,Course.AcademicProgram") });
 		}
 	}
 }

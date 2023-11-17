@@ -1,14 +1,26 @@
-﻿var dataTable;
+﻿var wishlistId;
 
 $(document).ready(function () {
-    loadddl();
+    loadSemesterInstances();
     loadCheckBoxes();
-    loadList();
 
     $('#ddlSemesterInstance').change(function () {
-        setSemesterInstanceIdForQueryString();
-        dataTable.ajax.reload();
+        //setSemesterInstanceIdForQueryString();
+        loadTemplateCourses();
+        getWishlistId().then(function () {
+            loadCourseWishlist();
+        });
     });
+
+    $("#ddlTemplateCourses").change(function () {
+        var selectedCourseId = $(this).val(item.course.id);
+        $("#selectedCourse").val(selectedCourseId);
+    });
+});
+
+$(document).on('click', '#btnRemoveCourse', function () {
+    var courseId = $(this).data('course-id');
+    // Now you can use courseId in your function
 });
 
 function loadCheckBoxes() {
@@ -26,7 +38,7 @@ function loadCheckBoxes() {
                     var input = $('<input>').addClass('form-check-input').attr({
                         type: 'checkbox',
                         id: 'check' + (index + 1),
-                        name: 'option' + (index + 1),
+                        name: 'modality' + (index + 1),
                         value: modality.modalityName
                     });
 
@@ -83,8 +95,8 @@ function loadTimeBlocks() {
 
                     var input = $('<input>').addClass('form-check-input').attr({
                         type: 'checkbox',
-                        id: 'check' + (index + 1),
-                        name: 'option' + (index + 1),
+                        id: 'timeBlock' + (index + 1),
+                        name: 'timeBlock' + (index + 1),
                         value: timeBlock.timeBlockValue
                     });
 
@@ -121,8 +133,8 @@ function loadDaysOfWeek() {
 
                     var input = $('<input>').addClass('form-check-input').attr({
                         type: 'checkbox',
-                        id: 'check' + (index + 1),
-                        name: 'option' + (index + 1),
+                        id: 'daysOfWeek' + (index + 1),
+                        name: 'daysOfWeek' + (index + 1),
                         value: day.daysOfWeekValue
                     });
 
@@ -153,8 +165,8 @@ function loadCampuses() {
 
                     var input = $('<input>').addClass('form-check-input').attr({
                         type: 'checkbox',
-                        id: 'check' + (index + 1),
-                        name: 'option' + (index + 1),
+                        id: 'campus' + (index + 1),
+                        name: 'campus' + (index + 1),
                         value: campus.campusName
                     });
 
@@ -171,9 +183,7 @@ function loadCampuses() {
     });
 }
 
-
-
-function loadddl() {
+function loadSemesterInstances() {
     $.ajax({
         url: "/api/semesterInstance",
         type: "GET",
@@ -190,11 +200,109 @@ function loadddl() {
                 }
             });
 
-            //This is to add the semester instance to the query string when the add preference button is clicked
-            setSemesterInstanceIdForQueryString();
+            loadTemplateCourses();
+            getWishlistId().then(function () {
+                loadCourseWishlist();
+            });
         },
         error: function (xhr, error, thrown) {
             alert('Ajax error:' + xhr.responseText);
+        }
+    });
+}
+
+function loadTemplateCourses() {
+    var selectedSemesterId = $("#ddlSemesterInstance").val(); // get the selected semester ID
+
+    $.ajax({
+        url: "/api/template?id=" + selectedSemesterId, // pass the semester ID to the API
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            var dropdown = $("#ddlTemplateCourses");
+            dropdown.empty();
+            dropdown.append($("<option />").val("").text("Add Courses")); // default option
+
+            $.each(data.data, function (index, item) {
+                var courseInfo = item.course.academicProgram.programCode + ' ' +
+                    item.course.courseNumber + ' ' +
+                    item.course.courseTitle;
+                dropdown.append($("<option />").val(item.course.id).text(courseInfo));
+            });
+        },
+        error: function (xhr, error, thrown) {
+            alert('Ajax error:' + xhr.responseText);
+        }
+    });
+}
+
+function loadCourseWishlist() {
+    $.ajax({
+        url: "/api/wishlistCourse",
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            var table = $("#T_WishlistCourses");
+
+            // Clear the table
+            table.empty();
+
+            // Add the table header
+            var header = $('<tr>').append(
+                $('<th>').text('Rank'),
+                $('<th>').text('Course'),
+                $('<th>').text(' ')
+            );
+            table.append(header);
+
+            // Add the table body
+            var body = $('<tbody>');
+            table.append(body);
+
+            // Sort the data by rank in ascending order
+            data.data.sort(function (a, b) {
+                return a.preferenceRank - b.preferenceRank;
+            });
+
+            // Populate the table with the sorted data
+            $.each(data.data, function (i, item) {
+                if (item.wishlistId == wishlistId) {
+                    var row = $('<tr>').append(
+                        $('<td>').text(item.preferenceRank),
+                        $('<td>').text(item.course.academicProgram.programCode + " " + item.course.courseNumber + " " + item.course.courseTitle),
+                        $('<td>').html('<button class="btn btn-outline-danger rounded" id="btnRemoveCourse" data-course-id="' + item.course.Id + '"><i class="bi bi-trash-fill"></i></button>')
+                    );
+                    body.append(row);  // Append the row to the tbody, not the table
+                }
+            });
+        },
+        error: function (xhr, error, thrown) {
+            alert('Ajax error:' + xhr.responseText);
+        }
+    });
+}
+
+
+
+function getWishlistId() {
+    var selectedSemesterId = $("#ddlSemesterInstance").val();
+
+    // Return the promise from the AJAX call
+    return $.ajax({
+        url: '/api/wishlist',
+        type: 'GET',
+        dataType: "json",
+        success: function (data) {
+            $.each(data.data, function (index, item) {
+                if (item.userId == userId && item.semesterInstanceId == selectedSemesterId) {
+                    console.log("Its working " + item.id);
+                    wishlistId = item.id;
+                }
+            });
+        },
+        error: function (error) {
+            console.log("Its not working");
+            console.log(error);
         }
     });
 }
@@ -209,48 +317,6 @@ function setSemesterInstanceIdForQueryString() {
     btn.attr("href", newHref);
 }
 
-function loadList() {
-    dataTable = $('#DT_PreferenceDetails').DataTable({
-        "ajax": {
-            "url": "/api/wishlist",
-            "type": "GET",
-            "datatype": "json",
-            "dataSrc": function (json) {
-                var selectedSemester = Number($('#ddlSemesterInstance').val());
-                var filteredData = $.grep(json.data, function (row) {
-                    return Number(row.wishlist) === selectedSemester;
-                });
-                return filteredData;
-            },
-            "error": function (xhr, error, thrown) {
-                alert('Ajax error:' + xhr.responseText);
-            }
-        },
-        "columns": [
-            { "data": "wishlistCourse.preferenceRank", "width": "5%" },
-            {
-                "data": "wishlistCourse",
-                "render": function (data) {
-                    return `${data.course.academicProgram.programCode} ${data.course.courseNumber} ${data.course.courseTitle}`
-                },
-                "width": "25%"
-            },
-            {
-                "data": "id",
-                "render": function (data, type, row, meta) {
-                    return `<div class="text-center">
-                                <a href="/Instr/Wishlists/Update?id=${data}&semesterInstanceId=${row.wishlistCourse.wishList.semesterInstanceId}" class="btn btn-outline-primary mb-1 rounded" style="cursor:pointer; width: 100px;">
-                                    <i class="bi bi-pencil-square"></i></a>
-                                <a href="/Instr/Wishlists/Delete?id=${data}&semesterInstanceId=${row.wishlistCourse.wishList.semesterInstanceId}" class="btn btn-outline-danger mb-1 rounded" style="cursor:pointer; width: 100px;">
-                                    <i class="bi bi-trash"></i></a>   
-                            </div>`;
-                }, "width": "20%"
-            }
-        ],
-        "language": {
-            "emptyTable": "No data found."
-        },
-        "width": "100%",
-        "order": [[0, "asc"]]
-    });
+function loadTemplate() {
+    
 }
