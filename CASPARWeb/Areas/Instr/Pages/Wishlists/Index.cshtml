@@ -3,7 +3,7 @@
 @model CASPARWeb.Areas.Instr.Pages.Wishlists.IndexModel
 @{
 }
-<input type="hidden" asp-for="WishlistId">
+@* <input type="hidden" asp-for="WishlistId"> *@
 <div class="container">
 	<div class="row pt=4">
 		<!--Start Row-->
@@ -76,40 +76,26 @@
 			<div id="collapseTwo" class="collapse show" data-bs-parent="#accordion">
 					<div class="row p-3">
 						<!--Start Row-->
-						<div class="col-5">
-							@* <span style="display:none" id="selectedSemesterId">@(Model.SelectedSemesterId != 0 ? Model.SelectedSemesterId : "0")</span> *@
-							<select id="ddlTemplateCourses" class="form-select rounded">
-							</select>
-						</div> <!--End 1stColumn-->
-						<div class="col-2">
-							<button type="button" class="btn btn-outline-primary rounded" id="btnAddCourse"><i class="bi bi-plus-circle"></i></button>
-						</div>
-					</div> <!--End Row-->
-				<table class="table table-bordered table-striped p-3" id="DT_PreferenceDetails" style="width:100%">
-					<thead>
-						<tr>
-							<th style="width: 10%;">Rank</th>
-							<th style="width: 80%;">Title</th>
-							<th style="width: 10%">&nbsp;</th>
-						</tr>
-					</thead>
-				</table>
+						<form class="row" method="post">
+							<div class="col-1">
+								<label for="rank">Rank:</label><br>
+								<input type="number" id="rank" name="rank" min="1" style="width: 60%;">
+							</div>
+							<div class="col-5">
+								<select id="ddlTemplateCourses" class="form-select rounded">
+								</select>
 
-					<table class="table table-bordered table-striped" style="width:100%">
-						<tbody>
-							<!--Loop Here-->
-							@foreach (var obj in Model.objCourseList)
-							{
-								<tr>
-									<td width="10%">@obj.PreferenceRank</td>
-									<td width="70%">@obj.Course.AcademicProgram.ProgramCode @obj.Course.CourseNumber @obj.Course.CourseTitle</td>
-									<td>
-										<button class="btn btn-outline-danger rounded" id="btnRemoveCourse"><i class="bi bi-trash-fill"></i></button>
-									</td>
-								</tr>
-							}
-							<!--End Loop Here-->
-						</tbody>
+								<input type="hidden" id="selectedCourse" name="selectedCourse">
+							</div>
+							<div class="col-2">
+								<button type="submit" asp-page-handler="add" asp-route-selectedSemesterId="@Model.SelectedSemesterId" class="btn btn-outline-primary rounded" id="btnAddCourse"><i class="bi bi-plus-circle"></i></button>
+							</div>
+						</form>
+					</div> <!--End Row-->
+
+
+					<table class="table table-bordered table-striped p-3" id="T_WishlistCourses" style="width:100%">
+						
 					</table>
 			</div>
 		</div>

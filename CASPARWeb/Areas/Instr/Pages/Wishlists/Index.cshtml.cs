@@ -9,9 +9,14 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 {
     public class IndexModel : PageModel
     {
-        public int SelectedSemesterId;
+		[BindProperty]
+		public int SelectedSemesterId { get; set; }
 		[BindProperty]
 		public int WishlistId { get; set; }
+		[BindProperty]
+		public int Rank { get; set; }
+		[BindProperty]
+		public string SelectedCourse { get; set; }
 		public IEnumerable<WishlistCourse> objCourseList;
 		public IEnumerable<SemesterInstance> objSemesterInstanceList;
 		public IEnumerable<SelectListItem> CourseWishlistList { get; set; }
@@ -56,30 +61,31 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 			return Page();
         }
 
-		public IActionResult OnGetTableData(int selectedSemesterId)
+		public IActionResult OnPostAdd(int? selectedSemesterId, int selectedCourse)
 		{
-			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-			Wishlist wishlist = _unitOfWork.Wishlist.Get(w => w.SemesterInstanceId == selectedSemesterId && w.UserId == userId);
-
-			if (wishlist == null)
+			if (!ModelState.IsValid)
 			{
-				wishlist = new Wishlist
-				{
-					SemesterInstanceId = selectedSemesterId,
-					UserId = userId
-				};
-
-				_unitOfWork.Wishlist.Add(wishlist);
-				_unitOfWork.Commit();
+				return Page();
 			}
 
-			var objCourseList = _unitOfWork.WishlistCourse.GetAll(w => w.WishlistId == wishlist.Id, null, "Wishlist,Course,Course.AcademicProgram");
+			SelectedSemesterId = (int)selectedSemesterId;
 
-			// Convert objCourseList to the format you need and return it
-			// If you want to return HTML, you can create a partial view and return it like this:
-			return Partial("_TableData", objCourseList);
-			// If you want to return JSON, you can do it like this:
-			// return Json(objCourseList);
+			// get the wishlistId for the current user and semester
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			Wishlist wishlist = _unitOfWork.Wishlist.Get(w => w.SemesterInstanceId == SelectedSemesterId && w.UserId == userId);
+			// add the course to the wishlistCourse where the wishlistId matches the wishlistId for the current user and semester
+			WishlistCourse wishlistCourse = new WishlistCourse
+			{
+				WishlistId = wishlist.Id,
+				CourseId = selectedCourse,
+				PreferenceRank = Rank
+			};
+
+			_unitOfWork.WishlistCourse.Add(wishlistCourse);
+			_unitOfWork.Commit();
+
+
+			return RedirectToPage("./Index");
 		}
 
 	}

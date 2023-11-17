@@ -1,23 +1,22 @@
-﻿var dataTable;
+﻿var wishlistId;
 
 $(document).ready(function () {
     loadSemesterInstances();
     loadCheckBoxes();
 
     $('#ddlSemesterInstance').change(function () {
-        setSemesterInstanceIdForQueryString();
+        //setSemesterInstanceIdForQueryString();
         loadTemplateCourses();
-
-        // Make an AJAX request to the server
-        $.ajax({
-            url: '/CourseWishllist/OnGetTableData?selectedSemesterId=' + $('#ddlSemesterInstance').val(), // Replace 'YourController' with your actual controller name
-            type: 'GET',
-            success: function (data) {
-                // Replace the old table body with the new one
-                $('#DT_PreferenceDetails tbody').html(data);
-            }
+        getWishlistId().then(function () {
+            loadCourseWishlist();
         });
     });
+
+    $("#ddlTemplateCourses").change(function () {
+        var selectedCourseId = $(this).val(item.course.id);
+        $("#selectedCourse").val(selectedCourseId);
+    });
+});
 
 $(document).on('click', '#btnRemoveCourse', function () {
     var courseId = $(this).data('course-id');
@@ -39,7 +38,7 @@ function loadCheckBoxes() {
                     var input = $('<input>').addClass('form-check-input').attr({
                         type: 'checkbox',
                         id: 'check' + (index + 1),
-                        name: 'option' + (index + 1),
+                        name: 'modality' + (index + 1),
                         value: modality.modalityName
                     });
 
@@ -96,8 +95,8 @@ function loadTimeBlocks() {
 
                     var input = $('<input>').addClass('form-check-input').attr({
                         type: 'checkbox',
-                        id: 'check' + (index + 1),
-                        name: 'option' + (index + 1),
+                        id: 'timeBlock' + (index + 1),
+                        name: 'timeBlock' + (index + 1),
                         value: timeBlock.timeBlockValue
                     });
 
@@ -134,8 +133,8 @@ function loadDaysOfWeek() {
 
                     var input = $('<input>').addClass('form-check-input').attr({
                         type: 'checkbox',
-                        id: 'check' + (index + 1),
-                        name: 'option' + (index + 1),
+                        id: 'daysOfWeek' + (index + 1),
+                        name: 'daysOfWeek' + (index + 1),
                         value: day.daysOfWeekValue
                     });
 
@@ -166,8 +165,8 @@ function loadCampuses() {
 
                     var input = $('<input>').addClass('form-check-input').attr({
                         type: 'checkbox',
-                        id: 'check' + (index + 1),
-                        name: 'option' + (index + 1),
+                        id: 'campus' + (index + 1),
+                        name: 'campus' + (index + 1),
                         value: campus.campusName
                     });
 
@@ -202,6 +201,9 @@ function loadSemesterInstances() {
             });
 
             loadTemplateCourses();
+            getWishlistId().then(function () {
+                loadCourseWishlist();
+            });
         },
         error: function (xhr, error, thrown) {
             alert('Ajax error:' + xhr.responseText);
@@ -225,11 +227,82 @@ function loadTemplateCourses() {
                 var courseInfo = item.course.academicProgram.programCode + ' ' +
                     item.course.courseNumber + ' ' +
                     item.course.courseTitle;
-                dropdown.append($("<option />").val(item.id).text(courseInfo));
+                dropdown.append($("<option />").val(item.course.id).text(courseInfo));
             });
         },
         error: function (xhr, error, thrown) {
             alert('Ajax error:' + xhr.responseText);
+        }
+    });
+}
+
+function loadCourseWishlist() {
+    $.ajax({
+        url: "/api/wishlistCourse",
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            var table = $("#T_WishlistCourses");
+
+            // Clear the table
+            table.empty();
+
+            // Add the table header
+            var header = $('<tr>').append(
+                $('<th>').text('Rank'),
+                $('<th>').text('Course'),
+                $('<th>').text(' ')
+            );
+            table.append(header);
+
+            // Add the table body
+            var body = $('<tbody>');
+            table.append(body);
+
+            // Sort the data by rank in ascending order
+            data.data.sort(function (a, b) {
+                return a.preferenceRank - b.preferenceRank;
+            });
+
+            // Populate the table with the sorted data
+            $.each(data.data, function (i, item) {
+                if (item.wishlistId == wishlistId) {
+                    var row = $('<tr>').append(
+                        $('<td>').text(item.preferenceRank),
+                        $('<td>').text(item.course.academicProgram.programCode + " " + item.course.courseNumber + " " + item.course.courseTitle),
+                        $('<td>').html('<button class="btn btn-outline-danger rounded" id="btnRemoveCourse" data-course-id="' + item.course.Id + '"><i class="bi bi-trash-fill"></i></button>')
+                    );
+                    body.append(row);  // Append the row to the tbody, not the table
+                }
+            });
+        },
+        error: function (xhr, error, thrown) {
+            alert('Ajax error:' + xhr.responseText);
+        }
+    });
+}
+
+
+
+function getWishlistId() {
+    var selectedSemesterId = $("#ddlSemesterInstance").val();
+
+    // Return the promise from the AJAX call
+    return $.ajax({
+        url: '/api/wishlist',
+        type: 'GET',
+        dataType: "json",
+        success: function (data) {
+            $.each(data.data, function (index, item) {
+                if (item.userId == userId && item.semesterInstanceId == selectedSemesterId) {
+                    console.log("Its working " + item.id);
+                    wishlistId = item.id;
+                }
+            });
+        },
+        error: function (error) {
+            console.log("Its not working");
+            console.log(error);
         }
     });
 }
