@@ -16,6 +16,19 @@ $(document).ready(function () {
         var selectedCourseId = $(this).val(item.course.id);
         $("#selectedCourse").val(selectedCourseId);
     });
+
+    //$('body').on('click', '.btn', function () {
+    //    var courseId = $(this).data('course-id');
+    //    console.log("Course Id = " + courseId);
+    //    $.ajax({
+    //        url: '/Instr/Wishlists/Index?handler=ArchiveCourse',
+    //        type: 'POST',
+    //        data: { selectedCourse: courseId },
+    //        success: function () {
+    //            location.reload();
+    //        }
+    //    });
+    //});
 });
 
 $(document).on('click', '#btnRemoveCourse', function () {
@@ -270,18 +283,41 @@ function loadCourseWishlist() {
                     var row = $('<tr>').append(
                         $('<td>').text(item.preferenceRank),
                         $('<td>').text(item.course.academicProgram.programCode + " " + item.course.courseNumber + " " + item.course.courseTitle),
-                        $('<td>').html('<button class="btn btn-outline-danger rounded" id="btnRemoveCourse" data-course-id="' + item.course.Id + '"><i class="bi bi-trash-fill"></i></button>')
+                        $('<td>').html('<button class="btn btn-outline-danger rounded archive-btn" data-course-id="' + item.courseId + '"><i class="bi bi-trash-fill"></i></button>')
                     );
                     body.append(row);  // Append the row to the tbody, not the table
+
+                    // Add event listener to the button
+                    row.find('.archive-btn').on('click', function () {
+                        var courseId = $(this).data('course-id');
+                        console.log("Course Id = " + courseId);
+
+                        // Add post request here
+                        $.ajax({
+                            url: '/api/WishlistCourse/OnPostArchiveCourse',
+                            type: 'POST',
+                            data: { selectedCourse: courseId },
+                            success: function (data) {
+                                // Handle success, if needed
+                                console.log("Post request successful");
+                            },
+                            error: function (error) {
+                                // Handle error, if needed
+                                console.error("Error in post request", error);
+                            }
+                        });
+
+                    });
                 }
             });
+
+
         },
         error: function (xhr, error, thrown) {
             alert('Ajax error:' + xhr.responseText);
         }
     });
 }
-
 
 
 function getWishlistId() {

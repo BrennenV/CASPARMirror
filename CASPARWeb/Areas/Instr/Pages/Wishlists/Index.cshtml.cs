@@ -61,12 +61,12 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 			return Page();
         }
 
-		public IActionResult OnPostAdd(int? selectedSemesterId, int selectedCourse)
+		public IActionResult OnPostAdd(int? selectedSemesterId, int? selectedCourse)
 		{
-			if (!ModelState.IsValid)
-			{
-				return Page();
-			}
+			//if (!ModelState.IsValid)
+			//{
+			//	return Page();
+			//}
 
 			SelectedSemesterId = (int)selectedSemesterId;
 
@@ -77,13 +77,21 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 			WishlistCourse wishlistCourse = new WishlistCourse
 			{
 				WishlistId = wishlist.Id,
-				CourseId = selectedCourse,
+				CourseId = (int)selectedCourse,
 				PreferenceRank = Rank
 			};
 
 			_unitOfWork.WishlistCourse.Add(wishlistCourse);
 			_unitOfWork.Commit();
 
+
+			return RedirectToPage("./Index");
+		}
+
+		public IActionResult OnPostArchiveCourse(int? selectedCourse)
+		{
+			_unitOfWork.WishlistCourse.Delete(_unitOfWork.WishlistCourse.Get(w => w.Id == (int)selectedCourse));
+			_unitOfWork.Commit();
 
 			return RedirectToPage("./Index");
 		}

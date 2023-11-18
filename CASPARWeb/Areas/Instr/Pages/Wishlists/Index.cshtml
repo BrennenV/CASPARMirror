@@ -82,13 +82,11 @@
 								<input type="number" id="rank" name="rank" min="1" style="width: 60%;">
 							</div>
 							<div class="col-5">
-								<select id="ddlTemplateCourses" class="form-select rounded">
+								<select id="ddlTemplateCourses" name="selectedCourse" class="form-select rounded">
 								</select>
-
-								<input type="hidden" id="selectedCourse" name="selectedCourse">
 							</div>
 							<div class="col-2">
-								<button type="submit" asp-page-handler="add" asp-route-selectedSemesterId="@Model.SelectedSemesterId" class="btn btn-outline-primary rounded" id="btnAddCourse"><i class="bi bi-plus-circle"></i></button>
+								<button type="submit" asp-page-handler="add" asp-route-selectedSemesterId="@Model.SelectedSemesterId" asp-route-selectedCourse="@Model.SelectedCourse" class="btn btn-outline-primary rounded" id="btnAddCourse"><i class="bi bi-plus-circle"></i></button>
 							</div>
 						</form>
 					</div> <!--End Row-->
