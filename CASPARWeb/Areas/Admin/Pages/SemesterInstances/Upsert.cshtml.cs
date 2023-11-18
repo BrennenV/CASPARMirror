@@ -14,6 +14,8 @@ namespace CASPARWeb.Areas.Admin.Pages.SemesterInstances
         public SemesterInstance objSemesterInstance { get; set; }
 		public CourseSection objCourseSection { get; set; }
 		public IEnumerable<SelectListItem> SemesterList { get; set; }
+        [BindProperty]
+        public int oldSemesterValue { get; set; }
         public UpsertModel(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -33,6 +35,7 @@ namespace CASPARWeb.Areas.Admin.Pages.SemesterInstances
             if (id != null && id != 0)
             {
                 objSemesterInstance = _unitOfWork.SemesterInstance.GetById(id);
+                oldSemesterValue = objSemesterInstance.SemesterId;
             }
             //Nothing found in DB
             if (objSemesterInstance == null)
@@ -79,6 +82,35 @@ namespace CASPARWeb.Areas.Admin.Pages.SemesterInstances
             //Modifying a Row
             else
             {
+                if(oldSemesterValue != objSemesterInstance.SemesterId)
+                {
+                    //If the semester template was changed, delete all the old course sections, and then add the new ones from the updated template
+                    IEnumerable<CourseSection> courseSections = _unitOfWork.CourseSection.GetAll(c => c.SemesterInstanceId == objSemesterInstance.Id && c.IsArchived != true);
+                    foreach(CourseSection courseSection in courseSections)
+                    {
+                        _unitOfWork.CourseSection.Delete(courseSection);
+                    }
+                    _unitOfWork.Commit();
+
+                    IEnumerable<Template> templates = _unitOfWork.Template.GetAll(t => t.SemesterId == objSemesterInstance.SemesterId && t.IsArchived != true);
+
+                    //create all courseSections based on the templates
+                    foreach (Template template in templates)
+                    {
+                        if (template.Quantity > 0)
+                        {
+                            for (int i = 0; i < template.Quantity; i++)
+                            {
+                                //create the same course for each count in quantity
+                                objCourseSection = new CourseSection();
+                                objCourseSection.SemesterInstanceId = objSemesterInstance.Id;
+                                objCourseSection.CourseId = template.CourseId;
+                                objCourseSection.SectionUpdated = DateTime.Now;
+                                _unitOfWork.CourseSection.Add(objCourseSection);
+                            }
+                        }
+                    }
+                }
                 _unitOfWork.SemesterInstance.Update(objSemesterInstance);
                 TempData["success"] = "Semester Instance updated Successfully";
             }
