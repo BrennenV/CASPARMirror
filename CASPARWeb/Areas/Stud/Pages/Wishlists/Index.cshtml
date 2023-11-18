@@ -1,6 +1,6 @@
 ﻿@page
 @using System.Security.Claims;
-@model CASPARWeb.Areas.Instr.Pages.Wishlists.IndexModel
+@model CASPARWeb.Areas.Stud.Pages.Wishlists.IndexModel
 @{
 }
 @* <input type="hidden" asp-for="WishlistId"> *@
@@ -10,7 +10,7 @@
 		<div class="col-4">
 			<!--50% of row-->
 			<h2 class="text-primary">
-				Instructor Preferences
+				Stuductor Preferences
 			</h2>
 		</div><!-- End 1st Column-->
 		<div class="col-3 text-end">
@@ -285,5 +285,5 @@
 		<script type="text/javascript">
 			var userId = '@User.FindFirstValue(ClaimTypes.NameIdentifier)';
 		</script>
-		<script src="~/js/preferenceLists.js"></script>
+		<script src="~/js/students.js"></script>
 	}

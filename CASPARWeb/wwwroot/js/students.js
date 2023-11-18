@@ -1,17 +1,34 @@
-﻿var dataTable;
-var ddlSemesterInstance;
+﻿var wishlistId;
 
 $(document).ready(function () {
-    loadddl();
-    loadList();
+    loadSemesterInstances();
 
     $('#ddlSemesterInstance').change(function () {
-        setSemesterInstanceIdForQueryString();
-        dataTable.ajax.reload();
+        var selectedSemesterId = $(this).val();
+        $("#selectedSemesterId").text(selectedSemesterId);
+        $("#selectedSemesterInstance").val(selectedSemesterId);
+
+        //reload page with new selectedSemesterId
+        window.location.href = window.location.pathname + '?selectedSemesterId=' + selectedSemesterId;
+
+        loadTemplateCourses();
+        getWishlistId().then(function () {
+            loadCourseWishlist();
+        });
+    });
+
+    $("#ddlTemplateCourses").change(function () {
+        var selectedCourseId = $(this).val(item.course.id);
+        $("#selectedCourse").val(selectedCourseId);
     });
 });
 
-function loadddl() {
+$(document).on('click', '#btnRemoveCourse', function () {
+    var courseId = $(this).data('course-id');
+    // Now you can use courseId in your function
+});
+
+function loadSemesterInstances() {
     $.ajax({
         url: "/api/semesterInstance",
         type: "GET",
@@ -28,8 +45,10 @@ function loadddl() {
                 }
             });
 
-            //This is to add the semester instance to the query string when the add preference button is clicked
-            setSemesterInstanceIdForQueryString();
+            loadTemplateCourses();
+            getWishlistId().then(function () {
+                loadCourseWishlist();
+            });
         },
         error: function (xhr, error, thrown) {
             alert('Ajax error:' + xhr.responseText);
@@ -37,60 +56,130 @@ function loadddl() {
     });
 }
 
-function setSemesterInstanceIdForQueryString() {
-    var dropdown = $("#ddlSemesterInstance");
-    var btn = $("#addPreferenceBtn");
+function loadTemplateCourses() {
+    var selectedSemesterId = $("#ddlSemesterInstance").val(); // get the selected semester ID
 
-    var oldHref = btn.attr("href");
-    var newHref = oldHref.slice(0, oldHref.indexOf("=") + 1) + dropdown.val().toString();
+    $.ajax({
+        url: "/api/template?id=" + selectedSemesterId, // pass the semester ID to the API
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            var dropdown = $("#ddlTemplateCourses");
+            dropdown.empty();
+            dropdown.append($("<option />").val("").text("Add Courses")); // default option
 
-    btn.attr("href", newHref);
+            $.each(data.data, function (index, item) {
+                var courseInfo = item.course.academicProgram.programCode + ' ' +
+                    item.course.courseNumber + ' ' +
+                    item.course.courseTitle;
+                dropdown.append($("<option />").val(item.course.id).text(courseInfo));
+            });
+        },
+        error: function (xhr, error, thrown) {
+            alert('Ajax error:' + xhr.responseText);
+        }
+    });
 }
 
-function loadList() {
-    dataTable = $('#DT_Students').DataTable({
-        "ajax": {
-            "url": "/api/student",
-            "type": "GET",
-            "datatype": "json",
-            "dataSrc": function (json) {
-                var selectedSemester = Number($('#ddlSemesterInstance').val());
-                var filteredData = $.grep(json.data, function (row) {
-                    return Number(row.wishlistDetail.wishlist.semesterInstanceId) === selectedSemester;
-                });
-                return filteredData;
-            },
-            "error": function (xhr, error, thrown) {
-                alert('Ajax error:' + xhr.responseText);
-            }
+function loadCourseWishlist() {
+    $.ajax({
+        url: "/api/wishlistCourse",
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            var table = $("#T_WishlistCourses");
+
+            // Clear the table
+            table.empty();
+
+            // Add the table header
+            var header = $('<tr>').append(
+                $('<th>').text('Course'),
+                $('<th>').text(' ')
+            );
+            table.append(header);
+
+            // Add the table body
+            var body = $('<tbody>');
+            table.append(body);
+
+            // Sort the data by rank in ascending order
+            data.data.sort(function (a, b) {
+                return a.preferenceRank - b.preferenceRank;
+            });
+
+            // Populate the table with the sorted data
+            $.each(data.data, function (i, item) {
+                if (item.wishlistId == wishlistId) {
+                    var row = $('<tr>').append(
+                        $('<td>').text(item.course.academicProgram.programCode + " " + item.course.courseNumber + " " + item.course.courseTitle),
+                        $('<td>').html('<button class="btn btn-outline-danger rounded archive-btn" data-wishlistCourseId="' + item.id + '"><i class="bi bi-trash-fill"></i></button>'),
+                        console.log(item.id)
+                    );
+                    body.append(row);  // Append the row to the tbody, not the table
+
+                    // Add event listener to the button
+                    row.find('.archive-btn').on('click', function () {
+                        var wishlistCourseId = $(this).attr('data-wishlistCourseId');
+                        console.log("Wishlist Course Id = " + wishlistCourseId);
+
+                        // Add post request here
+                        $.ajax({
+                            url: '/Stud/Wishlists?handler=ArchiveCourse',
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            type: 'POST',
+                            data: { selectedCourse: wishlistCourseId },
+                            success: function (data) {
+                                // Handle success, if needed
+                                console.log("Post request successful");
+                                location.reload();
+                            },
+                            error: function (error) {
+                                // Handle error, if needed
+                                console.error("Error in post request", error);
+                            }
+                        });
+
+                    });
+                }
+            });
+
+
         },
-        "columns": [
-            {
-                "data": "wishlistDetail",
-                "render": function (data) {
-                    return `${data.course.academicProgram.programCode} ${data.course.courseNumber} ${data.course.courseTitle} `
-                },
-                "width": "25%"
-            },
-            { "data": "modality.modalityName", "width": "15%" },
-            { "data": "campus.campusName", "width": "15%" },
-            { "data": "timeOfDay.partOfDay", "width": "10%" },
-            {
-                "data": "id",
-                "render": function (data, type, row, meta) {
-                    return `<div class="text-center">
-                                <a href="/Stud/Wishlists/Update?id=${data}&semesterInstanceId=${row.wishlistDetail.wishlist.semesterInstanceId}" class="btn btn-outline-primary mb-1 rounded" style="cursor:pointer; width: 100px;">
-                                    <i class="bi bi-pencil-square"></i> Edit </a>
-                                <a href="/Stud/Wishlists/Delete?id=${data}&semesterInstanceId=${row.wishlistDetail.wishlist.semesterInstanceId}" class="btn btn-outline-danger mb-1 rounded" style="cursor:pointer; width: 100px;">
-                                    <i class="bi bi-trash"></i> Delete </a>   
-                            </div>`;
-                }, "width": "20%"
-            }
-        ],
-        "language": {
-            "emptyTable": "No data found."
-        },
-        "width": "100%",
-        "order": [[0, "asc"]]
+        error: function (xhr, error, thrown) {
+            alert('Ajax error:' + xhr.responseText);
+        }
     });
+}
+
+
+function getWishlistId() {
+    var selectedSemesterId = $("#ddlSemesterInstance").val();
+
+    // Return the promise from the AJAX call
+    return $.ajax({
+        url: '/api/wishlist',
+        type: 'GET',
+        dataType: "json",
+        success: function (data) {
+            $.each(data.data, function (index, item) {
+                if (item.userId == userId && item.semesterInstanceId == selectedSemesterId) {
+                    console.log("User Id " + item.userId);
+                    console.log("Its semester " + item.semesterInstanceId);
+                    console.log("Its working " + item.id);
+                    wishlistId = item.id;
+                }
+            });
+        },
+        error: function (error) {
+            console.log("Its not working");
+            console.log(error);
+        }
+    });
+}
+
+function loadTemplate() {
+
 }

@@ -1157,12 +1157,6 @@ namespace DataAccess
 				new Wishlist { UserId = instr.Id, SemesterInstanceId = 3, IsArchived = false },
 				new Wishlist { UserId = stud.Id, SemesterInstanceId = 1, IsArchived = false },
 				new Wishlist { UserId = stud.Id, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 2, IsArchived = false },
 				new Wishlist { UserId = stud.Id, SemesterInstanceId = 3, IsArchived = false }
 			};
 

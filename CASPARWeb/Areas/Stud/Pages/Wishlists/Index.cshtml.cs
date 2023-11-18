@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Globalization;
 using System.Security.Claims;
 
-namespace CASPARWeb.Areas.Instr.Pages.Wishlists
+namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 {
     public class IndexModel : PageModel
     {
