@@ -283,23 +283,28 @@ function loadCourseWishlist() {
                     var row = $('<tr>').append(
                         $('<td>').text(item.preferenceRank),
                         $('<td>').text(item.course.academicProgram.programCode + " " + item.course.courseNumber + " " + item.course.courseTitle),
-                        $('<td>').html('<button class="btn btn-outline-danger rounded archive-btn" data-course-id="' + item.courseId + '"><i class="bi bi-trash-fill"></i></button>')
+                        $('<td>').html('<button class="btn btn-outline-danger rounded archive-btn" data-wishlistCourseId="' + item.id + '"><i class="bi bi-trash-fill"></i></button>'),
+                        console.log(item.id)
                     );
                     body.append(row);  // Append the row to the tbody, not the table
 
                     // Add event listener to the button
                     row.find('.archive-btn').on('click', function () {
-                        var courseId = $(this).data('course-id');
-                        console.log("Course Id = " + courseId);
+                        var wishlistCourseId = $(this).attr('data-wishlistCourseId');
+                        console.log("Wishlist Course Id = " + wishlistCourseId);
 
                         // Add post request here
                         $.ajax({
-                            url: '/api/WishlistCourse/OnPostArchiveCourse',
+                            url: '/Instr/Wishlists?handler=ArchiveCourse',
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
                             type: 'POST',
-                            data: { selectedCourse: courseId },
+                            data: { selectedCourse: wishlistCourseId },
                             success: function (data) {
                                 // Handle success, if needed
                                 console.log("Post request successful");
+                                location.reload();
                             },
                             error: function (error) {
                                 // Handle error, if needed
