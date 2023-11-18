@@ -30,45 +30,69 @@
 			<div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
 				<div class="card-body">
 					<div class="row pt=4">
-						<div class="col-2">
-							<label><h6>Modalities</h6></label>
-							<hr />
-							<form method="post" class="row">
-								<input type="hidden" asp-for="objWishlist.Id">
-								<div class="col-12 px-2" id="modalities">
-									@foreach (var modality in Model.AttachedModalityList)
-									{
-										<div>
-											<input class="form-check-input" onchange="updateCheckbox()" type="checkbox" value="@modality" checked />
-											<label>@modality</label>
-										</div>
-									}
-									@foreach (var modality in Model.UnattachedModalityList)
-									{
-										<div>
-											<input class="form-check-input" onchange="updateCheckbox()" type="checkbox" value="@modality" />
-											<label>@modality</label>
-										</div>
-									}
-								</div>
-								<input type="hidden" id="modalityArrayInput" asp-for="returnedAttachedModality" value="" />
-								<button type="submit" asp-route-selectedSemesterId="@Model.SelectedSemesterId" class="btn btn-primary form-control">Submit</button>
-							</form>
-						</div>
-								
-						
-						<div class="col-4">
-							<label><h6>Time Blocks</h6></label>
-							<hr />
-							<div class="row">
-								<div class="col-6" id="timeBlocks1">
-									
-								</div>
-								<div class="col-6" id="timeBlocks2">
-									
+						<form method="post" class="row">
+							<div class="col-2">
+								<label><h6>Modalities</h6></label>
+								<hr />
+							
+									<input type="hidden" asp-for="objWishlist.Id">
+									<div class="col-12 px-2" id="modalities">
+										@foreach (var modality in Model.ModalityList)
+										{
+											<div>
+											<input class="form-check-input" onchange="updateCheckboxModality()" type="checkbox" value="@modality.ModalityName" @(Model.AttachedModalityList.Contains(modality.ModalityName) ? "checked" : "") />
+												<label>@modality.ModalityName</label>
+											</div>
+										}
+									</div>
+									<input type="hidden" id="modalityArrayInput" asp-for="returnedAttachedModality" value="" />
+									<button type="submit" asp-page-handler="modality" asp-route-selectedSemesterId="@Model.SelectedSemesterId" class="btn btn-primary form-control">Submit</button>
+							</div>
+
+							<div class="col-4">
+								<label><h6>Time Blocks</h6></label>
+								<hr />
+								<div class="row">
+									<div class="col-6" id="timeBlocks1">
+										@{
+											var count = 0;
+										}
+										@foreach (var timeBlock in Model.TimeBlockList)
+										{
+											if (count % 2 == 0)
+											{
+												<div>
+													<input class="form-check-input" onchange="updateCheckboxTimeBlock()" type="checkbox" value="@timeBlock.TimeBlockValue" @(Model.AttachedTimeBlockList.Contains(timeBlock.TimeBlockValue) ? "checked" : "") />
+													<label>@timeBlock.TimeBlockValue</label>
+												</div>
+											}
+											count++;
+										}
+										<input type="hidden" id="timeBlockArrayInput" asp-for="returnedAttachedTimeBlock" value="" />
+									</div>
+									<div class="col-6" id="timeBlocks2">
+										@{
+											count = 0;
+										}
+										@foreach (var timeBlock in Model.TimeBlockList)
+										{
+											if (count % 2 != 0)
+											{
+												<div>
+													<input class="form-check-input" onchange="updateCheckboxTimeBlock()" type="checkbox" value="@timeBlock.TimeBlockValue" @(Model.AttachedTimeBlockList.Contains(timeBlock.TimeBlockValue) ? "checked" : "") />
+													<label>@timeBlock.TimeBlockValue</label>
+												</div>
+											}
+											count++;
+										}
+									</div>
 								</div>
 							</div>
-						</div>
+
+
+						</form>
+
+						
 
 						<div class="col-2">
 							<label><h6>Days of Week</h6></label>
@@ -121,7 +145,7 @@
 </div> <!--Close Container-->
 	@section Scripts{
 		<script>
-			function updateCheckbox() {
+			function updateCheckboxModality() {
 				//get all "checked" checkbox values
 				var checkboxes = document.querySelectorAll('.form-check-input');
 				var checkedValues = [];
@@ -150,6 +174,36 @@
 					document.getElementById('modalityArrayInput').value = "_";
 				}
 				console.log("Return string: " + document.getElementById('modalityArrayInput').value);
+			}
+			function updateCheckboxTimeBlock() {
+				//get all "checked" checkbox values
+				var checkboxes = document.querySelectorAll('.form-check-input');
+				var checkedValues = [];
+				console.log("");
+
+				//swal.fire('Error', 'TEST', 'error');
+				// Loop through each checkbox
+				checkboxes.forEach(function (checkbox) {
+					if (checkbox.checked) {
+						console.log(checkbox.value);
+						checkedValues.push(checkbox.value);
+					}
+				});
+				console.log("Checked Boxes: " + checkedValues.length);
+				//generate the comma separated return list
+				var returnList = "";
+				for (var i = 0; i < checkedValues.length; i++) {
+					returnList = returnList + checkedValues[i];
+					if (i < checkedValues.length - 1) {
+						returnList = returnList + ",";
+					}
+				}
+				document.getElementById('timeBlockArrayInput').value = returnList;
+				//if the list is empty set the return string to '_'
+				if (checkedValues.length == 0) {
+					document.getElementById('timeBlockArrayInput').value = "_";
+				}
+				console.log("Return string: " + document.getElementById('timeBlockArrayInput').value);
 			}
 		</script>
 		<script type="text/javascript">
