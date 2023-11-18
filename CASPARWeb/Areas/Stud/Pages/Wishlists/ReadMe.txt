@@ -1,1 +1,1 @@
-﻿The WishlistsOLD file contains all of the old wish list stuff. This Wishlists folder will contain the new stuff for the newly refurbished database structure.
+﻿The WishlistsOLD file contains all of the old preference list stuff. This Wishlists folder will contain the new stuff for the newly refurbished database structure.

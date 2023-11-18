@@ -1157,12 +1157,6 @@ namespace DataAccess
 				new Wishlist { UserId = instr.Id, SemesterInstanceId = 3, IsArchived = false },
 				new Wishlist { UserId = stud.Id, SemesterInstanceId = 1, IsArchived = false },
 				new Wishlist { UserId = stud.Id, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 3, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 1, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 2, IsArchived = false },
 				new Wishlist { UserId = stud.Id, SemesterInstanceId = 3, IsArchived = false }
 			};
 
@@ -1199,19 +1193,7 @@ namespace DataAccess
 				new WishlistCourse { PreferenceRank = 3, WishlistId = 5, CourseId = 3, IsArchived = false },
 				new WishlistCourse { PreferenceRank = 1, WishlistId = 6, CourseId = 1, IsArchived = false },
 				new WishlistCourse { PreferenceRank = 3, WishlistId = 6, CourseId = 2, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 2, WishlistId = 6, CourseId = 3, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 2, WishlistId = 7, CourseId = 1, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 1, WishlistId = 7, CourseId = 2, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 3, WishlistId = 7, CourseId = 3, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 1, WishlistId = 8, CourseId = 1, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 2, WishlistId = 8, CourseId = 2, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 3, WishlistId = 8, CourseId = 3, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 1, WishlistId = 9, CourseId = 1, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 3, WishlistId = 9, CourseId = 2, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 2, WishlistId = 9, CourseId = 3, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 2, WishlistId = 10, CourseId = 1, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 1, WishlistId = 10, CourseId = 2, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 3, WishlistId = 10, CourseId = 3, IsArchived = false }
+				new WishlistCourse { PreferenceRank = 2, WishlistId = 6, CourseId = 3, IsArchived = false }
 			};
 
 			foreach (var w in WishlistCourses)
@@ -1253,12 +1235,7 @@ namespace DataAccess
 				new WishlistPartOfDay { WishlistId = 4, PartOfDayId = 1, IsArchived = false },
 				new WishlistPartOfDay { WishlistId = 5, PartOfDayId = 2, IsArchived = false },
 				new WishlistPartOfDay { WishlistId = 5, PartOfDayId = 3, IsArchived = false },
-				new WishlistPartOfDay { WishlistId = 6, PartOfDayId = 3, IsArchived = false },
-				new WishlistPartOfDay { WishlistId = 7, PartOfDayId = 1, IsArchived = false },
-				new WishlistPartOfDay { WishlistId = 8, PartOfDayId = 2, IsArchived = false },
-				new WishlistPartOfDay { WishlistId = 9, PartOfDayId = 3, IsArchived = false },
-				new WishlistPartOfDay { WishlistId = 10, PartOfDayId = 1, IsArchived = false },
-				new WishlistPartOfDay { WishlistId = 10, PartOfDayId = 2, IsArchived = false }
+				new WishlistPartOfDay { WishlistId = 6, PartOfDayId = 3, IsArchived = false }
 			};
 
 
@@ -1275,11 +1252,7 @@ namespace DataAccess
 				new WishlistCampus { WishlistId = 3, CampusId = 3, IsArchived = false },
 				new WishlistCampus { WishlistId = 4, CampusId = 1, IsArchived = false },
 				new WishlistCampus { WishlistId = 5, CampusId = 1, IsArchived = false },
-				new WishlistCampus { WishlistId = 6, CampusId = 1, IsArchived = false },
-				new WishlistCampus { WishlistId = 7, CampusId = 2, IsArchived = false },
-				new WishlistCampus { WishlistId = 8, CampusId = 2, IsArchived = false },
-				new WishlistCampus { WishlistId = 9, CampusId = 2, IsArchived = false },
-				new WishlistCampus { WishlistId = 10, CampusId = 3, IsArchived = false }
+				new WishlistCampus { WishlistId = 6, CampusId = 1, IsArchived = false }
 			};
 
 			foreach (var w in WishlistCampuses)
@@ -1307,15 +1280,7 @@ namespace DataAccess
 				new WishlistDaysOfWeek { WishlistId = 5, DaysOfWeekId = 1, IsArchived = false },
 				new WishlistDaysOfWeek { WishlistId = 5, DaysOfWeekId = 2, IsArchived = false },
 				new WishlistDaysOfWeek { WishlistId = 6, DaysOfWeekId = 3, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 6, DaysOfWeekId = 4, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 7, DaysOfWeekId = 1, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 7, DaysOfWeekId = 2, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 8, DaysOfWeekId = 3, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 8, DaysOfWeekId = 4, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 9, DaysOfWeekId = 1, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 9, DaysOfWeekId = 2, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 10, DaysOfWeekId = 3, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 10, DaysOfWeekId = 5, IsArchived = false }
+				new WishlistDaysOfWeek { WishlistId = 6, DaysOfWeekId = 4, IsArchived = false }
 			};
 
 			foreach (var w in WishlistDaysOfWeeks)
@@ -1342,17 +1307,7 @@ namespace DataAccess
 				new WishlistModality { WishlistId = 4, ModalityId = 4, IsArchived = false },
 				new WishlistModality { WishlistId = 5, ModalityId = 3, IsArchived = false },
 				new WishlistModality { WishlistId = 5, ModalityId = 4, IsArchived = false },
-				new WishlistModality { WishlistId = 6, ModalityId = 6, IsArchived = false },
-				new WishlistModality { WishlistId = 7, ModalityId = 2, IsArchived = false },
-				new WishlistModality { WishlistId = 7, ModalityId = 3, IsArchived = false },
-				new WishlistModality { WishlistId = 8, ModalityId = 1, IsArchived = false },
-				new WishlistModality { WishlistId = 8, ModalityId = 2, IsArchived = false },
-				new WishlistModality { WishlistId = 8, ModalityId = 4, IsArchived = false },
-				new WishlistModality { WishlistId = 9, ModalityId = 3, IsArchived = false },
-				new WishlistModality { WishlistId = 9, ModalityId = 4, IsArchived = false },
-				new WishlistModality { WishlistId = 10, ModalityId = 1, IsArchived = false },
-				new WishlistModality { WishlistId = 10, ModalityId = 2, IsArchived = false },
-				new WishlistModality { WishlistId = 10, ModalityId = 3, IsArchived = false }
+				new WishlistModality { WishlistId = 6, ModalityId = 6, IsArchived = false }
 			};
 
 			foreach (var w in WishlistModalities)
@@ -1390,15 +1345,7 @@ namespace DataAccess
 			{
 				new WishlistTimeBlock { WishlistId = 5, TimeBlockId = 1, IsArchived = false },
 				new WishlistTimeBlock { WishlistId = 5, TimeBlockId = 2, IsArchived = false },
-				new WishlistTimeBlock { WishlistId = 6, TimeBlockId = 3, IsArchived = false },
-				new WishlistTimeBlock { WishlistId = 7, TimeBlockId = 4, IsArchived = false },
-				new WishlistTimeBlock { WishlistId = 7, TimeBlockId = 5, IsArchived = false },
-				new WishlistTimeBlock { WishlistId = 8, TimeBlockId = 6, IsArchived = false },
-				new WishlistTimeBlock { WishlistId = 9, TimeBlockId = 1, IsArchived = false },
-				new WishlistTimeBlock { WishlistId = 9, TimeBlockId = 2, IsArchived = false },
-				new WishlistTimeBlock { WishlistId = 10, TimeBlockId = 3, IsArchived = false },
-				new WishlistTimeBlock { WishlistId = 10, TimeBlockId = 4, IsArchived = false },
-				new WishlistTimeBlock { WishlistId = 10, TimeBlockId = 5, IsArchived = false }
+				new WishlistTimeBlock { WishlistId = 6, TimeBlockId = 3, IsArchived = false }
 			};
 
 			foreach (var w in WishlistTimeBlocks)
