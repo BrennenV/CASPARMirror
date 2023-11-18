@@ -30,14 +30,14 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 		public String returnedAttachedModality { get; set; }
 		//End Modality Checkboxes
 
-		//TimeBlock Checkboxes
-		public IEnumerable<TimeBlock> TimeBlockList { get; set; }
-		public IEnumerable<WishlistTimeBlock> WishlistTimeBlockList { get; set; }
-		public List<String> AttachedTimeBlockList { get; set; }
-		public List<String> UnattachedTimeBlockList { get; set; }
+		//PartOfDay Checkboxes
+		public IEnumerable<PartOfDay> PartOfDayList { get; set; }
+		public IEnumerable<WishlistPartOfDay> WishlistPartOfDayList { get; set; }
+		public List<String> AttachedPartOfDayList { get; set; }
+		public List<String> UnattachedPartOfDayList { get; set; }
 		[BindProperty]
-		public String returnedAttachedTimeBlock { get; set; }
-		//End TimeBlock Checkboxes
+		public String returnedAttachedPartOfDay { get; set; }
+		//End PartOfDay Checkboxes
 
 		//DaysOfWeek Checkboxes
 		public IEnumerable<DaysOfWeek> DaysOfWeekList { get; set; }
@@ -66,8 +66,8 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
             CourseWishlistList = new List<SelectListItem>();
 			AttachedModalityList = new List<String>();
 			UnattachedModalityList = new List<String>();
-			AttachedTimeBlockList = new List<String>();
-			UnattachedTimeBlockList = new List<String>();
+			AttachedPartOfDayList = new List<String>();
+			UnattachedPartOfDayList = new List<String>();
 			AttachedDaysOfWeekList = new List<String>();
 			UnattachedDaysOfWeekList = new List<String>();
 			AttachedCampusList = new List<String>();
@@ -86,9 +86,7 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 				SemesterInstance semesterInstance = _unitOfWork.SemesterInstance.GetAll(s => s.StartDate > currentDate).OrderBy(s => s.StartDate).FirstOrDefault();
 				SelectedSemesterId = semesterInstance.Id;
 			}
-
 			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
 			Wishlist wishlist = _unitOfWork.Wishlist.Get(w => w.SemesterInstanceId == SelectedSemesterId && w.UserId == userId);
 
 			if (wishlist == null)
@@ -135,71 +133,38 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 			}
 			//End Modality
 
-			//TimeBlock
-			WishlistTimeBlockList = _unitOfWork.WishlistTimeBlock.GetAll(w => w.WishlistId == wishlist.Id && w.IsArchived != true);
-			foreach (WishlistTimeBlock wishlistTimeBlock in WishlistTimeBlockList)
+			//PartOfDay
+			WishlistPartOfDayList = _unitOfWork.WishlistPartOfDay.GetAll(w => w.WishlistId == wishlist.Id && w.IsArchived != true);
+			foreach (WishlistPartOfDay wishlistPartOfDay in WishlistPartOfDayList)
 			{
-				//Grab each attached timeBlock
-				String temp = _unitOfWork.TimeBlock.Get(c => c.Id == wishlistTimeBlock.TimeBlockId && c.IsArchived != true).TimeBlockValue;
-				AttachedTimeBlockList.Add(temp);
+				//Grab each attached partOfDay
+				String temp = _unitOfWork.PartOfDay.Get(c => c.Id == wishlistPartOfDay.PartOfDayId && c.IsArchived != true).PartOfDayValue;
+				AttachedPartOfDayList.Add(temp);
 			}
-			//Fill UnattachedTimeBlockList will all timeBlock Names
-			TimeBlockList = _unitOfWork.TimeBlock.GetAll(c => c.IsArchived != true)
-				.OrderBy(t => TimeSpan.Parse(t.TimeBlockValue.Split('-')[0].Trim())).ToList();
-			foreach (TimeBlock timeBlock in TimeBlockList)
+			//Fill UnattachedPartOfDayList will all partOfDay Names
+			PartOfDayList = _unitOfWork.PartOfDay.GetAll(c => c.IsArchived != true);
+			foreach (PartOfDay partOfDay in PartOfDayList)
 			{
-				UnattachedTimeBlockList.Add(timeBlock.TimeBlockValue);
+				UnattachedPartOfDayList.Add(partOfDay.PartOfDayValue);
 			}
-			//Remove amenities from UnattachedTimeBlockList
-			//if they are already stored in the AttachedTimeBlockList
-			for (int i = 0; i < AttachedTimeBlockList.Count(); i++)
+			//Remove amenities from UnattachedPartOfDayList
+			//if they are already stored in the AttachedPartOfDayList
+			for (int i = 0; i < AttachedPartOfDayList.Count(); i++)
 			{
 				int l = 0;
-				String attachedTimeBlock = AttachedTimeBlockList[i];
-				while (l < UnattachedTimeBlockList.Count())
+				String attachedPartOfDay = AttachedPartOfDayList[i];
+				while (l < UnattachedPartOfDayList.Count())
 				{
-					if (attachedTimeBlock == UnattachedTimeBlockList[l])
+					if (attachedPartOfDay == UnattachedPartOfDayList[l])
 					{
-						UnattachedTimeBlockList.RemoveAt(l);
+						UnattachedPartOfDayList.RemoveAt(l);
 						break;
 					}
 					l++;
 				}
 			}
 
-			//End TimeBlock
-
-			//DaysOfWeek
-			WishlistDaysOfWeekList = _unitOfWork.WishlistDaysOfWeek.GetAll(w => w.WishlistId == wishlist.Id && w.IsArchived != true);
-			foreach (WishlistDaysOfWeek wishlistDaysOfWeek in WishlistDaysOfWeekList)
-			{
-				//Grab each attached modality
-				String temp = _unitOfWork.DaysOfWeek.Get(c => c.Id == wishlistDaysOfWeek.DaysOfWeekId && c.IsArchived != true).DaysOfWeekValue;
-				AttachedDaysOfWeekList.Add(temp);
-			}
-			//Fill UnattachedDaysOfWeekList will all modality Names
-			DaysOfWeekList = _unitOfWork.DaysOfWeek.GetAll(c => c.IsArchived != true);
-			foreach (DaysOfWeek modality in DaysOfWeekList)
-			{
-				UnattachedDaysOfWeekList.Add(modality.DaysOfWeekValue);
-			}
-			//Remove amenities from UnattachedDaysOfWeekList
-			//if they are already stored in the AttachedDaysOfWeekList
-			for (int i = 0; i < AttachedDaysOfWeekList.Count(); i++)
-			{
-				int l = 0;
-				String attachedDaysOfWeek = AttachedDaysOfWeekList[i];
-				while (l < UnattachedDaysOfWeekList.Count())
-				{
-					if (attachedDaysOfWeek == UnattachedDaysOfWeekList[l])
-					{
-						UnattachedDaysOfWeekList.RemoveAt(l);
-						break;
-					}
-					l++;
-				}
-			}
-			//End DaysOfWeek
+			//End PartOfDay
 
 			//Campus
 			WishlistCampusList = _unitOfWork.WishlistCampus.GetAll(w => w.WishlistId == wishlist.Id && w.IsArchived != true);
@@ -240,10 +205,6 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 
 		public IActionResult OnPostAdd(int? selectedSemesterId, int? selectedCourse)
 		{
-			if (!ModelState.IsValid)
-			{
-				return Page();
-			}
 
 			SelectedSemesterId = (int)selectedSemesterId;
 
@@ -345,7 +306,7 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 
 			//********************************Time Block********************************
 
-			String[] checkedTimeBlockList = returnedAttachedTimeBlock != null ? returnedAttachedTimeBlock.Split(',') : new String[0];
+			String[] checkedPartOfDayList = returnedAttachedPartOfDay != null ? returnedAttachedPartOfDay.Split(',') : new String[0];
 			//Creating a Row
 			if (objWishlist.Id == 0)
 			{
@@ -353,18 +314,18 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 				_unitOfWork.Commit();
 				int wishlistId = _unitOfWork.Wishlist.Get(c => c == objWishlist && c.IsArchived != true).Id;
 				//add the checked time blocks to the wishlist
-				if (checkedTimeBlockList.Length > 0 && checkedTimeBlockList[0] != "_")
+				if (checkedPartOfDayList.Length > 0 && checkedPartOfDayList[0] != "_")
 				{
 					//add the checked modalities to the wishlist
-					foreach (String s in checkedTimeBlockList)
+					foreach (String s in checkedPartOfDayList)
 					{
-						WishlistTimeBlock temp = new WishlistTimeBlock();
+						WishlistPartOfDay temp = new WishlistPartOfDay();
 						temp.WishlistId = objWishlist.Id;
 
-						if (_unitOfWork.TimeBlock.Get(c => c.TimeBlockValue == s && c.IsArchived != true).Id != null || _unitOfWork.TimeBlock.Get(c => c.TimeBlockValue == s && c.IsArchived != true).Id != 0)
+						if (_unitOfWork.PartOfDay.Get(c => c.PartOfDayValue == s && c.IsArchived != true).Id != null || _unitOfWork.PartOfDay.Get(c => c.PartOfDayValue == s && c.IsArchived != true).Id != 0)
 						{
-							temp.TimeBlockId = _unitOfWork.TimeBlock.Get(c => c.TimeBlockValue == s && c.IsArchived != true).Id;
-							_unitOfWork.WishlistTimeBlock.Add(temp);
+							temp.PartOfDayId = _unitOfWork.PartOfDay.Get(c => c.PartOfDayValue == s && c.IsArchived != true).Id;
+							_unitOfWork.WishlistPartOfDay.Add(temp);
 						}
 					}
 				}
@@ -373,32 +334,32 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 			//Modifying a Row
 			else
 			{
-				//get all attached WishlistTimeBlock's
-				IEnumerable<WishlistTimeBlock> tempList = _unitOfWork.WishlistTimeBlock.GetAll(c => c.WishlistId == objWishlist.Id && c.IsArchived != true);
-				foreach (WishlistTimeBlock ap in tempList)
+				//get all attached WishlistPartOfDay's
+				IEnumerable<WishlistPartOfDay> tempList = _unitOfWork.WishlistPartOfDay.GetAll(c => c.WishlistId == objWishlist.Id && c.IsArchived != true);
+				foreach (WishlistPartOfDay ap in tempList)
 				{
-					var modality = ap.TimeBlock;
-					if (modality != null && !checkedTimeBlockList.Contains(modality.TimeBlockValue))
+					var modality = ap.PartOfDay;
+					if (modality != null && !checkedPartOfDayList.Contains(modality.PartOfDayValue))
 					{
 						ap.IsArchived = true;
-						_unitOfWork.WishlistTimeBlock.Update(ap);
+						_unitOfWork.WishlistPartOfDay.Update(ap);
 					}
 
 				}
 				//if the user assigned no amenities or "_"
-				if (checkedTimeBlockList.Length > 0 && checkedTimeBlockList[0] != "_")
+				if (checkedPartOfDayList.Length > 0 && checkedPartOfDayList[0] != "_")
 				{
 					//add the checked modalities to the wishlist
-					foreach (String s in checkedTimeBlockList)
+					foreach (String s in checkedPartOfDayList)
 					{
-						WishlistTimeBlock temp = new WishlistTimeBlock();
+						WishlistPartOfDay temp = new WishlistPartOfDay();
 						temp.WishlistId = objWishlist.Id;
 
-						var modality = _unitOfWork.TimeBlock.Get(c => c.TimeBlockValue == s && c.IsArchived != true);
+						var modality = _unitOfWork.PartOfDay.Get(c => c.PartOfDayValue == s && c.IsArchived != true);
 						if (modality != null && modality.Id != 0)
 						{
-							temp.TimeBlockId = modality.Id;
-							_unitOfWork.WishlistTimeBlock.Add(temp);
+							temp.PartOfDayId = modality.Id;
+							_unitOfWork.WishlistPartOfDay.Add(temp);
 						}
 					}
 				}

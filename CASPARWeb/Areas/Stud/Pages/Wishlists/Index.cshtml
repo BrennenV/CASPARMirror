@@ -32,6 +32,9 @@
 					<div class="row pt=4">
 						<form method="post" class="row">
 							<div class="col-2">
+
+							</div>
+							<div class="col-2">
 								<label><h6>Modalities</h6></label>
 								<hr />
 							
@@ -48,62 +51,22 @@
 									<input type="hidden" id="modalityArrayInput" asp-for="returnedAttachedModality" value="" />
 							</div>
 
-							<div class="col-4">
-								<label><h6>Time Blocks</h6></label>
-								<hr />
-								<div class="row">
-									<div class="col-6" id="timeBlocks1">
-										@{
-											var count = 0;
-										}
-										@foreach (var timeBlock in Model.TimeBlockList)
-										{
-											if (count % 2 == 0)
-											{
-												<div>
-													<input class="form-check-input" onchange="updateCheckboxTimeBlock()" type="checkbox" value="@timeBlock.TimeBlockValue" @(Model.AttachedTimeBlockList.Contains(timeBlock.TimeBlockValue) ? "checked" : "") />
-													<label>@timeBlock.TimeBlockValue</label>
-												</div>
-											}
-											count++;
-										}
-										<input type="hidden" id="timeBlockArrayInput" asp-for="returnedAttachedTimeBlock" value="" />
-									</div>
-									<div class="col-6" id="timeBlocks2">
-										@{
-											count = 0;
-										}
-										@foreach (var timeBlock in Model.TimeBlockList)
-										{
-											if (count % 2 != 0)
-											{
-												<div>
-													<input class="form-check-input" onchange="updateCheckboxTimeBlock()" type="checkbox" value="@timeBlock.TimeBlockValue" @(Model.AttachedTimeBlockList.Contains(timeBlock.TimeBlockValue) ? "checked" : "") />
-													<label>@timeBlock.TimeBlockValue</label>
-												</div>
-											}
-											count++;
-										}
-									</div>
-								</div>
-							</div>
-
 							<div class="col-2">
-								<label><h6>Days of Week</h6></label>
+								<label><h6>Part of Day</h6></label>
 								<hr />
-								<div class="col-12 px-2" id="daysOfWeek">
-									@foreach (var dayOfWeek in Model.DaysOfWeekList)
+								<div class="col-12 px-2" id="modalities">
+									@foreach (var partOfDay in Model.PartOfDayList)
 									{
 										<div>
-											<input class="form-check-input" onchange="updateCheckboxDaysOfWeek()" type="checkbox" value="@dayOfWeek.DaysOfWeekValue" @(Model.AttachedDaysOfWeekList.Contains(dayOfWeek.DaysOfWeekValue) ? "checked" : "") />
-											<label>@dayOfWeek.DaysOfWeekValue</label>
+											<input class="form-check-input" onchange="updateCheckboxPartOfDay()" type="checkbox" value="@partOfDay.PartOfDayValue" @(Model.AttachedPartOfDayList.Contains(partOfDay.PartOfDayValue) ? "checked" : "") />
+											<label>@partOfDay.PartOfDayValue</label>
 										</div>
 									}
 								</div>
-								<input type="hidden" id="daysOfWeekArrayInput" asp-for="returnedAttachedDaysOfWeek" value="" />
+								<input type="hidden" id="partOfDayArrayInput" asp-for="returnedAttachedPartOfDay" value="" />
 							</div>
 
-							<div class="col-3">
+							<div class="col-4">
 								<label><h6>Campuses</h6></label>
 								<hr />
 								<div class="col-12 px-2" id="campuses">
@@ -116,6 +79,8 @@
 									}
 								</div>
 								<input type="hidden" id="campusArrayInput" asp-for="returnedAttachedCampus" value="" />
+							</div>
+							<div class="col-2">
 							</div>
 							<br />
 							<div style="display: flex; justify-content: center; width: 50%; margin: auto;">
@@ -137,16 +102,12 @@
 					<div class="row p-3">
 						<!--Start Row-->
 						<form class="row" method="post">
-							<div class="col-1">
-								<label for="rank">Rank:</label><br>
-								<input type="number" id="rank" name="rank" min="1" style="width: 60%;">
-							</div>
 							<div class="col-5">
 								<select id="ddlTemplateCourses" name="selectedCourse" class="form-select rounded">
 								</select>
 							</div>
 							<div class="col-2">
-								<button type="submit" asp-page-handler="add" asp-route-selectedSemesterId="@Model.SelectedSemesterId" asp-route-selectedCourse="@Model.SelectedCourse" class="btn btn-outline-primary rounded" id="btnAddCourse"><i class="bi bi-plus-circle"></i></button>
+								<button type="submit" onclick="return ValidateInput(event)" asp-page-handler="add" asp-route-selectedSemesterId="@Model.SelectedSemesterId" asp-route-selectedCourse="@Model.SelectedCourse" class="btn btn-outline-primary rounded" id="btnAddCourse"><i class="bi bi-plus-circle"></i></button>
 							</div>
 						</form>
 					</div> <!--End Row-->
@@ -191,7 +152,7 @@
 				}
 				console.log("Return string: " + document.getElementById('modalityArrayInput').value);
 			}
-			function updateCheckboxTimeBlock() {
+			function updateCheckboxPartOfDay() {
 				//get all "checked" checkbox values
 				var checkboxes = document.querySelectorAll('.form-check-input');
 				var checkedValues = [];
@@ -214,42 +175,12 @@
 						returnList = returnList + ",";
 					}
 				}
-				document.getElementById('timeBlockArrayInput').value = returnList;
+				document.getElementById('partOfDayArrayInput').value = returnList;
 				//if the list is empty set the return string to '_'
 				if (checkedValues.length == 0) {
-					document.getElementById('timeBlockArrayInput').value = "_";
+					document.getElementById('partOfDayArrayInput').value = "_";
 				}
-				console.log("Return string: " + document.getElementById('timeBlockArrayInput').value);
-			}
-			function updateCheckboxDaysOfWeek() {
-				//get all "checked" checkbox values
-				var checkboxes = document.querySelectorAll('.form-check-input');
-				var checkedValues = [];
-				console.log("");
-
-				//swal.fire('Error', 'TEST', 'error');
-				// Loop through each checkbox
-				checkboxes.forEach(function (checkbox) {
-					if (checkbox.checked) {
-						console.log(checkbox.value);
-						checkedValues.push(checkbox.value);
-					}
-				});
-				console.log("Checked Boxes: " + checkedValues.length);
-				//generate the comma separated return list
-				var returnList = "";
-				for (var i = 0; i < checkedValues.length; i++) {
-					returnList = returnList + checkedValues[i];
-					if (i < checkedValues.length - 1) {
-						returnList = returnList + ",";
-					}
-				}
-				document.getElementById('daysOfWeekArrayInput').value = returnList;
-				//if the list is empty set the return string to '_'
-				if (checkedValues.length == 0) {
-					document.getElementById('daysOfWeekArrayInput').value = "_";
-				}
-				console.log("Return string: " + document.getElementById('daysOfWeekArrayInput').value);
+				console.log("Return string: " + document.getElementById('partOfDayArrayInput').value);
 			}
 			function updateCheckboxCampus() {
 				//get all "checked" checkbox values
@@ -280,6 +211,14 @@
 					document.getElementById('campusArrayInput').value = "_";
 				}
 				console.log("Return string: " + document.getElementById('campusArrayInput').value);
+			}
+			function ValidateInput(event) {
+				if (document.getElementById('ddlTemplateCourses').value == "") {
+					swal.fire('Error', 'Please Select a Course', 'error');
+					return false;
+				}
+				return true;
+
 			}
 		</script>
 		<script type="text/javascript">

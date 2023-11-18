@@ -146,7 +146,7 @@
 								</select>
 							</div>
 							<div class="col-2">
-								<button type="submit" asp-page-handler="add" asp-route-selectedSemesterId="@Model.SelectedSemesterId" asp-route-selectedCourse="@Model.SelectedCourse" class="btn btn-outline-primary rounded" id="btnAddCourse"><i class="bi bi-plus-circle"></i></button>
+								<button type="submit" onclick="return ValidateInput(event)" asp-page-handler="add" asp-route-selectedSemesterId="@Model.SelectedSemesterId" asp-route-selectedCourse="@Model.SelectedCourse" class="btn btn-outline-primary rounded" id="btnAddCourse"><i class="bi bi-plus-circle"></i></button>
 							</div>
 						</form>
 					</div> <!--End Row-->
@@ -280,6 +280,19 @@
 					document.getElementById('campusArrayInput').value = "_";
 				}
 				console.log("Return string: " + document.getElementById('campusArrayInput').value);
+			}
+			function ValidateInput(event) {
+				if (document.getElementById('ddlTemplateCourses').value == "") {
+					swal.fire('Error', 'Please Select a Course', 'error');
+					return false;
+				}
+				else if (document.getElementById('rank').value == "") {
+
+					swal.fire('Error', 'Please enter a Rank', 'error');
+					return false;
+				}
+				return true;
+
 			}
 		</script>
 		<script type="text/javascript">

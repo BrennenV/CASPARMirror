@@ -240,10 +240,6 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 
 		public IActionResult OnPostAdd(int? selectedSemesterId, int? selectedCourse)
 		{
-			if (!ModelState.IsValid)
-			{
-				return Page();
-			}
 
 			SelectedSemesterId = (int)selectedSemesterId;
 
