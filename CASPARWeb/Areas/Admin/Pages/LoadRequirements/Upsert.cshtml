@@ -1,0 +1,55 @@
+﻿@page
+@model CASPARWeb.Areas.Admin.Pages.LoadRequirements.UpsertModel
+@{
+}
+<div class="card shadow border-0 mt-8 col-6 mx-auto">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-primary py-2">Update Load Requirements</h2>
+                <h2 class="text-primary py-2">@(Model.objSemesterInstance.SemesterInstanceName)</h2>
+            </div>
+        </div>
+    </div>
+    <form method="post" class="form">
+        <div class="border p-3">
+            <table id="myTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Instructor
+                        </th>
+                        <th>
+                            Load Amount
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model.objLoadReqList)
+                    {
+                        <input type="hidden" name="objLoadReqList.Index" value="@obj.Id" />
+                        <input type="hidden" name="objLoadReqList[@obj.Id].Id" value="@obj.Id" />
+                        <input type="hidden" name="objLoadReqList[@obj.Id].SemesterInstanceId" value="@obj.SemesterInstanceId" />
+                        <input type="hidden" name="objLoadReqList[@obj.Id].InstructorId" value="@obj.InstructorId" />
+                        <tr>
+                            <td>
+                                @obj.ApplicationUser.FullName
+                            </td>
+                            <td style="width: 10%;">
+                                <input type="text" name="objLoadReqList[@obj.Id].LoadReqAmount" value="@obj.LoadReqAmount" style="width: 100%;" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="row pt-2">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                </div>
+                <div class="col-6">
+                    <a asp-page="/LoadRequirements/Index" class=" btn btn-outline-primary border form-control">Back to Load Requirements</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div> <!--Close Container-->

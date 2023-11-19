@@ -1,0 +1,29 @@
+﻿@page
+@model CASPARWeb.Areas.Admin.Pages.LoadRequirements.IndexModel
+@{
+}
+<div class="container">
+    <div class="row pt=4">
+        <!--Start Row-->
+        <div class="col-6">
+            <!--50% of row-->
+            <h2 class="text-primary">
+                Instructor Load Requirements
+            </h2>
+        </div><!-- End 1st Column-->
+    </div> <!--End Row-->
+    <table class="table table-bordered table-striped" id="DT_LoadRequirements" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Semester
+                </th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+    </table>
+</div> <!--Close Container-->
+@section Scripts
+{
+    <script src="~/js/loadRequirements.js"></script>
+}
