@@ -3,6 +3,7 @@ using Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq.Expressions;
 
 namespace CASPARWeb.Areas.Admin.Pages.Semesters
 {
@@ -42,6 +43,17 @@ namespace CASPARWeb.Areas.Admin.Pages.Semesters
             if (objSemester.Id == 0)
             {
                 _unitOfWork.Semester.Add(objSemester);
+                Expression<Func<Course, bool>> predicate = c => c.IsArchived != true;
+                IEnumerable<Course> courses = _unitOfWork.Course.GetAll(predicate);
+                foreach(Course course in courses)
+                {
+                    Template template = new Template();
+                    template.Quantity = 0;
+                    template.IsArchived = false;
+                    template.Course = course;
+                    template.Semester = objSemester;
+                    _unitOfWork.Template.Add(template);
+                }
                 TempData["success"] = "Semester added Successfully";
             }
             //Modifying a Row
