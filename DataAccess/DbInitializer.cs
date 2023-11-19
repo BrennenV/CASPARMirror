@@ -90,8 +90,8 @@ namespace DataAccess
 			{
 				UserName = "instructor@instructor.com",
 				Email = "instructor@instructor.com",
-				FirstName = "Instructor",
-				LastName = "Doe",
+				FirstName = "Kyle",
+				LastName = "Fuez",
 			}, "Instructor123*").GetAwaiter().GetResult();
 
 			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
@@ -101,8 +101,8 @@ namespace DataAccess
             {
                 UserName = "instructor2@instructor.com",
                 Email = "instructor2@instructor.com",
-                FirstName = "Instructor2",
-                LastName = "Doe",
+                FirstName = "Rich",
+                LastName = "Fry",
             }, "Instructor123*").GetAwaiter().GetResult();
 
             user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor2@instructor.com");
@@ -112,8 +112,8 @@ namespace DataAccess
             {
                 UserName = "instructor3@instructor.com",
                 Email = "instructor3@instructor.com",
-                FirstName = "Instructor3",
-                LastName = "Doe",
+                FirstName = "Arpit",
+                LastName = "Christi",
             }, "Instructor123*").GetAwaiter().GetResult();
 
             user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor3@instructor.com");
@@ -124,8 +124,8 @@ namespace DataAccess
 			{
 				UserName = "student@student.com",
 				Email = "student@student.com",
-				FirstName = "Student",
-				LastName = "Doe",
+				FirstName = "Chris",
+				LastName = "Jensen",
 			}, "Student123*").GetAwaiter().GetResult();
 
 			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
@@ -135,8 +135,8 @@ namespace DataAccess
             {
                 UserName = "student2@student.com",
                 Email = "student2@student.com",
-                FirstName = "Student2",
-                LastName = "Doe",
+                FirstName = "Joseph",
+                LastName = "Brower",
             }, "Student123*").GetAwaiter().GetResult();
 
             user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student2@student.com");
@@ -146,8 +146,8 @@ namespace DataAccess
             {
                 UserName = "student3@student.com",
                 Email = "student3@student.com",
-                FirstName = "Student3",
-                LastName = "Doe",
+                FirstName = "Jaeden",
+                LastName = "Fisher",
             }, "Student123*").GetAwaiter().GetResult();
 
             user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student3@student.com");
