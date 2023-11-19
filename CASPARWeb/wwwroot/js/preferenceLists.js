@@ -69,10 +69,12 @@ function loadTemplateCourses() {
             dropdown.append($("<option />").val("").text("Add Courses")); // default option
 
             $.each(data.data, function (index, item) {
-                var courseInfo = item.course.academicProgram.programCode + ' ' +
-                    item.course.courseNumber + ' ' +
-                    item.course.courseTitle;
-                dropdown.append($("<option />").val(item.course.id).text(courseInfo));
+                if (item.quantity > 0) { // check if Template.quantity > 0
+                    var courseInfo = item.course.academicProgram.programCode + ' ' +
+                        item.course.courseNumber + ' ' +
+                        item.course.courseTitle;
+                    dropdown.append($("<option />").val(item.course.id).text(courseInfo));
+                }
             });
         },
         error: function (xhr, error, thrown) {
@@ -80,6 +82,7 @@ function loadTemplateCourses() {
         }
     });
 }
+
 
 function loadCourseWishlist() {
     $.ajax({
