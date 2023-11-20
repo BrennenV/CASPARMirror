@@ -1,24 +1,29 @@
 using DataAccess;
 using Infrastructure.Interfaces;
 using Infrastructure.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data;
+using Utility;
 
 namespace CASPARWeb.Areas.Admin.Pages.SemesterInstances
 {
 	public class UpsertModel : PageModel
 	{
 		private readonly UnitOfWork _unitOfWork;
+        private readonly UserManager<ApplicationUser> _userManager;
         [BindProperty]
         public SemesterInstance objSemesterInstance { get; set; }
 		public CourseSection objCourseSection { get; set; }
 		public IEnumerable<SelectListItem> SemesterList { get; set; }
         [BindProperty]
         public int oldSemesterValue { get; set; }
-        public UpsertModel(UnitOfWork unitOfWork)
+        public UpsertModel(UnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
             objSemesterInstance = new SemesterInstance();
             SemesterList = new List<SelectListItem>();
         }
@@ -45,7 +50,7 @@ namespace CASPARWeb.Areas.Admin.Pages.SemesterInstances
             //Create mode
             return Page();
         }
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {
@@ -56,7 +61,7 @@ namespace CASPARWeb.Areas.Admin.Pages.SemesterInstances
             if (objSemesterInstance.Id == 0)
             {
 				_unitOfWork.SemesterInstance.Add(objSemesterInstance);
-				_unitOfWork.Commit();
+				await _unitOfWork.CommitAsync();
 
 				//get the <list> of templates that have a semesterId equal to the selected semesterId 
 				IEnumerable<Template> templates = _unitOfWork.Template.GetAll(t => t.SemesterId == objSemesterInstance.SemesterId && t.IsArchived != true);
@@ -78,7 +83,39 @@ namespace CASPARWeb.Areas.Admin.Pages.SemesterInstances
 					}
 
 				}
-			}
+
+                IEnumerable<ApplicationUser> instructors = await _userManager.GetUsersInRoleAsync(SD.INSTRUCTOR_ROLE);
+                foreach (var instructor in instructors)
+                {
+                    //Add default load requirements for every instructor
+                    string currentSemesterType = _unitOfWork.Semester.GetById(objSemesterInstance.SemesterId).SemesterName;
+                    LoadReq newLoadReq = new LoadReq();
+                    newLoadReq.InstructorId = instructor.Id;
+                    newLoadReq.SemesterInstanceId = objSemesterInstance.Id;
+
+                    if (currentSemesterType == "Fall" || currentSemesterType == "Spring")
+                    {
+                        //Then the default load requirement time is 12
+                        newLoadReq.LoadReqAmount = 12;
+                    }
+                    else
+                    {
+                        //Then the default value is 0
+                        newLoadReq.LoadReqAmount = 0;
+                    }
+
+                    _unitOfWork.LoadReq.Add(newLoadReq);
+
+                    //Add default Release Times for every instructor
+                    ReleaseTime newReleaseTime = new ReleaseTime();
+                    newReleaseTime.InstructorId = instructor.Id;
+                    newReleaseTime.SemesterInstanceId = objSemesterInstance.Id;
+                    newReleaseTime.ReleaseTimeAmount = 0;
+
+                    _unitOfWork.ReleaseTime.Add(newReleaseTime);
+                }
+
+            }
             //Modifying a Row
             else
             {
@@ -90,7 +127,7 @@ namespace CASPARWeb.Areas.Admin.Pages.SemesterInstances
                     {
                         _unitOfWork.CourseSection.Delete(courseSection);
                     }
-                    _unitOfWork.Commit();
+                    await _unitOfWork.CommitAsync();
 
                     IEnumerable<Template> templates = _unitOfWork.Template.GetAll(t => t.SemesterId == objSemesterInstance.SemesterId && t.IsArchived != true);
 
@@ -115,7 +152,7 @@ namespace CASPARWeb.Areas.Admin.Pages.SemesterInstances
                 TempData["success"] = "Semester Instance updated Successfully";
             }
             //Saves changes
-            _unitOfWork.Commit();
+            await _unitOfWork.CommitAsync();
             return RedirectToPage("./Index");
         }
     }
