@@ -153,6 +153,18 @@ namespace DataAccess
             user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student3@student.com");
             _userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
 
+            //Create Program Coordinator
+            _userManager.CreateAsync(new ApplicationUser
+            {
+                UserName = "coord@coord.com",
+                Email = "coord@coord.com",
+                FirstName = "Hugo",
+                LastName = "Valle",
+            }, "Coord123*").GetAwaiter().GetResult();
+
+            user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "coord@coord.com");
+            _userManager.AddToRoleAsync(user, SD.PROGRAM_COORDINATOR_ROLE).GetAwaiter().GetResult();
+
             //Get some of the instructors and students for seeding further records
             var instr = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
             var instr2 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor2@instructor.com");
