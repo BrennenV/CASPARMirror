@@ -258,7 +258,7 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 			_unitOfWork.Commit();
 
 
-			return RedirectToPage("./Index");
+			return RedirectToPage("./Index", new { selectedSemesterId = SelectedSemesterId });
 		}
 
 		public IActionResult OnPostArchiveCourse(int? selectedCourse)
@@ -535,7 +535,7 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 
 			//Saves changes
 			_unitOfWork.Commit();
-			return RedirectToPage("./Index");
+			return RedirectToPage("./Index", new {selectedSemesterId = SelectedSemesterId});
 		}
 	}
 
