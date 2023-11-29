@@ -705,15 +705,15 @@ namespace DataAccess
 
 			var SectionStatuses = new List<SectionStatus>
 			{
-				new SectionStatus { SectionStatusName = "Pending", SectionStatusColor = "Yellow", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Active", SectionStatusColor = "Green", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Inactive", SectionStatusColor = "Gray", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Cancelled", SectionStatusColor = "Red", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Updated", SectionStatusColor = "Blue", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Needed", SectionStatusColor = "Purple", IsArchived = false },
-				new SectionStatus { SectionStatusName = "IF Needed", SectionStatusColor = "Pink", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Confirmed", SectionStatusColor = "Cyan", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Banner Conflict", SectionStatusColor = "Orange", IsArchived = false }
+				new SectionStatus { SectionStatusName = "Pending", SectionStatusColor = "#ffff00", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Active", SectionStatusColor = "#00ff00", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Inactive", SectionStatusColor = "#808080", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Cancelled", SectionStatusColor = "#ff0000", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Updated", SectionStatusColor = "#0000ff", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Needed", SectionStatusColor = "#800080", IsArchived = false },
+				new SectionStatus { SectionStatusName = "IF Needed", SectionStatusColor = "#ffc0cb", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Confirmed", SectionStatusColor = "#00ffff", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Banner Conflict", SectionStatusColor = "#ffa500", IsArchived = false }
 			};
 
 			foreach (var s in SectionStatuses)
