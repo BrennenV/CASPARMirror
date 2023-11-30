@@ -27,19 +27,16 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule {
             //instructorsWishList = new List<Wishlist>();
             instructorReport = new List<InstructorReport>();
         }
-        public void OnGet(int courseSectionId1, int semesterInstanceId1)
+        public void OnGet(int courseId1, int semesterInstanceId1)//courseID
         {
             int semesterInstanceId = 2;
-            int courseSectionId = 6;
+            //int courseSectionId = 6;
+            int courseId = 6;
             //Using courseSectionId and semesterInstanceId
             //List instructors and ranking them from their wishlist rank
             //and where their their load requirements has not been met.
-            CourseSection tempCourseSection = _unitOfWork.CourseSection.Get(c => c.Id == courseSectionId && c.IsArchived != true);
-            if (tempCourseSection == null) {
-                /*Error course does not exist*/
-                return;
-            }
-            Course tempCourse = _unitOfWork.Course.Get(c => c.Id == tempCourseSection.CourseId && c.IsArchived != true);
+            
+            Course tempCourse = _unitOfWork.Course.Get(c => c.Id == courseId && c.IsArchived != true);
 
             IEnumerable<WishlistCourse> wishlistCourses = _unitOfWork.WishlistCourse.GetAll(w => w.CourseId == tempCourse.Id && w.IsArchived != true, null, "Course");
             IEnumerable<Wishlist> wishlists = _unitOfWork.Wishlist.GetAll(w => w.SemesterInstanceId == semesterInstanceId && w.IsArchived != true, null, "ApplicationUser");
