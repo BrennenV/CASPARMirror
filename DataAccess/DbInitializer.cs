@@ -706,13 +706,13 @@ namespace DataAccess
 			var SectionStatuses = new List<SectionStatus>
 			{
 				new SectionStatus { SectionStatusName = "Pending", SectionStatusColor = "#ffff00", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Active", SectionStatusColor = "#00ff00", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Active", SectionStatusColor = "#00ffff", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Inactive", SectionStatusColor = "#808080", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Cancelled", SectionStatusColor = "#ff0000", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Updated", SectionStatusColor = "#0000ff", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Needed", SectionStatusColor = "#800080", IsArchived = false },
 				new SectionStatus { SectionStatusName = "IF Needed", SectionStatusColor = "#ffc0cb", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Confirmed", SectionStatusColor = "#00ffff", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Confirmed", SectionStatusColor = "#3cb043", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Banner Conflict", SectionStatusColor = "#ffa500", IsArchived = false }
 			};
 
