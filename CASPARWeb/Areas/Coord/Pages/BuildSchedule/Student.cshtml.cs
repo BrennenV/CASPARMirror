@@ -53,7 +53,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 			foreach (var user in WishlistList)
 			{
 				var applicationUser = user.ApplicationUser;
-				if (await _userManager.IsInRoleAsync(applicationUser, Utility.SD.STUDENT_ROLE))
+				if (await _userManager.IsInRoleAsync(applicationUser, SD.STUDENT_ROLE))
 				{
 					StudentCount++;
 				}
@@ -64,7 +64,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 			foreach (var user in WishlistModalityList)
 			{
 				var applicationUser = user.Wishlist.ApplicationUser;
-				if (await _userManager.IsInRoleAsync(applicationUser, Utility.SD.STUDENT_ROLE))
+				if (await _userManager.IsInRoleAsync(applicationUser, SD.STUDENT_ROLE))
 				{
 					// This user is a student. Count the modality id.
 					int modalityId = user.ModalityId;
@@ -84,7 +84,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 			foreach (var user in WishlistPartOfDayList)
 			{
 				var applicationUser = user.Wishlist.ApplicationUser;
-				if (await _userManager.IsInRoleAsync(applicationUser, Utility.SD.STUDENT_ROLE))
+				if (await _userManager.IsInRoleAsync(applicationUser, SD.STUDENT_ROLE))
 				{
 					// This user is a student. Count the part of day id.
 					int partOfDayId = user.PartOfDayId;
@@ -104,7 +104,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 			foreach (var user in WishlistCampusList)
 			{
 				var applicationUser = user.Wishlist.ApplicationUser;
-				if (await _userManager.IsInRoleAsync(applicationUser, Utility.SD.STUDENT_ROLE))
+				if (await _userManager.IsInRoleAsync(applicationUser, SD.STUDENT_ROLE))
 				{
 					// This user is a student. Count the campus id.
 					int campusId = user.CampusId;
