@@ -278,10 +278,10 @@ namespace DataAccess
 
 			var Campuses = new List<Campus>
 			{
-				new Campus { CampusName = "WSU Weber Main Campus", IsArchived = false },
-				new Campus { CampusName = "WSD Weber Davis Campus", IsArchived = false},
-				new Campus { CampusName = "SLCC Salt Lake Community College", IsArchived = false },
-				new Campus { CampusName = "WSF Farmington", IsArchived = false },
+				new Campus { CampusName = "Weber Main Campus", IsArchived = false },
+				new Campus { CampusName = "Weber Davis Campus", IsArchived = false},
+				new Campus { CampusName = "Salt Lake Community College", IsArchived = false },
+				new Campus { CampusName = "Farmington", IsArchived = false },
 				new Campus { CampusName = "High School", IsArchived = false }
 			};
 
