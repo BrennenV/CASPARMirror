@@ -2,123 +2,200 @@
 @model CASPARWeb.Areas.Coord.Pages.BuildSchedule.UpsertModel
 @{
 }
-<div class="card shadow border-0 mt-4 col-6 mx-auto">
-    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-primary py-2">@(Model.objCourseSection.Id != 0 ? "Update " : "Add ") Course Section for @Model.objSemesterInstance.SemesterInstanceName</h2>
-                <h5>@Model.objAcademicProgram.ProgramCode @Model.objCourse.CourseNumber @Model.objCourse.CourseTitle</h5>
-            </div>
-        </div>
-    </div>
-    <div class="card-body p-4">
-        <form method="post" class="row">
-            <input type="hidden" asp-for="objCourseSection.Id">
-            <input type="hidden" asp-for="objCourseSection.SemesterInstanceId">
-            <div class="border p-3">
-                <label class="form-label">BannerCRN</label>
-                <input asp-for="objCourseSection.BannerCRN" class="form-control border-0 shadow" />
-                <label class="form-label">Section Notes</label>
-                <input asp-for="objCourseSection.SectionNotes" class="form-control border-0 shadow" />
-                <label class="ms-2">Section First Day Enrollment:</label>
-                <div class="mb-3 col-6">
-                    <div class="form-group mt-1">
-                        <label class="ms-2">Start Date</label>
-                        <input asp-for="objCourseSection.SectionFirstDayEnrollment" type="date" class="form-control border-0 shadow" />
-                    </div>
-                </div>
-                <label class="ms-2">Section Final Enrollment:</label>
-                <div class="mb-3 col-6">
-                    <div class="form-group mt-1">
-                        <label class="ms-2">Start Date</label>
-                        <input asp-for="objCourseSection.SectionFinalEnrollment" type="date" class="form-control border-0 shadow" />
-                    </div>
-                </div>
-                <label class="ms-2">Section Updated:</label>
-                <div class="mb-3 col-6">
-                    <div class="form-group mt-1">
-                        <label class="ms-2">Start Date</label>
-                        <input asp-for="objCourseSection.SectionUpdated" type="date" class="form-control border-0 shadow" />
-                    </div>
-                </div>
-                <label class="ms-2">Section Banner Updated:</label>
-                <div class="mb-3 col-6">
-                    <div class="form-group mt-1">
-                        <label class="ms-2">Start Date</label>
-                        <input asp-for="objCourseSection.SectionBannerUpdated" type="date" class="form-control border-0 shadow" />
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label mt-4">Course</label>
-                    <select id="ddlCourse" asp-for="objCourseSection.CourseId" asp-items="@Model.CourseList" class="form-select">
-                        <option disabled selected>--Select Course--</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label mt-4">Instructor</label>
-                    <select id="ddlInstructor" asp-for="objCourseSection.InstructorId" asp-items="@Model.ApplicationUserList" class="form-select">
-                        <option disabled selected>--Select Instructor--</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label mt-4">Modality</label>
-                    <select id="ddlModality" asp-for="objCourseSection.ModalityId" asp-items="@Model.ModalityList" class="form-select">
-                        <option disabled selected>--Select Modality--</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label mt-4">Classroom</label>
-                    <select id="ddlClassroom" asp-for="objCourseSection.ClassroomId" asp-items="@Model.ClassroomList" class="form-select">
-                        <option disabled selected>--Select Classroom--</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label mt-4">Time Block</label>
-                    <select id="ddlTimeBlock" asp-for="objCourseSection.TimeBlockId" asp-items="@Model.TimeBlockList" class="form-select">
-                        <option disabled selected>--Select Time Block--</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label mt-4">Days Of Week</label>
-                    <select id="ddlDaysOfWeek" asp-for="objCourseSection.DaysOfWeekId" asp-items="@Model.DaysOfWeekList" class="form-select">
-                        <option disabled selected>--Select Day of the Week--</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label mt-4">Part Of Term</label>
-                    <select id="ddlPartOfTerm" asp-for="objCourseSection.PartOfTermId" asp-items="@Model.PartOfTermList" class="form-select">
-                        <option disabled selected>--Select Part of the Term--</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label mt-4">Pay Model</label>
-                    <select id="ddlPayModel" asp-for="objCourseSection.PayModelId" asp-items="@Model.PayModelList" class="form-select">
-                        <option disabled selected>--Select Pay Model--</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label mt-4">Pay Organization</label>
-                    <select id="ddlPayOrganization" asp-for="objCourseSection.PayOrganizationId" asp-items="@Model.PayOrganizationList" class="form-select">
-                        <option disabled selected>--Select Pay Organization--</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label mt-4">Section Status</label>
-                    <select id="ddlSectionStatus" asp-for="objCourseSection.SectionStatusId" asp-items="@Model.SectionStatusList" class="form-select">
-                        <option disabled selected>--Select Section Status--</option>
-                    </select>
-                </div>
-                <div class="row pt-2">
-                    <div class="col-6">
-                        <button type="submit" class="btn btn-primary form-control">@(Model.objCourseSection.Id != 0 ? "Update " : "Add ")</button>
-                    </div>
-                    <div class="col-6">
-                        <a asp-page="./Index" asp-route-id="@Model.objCourseSection.SemesterInstanceId" class=" btn btn-outline-primary border form-control">
-                            Back to List
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+<div class="card shadow border-0 mt-4 col-12 mx-auto">
+	<div class="card-header bg-secondary bg-gradient ml-0 py-3">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h2 class="text-primary py-2">@(Model.objCourseSection.Id != 0 ? "Update " : "Add ") Course Section for @Model.objSemesterInstance.SemesterInstanceName</h2>
+				<h5>@Model.objAcademicProgram.ProgramCode @Model.objCourse.CourseNumber @Model.objCourse.CourseTitle</h5>
+			</div>
+		</div>
+	</div>
+
+		<div class="card-body p-4 row">
+		<div class="col-3">
+			<div class="card">
+				<div class="card-header">
+					<h5>Student Report</h5>
+					<p>Course Demand: @Model.StudentCount</p>
+				</div>
+				<div class="card-body">
+					<div class="row py-2">
+						<div class="col-12">
+							<label><h6>Modalities</h6></label>
+							<hr />
+							<div class="col-12 px-2" id="modalities">
+								@foreach (var modality in Model.StudentModalityList.OrderByDescending(x => Model.ModalityCount.ContainsKey(x.Id) ? Model.ModalityCount[x.Id] : 0))
+								{
+									<div class="d-flex justify-content-between">
+										<label>@modality.ModalityName</label>
+										@if (Model.ModalityCount.ContainsKey(modality.Id))
+										{
+											<span> @Model.ModalityCount[modality.Id]</span>
+										}
+										else
+										{
+											<span> 0</span>
+										}
+									</div>
+								}
+							</div>
+						</div>
+
+						<div class="col-12 pt-4">
+							<label><h6>Part of Day</h6></label>
+							<hr />
+							<div class="col-12 px-2" id="partofdays">
+								@foreach (var partOfDay in Model.PartOfDayList.OrderByDescending(x => Model.PartOfDayCount.ContainsKey(x.Id) ? Model.PartOfDayCount[x.Id] : 0))
+								{
+									<div class="d-flex justify-content-between">
+										<label>@partOfDay.PartOfDayValue</label>
+										@if (Model.PartOfDayCount.ContainsKey(partOfDay.Id))
+										{
+											<span> @Model.PartOfDayCount[partOfDay.Id]</span>
+										}
+										else
+										{
+											<span> 0</span>
+										}
+									</div>
+								}
+							</div>
+						</div>
+
+						<div class="col-12 pt-4">
+							<label><h6>Campuses</h6></label>
+							<hr />
+							<div class="col-12 px-2" id="campuses">
+								@foreach (var campus in Model.CampusList.OrderByDescending(x => Model.CampusCount.ContainsKey(x.Id) ? Model.CampusCount[x.Id] : 0))
+								{
+									<div class="d-flex justify-content-between">
+										<label>@campus.CampusName</label>
+										@if (Model.CampusCount.ContainsKey(campus.Id))
+										{
+											<span> @Model.CampusCount[campus.Id]</span>
+										}
+										else
+										{
+											<span> 0</span>
+										}
+									</div>
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="col-9">
+				<form method="post" class="row">
+					<input type="hidden" asp-for="objCourseSection.Id">
+					<input type="hidden" asp-for="objCourseSection.SemesterInstanceId">
+					<div class="border p-3">
+						<label class="form-label">BannerCRN</label>
+						<input asp-for="objCourseSection.BannerCRN" class="form-control border-0 shadow" />
+						<label class="form-label">Section Notes</label>
+						<input asp-for="objCourseSection.SectionNotes" class="form-control border-0 shadow" />
+						<label class="ms-2">Section First Day Enrollment:</label>
+						<div class="mb-3 col-6">
+							<div class="form-group mt-1">
+								<label class="ms-2">Start Date</label>
+								<input asp-for="objCourseSection.SectionFirstDayEnrollment" type="date" class="form-control border-0 shadow" />
+							</div>
+						</div>
+						<label class="ms-2">Section Final Enrollment:</label>
+						<div class="mb-3 col-6">
+							<div class="form-group mt-1">
+								<label class="ms-2">Start Date</label>
+								<input asp-for="objCourseSection.SectionFinalEnrollment" type="date" class="form-control border-0 shadow" />
+							</div>
+						</div>
+						<label class="ms-2">Section Updated:</label>
+						<div class="mb-3 col-6">
+							<div class="form-group mt-1">
+								<label class="ms-2">Start Date</label>
+								<input asp-for="objCourseSection.SectionUpdated" type="date" class="form-control border-0 shadow" />
+							</div>
+						</div>
+						<label class="ms-2">Section Banner Updated:</label>
+						<div class="mb-3 col-6">
+							<div class="form-group mt-1">
+								<label class="ms-2">Start Date</label>
+								<input asp-for="objCourseSection.SectionBannerUpdated" type="date" class="form-control border-0 shadow" />
+							</div>
+						</div>
+						<div class="mb-3">
+							<label class="form-label mt-4">Course</label>
+							<select id="ddlCourse" asp-for="objCourseSection.CourseId" asp-items="@Model.CourseList" class="form-select">
+								<option disabled selected>--Select Course--</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label mt-4">Instructor</label>
+							<select id="ddlInstructor" asp-for="objCourseSection.InstructorId" asp-items="@Model.ApplicationUserList" class="form-select">
+								<option disabled selected>--Select Instructor--</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label mt-4">Modality</label>
+							<select id="ddlModality" asp-for="objCourseSection.ModalityId" asp-items="@Model.ModalityList" class="form-select">
+								<option disabled selected>--Select Modality--</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label mt-4">Classroom</label>
+							<select id="ddlClassroom" asp-for="objCourseSection.ClassroomId" asp-items="@Model.ClassroomList" class="form-select">
+								<option disabled selected>--Select Classroom--</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label mt-4">Time Block</label>
+							<select id="ddlTimeBlock" asp-for="objCourseSection.TimeBlockId" asp-items="@Model.TimeBlockList" class="form-select">
+								<option disabled selected>--Select Time Block--</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label mt-4">Days Of Week</label>
+							<select id="ddlDaysOfWeek" asp-for="objCourseSection.DaysOfWeekId" asp-items="@Model.DaysOfWeekList" class="form-select">
+								<option disabled selected>--Select Day of the Week--</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label mt-4">Part Of Term</label>
+							<select id="ddlPartOfTerm" asp-for="objCourseSection.PartOfTermId" asp-items="@Model.PartOfTermList" class="form-select">
+								<option disabled selected>--Select Part of the Term--</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label mt-4">Pay Model</label>
+							<select id="ddlPayModel" asp-for="objCourseSection.PayModelId" asp-items="@Model.PayModelList" class="form-select">
+								<option disabled selected>--Select Pay Model--</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label mt-4">Pay Organization</label>
+							<select id="ddlPayOrganization" asp-for="objCourseSection.PayOrganizationId" asp-items="@Model.PayOrganizationList" class="form-select">
+								<option disabled selected>--Select Pay Organization--</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label mt-4">Section Status</label>
+							<select id="ddlSectionStatus" asp-for="objCourseSection.SectionStatusId" asp-items="@Model.SectionStatusList" class="form-select">
+								<option disabled selected>--Select Section Status--</option>
+							</select>
+						</div>
+						<div class="row pt-2">
+							<div class="col-6">
+								<button type="submit" class="btn btn-primary form-control">@(Model.objCourseSection.Id != 0 ? "Update " : "Add ")</button>
+							</div>
+							<div class="col-6">
+								<a asp-page="./Index" asp-route-id="@Model.objCourseSection.SemesterInstanceId" class=" btn btn-outline-primary border form-control">
+									Back to List
+								</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 </div>
