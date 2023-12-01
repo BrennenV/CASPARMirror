@@ -2,7 +2,8 @@
 @model CASPARWeb.Areas.Coord.Pages.BuildSchedule.InstructorModel
 @{
 }
-<div class="card border-0">
+<!--<div class="overflow-auto">...</div>-->
+<div class="card border-0 overflow-auto" style="height: 800px">
     <div class="card-header">
         <h5>Instructor Report of @Model.SemesterName</h5>
         <p>Number of Instructors in Report: @Model.instructorReport.Count</p>
@@ -45,5 +46,6 @@
                 }
             </tbody>
         </table>
+
     </div>
 </div> <!--Close Container-->
