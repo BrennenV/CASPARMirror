@@ -3,6 +3,7 @@ using Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.AccessControl;
 
 namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 {
@@ -11,7 +12,9 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
         private readonly UnitOfWork _unitOfWork;
         [BindProperty]
         public CourseSection objCourseSection { get; set; }
-        public SemesterInstance objSemesterInstance { get; set; }
+		public Course objCourse { get; set; }
+        public AcademicProgram objAcademicProgram { get; set; }
+		public SemesterInstance objSemesterInstance { get; set; }
         public IEnumerable<SelectListItem> CourseList { get; set; }
         public IEnumerable<SelectListItem> SemesterInstanceList { get; set; }
         public IEnumerable<SelectListItem> ApplicationUserList { get; set; }
@@ -28,6 +31,8 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
         {
             _unitOfWork = unitOfWork;
             objCourseSection = new CourseSection();
+            objCourse = new Course();
+            objAcademicProgram = new AcademicProgram();
             objSemesterInstance = new SemesterInstance();
             CourseList = new List<SelectListItem>();
             SemesterInstanceList = new List<SelectListItem>();
@@ -65,6 +70,8 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
             if (courseSectionId != null && courseSectionId != 0)
             {
                 objCourseSection = _unitOfWork.CourseSection.GetById(courseSectionId);
+                objCourse = _unitOfWork.Course.Get(c => c.Id == objCourseSection.CourseId && c.IsArchived != true);
+                objAcademicProgram = _unitOfWork.AcademicProgram.Get(c => c.Id == objCourse.ProgramId && c.IsArchived != true);
             }
             //Nothing found in DB
             if (objCourseSection == null)
