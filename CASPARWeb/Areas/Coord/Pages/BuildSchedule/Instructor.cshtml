@@ -2,33 +2,48 @@
 @model CASPARWeb.Areas.Coord.Pages.BuildSchedule.InstructorModel
 @{
 }
-<div class="container">
-    <div class="row pt=4">
-        <!--Start Row-->
-        <div class="col-6">
-            <h2 class="text-primary">
-                Instructor Load List
-            </h2>
-        </div>
-        <div class="col-6 text-end">
-        </div>
-    </div> 
-    <table class="table table-bordered table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th>
-                    Instructor
-                </th>
-                <th>
-                    Current Load
-                </th>
-            </tr>
-            @for(int i = 0; i < Model.instructorReport.Count; i++){
+<div class="card border-0">
+    <div class="card-header">
+        <h5>Instructor Report of @Model.SemesterName</h5>
+        <p>Number of Instructors in Report: @Model.instructorReport.Count</p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@Model.instructorReport[i].wishlist.ApplicationUser.FullName</td>
-                    <td>@Model.instructorReport[i].totalLoadApplied/@Model.instructorReport[i].loadReqAmount</td>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Load</th>
+                    <th scope="col">Modality</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Location</th>
                 </tr>
-            }
-        </thead>
-    </table>
+            </thead>
+            <tbody>
+                @for(int i = 0; i < Model.instructorReport.Count; i++){
+                <tr>
+                    <th scope="row">@Model.instructorReport[i].ranking</th>
+                        <td>@Model.instructorReport[i].wishlist.ApplicationUser.FullName</td>
+                        <td>@Model.instructorReport[i].totalLoadApplied/@Model.instructorReport[i].loadReqAmount</td>
+                    <td>
+                        @for(int t = 0; t < Model.instructorReport[i].modalityList.Count; t++){
+                            <p>@Model.instructorReport[i].modalityList[t]</p>
+                        }
+                    </td>
+                    <td>
+                        @for (int t = 0; t < Model.instructorReport[i].timeList.Count; t++) {
+                            <p>@Model.instructorReport[i].timeList[t]</p>
+                        }
+                    </td>
+                    <td>
+                        @for (int t = 0; t < Model.instructorReport[i].locationList.Count; t++) {
+                            <p>@Model.instructorReport[i].locationList[t]</p>
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div> <!--Close Container-->
