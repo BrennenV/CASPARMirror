@@ -32,11 +32,11 @@
                 </div>
 
                 <div class="dropdown-content collapse multi-collapse container mb-4" id="multiCollapseCourse@(item.Key)">
-                @{
-                    int itemCount = 1;
-                    foreach (var courseSection in item.Value)
-                    {
-                        <div class="row no-gutters dropdown-row py-1">
+                    @{
+                        int itemCount = 1;
+                        foreach (var courseSection in item.Value)
+                        {
+                            <div class="row no-gutters dropdown-row py-1">
                             <div class="col-2">
                                     @{
                                         if (courseSection.SectionStatus != null && courseSection.SectionStatus.SectionStatusColor != null)
@@ -76,25 +76,25 @@
                                     }
                                     else
                                     {
-                                        <span style="position:relative"><span class="badge rounded-pill status-badge" style="background-color:#fafafa;color:#808080 !important;">No Status</span></span>
+                                        <span style="position:relative"><span class="badge rounded-pill status-badge" style="background-color:#b90e0a">Not Started</span></span>
                                         <br />
                                     }
                                 }
                                 <strong>@(courseSection.Course != null ? courseSection.Course.AcademicProgram != null ? courseSection.Course.AcademicProgram.ProgramCode : "Academic Program Not Found" : "Course Not Found") @(courseSection.Course != null ? courseSection.Course.CourseNumber : "Course Number Not Found")</strong>
                                 <br>
-                                <strong>Instructor:</strong> @(courseSection.ApplicationUser != null ? @courseSection.ApplicationUser.FullName : "None")
-                            </div>
+                                    <strong>Instructor:</strong> @(courseSection.ApplicationUser != null ? @courseSection.ApplicationUser.FullName : Html.Raw("<span class='noval'>None</span>"))
+                                </div>
                             <div class="col-9">
 
                                 <div class="row no-gutters">
                                     <div class="col">
-                                        <strong>Modality:</strong> @(courseSection.Modality != null ? @courseSection.Modality.ModalityName : "None")
+                                            <strong>Modality:</strong> @(courseSection.Modality != null ? @courseSection.Modality.ModalityName : Html.Raw("<span class='noval'>None</span>"))
                                     </div>
                                     <div class="col">
-                                        <strong>Days:</strong> @(courseSection.DaysOfWeek != null ? @courseSection.DaysOfWeek.DaysOfWeekValue : "None")
+                                            <strong>Pay Model:</strong> @(courseSection.PayModel != null ? @courseSection.PayModel.PayModelTitle : Html.Raw("<span class='noval'>None</span>"))
                                     </div>
                                     <div class="col">
-                                        <strong>Time Block:</strong> @(courseSection.TimeBlock != null ? @courseSection.TimeBlock.TimeBlockValue : "None")
+                                            <strong>Pay Org:</strong> @(courseSection.PayOrganization != null ? @courseSection.PayOrganization.PayOrganizationTitle : Html.Raw("<span class='noval'>None</span>"))
                                     </div>
                                 </div>
                                 <div class="row no-gutters">
@@ -102,10 +102,10 @@
                                         <strong>Part of Term:</strong> @(courseSection.PartOfTerm != null ? @courseSection.PartOfTerm.PartOfTermTitle : "None")
                                     </div>
                                     <div class="col">
-                                        <strong>Pay Model:</strong> @(courseSection.PayModel != null ? @courseSection.PayModel.PayModelTitle : "None")
+                                        <strong>Days:</strong> @(courseSection.DaysOfWeek != null ? @courseSection.DaysOfWeek.DaysOfWeekValue : "None")
                                     </div>
                                     <div class="col">
-                                        <strong>Pay Org:</strong> @(courseSection.PayOrganization != null ? @courseSection.PayOrganization.PayOrganizationTitle : "None")
+                                        <strong>Time Block:</strong> @(courseSection.TimeBlock != null ? @courseSection.TimeBlock.TimeBlockValue : "None")
                                     </div>
                                 </div>
                                 <div class="row no-gutters">
@@ -122,7 +122,7 @@
 
                             </div>
                             <div class="col-1">
-                                <a asp-page="Upsert" asp-route-semesterInstanceId="@(Model.objSemesterInstance.Id)" asp-route-courseSectionId="@(courseSection.Id)" class="btn btn-outline-primary mt-1 rounded" style="cursor:pointer; style="cursor:pointer; width: 100px;">
+                                <a asp-page="Upsert" asp-route-semesterInstanceId="@(Model.objSemesterInstance.Id)" asp-route-courseSectionId="@(courseSection.Id)" class="btn btn-outline-primary mt-1 rounded position-relative" style="cursor:pointer; style="cursor:pointer; width: 100px;">
                                     <i class="bi bi-pencil-square"></i> Edit
                                 </a>
                             </div>
@@ -192,5 +192,9 @@
         top: 58px;
         right: 20px;
         font-weight: lighter;
+    }
+
+    .noval {
+        color: #DC3545;
     }
 </style>
