@@ -46,7 +46,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule {
             //Using courseSectionId and semesterInstanceId
             //List instructors and ranking them from their wishlist rank
             //and where their their load requirements has not been met.
-            
+            //var courseId = _unitOfWork.CourseSection.GetById(courseSectionId).CourseId;
             //Get wishlists table with applicationUser table appended to it
             Course tempCourse = _unitOfWork.Course.Get(c => c.Id == courseId && c.IsArchived != true);
 
