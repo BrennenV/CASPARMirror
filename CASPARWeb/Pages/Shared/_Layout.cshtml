@@ -120,26 +120,6 @@
                                 </div>
                             </li>
                         }
-                        @if (User.IsInRole(SD.PROGRAM_COORDINATOR_ROLE))
-                        {
-                            <li>
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle text-light rounded me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Reports
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <!--Secretary Reports-->
-                                        <li><a class="dropdown-item" href="#">Offered Courses</a></li>
-                                        <!--Administrator Reports-->
-                                        <li><a class="dropdown-item" href="#">1st, 3rd week enrollment data</a></li>
-                                        <!--Program Coordinator Reports-->
-                                        <li><a class="dropdown-item" href="#">Student Course Preferences</a></li>
-                                        <li><a class="dropdown-item" href="#">Instructor Overview</a></li> <!-- Shows the final load and overload for each instructor -->
-                                        <!-- Add more dropdown items as needed -->
-                                    </ul>
-                                </div>
-                            </li>
-                        }
                         <li class="nav-item rounded">
                             <a class="nav-link text-light" asp-page="/About">About</a>
                         </li>
