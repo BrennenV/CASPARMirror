@@ -102,7 +102,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 				}
             }
 			ModalityList = _unitOfWork.Modality.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.ModalityName, Value = c.Id.ToString() });
-            ClassroomList = _unitOfWork.Classroom.GetAll(c => c.IsArchived != true,null,"Building").Select(c => new SelectListItem { Text = c.ClassroomNumber, Value = c.Id.ToString()});
+            ClassroomList = _unitOfWork.Classroom.GetAll(c => c.IsArchived != true,null,"Building,Building.Campus").Select(c => new SelectListItem { Text = c.ClassroomNumber + " - " + c.Building.Campus.CampusName, Value = c.Id.ToString()});
             TimeBlockList = _unitOfWork.TimeBlock.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.TimeBlockValue, Value = c.Id.ToString() });
             DaysOfWeekList = _unitOfWork.DaysOfWeek.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.DaysOfWeekValue, Value = c.Id.ToString() });
             PartOfTermList = _unitOfWork.PartOfTerm.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.PartOfTermTitle, Value = c.Id.ToString() });

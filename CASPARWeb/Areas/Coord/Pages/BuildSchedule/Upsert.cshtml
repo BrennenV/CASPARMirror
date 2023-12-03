@@ -100,6 +100,8 @@
 		<!--Form-->
 		<div class="col-9 mx-0">
 			<!--Instructor Report-->
+			@if (Model.objCourse.Id != 0)
+			{
 			<div class="mb-2">
 				<div class="card overflow-auto" style="height: 400px">
 					<div class="card-header">
@@ -160,6 +162,8 @@
 					</div>
 				</div> <!--Close Container-->
 			</div>
+			}
+
 			<div class="mb-2">
 				<div class="border p-3">
 					<form method="post" class="row">
