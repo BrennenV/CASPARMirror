@@ -56,12 +56,16 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
             public List<String>? modalityList { get; set; }
             public List<String>? locationList { get; set; }
             public List<String>? timeList { get; set; }
+
+            public List<String>? weekDayList { get; set; }
             public InstructorReport() {
                 modalityList = new List<String>();
                 locationList = new List<String>();
                 timeList = new List<String>();
                 wishlist = new Wishlist();
-            }
+				weekDayList = new List<String>();
+
+			}
         }
 
         //public List<Wishlist> instructorsWishList;
@@ -519,18 +523,25 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 					if (tempTimeBlocks == null || tempTimeBlocks.Count() == 0)
 					{
 
-					}
-					else
-					{
-						foreach (WishlistTimeBlock tempTimeBlock in tempTimeBlocks)
-						{
-							String temp = tempTimeBlock.TimeBlock.TimeBlockValue;
-							instructorReport[i].timeList.Add(temp);
-						}
-					}
-				}
-				//Rank instructor report items
-				instructorReport = instructorReport.OrderBy(i => i.ranking).ToList();
+                } else {
+                    foreach (WishlistTimeBlock tempTimeBlock in tempTimeBlocks) {
+                        String temp = tempTimeBlock.TimeBlock.TimeBlockValue;
+                        instructorReport[i].timeList.Add(temp);
+                    }
+                }
+				//Get all days of week
+				IEnumerable<WishlistDaysOfWeek> tempWeekDays = _unitOfWork.WishlistDaysOfWeek.GetAll(d => d.WishlistId == instructorReport[i].wishlist.Id && d.IsArchived != true, null, "DaysOfWeek");
+                if (tempWeekDays == null || tempWeekDays.Count() == 0) {
+                } else { 
+                    foreach (WishlistDaysOfWeek tempWeekDay in tempWeekDays) {
+                        String temp = tempWeekDay.DaysOfWeek.DaysOfWeekValue;
+                        instructorReport[i].weekDayList.Add(temp);
+                    }
+                }
+            }
+            
+            //Rank instructor report items
+            instructorReport = instructorReport.OrderBy(i => i.ranking).ToList();
 
 				//Get semester name for report title
 				SemesterName = _unitOfWork.SemesterInstance.Get(s => s.Id == semesterInstanceId && s.IsArchived != true).SemesterInstanceName;
