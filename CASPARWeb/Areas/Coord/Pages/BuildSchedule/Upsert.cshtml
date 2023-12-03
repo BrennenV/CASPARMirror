@@ -100,6 +100,8 @@
 		<!--Form-->
 		<div class="col-9 mx-0">
 			<!--Instructor Report-->
+			@if (Model.objCourse.Id != 0)
+			{
 			<div class="mb-2">
 				<div class="card overflow-auto" style="height: 400px">
 					<div class="card-header">
@@ -139,10 +141,17 @@
 												Times
 											</button>
 											<div class="collapse" id="collapseTime@(i)">
-												<div class="card card-body border-0">
-													@for (int t = 0; t < Model.instructorReport[i].timeList.Count; t++) {
-														<p>@Model.instructorReport[i].timeList[t]</p>
-													}
+												<div class="row">
+													<div class="card card-body border-0 col-6">
+														@for (int t = 0; t < Model.instructorReport[i].timeList.Count; t++) {
+															<p>@Model.instructorReport[i].timeList[t]</p>
+														}
+													</div>
+													<div class="card card-body border-0 col-6">
+														@for (int t = 0; t < Model.instructorReport[i].weekDayList.Count; t++) {
+															<p>@Model.instructorReport[i].weekDayList[t]</p>
+														}
+													</div>
 												</div>
 											</div>
 											
@@ -160,6 +169,8 @@
 					</div>
 				</div> <!--Close Container-->
 			</div>
+			}
+
 			<div class="mb-2">
 				<div class="border p-3">
 					<form method="post" class="row">
