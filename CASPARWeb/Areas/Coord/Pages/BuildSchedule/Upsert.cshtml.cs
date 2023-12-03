@@ -21,8 +21,8 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
         public AcademicProgram objAcademicProgram { get; set; }
 		public SemesterInstance objSemesterInstance { get; set; }
         public IEnumerable<SelectListItem> CourseList { get; set; }
-        public IEnumerable<SelectListItem> SemesterInstanceList { get; set; }
-        public IEnumerable<SelectListItem> ApplicationUserList { get; set; }
+        public IEnumerable<ApplicationUser> ApplicationUserList { get; set; }
+        public IEnumerable<SelectListItem> InstructorList { get; set; }
         public IEnumerable<SelectListItem> ModalityList { get; set; }
 		public IEnumerable<Modality> StudentModalityList { get; set; }
         public IEnumerable<SelectListItem> ClassroomList { get; set; }
@@ -77,8 +77,8 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
             objAcademicProgram = new AcademicProgram();
             objSemesterInstance = new SemesterInstance();
             CourseList = new List<SelectListItem>();
-            SemesterInstanceList = new List<SelectListItem>();
-            ApplicationUserList = new List<SelectListItem>();
+            ApplicationUserList = new List<ApplicationUser>();
+			InstructorList = new List<SelectListItem>();
             ModalityList = new List<SelectListItem>();
 			ClassroomList = new List<SelectListItem>();
             TimeBlockList = new List<SelectListItem>();
@@ -92,11 +92,17 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 		public async Task<IActionResult> OnGet(int courseSectionId, int semesterInstanceId)
         {
             //Populate the foreign keys to avoid foreign key conflicts
-            CourseList = _unitOfWork.Course.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.CourseTitle, Value = c.Id.ToString() });
-            SemesterInstanceList = _unitOfWork.SemesterInstance.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.SemesterInstanceName, Value = c.Id.ToString() });
-            ApplicationUserList = _unitOfWork.ApplicationUser.GetAll().Select(c => new SelectListItem { Text = c.FullName, Value = c.Id.ToString() });
-            ModalityList = _unitOfWork.Modality.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.ModalityName, Value = c.Id.ToString() });
-            ClassroomList = _unitOfWork.Classroom.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.ClassroomNumber, Value = c.Id.ToString() });
+            CourseList = _unitOfWork.Course.GetAll(c => c.IsArchived != true, null, "AcademicProgram").Select(c => new SelectListItem { Text = c.AcademicProgram.ProgramCode + " " + c.CourseNumber + " " + c.CourseTitle, Value = c.Id.ToString() });
+            ApplicationUserList = _unitOfWork.ApplicationUser.GetAll();
+            foreach (var user in ApplicationUserList)
+            {
+                if (await _userManager.IsInRoleAsync(user, SD.INSTRUCTOR_ROLE))
+                {
+					InstructorList = InstructorList.Concat(new[] { new SelectListItem { Text = user.FullName, Value = user.Id.ToString() } });
+				}
+            }
+			ModalityList = _unitOfWork.Modality.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.ModalityName, Value = c.Id.ToString() });
+            ClassroomList = _unitOfWork.Classroom.GetAll(c => c.IsArchived != true,null,"Building").Select(c => new SelectListItem { Text = c.ClassroomNumber, Value = c.Id.ToString()});
             TimeBlockList = _unitOfWork.TimeBlock.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.TimeBlockValue, Value = c.Id.ToString() });
             DaysOfWeekList = _unitOfWork.DaysOfWeek.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.DaysOfWeekValue, Value = c.Id.ToString() });
             PartOfTermList = _unitOfWork.PartOfTerm.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.PartOfTermTitle, Value = c.Id.ToString() });
@@ -336,7 +342,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
             }
             //Saves changes
             _unitOfWork.Commit();
-            return RedirectToPage("./Index", new { id = objCourseSection.SemesterInstanceId });
+            return RedirectToPage("./Sections", new { semesterInstanceId = objCourseSection.SemesterInstanceId });
         }
     }
 }
