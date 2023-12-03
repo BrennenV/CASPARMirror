@@ -119,8 +119,7 @@
 									<th scope="col">Rank</th>
 									<th scope="col">Name</th>
 									<th scope="col">Load</th>
-									<th scope="col">Modality</th>
-									<th scope="col">Time</th>
+									<th scope="col">Details</th>
 									<th scope="col">Location</th>
 								</tr>
 							</thead>
@@ -130,24 +129,23 @@
 										<th scope="row">@Model.instructorReport[i].ranking</th>
 										<td>@Model.instructorReport[i].wishlist.ApplicationUser.FullName</td>
 										<td>@Model.instructorReport[i].totalLoadApplied/@Model.instructorReport[i].loadReqAmount</td>
-										<td>
-
-											@for (int t = 0; t < Model.instructorReport[i].modalityList.Count; t++) {
-												<p>@Model.instructorReport[i].modalityList[t]</p>
-											}
-										</td>
-										<td>
+										<td style="width:500px">
 											<button class="btn btn-outline-secondary rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTime@(i)" aria-expanded="false" aria-controls="collapseExample" style="width:150px">
-												Times
+												Details
 											</button>
 											<div class="collapse" id="collapseTime@(i)">
 												<div class="row">
-													<div class="card card-body border-0 col-6">
+													<div class="card card-body border-0 col-4">
+														@for (int t = 0; t < Model.instructorReport[i].modalityList.Count; t++) {
+															<p>@Model.instructorReport[i].modalityList[t]</p>
+														}
+													</div>
+													<div class="card card-body border-0 col-4">
 														@for (int t = 0; t < Model.instructorReport[i].timeList.Count; t++) {
 															<p>@Model.instructorReport[i].timeList[t]</p>
 														}
 													</div>
-													<div class="card card-body border-0 col-6">
+													<div class="card card-body border-0 col-4">
 														@for (int t = 0; t < Model.instructorReport[i].weekDayList.Count; t++) {
 															<p>@Model.instructorReport[i].weekDayList[t]</p>
 														}
