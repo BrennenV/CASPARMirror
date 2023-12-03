@@ -32,11 +32,11 @@
                 </div>
 
                 <div class="dropdown-content collapse multi-collapse container mb-4" id="multiCollapseCourse@(item.Key)">
-                    @{
-                        int itemCount = 1;
-                        foreach (var courseSection in item.Value)
-                        {
-                            <div class="row no-gutters dropdown-row py-1">
+                @{
+                    int itemCount = 1;
+                    foreach (var courseSection in item.Value)
+                    {
+                        <div class="row no-gutters dropdown-row py-1">
                             <div class="col-2">
                                     @{
                                         if (courseSection.SectionStatus != null && courseSection.SectionStatus.SectionStatusColor != null)
@@ -83,7 +83,7 @@
                                 <strong>@(courseSection.Course != null ? courseSection.Course.AcademicProgram != null ? courseSection.Course.AcademicProgram.ProgramCode : "Academic Program Not Found" : "Course Not Found") @(courseSection.Course != null ? courseSection.Course.CourseNumber : "Course Number Not Found")</strong>
                                 <br>
                                     <strong>Instructor:</strong> @(courseSection.ApplicationUser != null ? @courseSection.ApplicationUser.FullName : Html.Raw("<span class='noval'>None</span>"))
-                                </div>
+                            </div>
                             <div class="col-9">
 
                                 <div class="row no-gutters">

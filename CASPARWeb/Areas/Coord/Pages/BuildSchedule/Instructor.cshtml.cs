@@ -16,7 +16,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule {
         public List<String>? locationList { get; set; }
         public List<String>? timeList { get; set; }
         public InstructorReport()
-        {
+{
             modalityList = new List<String>();
             locationList = new List<String>();
             timeList = new List<String>();

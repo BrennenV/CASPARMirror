@@ -3,92 +3,92 @@
 @{
 }
 <div id="accordion">
-	<div class="card">
+<div class="card">
 		<a class="btn-primary" data-bs-toggle="collapse" href="#collapseOne" style="text-decoration: none;">
-			<div class="card-header">
-				<h5>Student Report</h5>
+	<div class="card-header">
+		<h5>Student Report</h5>
 				<p>Course Demand: @Model.StudentCount</p>
-			</div>
+	</div>
 		</a>
 		<div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
 			<div class="card-body">
-				<div class="row py-2">
-					<div class="col-1">
-					</div>
-					<div class="col-2">
-						<label><h6>Modalities</h6></label>
-						<hr />
-						<div class="col-12 px-2" id="modalities">
+	<div class="row py-2">
+		<div class="col-1">
+		</div>
+		<div class="col-2">
+			<label><h6>Modalities</h6></label>
+			<hr />
+			<div class="col-12 px-2" id="modalities">
 							@foreach (var modality in Model.ModalityList.OrderByDescending(x => Model.ModalityCount.ContainsKey(x.Id) ? Model.ModalityCount[x.Id] : 0))
-							{
-								<div class="d-flex justify-content-between">
-									<label>@modality.ModalityName</label>
-									@if (Model.ModalityCount.ContainsKey(modality.Id))
-									{
-										<span> @Model.ModalityCount[modality.Id]</span>
-									}
-									else
-									{
-										<span> 0</span>
-									}
-								</div>
-							}
-						</div>
+				{
+					<div class="d-flex justify-content-between">
+						<label>@modality.ModalityName</label>
+						@if (Model.ModalityCount.ContainsKey(modality.Id))
+						{
+							<span> @Model.ModalityCount[modality.Id]</span>
+						}
+						else
+						{
+							<span> 0</span>
+						}
 					</div>
-
-
-					<div class="col-1">
-					</div>
-
-					<div class="col-2">
-						<label><h6>Part of Day</h6></label>
-						<hr />
-						<div class="col-12 px-2" id="partofdays">
-							@foreach (var partOfDay in Model.PartOfDayList.OrderByDescending(x => Model.PartOfDayCount.ContainsKey(x.Id) ? Model.PartOfDayCount[x.Id] : 0))
-							{
-								<div class="d-flex justify-content-between">
-									<label>@partOfDay.PartOfDayValue</label>
-									@if (Model.PartOfDayCount.ContainsKey(partOfDay.Id))
-									{
-										<span> @Model.PartOfDayCount[partOfDay.Id]</span>
-									}
-									else
-									{
-										<span> 0</span>
-									}
-								</div>
-							}
-						</div>
-					</div>
-
-					<div class="col-1">
-					</div>
-
-					<div class="col-4">
-						<label><h6>Campuses</h6></label>
-						<hr />
-						<div class="col-12 px-2" id="campuses">
-							@foreach (var campus in Model.CampusList.OrderByDescending(x => Model.CampusCount.ContainsKey(x.Id) ? Model.CampusCount[x.Id] : 0))
-							{
-								<div class="d-flex justify-content-between">
-									<label>@campus.CampusName</label>
-									@if (Model.CampusCount.ContainsKey(campus.Id))
-									{
-										<span> @Model.CampusCount[campus.Id]</span>
-									}
-									else
-									{
-										<span> 0</span>
-									}
-								</div>
-							}
-						</div>
-					</div>
-
-					<div class="col-1">
-					</div>
-				</div>
+				}
 			</div>
+		</div>
+
+
+		<div class="col-1">
+		</div>
+
+		<div class="col-2">
+			<label><h6>Part of Day</h6></label>
+			<hr />
+			<div class="col-12 px-2" id="partofdays">
+							@foreach (var partOfDay in Model.PartOfDayList.OrderByDescending(x => Model.PartOfDayCount.ContainsKey(x.Id) ? Model.PartOfDayCount[x.Id] : 0))
+				{
+					<div class="d-flex justify-content-between">
+						<label>@partOfDay.PartOfDayValue</label>
+						@if (Model.PartOfDayCount.ContainsKey(partOfDay.Id))
+						{
+							<span> @Model.PartOfDayCount[partOfDay.Id]</span>
+						}
+						else
+						{
+							<span> 0</span>
+						}
+					</div>
+				}
+			</div>
+		</div>
+
+		<div class="col-1">
+		</div>
+
+		<div class="col-4">
+			<label><h6>Campuses</h6></label>
+			<hr />
+			<div class="col-12 px-2" id="campuses">
+							@foreach (var campus in Model.CampusList.OrderByDescending(x => Model.CampusCount.ContainsKey(x.Id) ? Model.CampusCount[x.Id] : 0))
+				{
+					<div class="d-flex justify-content-between">
+						<label>@campus.CampusName</label>
+						@if (Model.CampusCount.ContainsKey(campus.Id))
+						{
+							<span> @Model.CampusCount[campus.Id]</span>
+						}
+						else
+						{
+							<span> 0</span>
+						}
+					</div>
+				}
+			</div>
+		</div>
+
+		<div class="col-1">
+		</div>
+	</div>
+</div>
 		</div>
 	</div>
 </div>

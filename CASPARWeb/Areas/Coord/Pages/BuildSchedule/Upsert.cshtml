@@ -90,9 +90,9 @@
 					</div>
 				</div>
 			</div>
-			</div>
+		</div>
 		<!--Form-->
-			<div class="col-9 mx-0">
+		<div class="col-9 mx-0">
 			<!--Instructor Report-->
 			<div class="mb-2">
 				<div class="card overflow-auto" style="height: 400px">
@@ -150,118 +150,151 @@
 
 					</div>
 				</div> <!--Close Container-->
-
 			</div>
-				<form method="post" class="row">
-					<input type="hidden" asp-for="objCourseSection.Id">
-					<input type="hidden" asp-for="objCourseSection.SemesterInstanceId">
-					<div class="border p-3">
-						<label class="form-label">BannerCRN</label>
-						<input asp-for="objCourseSection.BannerCRN" class="form-control border-0 shadow" />
-						<label class="form-label">Section Notes</label>
-						<input asp-for="objCourseSection.SectionNotes" class="form-control border-0 shadow" />
-						<label class="ms-2">Section First Day Enrollment:</label>
-						<div class="mb-3 col-6">
-							<div class="form-group mt-1">
-								<label class="ms-2">Start Date</label>
-								<input asp-for="objCourseSection.SectionFirstDayEnrollment" type="date" class="form-control border-0 shadow" />
+			<div class="mb-2">
+				<div class="border p-3">
+					<form method="post" class="row">
+						<input type="hidden" asp-for="objCourseSection.Id">
+						<input type="hidden" asp-for="objCourseSection.SemesterInstanceId">
+						<div class="row">
+							<div class="form-group col-6">
+								<div class="row">
+									<div class="form-group col-6">
+										<label class="form-label">BannerCRN</label>
+										<input asp-for="objCourseSection.BannerCRN" class="form-control border-0 shadow" />
+									</div>
+									<div class="form-group col-6">
+										<label class="form-label">Section Status</label>
+										<select id="ddlSectionStatus" asp-for="objCourseSection.SectionStatusId" asp-items="@Model.SectionStatusList" class="form-select shadow">
+											<option disabled selected>--Select Section Status--</option>
+										</select>
+									</div>
+								</div>
+								<div class="row mt-3">
+									<div class="form-group col-6">
+										<label class="ms-2">First Day Enrollment</label>
+										<input asp-for="objCourseSection.SectionFirstDayEnrollment" type="date" class="form-control border-0 shadow" />
+									</div>
+									<div class="form-group col-6">
+										<label class="ms-2">Final Day Enrollment</label>
+										<input asp-for="objCourseSection.SectionFinalEnrollment" type="date" class="form-control border-0 shadow" />
+									</div>
+								</div>
+								<div class="row mt-3">
+									<div class="form-group col-6">
+										<label class="ms-2">Section Updated</label>
+										<input asp-for="objCourseSection.SectionUpdated" type="date" class="form-control border-0 shadow" />
+									</div>
+									<div class="form-group col-6">
+										<label class="ms-2">Banner Updated</label>
+										<input asp-for="objCourseSection.SectionBannerUpdated" type="date" class="form-control border-0 shadow" />
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-6">
+								<label class="form-label">Section Notes</label>
+								<textarea asp-for="objCourseSection.SectionNotes" class="form-control border-0 shadow" style="height: 85%"></textarea>
 							</div>
 						</div>
-						<label class="ms-2">Section Final Enrollment:</label>
-						<div class="mb-3 col-6">
-							<div class="form-group mt-1">
-								<label class="ms-2">Start Date</label>
-								<input asp-for="objCourseSection.SectionFinalEnrollment" type="date" class="form-control border-0 shadow" />
+						<div class="row">
+							<div class="form-group">
+								<label class="form-label mt-2">Course</label>
+								<select id="ddlCourse" asp-for="objCourseSection.CourseId" asp-items="@Model.CourseList" class="form-select shadow">
+									<option disabled selected>--Select Course--</option>
+								</select>
 							</div>
 						</div>
-						<label class="ms-2">Section Updated:</label>
-						<div class="mb-3 col-6">
-							<div class="form-group mt-1">
-								<label class="ms-2">Start Date</label>
-								<input asp-for="objCourseSection.SectionUpdated" type="date" class="form-control border-0 shadow" />
+						<div class="row">
+							<div class="form-group col-3">
+								<label class="form-label mt-2">Instructor</label>
+								<select id="ddlInstructor" asp-for="objCourseSection.InstructorId" asp-items="@Model.InstructorList" class="form-select shadow">
+									<option disabled selected>--Select Instructor--</option>
+								</select>
+							</div>
+							<div class="form-group col-3">
+								<label class="form-label mt-2">Classroom</label>
+								<select id="ddlClassroom" asp-for="objCourseSection.ClassroomId" asp-items="@Model.ClassroomList" class="form-select shadow">
+									<option disabled selected>--Select Classroom--</option>
+								</select>
+							</div>
+							<div class="form-group col-3">
+								<label class="form-label mt-2">Day Of The Week</label>
+								<select id="ddlDaysOfWeek" asp-for="objCourseSection.DaysOfWeekId" asp-items="@Model.DaysOfWeekList" class="form-select shadow">
+									<option disabled selected>--Select Day of the Week--</option>
+								</select>
+							</div>
+							<div class="form-group col-3">
+								<label class="form-label mt-2">Time Slot</label>
+								<select id="ddlTimeBlock" asp-for="objCourseSection.TimeBlockId" asp-items="@Model.TimeBlockList" class="form-select shadow">
+									<option disabled selected>--Select Time Slot--</option>
+								</select>
 							</div>
 						</div>
-						<label class="ms-2">Section Banner Updated:</label>
-						<div class="mb-3 col-6">
-							<div class="form-group mt-1">
-								<label class="ms-2">Start Date</label>
-								<input asp-for="objCourseSection.SectionBannerUpdated" type="date" class="form-control border-0 shadow" />
+						<div class="row mb-3">
+							<div class="form-group col-3">
+								<label class="form-label mt-2">Modality</label>
+								<select id="ddlModality" asp-for="objCourseSection.ModalityId" asp-items="@Model.ModalityList" class="form-select shadow">
+									<option disabled selected>--Select Modality--</option>
+								</select>
 							</div>
-						</div>
-						<div class="mb-3">
-							<label class="form-label mt-4">Course</label>
-							<select id="ddlCourse" asp-for="objCourseSection.CourseId" asp-items="@Model.CourseList" class="form-select">
-								<option disabled selected>--Select Course--</option>
-							</select>
-						</div>
-						<div class="mb-3">
-							<label class="form-label mt-4">Instructor</label>
-							<select id="ddlInstructor" asp-for="objCourseSection.InstructorId" asp-items="@Model.ApplicationUserList" class="form-select">
-								<option disabled selected>--Select Instructor--</option>
-							</select>
-						</div>
-						<div class="mb-3">
-							<label class="form-label mt-4">Modality</label>
-							<select id="ddlModality" asp-for="objCourseSection.ModalityId" asp-items="@Model.ModalityList" class="form-select">
-								<option disabled selected>--Select Modality--</option>
-							</select>
-						</div>
-						<div class="mb-3">
-							<label class="form-label mt-4">Classroom</label>
-							<select id="ddlClassroom" asp-for="objCourseSection.ClassroomId" asp-items="@Model.ClassroomList" class="form-select">
-								<option disabled selected>--Select Classroom--</option>
-							</select>
-						</div>
-						<div class="mb-3">
-							<label class="form-label mt-4">Time Block</label>
-							<select id="ddlTimeBlock" asp-for="objCourseSection.TimeBlockId" asp-items="@Model.TimeBlockList" class="form-select">
-								<option disabled selected>--Select Time Block--</option>
-							</select>
-						</div>
-						<div class="mb-3">
-							<label class="form-label mt-4">Days Of Week</label>
-							<select id="ddlDaysOfWeek" asp-for="objCourseSection.DaysOfWeekId" asp-items="@Model.DaysOfWeekList" class="form-select">
-								<option disabled selected>--Select Day of the Week--</option>
-							</select>
-						</div>
-						<div class="mb-3">
-							<label class="form-label mt-4">Part Of Term</label>
-							<select id="ddlPartOfTerm" asp-for="objCourseSection.PartOfTermId" asp-items="@Model.PartOfTermList" class="form-select">
-								<option disabled selected>--Select Part of the Term--</option>
-							</select>
-						</div>
-						<div class="mb-3">
-							<label class="form-label mt-4">Pay Model</label>
-							<select id="ddlPayModel" asp-for="objCourseSection.PayModelId" asp-items="@Model.PayModelList" class="form-select">
-								<option disabled selected>--Select Pay Model--</option>
-							</select>
-						</div>
-						<div class="mb-3">
-							<label class="form-label mt-4">Pay Organization</label>
-							<select id="ddlPayOrganization" asp-for="objCourseSection.PayOrganizationId" asp-items="@Model.PayOrganizationList" class="form-select">
-								<option disabled selected>--Select Pay Organization--</option>
-							</select>
-						</div>
-						<div class="mb-3">
-							<label class="form-label mt-4">Section Status</label>
-							<select id="ddlSectionStatus" asp-for="objCourseSection.SectionStatusId" asp-items="@Model.SectionStatusList" class="form-select">
-								<option disabled selected>--Select Section Status--</option>
-							</select>
+							<div class="form-group col-3">
+								<label class="form-label mt-2">Part Of Term</label>
+								<select id="ddlPartOfTerm" asp-for="objCourseSection.PartOfTermId" asp-items="@Model.PartOfTermList" class="form-select shadow">
+									<option disabled selected>--Select Part of the Term--</option>
+								</select>
+							</div>
+							<div class="form-group col-3">
+								<label class="form-label mt-2">Pay Model</label>
+								<select id="ddlPayModel" asp-for="objCourseSection.PayModelId" asp-items="@Model.PayModelList" class="form-select shadow">
+									<option disabled selected>--Select Pay Model--</option>
+								</select>
+							</div>
+							<div class="form-group col-3">
+								<label class="form-label mt-2">Pay Organization</label>
+								<select id="ddlPayOrganization" asp-for="objCourseSection.PayOrganizationId" asp-items="@Model.PayOrganizationList" class="form-select shadow">
+									<option disabled selected>--Select Pay Organization--</option>
+								</select>
+							</div>
 						</div>
 						<div class="row pt-2">
 							<div class="col-6">
 								<button type="submit" class="btn btn-primary form-control">@(Model.objCourseSection.Id != 0 ? "Update " : "Add ")</button>
 							</div>
 							<div class="col-6">
-								<a asp-page="./Index" asp-route-id="@Model.objCourseSection.SemesterInstanceId" class=" btn btn-outline-primary border form-control">
+								<a href="/Coord/BuildSchedule/Sections?semesterInstanceId=@Model.objSemesterInstance.Id" class=" btn btn-outline-primary border form-control">
 									Back to List
 								</a>
 							</div>
 						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
-		
 		</div>
 </div>
+@section Scripts{
+	<script>
+		//Sort the options for the Courses
+		var select = document.getElementById("ddlCourse");
+		var selectedValue = select.value;
+		var options = Array.from(select.options);
+		options.shift(); // Remove the disabled option from the array
+		options.sort((a, b) => a.text.localeCompare(b.text));
+		select.innerHTML = ""; // Clear the select element
+		options.forEach((option) => {
+			select.appendChild(option);
+		});
+		select.value = selectedValue; // Set the selected value back
 
+		//Sort the options for the Time Blocks
+		var select = document.getElementById("ddlTimeBlock");
+		var selectedValue = select.value;
+		var options = Array.from(select.options);
+		options.shift(); // Remove the disabled option from the array
+		options.sort((a, b) => a.text.localeCompare(b.text));
+		select.innerHTML = ""; // Clear the select element
+		options.forEach((option) => {
+			select.appendChild(option);
+		});
+		select.value = selectedValue; // Set the selected value back
+	</script>
+}
