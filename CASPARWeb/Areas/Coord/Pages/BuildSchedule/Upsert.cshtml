@@ -7,7 +7,10 @@
 		<div class="row">
 			<div class="col-12 text-center">
 				<h2 class="text-primary py-2">@(Model.objCourseSection.Id != 0 ? "Update " : "Add ") Course Section for @Model.objSemesterInstance.SemesterInstanceName</h2>
-				<h5>@Model.objAcademicProgram.ProgramCode @Model.objCourse.CourseNumber @Model.objCourse.CourseTitle</h5>
+				@if (Model.objCourse.Id != 0)
+                {
+					<h5>@Model.objAcademicProgram.ProgramCode @Model.objCourse.CourseNumber @Model.objCourse.CourseTitle</h5>
+                }
 			</div>
 		</div>
 	</div>
@@ -21,7 +24,10 @@
 			<div class="card">
 				<div class="card-header">
 					<h5>Student Report</h5>
-					<p>Course Demand: @Model.StudentCount</p>
+					@if (Model.objCourse.Id != 0)
+					{
+                        <p>Number of Students in Report: @Model.StudentCount</p>
+                    }
 				</div>
 				<div class="card-body">
 					<div class="row py-2">
@@ -98,7 +104,10 @@
 				<div class="card overflow-auto" style="height: 400px">
 					<div class="card-header">
 						<h5>Instructor Report</h5>
-						<p>Number of Instructors in Report: @Model.instructorReport.Count</p>
+						@if (Model.objCourse.Id != 0)
+						{
+							<p>Number of Instructors in Report: @Model.instructorReport.Count</p>
+						}
 					</div>
 
 					<div class="table-responsive">
