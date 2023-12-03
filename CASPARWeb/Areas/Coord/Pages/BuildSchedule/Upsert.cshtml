@@ -130,10 +130,17 @@
 												Times
 											</button>
 											<div class="collapse" id="collapseTime@(i)">
-												<div class="card card-body border-0">
-													@for (int t = 0; t < Model.instructorReport[i].timeList.Count; t++) {
-														<p>@Model.instructorReport[i].timeList[t]</p>
-													}
+												<div class="row">
+													<div class="card card-body border-0 col-6">
+														@for (int t = 0; t < Model.instructorReport[i].timeList.Count; t++) {
+															<p>@Model.instructorReport[i].timeList[t]</p>
+														}
+													</div>
+													<div class="card card-body border-0 col-6">
+														@for (int t = 0; t < Model.instructorReport[i].weekDayList.Count; t++) {
+															<p>@Model.instructorReport[i].weekDayList[t]</p>
+														}
+													</div>
 												</div>
 											</div>
 											
