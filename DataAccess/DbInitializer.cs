@@ -119,8 +119,30 @@ namespace DataAccess
             user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor3@instructor.com");
             _userManager.AddToRoleAsync(user, SD.INSTRUCTOR_ROLE).GetAwaiter().GetResult();
 
-            //Creating Students
-            _userManager.CreateAsync(new ApplicationUser
+			_userManager.CreateAsync(new ApplicationUser
+			{
+				UserName = "instructor4@instructor.com",
+				Email = "instructor4@instructor.com",
+				FirstName = "Brad",
+				LastName = "Peterson",
+			}, "Instructor123*").GetAwaiter().GetResult();
+
+			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor4@instructor.com");
+			_userManager.AddToRoleAsync(user, SD.INSTRUCTOR_ROLE).GetAwaiter().GetResult();
+
+			_userManager.CreateAsync(new ApplicationUser
+			{
+				UserName = "instructor5@instructor.com",
+				Email = "instructor5@instructor.com",
+				FirstName = "Linda",
+				LastName = "Duhadway",
+			}, "Instructor123*").GetAwaiter().GetResult();
+
+			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor5@instructor.com");
+			_userManager.AddToRoleAsync(user, SD.INSTRUCTOR_ROLE).GetAwaiter().GetResult();
+
+			//Creating Students
+			_userManager.CreateAsync(new ApplicationUser
 			{
 				UserName = "student@student.com",
 				Email = "student@student.com",
@@ -153,8 +175,30 @@ namespace DataAccess
             user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student3@student.com");
             _userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
 
-            //Create Program Coordinator
-            _userManager.CreateAsync(new ApplicationUser
+			_userManager.CreateAsync(new ApplicationUser
+			{
+				UserName = "student4@student.com",
+				Email = "student4@student.com",
+				FirstName = "Aiden",
+				LastName = "Mitchell",
+			}, "Student123*").GetAwaiter().GetResult();
+
+			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student4@student.com");
+			_userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
+
+			_userManager.CreateAsync(new ApplicationUser
+			{
+				UserName = "student5@student.com",
+				Email = "student5@student.com",
+				FirstName = "Sunny",
+				LastName = "Shieldnicht",
+			}, "Student123*").GetAwaiter().GetResult();
+
+			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student5@student.com");
+			_userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
+
+			//Create Program Coordinator
+			_userManager.CreateAsync(new ApplicationUser
             {
                 UserName = "coord@coord.com",
                 Email = "coord@coord.com",
@@ -169,9 +213,13 @@ namespace DataAccess
             var instr = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor@instructor.com");
             var instr2 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor2@instructor.com");
             var instr3 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor3@instructor.com");
+			var instr4 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor4@instructor.com");
+			var instr5 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor5@instructor.com");
 			var stud = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@student.com");
 			var stud2 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student2@student.com");
 			var stud3 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student3@student.com");
+			var stud4 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student4@student.com");
+			var stud5 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student5@student.com");
 
 			//****************************************************************************** Super Admin
 
@@ -278,10 +326,10 @@ namespace DataAccess
 
 			var Campuses = new List<Campus>
 			{
-				new Campus { CampusName = "WSU Weber Main Campus", IsArchived = false },
-				new Campus { CampusName = "WSD Weber Davis Campus", IsArchived = false},
-				new Campus { CampusName = "SLCC Salt Lake Community College", IsArchived = false },
-				new Campus { CampusName = "WSF Farmington", IsArchived = false },
+				new Campus { CampusName = "Weber Main Campus", IsArchived = false },
+				new Campus { CampusName = "Weber Davis Campus", IsArchived = false},
+				new Campus { CampusName = "Salt Lake Community College", IsArchived = false },
+				new Campus { CampusName = "Farmington", IsArchived = false },
 				new Campus { CampusName = "High School", IsArchived = false }
 			};
 
@@ -613,7 +661,13 @@ namespace DataAccess
 				new ProgramAssignment { InstructorId = instr2.Id, ProgramId = 3, IsArchived = false },
 				new ProgramAssignment { InstructorId = instr3.Id, ProgramId = 1, IsArchived = false },
 				new ProgramAssignment { InstructorId = instr3.Id, ProgramId = 2, IsArchived = false },
-				new ProgramAssignment { InstructorId = instr3.Id, ProgramId = 3, IsArchived = false }
+				new ProgramAssignment { InstructorId = instr3.Id, ProgramId = 3, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr4.Id, ProgramId = 1, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr4.Id, ProgramId = 2, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr4.Id, ProgramId = 3, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr5.Id, ProgramId = 1, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr5.Id, ProgramId = 2, IsArchived = false },
+				new ProgramAssignment { InstructorId = instr5.Id, ProgramId = 3, IsArchived = false }
 			};
 
 			foreach (var p in ProgramAssignments)
@@ -708,11 +762,11 @@ namespace DataAccess
 				new SectionStatus { SectionStatusName = "Pending", SectionStatusColor = "#ffff00", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Active", SectionStatusColor = "#00ffff", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Inactive", SectionStatusColor = "#808080", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Cancelled", SectionStatusColor = "#ff0000", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Updated", SectionStatusColor = "#0000ff", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Not Started", SectionStatusColor = "#ff0000", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Confirmed", SectionStatusColor = "#0000ff", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Needed", SectionStatusColor = "#800080", IsArchived = false },
 				new SectionStatus { SectionStatusName = "IF Needed", SectionStatusColor = "#ffc0cb", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Confirmed", SectionStatusColor = "#3cb043", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Cancelled", SectionStatusColor = "#3cb043", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Banner Conflict", SectionStatusColor = "#ffa500", IsArchived = false }
 			};
 
@@ -821,15 +875,6 @@ namespace DataAccess
 
 			var SemesterInstances = new List<SemesterInstance>
 			{
-				new SemesterInstance {
-					SemesterInstanceName = "Fall 2024",
-					StartDate = new DateTime(2024, 8, 23),
-					EndDate = new DateTime(2024, 12, 10),
-					RegistrationDate = new DateTime(2024, 4, 1),
-					EndRegistrationDate = new DateTime(2024, 8, 22),
-					SemesterId = 1,
-					IsArchived = false
-				},
 				new SemesterInstance
 				{
 					SemesterInstanceName = "Spring 2024",
@@ -848,6 +893,15 @@ namespace DataAccess
 					RegistrationDate = new DateTime(2024, 1, 1),
 					EndRegistrationDate = new DateTime(2024, 5, 8),
 					SemesterId = 3,
+					IsArchived = false
+				},
+				new SemesterInstance {
+					SemesterInstanceName = "Fall 2024",
+					StartDate = new DateTime(2024, 8, 23),
+					EndDate = new DateTime(2024, 12, 10),
+					RegistrationDate = new DateTime(2024, 4, 1),
+					EndRegistrationDate = new DateTime(2024, 8, 22),
+					SemesterId = 1,
 					IsArchived = false
 				}
 			};
@@ -932,6 +986,70 @@ namespace DataAccess
 				},
 				new CourseSection
 				{
+					BannerCRN = "12346",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2021, 6, 23),
+					SectionFinalEnrollment = new DateTime(2021, 8, 23),
+					SectionUpdated = new DateTime(2021, 8, 23),
+					SectionBannerUpdated = new DateTime(2021, 8, 23),
+					CourseId = 1,
+					SemesterInstanceId = 1,
+					InstructorId = instr2.Id,
+					ModalityId = 3,
+					ClassroomId = 2,
+					TimeBlockId = 7,
+					DaysOfWeekId = 3,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "12347",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2021, 6, 23),
+					SectionFinalEnrollment = new DateTime(2021, 8, 23),
+					SectionUpdated = new DateTime(2021, 8, 23),
+					SectionBannerUpdated = new DateTime(2021, 8, 23),
+					CourseId = 1,
+					SemesterInstanceId = 1,
+					InstructorId = instr4.Id,
+					ModalityId = 2,
+					ClassroomId = 5,
+					TimeBlockId = 4,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "12348",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2021, 6, 23),
+					SectionFinalEnrollment = new DateTime(2021, 8, 23),
+					SectionUpdated = new DateTime(2021, 8, 23),
+					SectionBannerUpdated = new DateTime(2021, 8, 23),
+					CourseId = 1,
+					SemesterInstanceId = 1,
+					InstructorId = instr5.Id,
+					ModalityId = 1,
+					ClassroomId = 1,
+					TimeBlockId = 2,
+					DaysOfWeekId = 1,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
 					BannerCRN = "23456",
 					SectionNotes = "None",
 					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
@@ -940,7 +1058,7 @@ namespace DataAccess
 					SectionBannerUpdated = new DateTime(2024, 8, 23),
 					CourseId = 2,
 					SemesterInstanceId = 1,
-					InstructorId = instr.Id,
+					InstructorId = instr2.Id,
 					ModalityId = 1,
 					ClassroomId = 2,
 					TimeBlockId = 2,
@@ -951,6 +1069,70 @@ namespace DataAccess
 					SectionStatusId = 1,
 					IsArchived = false
 				},
+				new CourseSection
+				{
+					BannerCRN = "23457",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 2,
+					SemesterInstanceId = 1,
+					InstructorId = instr3.Id,
+					ModalityId = 4,
+					ClassroomId = 7,
+					TimeBlockId = 19,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "23458",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 2,
+					SemesterInstanceId = 1,
+					InstructorId = instr.Id,
+					ModalityId = 3,
+					ClassroomId = 8,
+					TimeBlockId = 13,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "23459",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 2,
+					SemesterInstanceId = 1,
+					InstructorId = instr5.Id,
+					ModalityId = 1,
+					ClassroomId = 4,
+					TimeBlockId = 8,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
 				new CourseSection
 				{
 					BannerCRN = "34567",
@@ -974,13 +1156,35 @@ namespace DataAccess
 				},
 				new CourseSection
 				{
+					BannerCRN = "34568",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 3,
+					SemesterInstanceId = 1,
+					InstructorId = instr4.Id,
+					ModalityId = 1,
+					ClassroomId = 3,
+					TimeBlockId = 10,
+					DaysOfWeekId = 1,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
 					BannerCRN = "34569",
 					SectionNotes = "None",
 					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
 					SectionFinalEnrollment = new DateTime(2024, 8, 23),
 					SectionUpdated = new DateTime(2024, 8, 23),
 					SectionBannerUpdated = new DateTime(2024, 8, 23),
-					CourseId = 4,
+					CourseId = 112,
 					SemesterInstanceId = 2,
 					InstructorId = instr.Id,
 					ModalityId = 1,
@@ -995,19 +1199,105 @@ namespace DataAccess
 				},
 				new CourseSection
 				{
+					BannerCRN = "34570",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 112,
+					SemesterInstanceId = 2,
+					InstructorId = instr3.Id,
+					ModalityId = 2,
+					ClassroomId = 8,
+					TimeBlockId = 6,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "34571",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 112,
+					SemesterInstanceId = 2,
+					InstructorId = instr4.Id,
+					ModalityId = 1,
+					ClassroomId = 3,
+					TimeBlockId = 9,
+					DaysOfWeekId = 3,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
 					BannerCRN = "45678",
 					SectionNotes = "None",
 					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
 					SectionFinalEnrollment = new DateTime(2024, 8, 23),
 					SectionUpdated = new DateTime(2024, 8, 23),
 					SectionBannerUpdated = new DateTime(2024, 8, 23),
-					CourseId = 5,
+					CourseId = 63,
+					SemesterInstanceId = 2,
+					InstructorId = instr2.Id,
+					ModalityId = 1,
+					ClassroomId = 4,
+					TimeBlockId = 4,
+					DaysOfWeekId = 4,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "45678",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 63,
 					SemesterInstanceId = 2,
 					InstructorId = instr.Id,
 					ModalityId = 1,
 					ClassroomId = 4,
 					TimeBlockId = 4,
 					DaysOfWeekId = 4,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "56789",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 14,
+					SemesterInstanceId = 2,
+					InstructorId = instr2.Id,
+					ModalityId = 1,
+					ClassroomId = 5,
+					TimeBlockId = 12,
+					DaysOfWeekId = 5,
 					PartOfTermId = 1,
 					PayModelId = 1,
 					PayOrganizationId = 1,
@@ -1022,9 +1312,31 @@ namespace DataAccess
 					SectionFinalEnrollment = new DateTime(2024, 8, 23),
 					SectionUpdated = new DateTime(2024, 8, 23),
 					SectionBannerUpdated = new DateTime(2024, 8, 23),
-					CourseId = 6,
+					CourseId = 14,
 					SemesterInstanceId = 2,
-					InstructorId = instr.Id,
+					InstructorId = instr4.Id,
+					ModalityId = 1,
+					ClassroomId = 7,
+					TimeBlockId = 14,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "78965",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 7,
+					SemesterInstanceId = 3,
+					InstructorId = instr2.Id,
 					ModalityId = 1,
 					ClassroomId = 5,
 					TimeBlockId = 5,
@@ -1037,25 +1349,687 @@ namespace DataAccess
 				},
 				new CourseSection
 				{
-					BannerCRN = "67890",
+					BannerCRN = "78964",
 					SectionNotes = "None",
 					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
 					SectionFinalEnrollment = new DateTime(2024, 8, 23),
 					SectionUpdated = new DateTime(2024, 8, 23),
 					SectionBannerUpdated = new DateTime(2024, 8, 23),
 					CourseId = 7,
-					SemesterInstanceId = 2,
-					InstructorId = instr.Id,
+					SemesterInstanceId = 3,
+					InstructorId = instr5.Id,
 					ModalityId = 1,
-					ClassroomId = 6,
+					ClassroomId = 5,
 					TimeBlockId = 6,
-					DaysOfWeekId = 6,
+					DaysOfWeekId = 5,
 					PartOfTermId = 1,
 					PayModelId = 1,
 					PayOrganizationId = 1,
 					SectionStatusId = 1,
 					IsArchived = false
-				}
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "89654",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 19,
+					SemesterInstanceId = 3,
+					InstructorId = instr2.Id,
+					ModalityId = 3,
+					ClassroomId = 5,
+					TimeBlockId = 2,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "89653",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 19,
+					SemesterInstanceId = 3,
+					InstructorId = instr.Id,
+					ModalityId = 2,
+					ClassroomId = 5,
+					TimeBlockId = 3,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "89652",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 19,
+					SemesterInstanceId = 3,
+					InstructorId = instr3.Id,
+					ModalityId = 3,
+					ClassroomId = 5,
+					TimeBlockId = 8,
+					DaysOfWeekId = 3,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "96543",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 99,
+					SemesterInstanceId = 3,
+					InstructorId = instr.Id,
+					ModalityId = 1,
+					ClassroomId = 5,
+					TimeBlockId = 4,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "96542",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 99,
+					SemesterInstanceId = 3,
+					InstructorId = instr2.Id,
+					ModalityId = 1,
+					ClassroomId = 5,
+					TimeBlockId = 5,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "96541",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 99,
+					SemesterInstanceId = 3,
+					InstructorId = instr.Id,
+					ModalityId = 5,
+					ClassroomId = 5,
+					TimeBlockId = 15,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "65432",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 4,
+					SemesterInstanceId = 1,
+					InstructorId = instr.Id,
+					ModalityId = 1,
+					ClassroomId = 5,
+					TimeBlockId = 8,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "65431",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 4,
+					SemesterInstanceId = 1,
+					InstructorId = instr2.Id,
+					ModalityId = 3,
+					ClassroomId = 5,
+					TimeBlockId = 8,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "65430",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 4,
+					SemesterInstanceId = 1,
+					InstructorId = instr4.Id,
+					ModalityId = 1,
+					ClassroomId = 5,
+					TimeBlockId = 8,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "54321",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 5,
+					SemesterInstanceId = 1,
+					InstructorId = instr3.Id,
+					ModalityId = 2,
+					ClassroomId = 5,
+					TimeBlockId = 8,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "54320",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 5,
+					SemesterInstanceId = 1,
+					InstructorId = instr4.Id,
+					ModalityId = 2,
+					ClassroomId = 5,
+					TimeBlockId = 3,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "43210",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 6,
+					SemesterInstanceId = 1,
+					InstructorId = instr.Id,
+					ModalityId = 2,
+					ClassroomId = 5,
+					TimeBlockId = 8,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "43219",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 6,
+					SemesterInstanceId = 1,
+					InstructorId = instr2.Id,
+					ModalityId = 5,
+					ClassroomId = 5,
+					TimeBlockId = 8,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "32109",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 13,
+					SemesterInstanceId = 2,
+					InstructorId = instr3.Id,
+					ModalityId = 1,
+					ClassroomId = 5,
+					TimeBlockId = 9,
+					DaysOfWeekId = 5,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "32100",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 13,
+					SemesterInstanceId = 2,
+					InstructorId = instr4.Id,
+					ModalityId = 1,
+					ClassroomId = 5,
+					TimeBlockId = 3,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "32101",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 13,
+					SemesterInstanceId = 2,
+					InstructorId = instr4.Id,
+					ModalityId = 1,
+					ClassroomId = 5,
+					TimeBlockId = 5,
+					DaysOfWeekId = 3,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "21098",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 21,
+					SemesterInstanceId = 2,
+					InstructorId = instr2.Id,
+					ModalityId = 1,
+					ClassroomId = 5,
+					TimeBlockId = 4,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "21097",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 21,
+					SemesterInstanceId = 2,
+					InstructorId = instr.Id,
+					ModalityId = 2,
+					ClassroomId = 5,
+					TimeBlockId = 4,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "21096",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 21,
+					SemesterInstanceId = 2,
+					InstructorId = instr4.Id,
+					ModalityId = 3,
+					ClassroomId = 5,
+					TimeBlockId = 5,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "21087",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 69,
+					SemesterInstanceId = 2,
+					InstructorId = instr.Id,
+					ModalityId = 4,
+					ClassroomId = 5,
+					TimeBlockId = 8,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "21086",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 69,
+					SemesterInstanceId = 2,
+					InstructorId = instr4.Id,
+					ModalityId = 4,
+					ClassroomId = 5,
+					TimeBlockId = 8,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "21085",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 69,
+					SemesterInstanceId = 2,
+					InstructorId = instr5.Id,
+					ModalityId = 4,
+					ClassroomId = 5,
+					TimeBlockId = 8,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "21076",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 1,
+					SemesterInstanceId = 3,
+					InstructorId = instr.Id,
+					ModalityId = 1,
+					ClassroomId = 5,
+					TimeBlockId = 10,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "21075",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 1,
+					SemesterInstanceId = 3,
+					InstructorId = instr3.Id,
+					ModalityId = 1,
+					ClassroomId = 5,
+					TimeBlockId = 2,
+					DaysOfWeekId = 4,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "21074",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 1,
+					SemesterInstanceId = 3,
+					InstructorId = instr2.Id,
+					ModalityId = 1,
+					ClassroomId = 5,
+					TimeBlockId = 11,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "21065",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 5,
+					SemesterInstanceId = 3,
+					InstructorId = instr2.Id,
+					ModalityId = 7,
+					ClassroomId = 5,
+					TimeBlockId = 2,
+					DaysOfWeekId = 4,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "21064",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 5,
+					SemesterInstanceId = 3,
+					InstructorId = instr4.Id,
+					ModalityId = 7,
+					ClassroomId = 5,
+					TimeBlockId = 3,
+					DaysOfWeekId = 1,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "21063",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 5,
+					SemesterInstanceId = 3,
+					InstructorId = instr5.Id,
+					ModalityId = 3,
+					ClassroomId = 5,
+					TimeBlockId = 2,
+					DaysOfWeekId = 4,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+
+				new CourseSection
+				{
+					BannerCRN = "21054",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 9,
+					SemesterInstanceId = 3,
+					InstructorId = instr.Id,
+					ModalityId = 1,
+					ClassroomId = 4,
+					TimeBlockId = 5,
+					DaysOfWeekId = 3,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "21053",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 9,
+					SemesterInstanceId = 3,
+					InstructorId = instr.Id,
+					ModalityId = 2,
+					ClassroomId = 4,
+					TimeBlockId = 5,
+					DaysOfWeekId = 3,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				},
+				new CourseSection
+				{
+					BannerCRN = "21052",
+					SectionNotes = "None",
+					SectionFirstDayEnrollment = new DateTime(2024, 6, 23),
+					SectionFinalEnrollment = new DateTime(2024, 8, 23),
+					SectionUpdated = new DateTime(2024, 8, 23),
+					SectionBannerUpdated = new DateTime(2024, 8, 23),
+					CourseId = 9,
+					SemesterInstanceId = 3,
+					InstructorId = instr3.Id,
+					ModalityId = 3,
+					ClassroomId = 4,
+					TimeBlockId = 2,
+					DaysOfWeekId = 2,
+					PartOfTermId = 1,
+					PayModelId = 1,
+					PayOrganizationId = 1,
+					SectionStatusId = 1,
+					IsArchived = false
+				} 
 			};
 
 			foreach (var c in CourseSections)
@@ -1076,14 +2050,20 @@ namespace DataAccess
 			var ReleaseTimes = new List<ReleaseTime>
 			{
 				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = instr.Id, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = instr.Id, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = instr.Id, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = instr2.Id, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = instr2.Id, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = instr2.Id, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = instr3.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 4, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = instr.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 4, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = instr.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 2, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = instr2.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 1, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = instr2.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 2, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = instr2.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 5, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = instr3.Id, IsArchived = false },
 				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = instr3.Id, IsArchived = false },
-				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = instr3.Id, IsArchived = false }
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = instr3.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 2, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = instr4.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 1, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = instr4.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 1, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = instr4.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 0, ReleaseTimeNotes = "None", SemesterInstanceId = 1, InstructorId = instr5.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 3, ReleaseTimeNotes = "None", SemesterInstanceId = 2, InstructorId = instr5.Id, IsArchived = false },
+				new ReleaseTime { ReleaseTimeAmount = 2, ReleaseTimeNotes = "None", SemesterInstanceId = 3, InstructorId = instr5.Id, IsArchived = false }
 			};
 
 			foreach (var r in ReleaseTimes)
@@ -1110,7 +2090,13 @@ namespace DataAccess
 				new LoadReq { LoadReqAmount = 12, InstructorId = instr2.Id, SemesterInstanceId = 3, IsArchived = false },
 				new LoadReq { LoadReqAmount = 12, InstructorId = instr3.Id, SemesterInstanceId = 1, IsArchived = false },
 				new LoadReq { LoadReqAmount = 12, InstructorId = instr3.Id, SemesterInstanceId = 2, IsArchived = false },
-				new LoadReq { LoadReqAmount = 12, InstructorId = instr3.Id, SemesterInstanceId = 3, IsArchived = false }
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr3.Id, SemesterInstanceId = 3, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr4.Id, SemesterInstanceId = 1, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr4.Id, SemesterInstanceId = 2, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr4.Id, SemesterInstanceId = 3, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr5.Id, SemesterInstanceId = 1, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr5.Id, SemesterInstanceId = 2, IsArchived = false },
+				new LoadReq { LoadReqAmount = 12, InstructorId = instr5.Id, SemesterInstanceId = 3, IsArchived = false }
 			};
 
 			foreach (var l in LoadReqs)
@@ -1131,22 +2117,27 @@ namespace DataAccess
 			{
 				new Template { Quantity = 4, SemesterId = 1, CourseId = 1, IsArchived = false },
 				new Template { Quantity = 4, SemesterId = 1, CourseId = 2, IsArchived = false },
-				new Template { Quantity = 4, SemesterId = 1, CourseId = 3, IsArchived = false },
-				new Template { Quantity = 4, SemesterId = 2, CourseId = 1, IsArchived = false },
-				new Template { Quantity = 4, SemesterId = 2, CourseId = 2, IsArchived = false },
-				new Template { Quantity = 4, SemesterId = 2, CourseId = 3, IsArchived = false },
-				new Template { Quantity = 3, SemesterId = 3, CourseId = 1, IsArchived = false },
-				new Template { Quantity = 3, SemesterId = 3, CourseId = 2, IsArchived = false },
-				new Template { Quantity = 3, SemesterId = 3, CourseId = 3, IsArchived = false },
+				new Template { Quantity = 2, SemesterId = 1, CourseId = 3, IsArchived = false },
+
+				new Template { Quantity = 3, SemesterId = 2, CourseId = 112, IsArchived = false },
+				new Template { Quantity = 2, SemesterId = 2, CourseId = 63, IsArchived = false },
+				new Template { Quantity = 2, SemesterId = 2, CourseId = 14, IsArchived = false },
+
+				new Template { Quantity = 2, SemesterId = 3, CourseId = 7, IsArchived = false },
+				new Template { Quantity = 3, SemesterId = 3, CourseId = 19, IsArchived = false },
+				new Template { Quantity = 3, SemesterId = 3, CourseId = 99, IsArchived = false },
+
 				new Template { Quantity = 3, SemesterId = 1, CourseId = 4, IsArchived = false },
-				new Template { Quantity = 3, SemesterId = 1, CourseId = 5, IsArchived = false },
-				new Template { Quantity = 3, SemesterId = 1, CourseId = 6, IsArchived = false },
-				new Template { Quantity = 3, SemesterId = 2, CourseId = 4, IsArchived = false },
-				new Template { Quantity = 3, SemesterId = 2, CourseId = 5, IsArchived = false },
-				new Template { Quantity = 3, SemesterId = 2, CourseId = 6, IsArchived = false },
-				new Template { Quantity = 3, SemesterId = 3, CourseId = 4, IsArchived = false },
+				new Template { Quantity = 2, SemesterId = 1, CourseId = 5, IsArchived = false },
+				new Template { Quantity = 2, SemesterId = 1, CourseId = 6, IsArchived = false },
+
+				new Template { Quantity = 3, SemesterId = 2, CourseId = 13, IsArchived = false },
+				new Template { Quantity = 3, SemesterId = 2, CourseId = 21, IsArchived = false },
+				new Template { Quantity = 3, SemesterId = 2, CourseId = 69, IsArchived = false },
+
+				new Template { Quantity = 3, SemesterId = 3, CourseId = 1, IsArchived = false },
 				new Template { Quantity = 3, SemesterId = 3, CourseId = 5, IsArchived = false },
-				new Template { Quantity = 3, SemesterId = 3, CourseId = 6, IsArchived = false }
+				new Template { Quantity = 3, SemesterId = 3, CourseId = 9, IsArchived = false }
 			};
 
 			foreach (var t in Templates)
@@ -1169,7 +2160,32 @@ namespace DataAccess
 				new Wishlist { UserId = instr.Id, SemesterInstanceId = 3, IsArchived = false },
 				new Wishlist { UserId = stud.Id, SemesterInstanceId = 1, IsArchived = false },
 				new Wishlist { UserId = stud.Id, SemesterInstanceId = 2, IsArchived = false },
-				new Wishlist { UserId = stud.Id, SemesterInstanceId = 3, IsArchived = false }
+				new Wishlist { UserId = stud.Id, SemesterInstanceId = 3, IsArchived = false },
+				new Wishlist { UserId = instr2.Id, SemesterInstanceId = 1, IsArchived = false },
+				new Wishlist { UserId = instr2.Id, SemesterInstanceId = 2, IsArchived = false },
+				new Wishlist { UserId = instr2.Id, SemesterInstanceId = 3, IsArchived = false },
+				new Wishlist { UserId = stud2.Id, SemesterInstanceId = 1, IsArchived = false },
+				new Wishlist { UserId = stud2.Id, SemesterInstanceId = 2, IsArchived = false },
+				new Wishlist { UserId = stud2.Id, SemesterInstanceId = 3, IsArchived = false },
+				new Wishlist { UserId = instr3.Id, SemesterInstanceId = 1, IsArchived = false },
+				new Wishlist { UserId = instr3.Id, SemesterInstanceId = 2, IsArchived = false },
+				new Wishlist { UserId = instr3.Id, SemesterInstanceId = 3, IsArchived = false },
+				new Wishlist { UserId = stud3.Id, SemesterInstanceId = 1, IsArchived = false },
+				new Wishlist { UserId = stud3.Id, SemesterInstanceId = 2, IsArchived = false },
+				new Wishlist { UserId = stud3.Id, SemesterInstanceId = 3, IsArchived = false },
+				new Wishlist { UserId = instr4.Id, SemesterInstanceId = 1, IsArchived = false },
+				new Wishlist { UserId = instr4.Id, SemesterInstanceId = 2, IsArchived = false },
+				new Wishlist { UserId = instr4.Id, SemesterInstanceId = 3, IsArchived = false },
+				new Wishlist { UserId = stud4.Id, SemesterInstanceId = 1, IsArchived = false },
+				new Wishlist { UserId = stud4.Id, SemesterInstanceId = 2, IsArchived = false },
+				new Wishlist { UserId = stud4.Id, SemesterInstanceId = 3, IsArchived = false },
+				new Wishlist { UserId = instr5.Id, SemesterInstanceId = 1, IsArchived = false },
+				new Wishlist { UserId = instr5.Id, SemesterInstanceId = 2, IsArchived = false },
+				new Wishlist { UserId = instr5.Id, SemesterInstanceId = 3, IsArchived = false },
+				new Wishlist { UserId = stud5.Id, SemesterInstanceId = 1, IsArchived = false },
+				new Wishlist { UserId = stud5.Id, SemesterInstanceId = 2, IsArchived = false },
+				new Wishlist { UserId = stud5.Id, SemesterInstanceId = 3, IsArchived = false }
+
 			};
 
 			foreach (var w in Wishlists)
@@ -1190,22 +2206,34 @@ namespace DataAccess
 			{
 				new WishlistCourse { PreferenceRank = 1, WishlistId = 1, CourseId = 1, IsArchived = false },
 				new WishlistCourse { PreferenceRank = 2, WishlistId = 1, CourseId = 2, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 3, WishlistId = 1, CourseId = 3, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 1, WishlistId = 2, CourseId = 1, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 3, WishlistId = 2, CourseId = 2, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 2, WishlistId = 2, CourseId = 3, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 2, WishlistId = 3, CourseId = 1, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 1, WishlistId = 3, CourseId = 2, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 3, WishlistId = 3, CourseId = 3, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 3, WishlistId = 1, CourseId = 5, IsArchived = false },
 				new WishlistCourse { PreferenceRank = 2, WishlistId = 4, CourseId = 1, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 3, WishlistId = 4, CourseId = 2, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 1, WishlistId = 4, CourseId = 3, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 1, WishlistId = 5, CourseId = 1, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 2, WishlistId = 5, CourseId = 2, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 3, WishlistId = 5, CourseId = 3, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 1, WishlistId = 6, CourseId = 1, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 3, WishlistId = 6, CourseId = 2, IsArchived = false },
-				new WishlistCourse { PreferenceRank = 2, WishlistId = 6, CourseId = 3, IsArchived = false }
+				new WishlistCourse { PreferenceRank = 3, WishlistId = 4, CourseId = 3, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 1, WishlistId = 4, CourseId = 6, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 1, WishlistId = 7, CourseId = 2, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 2, WishlistId = 7, CourseId = 3, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 3, WishlistId = 7, CourseId = 4, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 1, WishlistId = 10, CourseId = 2, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 3, WishlistId = 10, CourseId = 4, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 2, WishlistId = 10, CourseId = 6, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 1, WishlistId = 13, CourseId = 3, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 2, WishlistId = 13, CourseId = 2, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 3, WishlistId = 13, CourseId = 4, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 1, WishlistId = 16, CourseId = 1, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 2, WishlistId = 16, CourseId = 5, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 3, WishlistId = 16, CourseId = 6, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 1, WishlistId = 19, CourseId = 1, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 3, WishlistId = 19, CourseId = 4, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 2, WishlistId = 19, CourseId = 3, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 1, WishlistId = 22, CourseId = 2, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 2, WishlistId = 22, CourseId = 3, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 3, WishlistId = 22, CourseId = 4, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 1, WishlistId = 25, CourseId = 1, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 2, WishlistId = 25, CourseId = 5, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 3, WishlistId = 25, CourseId = 6, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 1, WishlistId = 28, CourseId = 1, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 2, WishlistId = 28, CourseId = 2, IsArchived = false },
+				new WishlistCourse { PreferenceRank = 3, WishlistId = 28, CourseId = 3, IsArchived = false }
 			};
 
 			foreach (var w in WishlistCourses)
@@ -1240,14 +2268,25 @@ namespace DataAccess
 
 			var WishlistPartOfDay = new List<WishlistPartOfDay>
 			{
-				new WishlistPartOfDay { WishlistId = 1, PartOfDayId = 1, IsArchived = false },
-				new WishlistPartOfDay { WishlistId = 1, PartOfDayId = 2, IsArchived = false },
-				new WishlistPartOfDay { WishlistId = 2, PartOfDayId = 2, IsArchived = false },
-				new WishlistPartOfDay { WishlistId = 3, PartOfDayId = 3, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 10, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 11, PartOfDayId = 2, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 12, PartOfDayId = 2, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 12, PartOfDayId = 3, IsArchived = false },
 				new WishlistPartOfDay { WishlistId = 4, PartOfDayId = 1, IsArchived = false },
 				new WishlistPartOfDay { WishlistId = 5, PartOfDayId = 2, IsArchived = false },
 				new WishlistPartOfDay { WishlistId = 5, PartOfDayId = 3, IsArchived = false },
-				new WishlistPartOfDay { WishlistId = 6, PartOfDayId = 3, IsArchived = false }
+				new WishlistPartOfDay { WishlistId = 6, PartOfDayId = 3, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 16, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 17, PartOfDayId = 2, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 18, PartOfDayId = 2, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 18, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 22, PartOfDayId = 2, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 23, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 24, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 24, PartOfDayId = 2, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 28, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 29, PartOfDayId = 2, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 30, PartOfDayId = 2, IsArchived = false }
 			};
 
 
@@ -1260,11 +2299,37 @@ namespace DataAccess
 			var WishlistCampuses = new List<WishlistCampus>
 			{
 				new WishlistCampus { WishlistId = 1, CampusId = 1, IsArchived = false },
+				new WishlistCampus { WishlistId = 1, CampusId = 2, IsArchived = false },
 				new WishlistCampus { WishlistId = 2, CampusId = 2, IsArchived = false },
 				new WishlistCampus { WishlistId = 3, CampusId = 3, IsArchived = false },
 				new WishlistCampus { WishlistId = 4, CampusId = 1, IsArchived = false },
-				new WishlistCampus { WishlistId = 5, CampusId = 1, IsArchived = false },
-				new WishlistCampus { WishlistId = 6, CampusId = 1, IsArchived = false }
+				new WishlistCampus { WishlistId = 5, CampusId = 4, IsArchived = false },
+				new WishlistCampus { WishlistId = 6, CampusId = 3, IsArchived = false },
+				new WishlistCampus { WishlistId = 6, CampusId = 5, IsArchived = false },
+				new WishlistCampus { WishlistId = 7, CampusId = 2, IsArchived = false },
+				new WishlistCampus { WishlistId = 8, CampusId = 2, IsArchived = false },
+				new WishlistCampus { WishlistId = 9, CampusId = 2, IsArchived = false },
+				new WishlistCampus { WishlistId = 10, CampusId = 3, IsArchived = false },
+				new WishlistCampus { WishlistId = 11, CampusId = 3, IsArchived = false },
+				new WishlistCampus { WishlistId = 12, CampusId = 3, IsArchived = false },
+				new WishlistCampus { WishlistId = 13, CampusId = 1, IsArchived = false },
+				new WishlistCampus { WishlistId = 14, CampusId = 1, IsArchived = false },
+				new WishlistCampus { WishlistId = 15, CampusId = 1, IsArchived = false },
+				new WishlistCampus { WishlistId = 16, CampusId = 2, IsArchived = false },
+				new WishlistCampus { WishlistId = 17, CampusId = 2, IsArchived = false },
+				new WishlistCampus { WishlistId = 18, CampusId = 2, IsArchived = false },
+				new WishlistCampus { WishlistId = 19, CampusId = 3, IsArchived = false },
+				new WishlistCampus { WishlistId = 20, CampusId = 3, IsArchived = false },
+				new WishlistCampus { WishlistId = 21, CampusId = 3, IsArchived = false },
+				new WishlistCampus { WishlistId = 22, CampusId = 1, IsArchived = false },
+				new WishlistCampus { WishlistId = 23, CampusId = 1, IsArchived = false },
+				new WishlistCampus { WishlistId = 24, CampusId = 4, IsArchived = false },
+				new WishlistCampus { WishlistId = 25, CampusId = 5, IsArchived = false },
+				new WishlistCampus { WishlistId = 26, CampusId = 3, IsArchived = false },
+				new WishlistCampus { WishlistId = 27, CampusId = 2, IsArchived = false },
+				new WishlistCampus { WishlistId = 28, CampusId = 4, IsArchived = false },
+				new WishlistCampus { WishlistId = 29, CampusId = 3, IsArchived = false },
+				new WishlistCampus { WishlistId = 30, CampusId = 3, IsArchived = false }
 			};
 
 			foreach (var w in WishlistCampuses)
@@ -1287,12 +2352,25 @@ namespace DataAccess
 				new WishlistDaysOfWeek { WishlistId = 2, DaysOfWeekId = 4, IsArchived = false },
 				new WishlistDaysOfWeek { WishlistId = 3, DaysOfWeekId = 1, IsArchived = false },
 				new WishlistDaysOfWeek { WishlistId = 3, DaysOfWeekId = 2, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 4, DaysOfWeekId = 3, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 4, DaysOfWeekId = 4, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 5, DaysOfWeekId = 1, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 5, DaysOfWeekId = 2, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 6, DaysOfWeekId = 3, IsArchived = false },
-				new WishlistDaysOfWeek { WishlistId = 6, DaysOfWeekId = 4, IsArchived = false }
+				new WishlistDaysOfWeek { WishlistId = 7, DaysOfWeekId = 3, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 7, DaysOfWeekId = 4, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 8, DaysOfWeekId = 1, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 8, DaysOfWeekId = 2, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 9, DaysOfWeekId = 3, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 9, DaysOfWeekId = 4, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 13, DaysOfWeekId = 1, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 13, DaysOfWeekId = 2, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 14, DaysOfWeekId = 3, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 14, DaysOfWeekId = 4, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 15, DaysOfWeekId = 1, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 15, DaysOfWeekId = 3, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 15, DaysOfWeekId = 5, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 19, DaysOfWeekId = 2, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 20, DaysOfWeekId = 4, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 21, DaysOfWeekId = 1, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 25, DaysOfWeekId = 3, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 26, DaysOfWeekId = 5, IsArchived = false },
+				new WishlistDaysOfWeek { WishlistId = 27, DaysOfWeekId = 2, IsArchived = false }
 			};
 
 			foreach (var w in WishlistDaysOfWeeks)
@@ -1319,7 +2397,56 @@ namespace DataAccess
 				new WishlistModality { WishlistId = 4, ModalityId = 4, IsArchived = false },
 				new WishlistModality { WishlistId = 5, ModalityId = 3, IsArchived = false },
 				new WishlistModality { WishlistId = 5, ModalityId = 4, IsArchived = false },
-				new WishlistModality { WishlistId = 6, ModalityId = 6, IsArchived = false }
+				new WishlistModality { WishlistId = 6, ModalityId = 6, IsArchived = false },
+				new WishlistModality { WishlistId = 6, ModalityId = 5, IsArchived = false },
+				new WishlistModality { WishlistId = 7, ModalityId = 1, IsArchived = false },
+				new WishlistModality { WishlistId = 7, ModalityId = 2, IsArchived = false },
+				new WishlistModality { WishlistId = 8, ModalityId = 3, IsArchived = false },
+				new WishlistModality { WishlistId = 8, ModalityId = 4, IsArchived = false },
+				new WishlistModality { WishlistId = 9, ModalityId = 5, IsArchived = false },
+				new WishlistModality { WishlistId = 9, ModalityId = 6, IsArchived = false },
+				new WishlistModality { WishlistId = 10, ModalityId = 1, IsArchived = false },
+				new WishlistModality { WishlistId = 10, ModalityId = 2, IsArchived = false },
+				new WishlistModality { WishlistId = 11, ModalityId = 3, IsArchived = false },
+				new WishlistModality { WishlistId = 11, ModalityId = 4, IsArchived = false },
+				new WishlistModality { WishlistId = 12, ModalityId = 5, IsArchived = false },
+				new WishlistModality { WishlistId = 12, ModalityId = 6, IsArchived = false },
+				new WishlistModality { WishlistId = 13, ModalityId = 1, IsArchived = false },
+				new WishlistModality { WishlistId = 13, ModalityId = 2, IsArchived = false },
+				new WishlistModality { WishlistId = 14, ModalityId = 3, IsArchived = false },
+				new WishlistModality { WishlistId = 14, ModalityId = 4, IsArchived = false },
+				new WishlistModality { WishlistId = 15, ModalityId = 5, IsArchived = false },
+				new WishlistModality { WishlistId = 15, ModalityId = 6, IsArchived = false },
+				new WishlistModality { WishlistId = 16, ModalityId = 1, IsArchived = false },
+				new WishlistModality { WishlistId = 16, ModalityId = 2, IsArchived = false },
+				new WishlistModality { WishlistId = 17, ModalityId = 3, IsArchived = false },
+				new WishlistModality { WishlistId = 17, ModalityId = 4, IsArchived = false },
+				new WishlistModality { WishlistId = 18, ModalityId = 5, IsArchived = false },
+				new WishlistModality { WishlistId = 18, ModalityId = 6, IsArchived = false },
+				new WishlistModality { WishlistId = 19, ModalityId = 1, IsArchived = false },
+				new WishlistModality { WishlistId = 19, ModalityId = 2, IsArchived = false },
+				new WishlistModality { WishlistId = 20, ModalityId = 3, IsArchived = false },
+				new WishlistModality { WishlistId = 20, ModalityId = 4, IsArchived = false },
+				new WishlistModality { WishlistId = 21, ModalityId = 5, IsArchived = false },
+				new WishlistModality { WishlistId = 21, ModalityId = 6, IsArchived = false },
+				new WishlistModality { WishlistId = 22, ModalityId = 1, IsArchived = false },
+				new WishlistModality { WishlistId = 22, ModalityId = 2, IsArchived = false },
+				new WishlistModality { WishlistId = 23, ModalityId = 3, IsArchived = false },
+				new WishlistModality { WishlistId = 23, ModalityId = 4, IsArchived = false },
+				new WishlistModality { WishlistId = 24, ModalityId = 5, IsArchived = false },
+				new WishlistModality { WishlistId = 24, ModalityId = 6, IsArchived = false },
+				new WishlistModality { WishlistId = 25, ModalityId = 1, IsArchived = false },
+				new WishlistModality { WishlistId = 25, ModalityId = 2, IsArchived = false },
+				new WishlistModality { WishlistId = 26, ModalityId = 3, IsArchived = false },
+				new WishlistModality { WishlistId = 26, ModalityId = 4, IsArchived = false },
+				new WishlistModality { WishlistId = 27, ModalityId = 5, IsArchived = false },
+				new WishlistModality { WishlistId = 27, ModalityId = 6, IsArchived = false },
+				new WishlistModality { WishlistId = 28, ModalityId = 1, IsArchived = false },
+				new WishlistModality { WishlistId = 28, ModalityId = 2, IsArchived = false },
+				new WishlistModality { WishlistId = 29, ModalityId = 3, IsArchived = false },
+				new WishlistModality { WishlistId = 29, ModalityId = 4, IsArchived = false },
+				new WishlistModality { WishlistId = 30, ModalityId = 5, IsArchived = false },
+				new WishlistModality { WishlistId = 30, ModalityId = 6, IsArchived = false }
 			};
 
 			foreach (var w in WishlistModalities)
@@ -1337,8 +2464,23 @@ namespace DataAccess
 			var WishlistPartOfDays = new List<WishlistPartOfDay>
 			{
 				new WishlistPartOfDay { WishlistId = 4, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 4, PartOfDayId = 2, IsArchived = false },
 				new WishlistPartOfDay { WishlistId = 5, PartOfDayId = 2, IsArchived = false },
-				new WishlistPartOfDay { WishlistId = 6, PartOfDayId = 3, IsArchived = false }
+				new WishlistPartOfDay { WishlistId = 6, PartOfDayId = 3, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 10, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 11, PartOfDayId = 2, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 11, PartOfDayId = 3, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 12, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 16, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 17, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 18, PartOfDayId = 3, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 22, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 22, PartOfDayId = 2, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 23, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 24, PartOfDayId = 2, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 28, PartOfDayId = 1, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 29, PartOfDayId = 2, IsArchived = false },
+				new WishlistPartOfDay { WishlistId = 30, PartOfDayId = 3, IsArchived = false }
 			};
 
 			foreach (var w in WishlistPartOfDays)
@@ -1355,9 +2497,55 @@ namespace DataAccess
 
 			var WishlistTimeBlocks = new List<WishlistTimeBlock>
 			{
-				new WishlistTimeBlock { WishlistId = 5, TimeBlockId = 1, IsArchived = false },
-				new WishlistTimeBlock { WishlistId = 5, TimeBlockId = 2, IsArchived = false },
-				new WishlistTimeBlock { WishlistId = 6, TimeBlockId = 3, IsArchived = false }
+				new WishlistTimeBlock { WishlistId = 1, TimeBlockId = 1, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 1, TimeBlockId = 2, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 1, TimeBlockId = 3, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 2, TimeBlockId = 2, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 2, TimeBlockId = 4, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 2, TimeBlockId = 12, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 3, TimeBlockId = 1, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 3, TimeBlockId = 3, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 3, TimeBlockId = 5, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 3, TimeBlockId = 11, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 3, TimeBlockId = 12, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 3, TimeBlockId = 13, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 7, TimeBlockId = 1, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 7, TimeBlockId = 2, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 7, TimeBlockId = 3, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 8, TimeBlockId = 2, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 8, TimeBlockId = 4, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 8, TimeBlockId = 6, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 9, TimeBlockId = 11, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 9, TimeBlockId = 12, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 9, TimeBlockId = 13, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 13, TimeBlockId = 9, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 13, TimeBlockId = 10, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 13, TimeBlockId = 11, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 14, TimeBlockId = 6, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 14, TimeBlockId = 7, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 14, TimeBlockId = 8, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 15, TimeBlockId = 1, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 15, TimeBlockId = 3, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 15, TimeBlockId = 5, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 19, TimeBlockId = 2, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 19, TimeBlockId = 4, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 19, TimeBlockId = 6, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 20, TimeBlockId = 9, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 20, TimeBlockId = 10, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 20, TimeBlockId = 11, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 21, TimeBlockId = 1, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 21, TimeBlockId = 3, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 21, TimeBlockId = 5, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 25, TimeBlockId = 2, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 25, TimeBlockId = 4, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 25, TimeBlockId = 6, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 26, TimeBlockId = 9, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 26, TimeBlockId = 10, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 26, TimeBlockId = 11, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 27, TimeBlockId = 1, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 27, TimeBlockId = 3, IsArchived = false },
+				new WishlistTimeBlock { WishlistId = 27, TimeBlockId = 5, IsArchived = false }
+
 			};
 
 			foreach (var w in WishlistTimeBlocks)
