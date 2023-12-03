@@ -330,7 +330,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
             }
             //Modifying a Row
             else
-            {
+        {
                 _unitOfWork.CourseSection.Update(objCourseSection);
                 TempData["success"] = "Course Section updated Successfully";
             }
