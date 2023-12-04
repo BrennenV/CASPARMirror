@@ -141,8 +141,26 @@ namespace DataAccess
 			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "instructor5@instructor.com");
 			_userManager.AddToRoleAsync(user, SD.INSTRUCTOR_ROLE).GetAwaiter().GetResult();
 
-			//Creating Students
-			_userManager.CreateAsync(new ApplicationUser
+            string[] instrNames = new string[] { "Abdulmalek Al-Gahmi", "Cody Squadroni", "Hugo Valle", "Kim Murhpy", "Mark Huson", "Matt Paulson", "Robert Kumar", "Ted Cowan", "Lance Rhodes", "Dylan Zwich" };
+
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"instructor{6 + i}@instructor.com";
+                ApplicationUser instructorUser = new ApplicationUser
+                {
+                    UserName = email,
+                    Email = email,
+                    FirstName = instrNames[i].Split(' ')[0],
+                    LastName = instrNames[i].Split(' ')[1],
+                };
+                _userManager.CreateAsync(instructorUser, "Instructor123*").GetAwaiter().GetResult();
+
+                instructorUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+                _userManager.AddToRoleAsync(instructorUser, SD.INSTRUCTOR_ROLE).GetAwaiter().GetResult();
+            }
+
+            //Creating Students
+            _userManager.CreateAsync(new ApplicationUser
 			{
 				UserName = "student@student.com",
 				Email = "student@student.com",
@@ -598,13 +616,31 @@ namespace DataAccess
 			}
 			_db.SaveChanges();
 
-			//****************************************************************************** ProgramAssignments
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"instructor{6 + i}@instructor.com";
+                ApplicationUser instructorUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
 
-			// Seed the PartOfTerms
-			// - PartOfTermTitle
-			// - IsArchived
+                for (int j = 1; j <= 3; j++)
+                {
+                    ProgramAssignment programAssignment = new ProgramAssignment
+                    {
+                        InstructorId = instructorUser.Id,
+                        ProgramId = j,
+                        IsArchived = false
+                    };
+                    _db.ProgramAssignments.Add(programAssignment);
+                }
+            }
+            _db.SaveChanges();
 
-			var PartOfTerms = new List<PartOfTerm>
+            //****************************************************************************** ProgramAssignments
+
+            // Seed the PartOfTerms
+            // - PartOfTermTitle
+            // - IsArchived
+
+            var PartOfTerms = new List<PartOfTerm>
 			{
 				new PartOfTerm { PartOfTermTitle = "Full Term", IsArchived = false },
 				new PartOfTerm { PartOfTermTitle = "First Half Term", IsArchived = false },
@@ -1997,15 +2033,38 @@ namespace DataAccess
 			}
 			_db.SaveChanges();
 
-			//****************************************************************************** ReleaseTimes
+            Random rand = new Random();
 
-			// Seed the LoadReqs
-			// - LoadReqHours
-			// - InstructorId (FK)
-			// - SemesterId (FK)
-			// - IsArchived
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"instructor{6 + i}@instructor.com";
+                ApplicationUser instructorUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
 
-			var LoadReqs = new List<LoadReq>
+                for (int j = 1; j <= 3; j++)
+                {
+                    ReleaseTime releaseTime = new ReleaseTime
+                    {
+                        ReleaseTimeAmount = rand.Next(0, 7), // Generates a random number between 0 and 6
+                        ReleaseTimeNotes = "None",
+                        SemesterInstanceId = j,
+                        InstructorId = instructorUser.Id,
+                        IsArchived = false
+                    };
+                    _db.ReleaseTimes.Add(releaseTime);
+                }
+            }
+            _db.SaveChanges();
+
+
+            //****************************************************************************** ReleaseTimes
+
+            // Seed the LoadReqs
+            // - LoadReqHours
+            // - InstructorId (FK)
+            // - SemesterId (FK)
+            // - IsArchived
+
+            var LoadReqs = new List<LoadReq>
 			{
 				new LoadReq { LoadReqAmount = 12, InstructorId = instr.Id, SemesterInstanceId = 1, IsArchived = false },
 				new LoadReq { LoadReqAmount = 12, InstructorId = instr.Id, SemesterInstanceId = 2, IsArchived = false },
@@ -2030,15 +2089,34 @@ namespace DataAccess
 			}
 			_db.SaveChanges();
 
-			//****************************************************************************** LoadReqs
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"instructor{6 + i}@instructor.com";
+                ApplicationUser instructorUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
 
-			// Seed the Templates
-			// - Quantity
-			// - SemesterId (FK)
-			// - CourseId (FK)
-			// - IsArchived
+                for (int j = 1; j <= 3; j++)
+                {
+                    LoadReq loadReq = new LoadReq
+                    {
+                        LoadReqAmount = 12,
+                        InstructorId = instructorUser.Id,
+                        SemesterInstanceId = j,
+                        IsArchived = false
+                    };
+                    _db.LoadReqs.Add(loadReq);
+                }
+            }
+            _db.SaveChanges();
 
-			var Templates = new List<Template>
+            //****************************************************************************** LoadReqs
+
+            // Seed the Templates
+            // - Quantity
+            // - SemesterId (FK)
+            // - CourseId (FK)
+            // - IsArchived
+
+            var Templates = new List<Template>
 			{
 				new Template { Quantity = 4, SemesterId = 1, CourseId = 1, IsArchived = false },
 				new Template { Quantity = 4, SemesterId = 1, CourseId = 2, IsArchived = false },
@@ -2137,6 +2215,23 @@ namespace DataAccess
             }
             _db.SaveChanges();
 
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"instructor{6 + i}@instructor.com";
+                ApplicationUser instructorUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+
+                for (int j = 1; j <= 3; j++)
+                {
+                    Wishlist wishlist = new Wishlist
+                    {
+                        UserId = instructorUser.Id,
+                        SemesterInstanceId = j,
+                        IsArchived = false
+                    };
+                    _db.Wishlists.Add(wishlist);
+                }
+            }
+            _db.SaveChanges();
 
             //****************************************************************************** Wishlists
 
@@ -2217,6 +2312,29 @@ namespace DataAccess
             }
             _db.SaveChanges();
 
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"instructor{6 + i}@instructor.com";
+                ApplicationUser instructorUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+
+                for (int j = 0; j < 3; j++)
+                {
+                    Wishlist wishlist = _db.Wishlists.FirstOrDefault(w => w.UserId == instructorUser.Id && w.SemesterInstanceId == j + 1);
+
+                    for (int k = 0; k < courseIds[j].Length; k++)
+                    {
+                        WishlistCourse wishlistCourse = new WishlistCourse
+                        {
+                            PreferenceRank = k + 1,
+                            WishlistId = wishlist.Id,
+                            CourseId = courseIds[j][k],
+                            IsArchived = false
+                        };
+                        _db.WishlistCourses.Add(wishlistCourse);
+                    }
+                }
+            }
+            _db.SaveChanges();
 
             //****************************************************************************** WishlistCourses
             // Seed the PartOfDay
@@ -2373,6 +2491,34 @@ namespace DataAccess
             }
             _db.SaveChanges();
 
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"instructor{6 + i}@instructor.com";
+                ApplicationUser instructorUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+
+                for (int j = 0; j < 3; j++)
+                {
+                    Wishlist wishlist = _db.Wishlists.FirstOrDefault(w => w.UserId == instructorUser.Id && w.SemesterInstanceId == j + 1);
+
+                    // Generate a random number of campuses for each user (between 1 and 5)
+                    int numCampuses = random.Next(1, 6);
+
+                    for (int k = 0; k < numCampuses; k++)
+                    {
+                        // Generate a random CampusId for each WishlistCampus (between 1 and 5)
+                        int campusId = random.Next(1, 6);
+
+                        WishlistCampus wishlistCampus = new WishlistCampus
+                        {
+                            WishlistId = wishlist.Id,
+                            CampusId = campusId,
+                            IsArchived = false
+                        };
+                        _db.WishlistCampuses.Add(wishlistCampus);
+                    }
+                }
+            }
+            _db.SaveChanges();
 
             //****************************************************************************** WishlistCampuses
             // Seed the WishlistDaysOfWeek
@@ -2415,13 +2561,44 @@ namespace DataAccess
 			}
 			_db.SaveChanges();
 
-			//****************************************************************************** WishlistDaysOfWeeks
-			// Seed the WishlistModality
-			// - WishlistId (FK)
-			// - ModalityId (FK)
-			// - IsArchived
+            //Random random = new Random();
 
-			var WishlistModalities = new List<WishlistModality>
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"instructor{6 + i}@instructor.com";
+                ApplicationUser instructorUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+
+                for (int j = 0; j < 3; j++)
+                {
+                    Wishlist wishlist = _db.Wishlists.FirstOrDefault(w => w.UserId == instructorUser.Id && w.SemesterInstanceId == j + 1);
+
+                    // Generate a random number of days for each user (between 1 and 10)
+                    int numDays = random.Next(1, 11);
+
+                    for (int k = 0; k < numDays; k++)
+                    {
+                        // Generate a random DaysOfWeekId for each WishlistDaysOfWeek (between 1 and 10)
+                        int daysOfWeekId = random.Next(1, 11);
+
+                        WishlistDaysOfWeek wishlistDaysOfWeek = new WishlistDaysOfWeek
+                        {
+                            WishlistId = wishlist.Id,
+                            DaysOfWeekId = daysOfWeekId,
+                            IsArchived = false
+                        };
+                        _db.WishlistDaysOfWeeks.Add(wishlistDaysOfWeek);
+                    }
+                }
+            }
+            _db.SaveChanges();
+
+            //****************************************************************************** WishlistDaysOfWeeks
+            // Seed the WishlistModality
+            // - WishlistId (FK)
+            // - ModalityId (FK)
+            // - IsArchived
+
+            var WishlistModalities = new List<WishlistModality>
 			{
 				new WishlistModality { WishlistId = 1, ModalityId = 1, IsArchived = false },
 				new WishlistModality { WishlistId = 1, ModalityId = 2, IsArchived = false },
@@ -2490,7 +2667,6 @@ namespace DataAccess
 				_db.WishlistModalities.Add(w);
 			}
 			_db.SaveChanges();
-
             //Random random = new Random();
 
             for (int i = 0; i < 10; i++)
@@ -2522,6 +2698,34 @@ namespace DataAccess
             }
             _db.SaveChanges();
 
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"instructor{6 + i}@instructor.com";
+                ApplicationUser instructorUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+
+                for (int j = 0; j < 3; j++)
+                {
+                    Wishlist wishlist = _db.Wishlists.FirstOrDefault(w => w.UserId == instructorUser.Id && w.SemesterInstanceId == j + 1);
+
+                    // Generate a random number of modalities for each user (between 1 and 11)
+                    int numModalities = random.Next(1, 12);
+
+                    for (int k = 0; k < numModalities; k++)
+                    {
+                        // Generate a random ModalityId for each WishlistModality (between 1 and 11)
+                        int modalityId = random.Next(1, 12);
+
+                        WishlistModality wishlistModality = new WishlistModality
+                        {
+                            WishlistId = wishlist.Id,
+                            ModalityId = modalityId,
+                            IsArchived = false
+                        };
+                        _db.WishlistModalities.Add(wishlistModality);
+                    }
+                }
+            }
+            _db.SaveChanges();
 
             //****************************************************************************** WishlistModalities
             // Seed the WishlistPartOfDays
@@ -2622,7 +2826,36 @@ namespace DataAccess
 			}
 			_db.SaveChanges();
 
-			//****************************************************************************** WishlistTimeBlocks
-		}
-	}
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"instructor{6 + i}@instructor.com";
+                ApplicationUser instructorUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+
+                for (int j = 0; j < 3; j++)
+                {
+                    Wishlist wishlist = _db.Wishlists.FirstOrDefault(w => w.UserId == instructorUser.Id && w.SemesterInstanceId == j + 1);
+
+                    // Generate a random number of time blocks for each user (between 2 and 8)
+                    int numTimeBlocks = random.Next(2, 9);
+
+                    for (int k = 0; k < numTimeBlocks; k++)
+                    {
+                        // Generate a random TimeBlockId for each WishlistTimeBlock (between 1 and 27)
+                        int timeBlockId = random.Next(1, 28);
+
+                        WishlistTimeBlock wishlistTimeBlock = new WishlistTimeBlock
+                        {
+                            WishlistId = wishlist.Id,
+                            TimeBlockId = timeBlockId,
+                            IsArchived = false
+                        };
+                        _db.WishlistTimeBlocks.Add(wishlistTimeBlock);
+                    }
+                }
+            }
+            _db.SaveChanges();
+
+            //****************************************************************************** WishlistTimeBlocks
+        }
+    }
 }
