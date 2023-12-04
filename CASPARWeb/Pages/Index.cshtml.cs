@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Infrastructure.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Utility;
 
 namespace CASPARWeb.Pages
 {
@@ -9,14 +12,29 @@ namespace CASPARWeb.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+			if (User.IsInRole(SD.ADMIN_ROLE) || User.IsInRole(SD.PROGRAM_COORDINATOR_ROLE))
+			{
+                return Page();
+			}
 
+			if (User.IsInRole(SD.INSTRUCTOR_ROLE))
+            {
+                return Redirect("/Instr/Wishlists/Index");
+            }
+
+            if (User.IsInRole(SD.STUDENT_ROLE))
+            {
+                return Redirect("/Stud/Wishlists/Index");
+            }
+
+			return Page();
         }
     }
 }

@@ -109,10 +109,12 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
             ClassroomList = _unitOfWork.Classroom.GetAll(c => c.IsArchived != true,null,"Building,Building.Campus").Select(c => new SelectListItem { Text = c.ClassroomNumber + " - " + c.Building.Campus.CampusName, Value = c.Id.ToString()});
             TimeBlockList = _unitOfWork.TimeBlock.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.TimeBlockValue, Value = c.Id.ToString() });
             DaysOfWeekList = _unitOfWork.DaysOfWeek.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.DaysOfWeekValue, Value = c.Id.ToString() });
-            PartOfTermList = _unitOfWork.PartOfTerm.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.PartOfTermTitle, Value = c.Id.ToString() });
-            PayModelList = _unitOfWork.PayModel.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.PayModelTitle, Value = c.Id.ToString() });
-            PayOrganizationList = _unitOfWork.PayOrganization.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.PayOrganizationTitle, Value = c.Id.ToString() });
-            SectionStatusList = _unitOfWork.SectionStatus.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.SectionStatusName, Value = c.Id.ToString() });
+            PartOfTermList = _unitOfWork.PartOfTerm.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.PartOfTermTitle, Value = c.Id.ToString(), Selected = c.PartOfTermTitle == "Full Term" });
+            PayModelList = _unitOfWork.PayModel.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.PayModelTitle, Value = c.Id.ToString(), Selected = c.PayModelTitle == "Load" });
+            PayOrganizationList = _unitOfWork.PayOrganization.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.PayOrganizationTitle, Value = c.Id.ToString(), Selected = c.PayOrganizationTitle == "EAST" });
+            SectionStatusList = _unitOfWork.SectionStatus.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.SectionStatusName, Value = c.Id.ToString(), Selected = c.SectionStatusName == "Pending" });
+
+
             //Catch the semester instance id to use for new course sections
             if (semesterInstanceId != 0)
             {
