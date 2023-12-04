@@ -197,8 +197,27 @@ namespace DataAccess
 			user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student5@student.com");
 			_userManager.AddToRoleAsync(user, SD.STUDENT_ROLE).GetAwaiter().GetResult();
 
-			//Create Program Coordinator
-			_userManager.CreateAsync(new ApplicationUser
+            string[] studFirstNames = new string[] { "John", "Jane", "Sam", "Sara", "Bob", "Alice", "Tom", "Emma", "Max", "Olivia" };
+            string[] studLastNames = new string[] { "Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez", "Wilson" };
+
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"student{6 + i}@student.com";
+                ApplicationUser studentUser = new ApplicationUser
+                {
+                    UserName = email,
+                    Email = email,
+                    FirstName = studFirstNames[i],
+                    LastName = studLastNames[i],
+                };
+                _userManager.CreateAsync(studentUser, "Student123*").GetAwaiter().GetResult();
+
+                studentUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+                _userManager.AddToRoleAsync(studentUser, SD.STUDENT_ROLE).GetAwaiter().GetResult();
+            }
+
+            //Create Program Coordinator
+            _userManager.CreateAsync(new ApplicationUser
             {
                 UserName = "coord@coord.com",
                 Email = "coord@coord.com",
@@ -222,103 +241,6 @@ namespace DataAccess
 			var stud5 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student5@student.com");
 
 			//****************************************************************************** Super Admin
-
-			//START - THIS BLOCK OF USERS, ROLES, AND ROLEASSIGNMENTS WILL BE HANDLED BY THE IDENTITY FRAMEWORK
-			// HOWEVER, THIS NEEDS TO BE HERE FOR THE REST OF THE SEED DATA TO WORK
-
-			//var Users = new List<User>
-			//{
-			//	new User { UserFirstName = "Chris", UserLastName = "Jensen", UserEmail = "chrisjensen3@mail.weber.edu", UserPassword = "password"},
-			//	new User { UserFirstName = "Joseph", UserLastName = "Brower", UserEmail = "josephbrower@mail.weber.edu", UserPassword = "wordpass"},
-			//	new User { UserFirstName = "Jaeden", UserLastName = "Fisher", UserEmail = "jaedenfisher@mail.weber.edu", UserPassword = "pass"},
-			//	new User { UserFirstName = "Brennen", UserLastName = "Vanderpool", UserEmail = "brennenvanderpool@mail.weber.edu", UserPassword = "word"},
-			//	new User { UserFirstName = "Richard", UserLastName = "Fry", UserEmail = "rfry@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Abdulmalek", UserLastName = "Al-Gahmi", UserEmail = "aal-gahmi@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "AJ", UserLastName = "Hepler", UserEmail = "ahepler@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Alison", UserLastName = "Sunderland", UserEmail = "asunderland@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Allyson", UserLastName = "Saunders", UserEmail = "asaunders@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Andrew", UserLastName = "Drake", UserEmail = "adrake@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Angela", UserLastName = "Christensen", UserEmail = "achristensen@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Arpit", UserLastName = "Christi", UserEmail = "achristi@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Bob", UserLastName = "Ball", UserEmail = "bball@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Brad", UserLastName = "Peterson", UserEmail = "bpeterson@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Brian", UserLastName = "Rague", UserEmail = "brague@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Chimobi", UserLastName = "Ucha", UserEmail = "cucha@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Cody", UserLastName = "Squadroni", UserEmail = "csquadroni@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "David", UserLastName = "Ferro", UserEmail = "dferro@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Delroy", UserLastName = "Brinkerhoff", UserEmail = "dbrinkerhoff@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Drew", UserLastName = "Weidman", UserEmail = "dweidman@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Garth", UserLastName = "Tuck", UserEmail = "gtuck@weber.edu", UserPassword = "temp1234"},
-			//	new User { UserFirstName = "Hugo", UserLastName = "Valle", UserEmail = "hvalle@weber.edu", UserPassword = "temp1234"}
-			//};
-
-			//foreach (var u in Users)
-			//{
-			//	_db.Users.Add(u);
-			//}
-			//_db.SaveChanges();
-
-			////****************************************************************************** Users
-
-			//// Seed the Roles
-			//// - RoleName
-
-			//var Roles = new List<Role>
-			//{
-			//	new Role { RoleName = "Admin" },
-			//	new Role { RoleName = "Instructor" },
-			//	new Role { RoleName = "Student" }
-			//};
-
-			//foreach (var r in Roles)
-			//{
-			//	_db.Roles.Add(r);
-			//}
-			//_db.SaveChanges();
-
-			////****************************************************************************** Roles
-
-			//// Seed the RoleAssignments
-			//// - RoleId (FK)
-			//// - UserId (FK)
-
-			//var RoleAssignments = new List<RoleAssignment>
-			//{
-			//	new RoleAssignment { RoleId = 1, UserId = 1 },
-			//	new RoleAssignment { RoleId = 2, UserId = 5 },
-			//	new RoleAssignment { RoleId = 2, UserId = 6 },
-			//	new RoleAssignment { RoleId = 3, UserId = 2 },
-			//	new RoleAssignment { RoleId = 3, UserId = 3 },
-			//	new RoleAssignment { RoleId = 3, UserId = 4 },
-			//	new RoleAssignment { RoleId = 2, UserId = 7 },
-			//	new RoleAssignment { RoleId = 2, UserId = 8 },
-			//	new RoleAssignment { RoleId = 2, UserId = 9 },
-			//	new RoleAssignment { RoleId = 2, UserId = 10 },
-			//	new RoleAssignment { RoleId = 2, UserId = 11 },
-			//	new RoleAssignment { RoleId = 2, UserId = 12 },
-			//	new RoleAssignment { RoleId = 2, UserId = 13 },
-			//	new RoleAssignment { RoleId = 2, UserId = 14 },
-			//	new RoleAssignment { RoleId = 2, UserId = 15 },
-			//	new RoleAssignment { RoleId = 2, UserId = 16 },
-			//	new RoleAssignment { RoleId = 2, UserId = 17 },
-			//	new RoleAssignment { RoleId = 2, UserId = 18 },
-			//	new RoleAssignment { RoleId = 2, UserId = 19 },
-			//	new RoleAssignment { RoleId = 2, UserId = 20 },
-			//	new RoleAssignment { RoleId = 2, UserId = 21 },
-			//	new RoleAssignment { RoleId = 2, UserId = 22 }
-			//};
-
-			//foreach (var r in RoleAssignments)
-			//{
-			//	_db.RoleAssignments.Add(r);
-			//}
-			//_db.SaveChanges();
-
-			////****************************************************************************** RoleAssignments
-
-			////END - DELETE BLOCK FOR LATER
-
-			//Student and Instructor tables were deleted 11/14/2023
 
 			// Seed the Campuses
 			// - CampusName
@@ -790,8 +712,11 @@ namespace DataAccess
 				new DaysOfWeek { DaysOfWeekValue = "Thursday", IsArchived = false },
 				new DaysOfWeek { DaysOfWeekValue = "Friday", IsArchived = false },
 				new DaysOfWeek { DaysOfWeekValue = "Saturday", IsArchived = false },
-				new DaysOfWeek { DaysOfWeekValue = "Sunday", IsArchived = false }
-			};
+				new DaysOfWeek { DaysOfWeekValue = "Sunday", IsArchived = false },
+                new DaysOfWeek { DaysOfWeekValue = "Mon, Wed", IsArchived = false },
+				new DaysOfWeek { DaysOfWeekValue = "Tues, Thurs", IsArchived = false },
+				new DaysOfWeek { DaysOfWeekValue = "Mon, Wed, Fri", IsArchived = false }
+            };
 
 			foreach (var d in DaysOfWeeks)
 			{
@@ -2194,15 +2119,34 @@ namespace DataAccess
 			}
 			_db.SaveChanges();
 
-			//****************************************************************************** Wishlists
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"student{6 + i}@student.com";
+                ApplicationUser studentUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
 
-			// Seed the WishlistCourse
-			// - PreferenceRank (nullable)
-			// - WishlistId (FK)
-			// - CourseId (FK)
-			// - IsArchived
+                for (int j = 1; j <= 3; j++)
+                {
+                    Wishlist wishlist = new Wishlist
+                    {
+                        UserId = studentUser.Id,
+                        SemesterInstanceId = j,
+                        IsArchived = false
+                    };
+                    _db.Wishlists.Add(wishlist);
+                }
+            }
+            _db.SaveChanges();
 
-			var WishlistCourses = new List<WishlistCourse>
+
+            //****************************************************************************** Wishlists
+
+            // Seed the WishlistCourse
+            // - PreferenceRank (nullable)
+            // - WishlistId (FK)
+            // - CourseId (FK)
+            // - IsArchived
+
+            var WishlistCourses = new List<WishlistCourse>
 			{
 				new WishlistCourse { PreferenceRank = 1, WishlistId = 1, CourseId = 1, IsArchived = false },
 				new WishlistCourse { PreferenceRank = 2, WishlistId = 1, CourseId = 2, IsArchived = false },
@@ -2242,12 +2186,44 @@ namespace DataAccess
 			}
 			_db.SaveChanges();
 
-			//****************************************************************************** WishlistCourses
-			// Seed the PartOfDay
-			// - PartOfDay (FK)
-			// - isArchived
+            int[][] courseIds = new int[][]
+			{
+				new int[] {1, 2, 3, 4, 5, 6}, // CourseId's for SemesterInstanceId 1
+				new int[] {112, 63, 14, 13, 21, 69}, // CourseId's for SemesterInstanceId 2
+				new int[] {7, 19, 99, 1, 5, 9} // CourseId's for SemesterInstanceId 3
+			};
 
-			var PartOfDay = new List<PartOfDay>
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"student{6 + i}@student.com";
+                ApplicationUser studentUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+
+                for (int j = 0; j < 3; j++)
+                {
+                    Wishlist wishlist = _db.Wishlists.FirstOrDefault(w => w.UserId == studentUser.Id && w.SemesterInstanceId == j + 1);
+
+                    for (int k = 0; k < courseIds[j].Length; k++)
+                    {
+                        WishlistCourse wishlistCourse = new WishlistCourse
+                        {
+                            PreferenceRank = k + 1,
+                            WishlistId = wishlist.Id,
+                            CourseId = courseIds[j][k],
+                            IsArchived = false
+                        };
+                        _db.WishlistCourses.Add(wishlistCourse);
+                    }
+                }
+            }
+            _db.SaveChanges();
+
+
+            //****************************************************************************** WishlistCourses
+            // Seed the PartOfDay
+            // - PartOfDay (FK)
+            // - isArchived
+
+            var PartOfDay = new List<PartOfDay>
 			{
 				new PartOfDay { PartOfDayValue = "Morning", IsArchived = false },
 				new PartOfDay { PartOfDayValue = "Afternoon", IsArchived = false },
@@ -2289,14 +2265,42 @@ namespace DataAccess
 				new WishlistPartOfDay { WishlistId = 30, PartOfDayId = 2, IsArchived = false }
 			};
 
+			foreach (var w in WishlistPartOfDay)
+			{
+                _db.WishlistPartOfDays.Add(w);
+            }
+			_db.SaveChanges();
 
-			//****************************************************************************** WishlistPartOfDay
-			// Seed the WishlistCampus
-			// - WishlistId (FK)
-			// - CampusId (FK)
-			// - IsArchived
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"student{6 + i}@student.com";
+                ApplicationUser studentUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
 
-			var WishlistCampuses = new List<WishlistCampus>
+                for (int j = 0; j < 3; j++)
+                {
+                    Wishlist wishlist = _db.Wishlists.FirstOrDefault(w => w.UserId == studentUser.Id && w.SemesterInstanceId == j + 1);
+
+                    for (int k = 1; k <= 3; k++)
+                    {
+                        WishlistPartOfDay wishlistPartOfDay = new WishlistPartOfDay
+                        {
+                            WishlistId = wishlist.Id,
+                            PartOfDayId = k,
+                            IsArchived = false
+                        };
+                        _db.WishlistPartOfDays.Add(wishlistPartOfDay);
+                    }
+                }
+            }
+            _db.SaveChanges();
+
+            //****************************************************************************** WishlistPartOfDay
+            // Seed the WishlistCampus
+            // - WishlistId (FK)
+            // - CampusId (FK)
+            // - IsArchived
+
+            var WishlistCampuses = new List<WishlistCampus>
 			{
 				new WishlistCampus { WishlistId = 1, CampusId = 1, IsArchived = false },
 				new WishlistCampus { WishlistId = 1, CampusId = 2, IsArchived = false },
@@ -2338,13 +2342,45 @@ namespace DataAccess
 			}
 			_db.SaveChanges();
 
-			//****************************************************************************** WishlistCampuses
-			// Seed the WishlistDaysOfWeek
-			// - WishlistId (FK)
-			// - DaysOfWeekId (FK)
-			// - IsArchived
+            Random random = new Random();
 
-			var WishlistDaysOfWeeks = new List<WishlistDaysOfWeek>
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"student{6 + i}@student.com";
+                ApplicationUser studentUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+
+                for (int j = 0; j < 3; j++)
+                {
+                    Wishlist wishlist = _db.Wishlists.FirstOrDefault(w => w.UserId == studentUser.Id && w.SemesterInstanceId == j + 1);
+
+                    // Generate a random number of campuses for each user (between 1 and 5)
+                    int numCampuses = random.Next(1, 6);
+
+                    for (int k = 0; k < numCampuses; k++)
+                    {
+                        // Generate a random CampusId for each WishlistCampus (between 1 and 5)
+                        int campusId = random.Next(1, 6);
+
+                        WishlistCampus wishlistCampus = new WishlistCampus
+                        {
+                            WishlistId = wishlist.Id,
+                            CampusId = campusId,
+                            IsArchived = false
+                        };
+                        _db.WishlistCampuses.Add(wishlistCampus);
+                    }
+                }
+            }
+            _db.SaveChanges();
+
+
+            //****************************************************************************** WishlistCampuses
+            // Seed the WishlistDaysOfWeek
+            // - WishlistId (FK)
+            // - DaysOfWeekId (FK)
+            // - IsArchived
+
+            var WishlistDaysOfWeeks = new List<WishlistDaysOfWeek>
 			{
 				new WishlistDaysOfWeek { WishlistId = 1, DaysOfWeekId = 1, IsArchived = false },
 				new WishlistDaysOfWeek { WishlistId = 1, DaysOfWeekId = 3, IsArchived = false },
@@ -2455,13 +2491,45 @@ namespace DataAccess
 			}
 			_db.SaveChanges();
 
-			//****************************************************************************** WishlistModalities
-			// Seed the WishlistPartOfDays
-			// - WishlistId (FK)
-			// - PartOfDayId (FK)
-			// - IsArchived
+            //Random random = new Random();
 
-			var WishlistPartOfDays = new List<WishlistPartOfDay>
+            for (int i = 0; i < 10; i++)
+            {
+                string email = $"student{6 + i}@student.com";
+                ApplicationUser studentUser = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+
+                for (int j = 0; j < 3; j++)
+                {
+                    Wishlist wishlist = _db.Wishlists.FirstOrDefault(w => w.UserId == studentUser.Id && w.SemesterInstanceId == j + 1);
+
+                    // Generate a random number of modalities for each user (between 1 and 11)
+                    int numModalities = random.Next(1, 12);
+
+                    for (int k = 0; k < numModalities; k++)
+                    {
+                        // Generate a random ModalityId for each WishlistModality (between 1 and 11)
+                        int modalityId = random.Next(1, 12);
+
+                        WishlistModality wishlistModality = new WishlistModality
+                        {
+                            WishlistId = wishlist.Id,
+                            ModalityId = modalityId,
+                            IsArchived = false
+                        };
+                        _db.WishlistModalities.Add(wishlistModality);
+                    }
+                }
+            }
+            _db.SaveChanges();
+
+
+            //****************************************************************************** WishlistModalities
+            // Seed the WishlistPartOfDays
+            // - WishlistId (FK)
+            // - PartOfDayId (FK)
+            // - IsArchived
+
+            var WishlistPartOfDays = new List<WishlistPartOfDay>
 			{
 				new WishlistPartOfDay { WishlistId = 4, PartOfDayId = 1, IsArchived = false },
 				new WishlistPartOfDay { WishlistId = 4, PartOfDayId = 2, IsArchived = false },
