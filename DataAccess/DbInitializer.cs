@@ -720,7 +720,7 @@ namespace DataAccess
 				new SectionStatus { SectionStatusName = "Pending", SectionStatusColor = "#ffff00", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Active", SectionStatusColor = "#00ffff", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Inactive", SectionStatusColor = "#808080", IsArchived = false },
-				new SectionStatus { SectionStatusName = "Not Started", SectionStatusColor = "#ff0000", IsArchived = false },
+				new SectionStatus { SectionStatusName = "Not Started", SectionStatusColor = "#b90e0a", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Confirmed", SectionStatusColor = "#0000ff", IsArchived = false },
 				new SectionStatus { SectionStatusName = "Needed", SectionStatusColor = "#800080", IsArchived = false },
 				new SectionStatus { SectionStatusName = "IF Needed", SectionStatusColor = "#ffc0cb", IsArchived = false },

@@ -28,9 +28,9 @@
                 <div class="form-group mt-3">
                     <div class="row">
                         <div class="mb-3 col-6">
-                            <label class="ms-2">Semester Template</label>
+                            <label class="ms-2">Semester Type</label>
                             <select id="inputSemesterTemplate" asp-for="objSemesterInstance.SemesterId" asp-items="@Model.SemesterList" class="form-select border-0 shadow mt-3">
-                                <option disabled selected>--Select Template--</option>
+                                <option disabled selected>--Select Type--</option>
                             </select>
                         </div>
                     </div>
@@ -89,12 +89,8 @@
             swal.fire('Error', 'Please Enter a Semester Name', 'error');
             return false;
         }
-        else if (document.getElementById('inputSemesterTemplate').value == "--Select Template--") {
+        else if (document.getElementById('inputSemesterTemplate').value == "--Select Type--") {
             swal.fire('Error', 'Please select a Semester Template', 'error');
-            return false;
-        }
-        else if (document.getElementById('inputSemesterStatus').value == "--Select Status--") {
-            swal.fire('Error', 'Please select a Semester Status', 'error');
             return false;
         }
         else if (document.getElementById('inputSemesterStartDate').value == "") {
@@ -121,6 +117,6 @@
             swal.fire('Error', 'Please make sure your Registration Start Date is less than the Registration End Date', 'error');
             return false;
         }
-        return true;
+       return true;
     }
 </script>

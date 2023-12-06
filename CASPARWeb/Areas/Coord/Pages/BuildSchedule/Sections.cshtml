@@ -28,7 +28,28 @@
             {
                 <div class="big-dropdown text-primary mb-3" onclick="changeCaret('sectionDropdown@(item.Key)')" data-bs-toggle="collapse" data-bs-target="#multiCollapseCourse@(item.Key)" aria-expanded="false" aria-controls="multiCollapseCourse@(item.Key)">
                     <span><i class="bi bi-caret-right mx-2" id="sectionDropdown@(item.Key)"></i>@item.Value.First().Course.AcademicProgram.ProgramCode @item.Value.First().Course.CourseNumber @item.Value.First().Course.CourseTitle</span>
-                    <span class="badge rounded-pill section-count">@item.Value.Count() Sections</span>
+                    <span class="badge rounded-pill section-count">
+                        @item.Value.Count() Sections
+
+                        @{
+                            int notStartedCount = 0;
+                            foreach (var courseSection in item.Value)
+                            {
+                                if (courseSection.SectionStatus == null || courseSection.SectionStatus.SectionStatusName == "Not Started")
+                                {
+                                    notStartedCount++;
+                                }
+                            }
+
+                            if(notStartedCount > 0)
+                            {
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" data-bs-toggle="tooltip" data-bs-placement="right" title="Sections Not Started">
+                                    @notStartedCount
+                                    <span class="visually-hidden">sections not started</span>
+                                </span>
+                            }
+                        }
+                    </span>
                 </div>
 
                 <div class="dropdown-content collapse multi-collapse container mb-4" id="multiCollapseCourse@(item.Key)">
@@ -142,12 +163,19 @@
     </div>
 </div> <!--Close Container-->
 
-<script>
-    function changeCaret(elemId) {
-        $("#" + elemId).toggleClass("bi-caret-right");
-        $("#" + elemId).toggleClass("bi-caret-down-fill");
-    }
-</script>
+@section Scripts {
+    <script>
+        function changeCaret(elemId) {
+            $("#" + elemId).toggleClass("bi-caret-right");
+            $("#" + elemId).toggleClass("bi-caret-down-fill");
+        }
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+}
 
 <style>
     .big-dropdown {

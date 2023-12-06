@@ -25,8 +25,35 @@ namespace CASPARWeb.Areas.Admin.Pages.Templates
         }
         public IActionResult OnGet(int? id)
         {
+            //This is to make sure that when you go into edit templates, all courses are shown
+            IEnumerable<Template> existingTemplates = _unitOfWork.Template.GetAll(c => c.IsArchived != true && c.SemesterId == id);
+            IEnumerable<Course> courses = _unitOfWork.Course.GetAll(c => c.IsArchived != true);
+            List<int> existingCourseIds = new List<int>();
+
+            foreach (var template in existingTemplates)
+            {
+                existingCourseIds.Add(template.CourseId);
+            }
+
+            foreach (var course in courses)
+            {
+                //Check if the semester had a template for the course
+                //if not, add a new template
+                if (!existingCourseIds.Contains(course.Id))
+                {
+                    Template newTemplate = new Template();
+                    newTemplate.CourseId = course.Id;
+                    newTemplate.SemesterId = (int)id;
+                    newTemplate.Quantity = 0;
+
+                    _unitOfWork.Template.Add(newTemplate);
+                }
+            }
+
+            _unitOfWork.Commit();
+
             //Populate the foreign keys to avoid foreign key conflicts
-            CourseList = _unitOfWork.Course.GetAll(c => c.IsArchived != true)
+            CourseList = courses
                             .Select(c => new SelectListItem
                             {
                                 Text = c.CourseTitle,
@@ -35,7 +62,7 @@ namespace CASPARWeb.Areas.Admin.Pages.Templates
             //objTemplateList = _unitOfWork.Template.GetAll(c => c.IsArchived != true);
             Expression<Func<Semester, bool>> predicate = c => c.Id == id && c.IsArchived != true;
             objSemester = _unitOfWork.Semester.Get(predicate, true, "Course,Semester");
-            objTemplateList = _unitOfWork.Template.GetAll(c => c.SemesterId == id && c.IsArchived != true, null, "Course,Semester");
+            objTemplateList = _unitOfWork.Template.GetAll(c => c.SemesterId == id && c.IsArchived != true && c.Course.IsArchived != true, null, "Course,Semester,Course.AcademicProgram").OrderBy(c => c.Course.AcademicProgram.ProgramCode).ThenBy(c => c.Course.CourseNumber);
             return Page();
         }
         public void OnPost()

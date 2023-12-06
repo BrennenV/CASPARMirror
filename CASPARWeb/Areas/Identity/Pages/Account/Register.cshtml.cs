@@ -22,6 +22,7 @@ using Microsoft.Extensions.Logging;
 using System.ComponentModel;
 using Utility;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using DataAccess;
 
 namespace CASPARWeb.Areas.Identity.Pages.Account
 {
@@ -34,13 +35,15 @@ namespace CASPARWeb.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         //private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UnitOfWork _unitOfWork;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            UnitOfWork unitOfWork)
             //IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -50,6 +53,7 @@ namespace CASPARWeb.Areas.Identity.Pages.Account
             _logger = logger;
             //_emailSender = emailSender;
             _roleManager = roleManager;
+            _unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -161,6 +165,34 @@ namespace CASPARWeb.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    if(Input.Role == SD.INSTRUCTOR_ROLE)
+                    {
+                        //Create LoadReq and ReleaseTimes for the new instructor in all existing semester instances
+                        IEnumerable<SemesterInstance> semesterInstances = _unitOfWork.SemesterInstance.GetAll(c => c.IsArchived != true, null, "Semester");
+                        foreach(var instance  in semesterInstances)
+                        {
+                            ReleaseTime releaseTime = new ReleaseTime();
+                            LoadReq loadReq = new LoadReq();
+
+                            releaseTime.InstructorId = user.Id;
+                            releaseTime.SemesterInstanceId = instance.Id;
+                            releaseTime.ReleaseTimeAmount = 0;
+
+                            loadReq.InstructorId = user.Id;
+                            loadReq.SemesterInstanceId = instance.Id;
+                            loadReq.LoadReqAmount = 0;
+                            if(instance.Semester.SemesterName == "Fall" || instance.Semester.SemesterName == "Spring")
+                            {
+                                loadReq.LoadReqAmount = 12;
+                            }
+
+                            _unitOfWork.ReleaseTime.Add(releaseTime);
+                            _unitOfWork.LoadReq.Add(loadReq);
+                        }
+
+                        _unitOfWork.Commit();
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

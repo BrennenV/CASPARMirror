@@ -32,7 +32,7 @@
                         <input type="hidden" name="objTemplateList[@obj.Id].CourseId" value="@obj.CourseId"/>
                         <tr>
                             <td>
-                                @obj.Course.CourseNumber - @obj.Course.CourseTitle
+                                @obj.Course.AcademicProgram.ProgramCode @obj.Course.CourseNumber - @obj.Course.CourseTitle
                             </td>
                             <td style="width: 10%;">
                                 <input type="text" name="objTemplateList[@obj.Id].Quantity" value="@obj.Quantity" style="width: 100%;" />

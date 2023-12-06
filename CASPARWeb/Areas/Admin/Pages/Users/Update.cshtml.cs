@@ -3,6 +3,7 @@ using Infrastructure.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Utility;
 
 namespace CASPARWeb.Areas.Admin.Pages.Users
 {
@@ -49,11 +50,18 @@ namespace CASPARWeb.Areas.Admin.Pages.Users
             _unitOfWork.ApplicationUser.Update(user);
             _unitOfWork.Commit();
 
+            bool becomingInstructor = false;
+            bool removingInstructor = false;
+
             //update their roles
             foreach(var r in UsersRoles)
             {
                 if(!OldRoles.Contains(r)) //new Role
                 {
+                    if(r == SD.INSTRUCTOR_ROLE)
+                    {
+                        becomingInstructor = true;
+                    }
                     rolesToAdd.Add(r);
                 }
             }
@@ -62,11 +70,85 @@ namespace CASPARWeb.Areas.Admin.Pages.Users
             {
                 if(!UsersRoles.Contains(r)) //remove
                 {
+                    if(r == SD.INSTRUCTOR_ROLE)
+                    {
+                        removingInstructor = true;
+                    }
                     var result = await _userManager.RemoveFromRoleAsync(user, r);
                 }
             }
 
             var result1 = await _userManager.AddToRolesAsync(user, rolesToAdd.AsEnumerable());
+
+            if(becomingInstructor)
+            {
+                //Create LoadReq and ReleaseTimes for the new instructor in all existing semester instances
+                IEnumerable<SemesterInstance> semesterInstances = _unitOfWork.SemesterInstance.GetAll(c => c.IsArchived != true, null, "Semester");
+                IEnumerable<LoadReq> existingLoadReqs = _unitOfWork.LoadReq.GetAll(c => c.IsArchived != true && c.InstructorId == user.Id, null, "SemesterInstance");
+                IEnumerable<ReleaseTime> existingReleaseTimes = _unitOfWork.ReleaseTime.GetAll(c => c.IsArchived != true && c.InstructorId == user.Id, null, "SemesterInstance");
+                List<int> semesterInstanceIds = new List<int>();
+
+                foreach(var loadReq in existingLoadReqs)
+                {
+                    semesterInstanceIds.Add(loadReq.SemesterInstanceId);
+                }
+
+                foreach (var instance in semesterInstances)
+                {
+                    if (!semesterInstanceIds.Contains(instance.Id))
+                    {
+                        ReleaseTime releaseTime = new ReleaseTime();
+                        LoadReq loadReq = new LoadReq();
+
+                        releaseTime.InstructorId = user.Id;
+                        releaseTime.SemesterInstanceId = instance.Id;
+                        releaseTime.ReleaseTimeAmount = 0;
+
+                        loadReq.InstructorId = user.Id;
+                        loadReq.SemesterInstanceId = instance.Id;
+                        loadReq.LoadReqAmount = 0;
+                        if (instance.Semester.SemesterName == "Fall" || instance.Semester.SemesterName == "Spring")
+                        {
+                            loadReq.LoadReqAmount = 12;
+                        }
+
+                        _unitOfWork.ReleaseTime.Add(releaseTime);
+                        _unitOfWork.LoadReq.Add(loadReq);
+                    } 
+                }
+
+                //For load reqs and release times that already exist for a user, unarchive them
+                foreach (var loadReq in existingLoadReqs)
+                {
+                    loadReq.IsArchived = false;
+                    _unitOfWork.LoadReq.Update(loadReq);
+                }
+                foreach (var releaseTime in existingReleaseTimes)
+                {
+                    releaseTime.IsArchived = false;
+                    _unitOfWork.ReleaseTime.Update(releaseTime);
+                }
+
+                _unitOfWork.Commit();
+            }
+            else if(removingInstructor) 
+            {
+                //Archive all release times and load reqs associated with user
+                IEnumerable<LoadReq> loadReqs = _unitOfWork.LoadReq.GetAll(c => c.IsArchived != true && c.InstructorId == user.Id, null);
+                IEnumerable<ReleaseTime> releaseTimes = _unitOfWork.ReleaseTime.GetAll(c => c.IsArchived != true && c.InstructorId == user.Id, null);
+                foreach (var loadReq in loadReqs)
+                {
+                    loadReq.IsArchived = true;
+                    _unitOfWork.LoadReq.Update(loadReq);
+                }
+                foreach (var releaseTime in releaseTimes)
+                {
+                    releaseTime.IsArchived = true;
+                    _unitOfWork.ReleaseTime.Update(releaseTime);
+                }
+
+                _unitOfWork.Commit();
+            }
 
             return RedirectToPage("./Index", new { success = true, message = "Update Successful" });
         }
