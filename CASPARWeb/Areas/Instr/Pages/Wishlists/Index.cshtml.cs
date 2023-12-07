@@ -301,6 +301,10 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 				TempData["success"] = "Wishlist added Successfully";
 			}
 			//Modifying a Row
+			else if(checkedModalityList.Length == 0)
+			{
+
+			}
 			else
 			{
 				//get all attached WishlistModality's
@@ -370,13 +374,14 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 				TempData["success"] = "Wishlist added Successfully";
 			}
 			//Modifying a Row
-			else
+			else if (checkedTimeBlockList.Length > 0)
 			{
 				//get all attached WishlistTimeBlock's
 				IEnumerable<WishlistTimeBlock> tempList = _unitOfWork.WishlistTimeBlock.GetAll(c => c.WishlistId == objWishlist.Id && c.IsArchived != true);
 				foreach (WishlistTimeBlock ap in tempList)
 				{
-					var modality = ap.TimeBlock;
+					var id = ap.Id;
+					var modality = _unitOfWork.TimeBlock.Get(c => c.Id == ap.TimeBlockId && c.IsArchived != true);
 					if (modality != null && !checkedTimeBlockList.Contains(modality.TimeBlockValue))
 					{
 						ap.IsArchived = true;
