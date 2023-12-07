@@ -307,7 +307,10 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 				IEnumerable<WishlistModality> tempList = _unitOfWork.WishlistModality.GetAll(c => c.WishlistId == objWishlist.Id && c.IsArchived != true);
 				foreach (WishlistModality ap in tempList)
 				{
-					var modality = ap.Modality;
+					var id = ap.Id;
+					var modalityId = ap.ModalityId;
+					var modality = _unitOfWork.Modality.Get(c => c.Id == modalityId && c.IsArchived != true);
+
 					if (modality != null && !checkedModalityList.Contains(modality.ModalityName))
 					{
 						ap.IsArchived = true;

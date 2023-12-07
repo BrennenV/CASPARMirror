@@ -17,6 +17,35 @@ $(document).ready(function () {
         });
     });
 
+    //// Function to disable or enable checkboxes
+    //function toggleCheckboxes(status) {
+    //    $('#timeBlocks1 input[type=checkbox]').prop('disabled', status);
+    //    $('#timeBlocks2 input[type=checkbox]').prop('disabled', status);
+    //    $('#daysOfWeek input[type=checkbox]').prop('disabled', status);
+    //    $('#campuses input[type=checkbox]').prop('disabled', status);
+    //}
+
+    //// Initially disable all checkboxes
+    //toggleCheckboxes(true);
+
+    //// Add event listener to modality checkboxes
+    //$('#modalities input[type=checkbox]').change(function () {
+    //    var modality = $(this).val();
+    //    if ($('#modalities input[type=checkbox]:checked').length == 0) {
+    //        // If no modality is checked, disable all other checkboxes
+    //        toggleCheckboxes(true);
+    //    } else if (modality == 'online') {
+    //        // If 'online' is checked, disable all other checkboxes
+    //        toggleCheckboxes(true);
+    //    } else if (modality == 'virtual') {
+    //        // If 'virtual' is checked, disable 'campus' checkboxes
+    //        $('#campuses input[type=checkbox]').prop('disabled', true);
+    //    } else {
+    //        // If any other modality is checked, enable all checkboxes
+    //        toggleCheckboxes(false);
+    //    }
+    //});
+
     $("#ddlTemplateCourses").change(function () {
         var selectedCourseId = $(this).val(item.course.id);
         $("#selectedCourse").val(selectedCourseId);
