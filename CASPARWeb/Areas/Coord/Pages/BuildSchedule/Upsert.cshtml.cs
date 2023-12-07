@@ -25,6 +25,8 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
         public IEnumerable<SelectListItem> InstructorList { get; set; }
         public IEnumerable<SelectListItem> ModalityList { get; set; }
 		public IEnumerable<Modality> StudentModalityList { get; set; }
+        public IEnumerable<SelectListItem> SCampusList { get; set; }
+        public IEnumerable<SelectListItem> SBuildingList { get; set; }
         public IEnumerable<SelectListItem> ClassroomList { get; set; }
         public IEnumerable<SelectListItem> TimeBlockList { get; set; }
         public IEnumerable<SelectListItem> DaysOfWeekList { get; set; }
@@ -84,6 +86,8 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
             ApplicationUserList = new List<ApplicationUser>();
 			InstructorList = new List<SelectListItem>();
             ModalityList = new List<SelectListItem>();
+			SCampusList = new List<SelectListItem>();
+			SBuildingList = new List<SelectListItem>();
 			ClassroomList = new List<SelectListItem>();
             TimeBlockList = new List<SelectListItem>();
             DaysOfWeekList = new List<SelectListItem>();
@@ -106,7 +110,9 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 				}
             }
 			ModalityList = _unitOfWork.Modality.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.ModalityName, Value = c.Id.ToString() });
-            ClassroomList = _unitOfWork.Classroom.GetAll(c => c.IsArchived != true,null,"Building,Building.Campus").Select(c => new SelectListItem { Text = c.ClassroomNumber + " - " + c.Building.Campus.CampusName, Value = c.Id.ToString()});
+            SCampusList = _unitOfWork.Campus.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.CampusName});
+            SBuildingList = _unitOfWork.Building.GetAll(c => c.IsArchived != true,null,"Campus").Select(c => new SelectListItem { Text = c.BuildingName, Value = c.Campus.CampusName});
+            ClassroomList = _unitOfWork.Classroom.GetAll(c => c.IsArchived != true,null,"Building").Select(c => new SelectListItem { Text = c.ClassroomNumber + " - " + c.Building.BuildingName, Value = c.Id.ToString()});
             TimeBlockList = _unitOfWork.TimeBlock.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.TimeBlockValue, Value = c.Id.ToString() });
             DaysOfWeekList = _unitOfWork.DaysOfWeek.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.DaysOfWeekValue, Value = c.Id.ToString() });
             PartOfTermList = _unitOfWork.PartOfTerm.GetAll(c => c.IsArchived != true).Select(c => new SelectListItem { Text = c.PartOfTermTitle, Value = c.Id.ToString(), Selected = c.PartOfTermTitle == "Full Term" });
