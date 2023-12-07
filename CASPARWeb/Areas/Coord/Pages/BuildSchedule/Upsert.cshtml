@@ -229,15 +229,15 @@
 								</select>
 							</div>
 							<div class="form-group col-3 hideByModality" style="display:none">
-								<label class="form-label mt-2">Day Of The Week</label>
-								<select id="ddlDaysOfWeek" asp-for="objCourseSection.DaysOfWeekId" asp-items="@Model.DaysOfWeekList" class="form-select shadow">
-									<option disabled selected>--Select Day of the Week--</option>
+								<label class="form-label mt-2">Campus</label>
+								<select id="ddlCampus" asp-items="@Model.SCampusList" class="form-select shadow" onchange="showBuildings()">
+									<option disabled selected>--Select Campus--</option>
 								</select>
 							</div>
 							<div class="form-group col-3 hideByModality" style="display:none">
-								<label class="form-label mt-2">Time Slot</label>
-								<select id="ddlTimeBlock" asp-for="objCourseSection.TimeBlockId" asp-items="@Model.TimeBlockList" class="form-select shadow">
-									<option disabled selected>--Select Time Slot--</option>
+								<label class="form-label mt-2">Building</label>
+								<select id="ddlBuilding" asp-items="@Model.SBuildingList" class="form-select shadow" onchange=showClassrooms()>
+									<option disabled selected>--Select Building--</option>
 								</select>
 							</div>
 							<div class="form-group col-3 hideByModality" style="display:none">
@@ -250,6 +250,20 @@
 
 						<div class="row mt-3 mb-3">
 							<div class="form-group col-6">
+								<div class="row">
+									<div class="form-group col-6 hideByModality" style="display:none">
+										<label class="form-label mt-2">Day Of The Week</label>
+										<select id="ddlDaysOfWeek" asp-for="objCourseSection.DaysOfWeekId" asp-items="@Model.DaysOfWeekList" class="form-select shadow">
+											<option disabled selected>--Select Day of the Week--</option>
+										</select>
+									</div>
+									<div class="form-group col-6 hideByModality" style="display:none">
+										<label class="form-label mt-2">Time Slot</label>
+										<select id="ddlTimeBlock" asp-for="objCourseSection.TimeBlockId" asp-items="@Model.TimeBlockList" class="form-select shadow">
+											<option disabled selected>--Select Time Slot--</option>
+										</select>
+									</div>
+								</div>
 								<div class="row">
 									<div class="form-group col-6">
 										<label class="form-label">BannerCRN</label>
@@ -315,6 +329,31 @@
 			}
 			else {
 				$('.hideByModality').show();
+			}
+		}
+
+		function showBuildings() {
+			var campus = document.getElementById("ddlCampus").value;
+			var buildingOptions = document.getElementById("ddlBuilding").options;
+
+			for (var i = 0; i < buildingOptions.length; i++) {
+				if (buildingOptions[i].value.includes(campus)) {
+					buildingOptions[i].style.display = "block";
+				} else {
+					buildingOptions[i].style.display = "none";
+				}
+			}
+		}
+		function showClassrooms() {
+			var building = $('#ddlBuilding option:selected').text();
+			var classroomOptions = document.getElementById("ddlClassroom").options;
+			
+			for (var i = 0; i < classroomOptions.length; i++) {
+				if (classroomOptions[i].innerText.includes(building)) {
+					classroomOptions[i].style.display = "block";
+				} else {
+					classroomOptions[i].style.display = "none";
+				}
 			}
 		}
 
