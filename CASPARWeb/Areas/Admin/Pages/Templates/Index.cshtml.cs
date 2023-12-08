@@ -65,7 +65,7 @@ namespace CASPARWeb.Areas.Admin.Pages.Templates
             objTemplateList = _unitOfWork.Template.GetAll(c => c.SemesterId == id && c.IsArchived != true && c.Course.IsArchived != true, null, "Course,Semester,Course.AcademicProgram").OrderBy(c => c.Course.AcademicProgram.ProgramCode).ThenBy(c => c.Course.CourseNumber);
             return Page();
         }
-        public void OnPost()
+        public IActionResult OnPost()
         {
             objSemester = _unitOfWork.Semester.Get(c => c.Id == objTemplateList.First().SemesterId);
             foreach (var objTemplate in objTemplateList)
@@ -88,7 +88,7 @@ namespace CASPARWeb.Areas.Admin.Pages.Templates
             }
             //Saves changes
             _unitOfWork.Commit();
-            //return RedirectToPage("./Index", new { id = objTemplate.SemesterId });
+            return RedirectToPage("./Index", new { id = objSemester.Id });
         }
     }
 }
