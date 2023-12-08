@@ -48,7 +48,11 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 		public Dictionary<int, int> CampusCount { get; private set; }
         //End of Student Report------------------------------------------------------------------------------------------------------------------------------
         //Start of instructor report---------------------------------------------------------------------------------
-        public class InstructorReport {
+        public class AssingedCourseSections {
+
+			public String modalites { get; set; }
+		}
+		public class InstructorReport {
             public Wishlist wishlist { get; set; }
             public int loadReqAmount { get; set; }
             public int sumOfCourseLoads { get; set; }
@@ -60,13 +64,15 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
             public List<String>? timeList { get; set; }
 
             public List<String>? weekDayList { get; set; }
-            public InstructorReport() {
+
+			public List<CourseSection> assignedCourses { get; set; }
+			public InstructorReport() {
                 modalityList = new List<String>();
                 locationList = new List<String>();
                 timeList = new List<String>();
                 wishlist = new Wishlist();
 				weekDayList = new List<String>();
-
+				assignedCourses = new List<CourseSection>();
 			}
         }
 
@@ -380,7 +386,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 					instructorReport[i].realiseTime = _unitOfWork.ReleaseTime.Get(r => r.SemesterInstanceId == semesterInstanceId && r.InstructorId == instructorReport[i].wishlist.ApplicationUser.Id && r.IsArchived != true).ReleaseTimeAmount;
 					instructorReport[i].loadReqAmount = _unitOfWork.LoadReq.Get(l => l.SemesterInstanceId == semesterInstanceId && l.InstructorId == instructorReport[i].wishlist.ApplicationUser.Id && l.IsArchived != true).LoadReqAmount;
 					//WishlistCourse tempWishCourses = _unitOfWork.WishlistCourse.Get(c => c.WishlistId == instructorReport[i].wishlist.Id && c.CourseId == tempCourse.Id && c.IsArchived != true);
-					IEnumerable<CourseSection> tempCourseSections = _unitOfWork.CourseSection.GetAll(c => c.InstructorId == instructorReport[i].wishlist.ApplicationUser.Id && c.IsArchived != true && c.SemesterInstanceId == semesterInstanceId, null, "Course");
+					IEnumerable<CourseSection> tempCourseSections = _unitOfWork.CourseSection.GetAll(c => c.InstructorId == instructorReport[i].wishlist.ApplicationUser.Id && c.IsArchived != true && c.SemesterInstanceId == semesterInstanceId, null, "Course,classroom,classroom.building,classroom.building.campus,timeblock,modality,daysofweek");
 					if (tempCourseSections == null || tempCourseSections.Count() == 0) {/*PASS*/}
 					else
 					{
@@ -486,13 +492,15 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 					instructorReport[i].realiseTime = _unitOfWork.ReleaseTime.Get(r => r.SemesterInstanceId == semesterInstanceId && r.InstructorId == instructorReport[i].wishlist.ApplicationUser.Id && r.IsArchived != true).ReleaseTimeAmount;
 					instructorReport[i].loadReqAmount = _unitOfWork.LoadReq.Get(l => l.SemesterInstanceId == semesterInstanceId && l.InstructorId == instructorReport[i].wishlist.ApplicationUser.Id && l.IsArchived != true).LoadReqAmount;
 					WishlistCourse tempWishCourses = _unitOfWork.WishlistCourse.Get(c => c.WishlistId == instructorReport[i].wishlist.Id && c.CourseId == tempCourse.Id && c.IsArchived != true);
-					IEnumerable<CourseSection> tempCourseSections = _unitOfWork.CourseSection.GetAll(c => c.InstructorId == instructorReport[i].wishlist.ApplicationUser.Id && c.IsArchived != true && c.SemesterInstanceId == semesterInstanceId, null, "Course");
+					//get all assigned instructor coursesSections
+					IEnumerable<CourseSection> tempCourseSections = _unitOfWork.CourseSection.GetAll(c => c.InstructorId == instructorReport[i].wishlist.ApplicationUser.Id && c.IsArchived != true && c.SemesterInstanceId == semesterInstanceId, null, "Course,Classroom,Classroom.Building,Classroom.Building.Campus,TimeBlock,Modality,DaysOfWeek");
 					if (tempCourseSections == null || tempCourseSections.Count() == 0) {/*PASS*/}
 					else
 					{
 						foreach (CourseSection tempCourseSection2 in tempCourseSections)
 						{
 							instructorReport[i].sumOfCourseLoads += tempCourseSection2.Course.CourseCreditHours;
+							instructorReport[i].assignedCourses.Add(tempCourseSection2);
 						}
 					}
 					instructorReport[i].totalLoadApplied = instructorReport[i].sumOfCourseLoads + instructorReport[i].realiseTime;
