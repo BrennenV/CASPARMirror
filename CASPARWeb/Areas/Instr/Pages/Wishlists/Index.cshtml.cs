@@ -3,6 +3,7 @@ using Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Security.Claims;
 
@@ -269,7 +270,38 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 			return RedirectToPage("./Index");
 		}
 
-		public IActionResult OnPostCheckBoxes(int? selectedSemesterId)
+        public IActionResult OnPostUpRank(int? selectedCourse)
+        {
+            //Update the rank of the selected course to be one less than its current rank
+			WishlistCourse wishlistCourse = _unitOfWork.WishlistCourse.Get(w => w.Id == (int)selectedCourse);
+			if (wishlistCourse.PreferenceRank > 1)
+			{
+                wishlistCourse.PreferenceRank = wishlistCourse.PreferenceRank - 1;
+                _unitOfWork.WishlistCourse.Update(wishlistCourse);
+
+                _unitOfWork.Commit();
+            }
+
+            return RedirectToPage("./Index");
+        }
+        public IActionResult OnPostDownRank(int? selectedCourse)
+        {
+            //Update the rank of the selected course to be one more than its current rank
+            WishlistCourse wishlistCourse = _unitOfWork.WishlistCourse.Get(w => w.Id == (int)selectedCourse);
+
+            //if (wishlistCourse.PreferenceRank <= _unitOfWork.WishlistCourse.GetAll(w => w.WishlistId == wishlistCourse.WishlistId).Count())
+            //{
+                wishlistCourse.PreferenceRank = wishlistCourse.PreferenceRank + 1;
+                _unitOfWork.WishlistCourse.Update(wishlistCourse);
+
+                _unitOfWork.Commit();
+            //}
+
+            return RedirectToPage("./Index");
+        }
+
+
+        public IActionResult OnPostCheckBoxes(int? selectedSemesterId)
 		{
 			SelectedSemesterId = (int)selectedSemesterId;
 			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -301,13 +333,20 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 				TempData["success"] = "Wishlist added Successfully";
 			}
 			//Modifying a Row
+			else if(checkedModalityList.Length == 0)
+			{
+
+			}
 			else
 			{
 				//get all attached WishlistModality's
 				IEnumerable<WishlistModality> tempList = _unitOfWork.WishlistModality.GetAll(c => c.WishlistId == objWishlist.Id && c.IsArchived != true);
 				foreach (WishlistModality ap in tempList)
 				{
-					var modality = ap.Modality;
+					var id = ap.Id;
+					var modalityId = ap.ModalityId;
+					var modality = _unitOfWork.Modality.Get(c => c.Id == modalityId && c.IsArchived != true);
+
 					if (modality != null && !checkedModalityList.Contains(modality.ModalityName))
 					{
 						ap.IsArchived = true;
@@ -367,13 +406,14 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 				TempData["success"] = "Wishlist added Successfully";
 			}
 			//Modifying a Row
-			else
+			else if (checkedTimeBlockList.Length > 0)
 			{
 				//get all attached WishlistTimeBlock's
 				IEnumerable<WishlistTimeBlock> tempList = _unitOfWork.WishlistTimeBlock.GetAll(c => c.WishlistId == objWishlist.Id && c.IsArchived != true);
 				foreach (WishlistTimeBlock ap in tempList)
 				{
-					var modality = ap.TimeBlock;
+					var id = ap.Id;
+					var modality = _unitOfWork.TimeBlock.Get(c => c.Id == ap.TimeBlockId && c.IsArchived != true);
 					if (modality != null && !checkedTimeBlockList.Contains(modality.TimeBlockValue))
 					{
 						ap.IsArchived = true;

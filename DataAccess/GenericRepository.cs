@@ -569,5 +569,10 @@ namespace DataAccess
             //for track changes I'm flagging modified to the system
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
+
+        public void Detach(T entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Detached;
+        }
     }
 }

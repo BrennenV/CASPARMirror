@@ -83,7 +83,6 @@ function loadTemplateCourses() {
     });
 }
 
-
 function loadCourseWishlist() {
     $.ajax({
         url: "/api/wishlistCourse",
@@ -116,14 +115,18 @@ function loadCourseWishlist() {
             $.each(data.data, function (i, item) {
                 if (item.wishlistId == wishlistId) {
                     var row = $('<tr>').append(
-                        $('<td>').text(item.preferenceRank),
-                        $('<td>').text(item.course.academicProgram.programCode + " " + item.course.courseNumber + " " + item.course.courseTitle),
-                        $('<td>').html('<button class="btn btn-outline-danger rounded archive-btn" data-wishlistCourseId="' + item.id + '"><i class="bi bi-trash-fill"></i></button>'),
-                        console.log(item.id)
+                        $('<td>').html('<div style="display: flex; flex-direction: row; align-items: center;">' +
+                            '<div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; margin-right: 5px;">' +
+                            '<button class="btn rounded upRank-btn" data-wishlistCourseId="' + item.id + '"><i class="bi bi-caret-up-fill"></i></button>' +
+                            '<div>' + item.preferenceRank + '</div>' +
+                            '<button class="btn rounded downRank-btn" data-wishlistCourseId="' + item.id + '"><i class="bi bi-caret-down-fill"></i></button>' +
+                            '</div>'),
+                        $('<td>').text(item.course.academicProgram.programCode + " " + item.course.courseNumber + " " + item.course.courseTitle).css('vertical-align', 'middle'),
+                        $('<td>').html('<button class="btn btn-outline-danger rounded archive-btn" data-wishlistCourseId="' + item.id + '"><i class="bi bi-trash-fill"></i></button>').css('vertical-align', 'middle'),
                     );
                     body.append(row);  // Append the row to the tbody, not the table
 
-                    // Add event listener to the button
+                    // Add event listener to the buttons
                     row.find('.archive-btn').on('click', function () {
                         var wishlistCourseId = $(this).attr('data-wishlistCourseId');
                         console.log("Wishlist Course Id = " + wishlistCourseId);
@@ -146,18 +149,65 @@ function loadCourseWishlist() {
                                 console.error("Error in post request", error);
                             }
                         });
+                    });
 
+                    row.find('.upRank-btn').on('click', function () {
+                        var wishlistCourseId = $(this).attr('data-wishlistCourseId');
+                        console.log("Wishlist Course Id = " + wishlistCourseId);
+
+                        // Add post request here
+                        $.ajax({
+                            url: '/Instr/Wishlists?handler=UpRank',
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            type: 'POST',
+                            data: { selectedCourse: wishlistCourseId },
+                            success: function (data) {
+                                // Handle success, if needed
+                                console.log("Post request successful");
+                                location.reload();
+                            },
+                            error: function (error) {
+                                // Handle error, if needed
+                                console.error("Error in post request", error);
+                            }
+                        });
+                    });
+
+                    row.find('.downRank-btn').on('click', function () {
+                        var wishlistCourseId = $(this).attr('data-wishlistCourseId');
+                        console.log("Wishlist Course Id = " + wishlistCourseId);
+
+                        // Add post request here
+                        $.ajax({
+                            url: '/Instr/Wishlists?handler=DownRank',
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                            },
+                            type: 'POST',
+                            data: { selectedCourse: wishlistCourseId },
+                            success: function (data) {
+                                // Handle success, if needed
+                                console.log("Post request successful");
+                                location.reload();
+                            },
+                            error: function (error) {
+                                // Handle error, if needed
+                                console.error("Error in post request", error);
+                            }
+                        });
                     });
                 }
             });
-
-
         },
         error: function (xhr, error, thrown) {
             alert('Ajax error:' + xhr.responseText);
         }
     });
 }
+
+
 
 
 function getWishlistId() {
