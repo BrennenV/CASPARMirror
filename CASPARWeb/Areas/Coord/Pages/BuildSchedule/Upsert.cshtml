@@ -103,7 +103,7 @@
 			@if (Model.objCourse.Id != 0)
 			{
 			<div class="mb-2">
-				<div class="card overflow-auto" style="height: 400px">
+				<div class="card overflow-auto" >
 					<div class="card-header">
 						<h5>Instructor Report</h5>
 						@if (Model.objCourse.Id != 0)
@@ -112,54 +112,131 @@
 						}
 					</div>
 
-					<div class="table-responsive">
-						<table class="table">
+						<div class="table-responsive overflow-auto" style=" height: 300px;">
+						<table class="table table-striped">
 							<thead>
 								<tr>
 									<th scope="col">Rank</th>
 									<th scope="col">Name</th>
 									<th scope="col">Load</th>
-									<th scope="col">Details</th>
-									<th scope="col">Location</th>
+										<th scope="col" stlye="align: center"></th>
+
 								</tr>
 							</thead>
 							<tbody>
 								@for (int i = 0; i < Model.instructorReport.Count; i++) {
-									<tr>
-										<th scope="row">@Model.instructorReport[i].ranking</th>
-										<td>@Model.instructorReport[i].wishlist.ApplicationUser.FullName</td>
-										<td>@Model.instructorReport[i].totalLoadApplied/@Model.instructorReport[i].loadReqAmount</td>
-										<td style="width:500px">
-											<button class="btn btn-outline-secondary rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTime@(i)" aria-expanded="false" aria-controls="collapseExample" style="width:150px">
-												Details
-											</button>
-											<div class="collapse" id="collapseTime@(i)">
-												<div class="row">
-													<div class="card card-body border-0 col-4">
-														@for (int t = 0; t < Model.instructorReport[i].modalityList.Count; t++) {
-															<p>@Model.instructorReport[i].modalityList[t]</p>
-														}
-													</div>
-													<div class="card card-body border-0 col-4">
-														@for (int t = 0; t < Model.instructorReport[i].timeList.Count; t++) {
-															<p>@Model.instructorReport[i].timeList[t]</p>
-														}
-													</div>
-													<div class="card card-body border-0 col-4">
-														@for (int t = 0; t < Model.instructorReport[i].weekDayList.Count; t++) {
-															<p>@Model.instructorReport[i].weekDayList[t]</p>
-														}
-													</div>
-												</div>
-											</div>
-											
+										<tr data-bs-toggle="collapse" data-bs-target="#collapseAssigned@(i)" aria-expanded="false" aria-controls="collapseExample">
+											<th scope="row">@Model.instructorReport[i].ranking</th>
+											<td>
+												@Model.instructorReport[i].wishlist.ApplicationUser.FullName
+												
+												
 										</td>
-										<td>
-											@for (int t = 0; t < Model.instructorReport[i].locationList.Count; t++) {
-												<p>@Model.instructorReport[i].locationList[t]</p>
-											}
-										</td>
-									</tr>
+											<td class="m-0 p-0">@Model.instructorReport[i].totalLoadApplied/@Model.instructorReport[i].loadReqAmount</td>
+											<td>
+												<i class="bi bi-arrows-expand"></i>
+											</td>
+										</tr>
+												<tr>
+													<td colspan="4"  >
+														<div class="row">
+															<div class="collapse col-6" id="collapseAssigned@(i)">
+															<div class="row no-gutters border-bottom">
+																<div class="col text-center">
+																	<strong>Assigned Courses</strong>
+																</div>
+															</div>
+														@if (Model.instructorReport[i].assignedCourses.Count > 0)
+														{
+															@for (int l = 0; l < Model.instructorReport[i].assignedCourses.Count; l++)
+															{
+																<div class="col-9 mb-2">
+																	<div class="row no-gutters">
+																		<div class="col">
+																			<!--course name && credit hours-->
+																			<strong>@Model.instructorReport[i].assignedCourses[l].Course.CourseTitle (@Model.instructorReport[i].assignedCourses[l].Course.CourseCreditHours)</strong>
+																		</div>
+
+																	</div>
+																	<div class="row no-gutters">
+
+																		<div class="col">
+																			<!--campus name-->
+																			@Model.instructorReport[i].assignedCourses[l].Classroom.Building.Campus.CampusName
+																		</div>
+																		<div class="col">
+																			<!--modality name-->
+																			@Model.instructorReport[i].assignedCourses[l].Modality.ModalityName
+																		</div>
+																	</div>
+																	<div class="row no-gutters">
+
+																		<div class="col">
+																			<!--building name-->
+																			@Model.instructorReport[i].assignedCourses[l].Classroom.Building.BuildingName
+																		</div>
+																		<div class="col">
+																			<!--days-->
+																			@Model.instructorReport[i].assignedCourses[l].DaysOfWeek.DaysOfWeekValue
+																		</div>
+
+																	</div>
+																	<div class="row no-gutters">
+																		<div class="col">
+																			<!--classroom #-->
+																			@Model.instructorReport[i].assignedCourses[l].Classroom.ClassroomNumber
+																		</div>
+																		<div class="col">
+																			<!--time block-->
+																			@Model.instructorReport[i].assignedCourses[l].TimeBlock.TimeBlockValue
+																		</div>
+																	</div>
+
+																</div>
+															}
+														} else {
+															<div class="row no-gutters ">
+																<div class="col text-center">
+																	-No Assigned Courses-
+																</div>
+															</div>
+														}
+													</div>
+
+															<div class="collapse col-6" id="collapseAssigned@(i)">
+																<div class="row no-gutters">
+																	<div class="col text-center border-bottom">
+																		<strong>Course Preferences</strong>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="card card-body border-0 col-3 p-1 m-0">
+																		@for (int t = 0; t < Model.instructorReport[i].modalityList.Count; t++) {
+																			<div class="row">@Model.instructorReport[i].modalityList[t]</div>
+																		}
+																	</div>
+																	<div class="card card-body border-0 col-3 p-1 m-0">
+																		@for (int t = 0; t < Model.instructorReport[i].timeList.Count; t++) {
+																			<div class="row">@Model.instructorReport[i].timeList[t]</div>
+																		}
+																	</div>
+																	<div class="card card-body border-0 col-3 p-1 m-0">
+																		@for (int t = 0; t < Model.instructorReport[i].weekDayList.Count; t++) {
+																			<div class="row">@Model.instructorReport[i].weekDayList[t]</div>
+																		}
+																	</div>
+																	<div class="card card-body border-0 col-3 p-1 m-0">
+																		@for (int t = 0; t < Model.instructorReport[i].locationList.Count; t++) {
+																			<div class="row">@Model.instructorReport[i].locationList[t]</div>
+																		}
+																	</div>
+																</div>
+															</div>
+														</div>
+													</td>
+												</tr>
+
+
 								}
 							</tbody>
 						</table>
