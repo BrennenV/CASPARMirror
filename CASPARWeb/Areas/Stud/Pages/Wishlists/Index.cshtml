@@ -37,18 +37,17 @@
 							<div class="col-2">
 								<label><h6>Modalities</h6></label>
 								<hr />
-							
-									<input type="hidden" asp-for="objWishlist.Id">
-									<div class="col-12 px-2" id="modalities">
-										@foreach (var modality in Model.ModalityList)
-										{
-											<div>
-											<input class="form-check-input" onchange="updateCheckboxModality()" type="checkbox" value="@modality.ModalityName" @(Model.AttachedModalityList.Contains(modality.ModalityName) ? "checked" : "") />
-												<label>@modality.ModalityName</label>
-											</div>
-										}
-									</div>
-									<input type="hidden" id="modalityArrayInput" asp-for="returnedAttachedModality" value="" />
+								<input type="hidden" asp-for="objWishlist.Id">
+								<div class="col-12 px-2" id="modalities">
+									@foreach (var modality in Model.ModalityList)
+									{
+										<div>
+											<input class="form-check-input modality-checkbox" onchange="updateCheckboxModality()" type="checkbox" value="@modality.ModalityName" @(Model.AttachedModalityList.Contains(modality.ModalityName) ? "checked" : "") />
+											<label>@modality.ModalityName</label>
+										</div>
+									}
+								</div>
+								<input type="hidden" id="modalityArrayInput" asp-for="returnedAttachedModality" value="" />
 							</div>
 
 							<div class="col-1">
@@ -57,7 +56,7 @@
 							<div class="col-2">
 								<label><h6>Part of Day</h6></label>
 								<hr />
-								<div class="col-12 px-2" id="modalities">
+								<div class="col-12 px-2" id="partsOfDay">
 									@foreach (var partOfDay in Model.PartOfDayList)
 									{
 										<div>
@@ -131,11 +130,11 @@
 		<script>
 			function updateCheckboxModality() {
 				//get all "checked" checkbox values
-				var checkboxes = document.querySelectorAll('.form-check-input');
+				var checkboxes = document.querySelectorAll('.modality-checkbox');
 				var checkedValues = [];
-				console.log("");
+				var partsOfDay = document.querySelectorAll('#partsOfDay .form-check-input');
+				var campuses = document.querySelectorAll('#campuses .form-check-input');
 
-				//swal.fire('Error', 'TEST', 'error');
 				// Loop through each checkbox
 				checkboxes.forEach(function (checkbox) {
 					if (checkbox.checked) {
@@ -143,6 +142,34 @@
 						checkedValues.push(checkbox.value);
 					}
 				});
+
+				// If no modalities are selected or if "Online" is the only selected modality, disable the time blocks, days of week, and campuses
+				if (checkedValues.length == 0 || (checkedValues.length == 1 && checkedValues[0] == "Online")) {
+					partsOfDay.forEach(function (partOfDay) {
+						partOfDay.disabled = true;
+					});
+					campuses.forEach(function (campus) {
+						campus.disabled = true;
+					});
+				}
+				else if ((checkedValues.length == 1 && checkedValues[0] == "Virtual") || (checkedValues.length == 2 && checkedValues[0] == "Online" && checkedValues[1] == "Virtual")) {
+					partsOfDay.forEach(function (partOfDay) {
+						partOfDay.disabled = false;
+					});
+					campuses.forEach(function (campus) {
+						campus.disabled = true;
+					});
+				}
+				else {
+					// If any other modalities are selected, enable the time blocks, days of week, and campuses
+					partsOfDay.forEach(function (partOfDay) {
+						partOfDay.disabled = false;
+					});
+					campuses.forEach(function (campus) {
+						campus.disabled = false;
+					});
+				}
+
 				console.log("Checked Boxes: " + checkedValues.length);
 				//generate the comma separated return list
 				var returnList = "";
@@ -159,36 +186,9 @@
 				}
 				console.log("Return string: " + document.getElementById('modalityArrayInput').value);
 			}
-			function updateCheckboxPartOfDay() {
-				//get all "checked" checkbox values
-				var checkboxes = document.querySelectorAll('.form-check-input');
-				var checkedValues = [];
-				console.log("");
 
-				//swal.fire('Error', 'TEST', 'error');
-				// Loop through each checkbox
-				checkboxes.forEach(function (checkbox) {
-					if (checkbox.checked) {
-						console.log(checkbox.value);
-						checkedValues.push(checkbox.value);
-					}
-				});
-				console.log("Checked Boxes: " + checkedValues.length);
-				//generate the comma separated return list
-				var returnList = "";
-				for (var i = 0; i < checkedValues.length; i++) {
-					returnList = returnList + checkedValues[i];
-					if (i < checkedValues.length - 1) {
-						returnList = returnList + ",";
-					}
-				}
-				document.getElementById('partOfDayArrayInput').value = returnList;
-				//if the list is empty set the return string to '_'
-				if (checkedValues.length == 0) {
-					document.getElementById('partOfDayArrayInput').value = "_";
-				}
-				console.log("Return string: " + document.getElementById('partOfDayArrayInput').value);
-			}
+			window.onload = updateCheckboxModality;
+
 			function updateCheckboxCampus() {
 				//get all "checked" checkbox values
 				var checkboxes = document.querySelectorAll('.form-check-input');

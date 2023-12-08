@@ -191,7 +191,22 @@
                     campuses.forEach(function (campus) {
                         campus.disabled = true;
                     });
-                } else {
+                }
+                else if ((checkedValues.length == 1 && checkedValues[0] == "Virtual") || (checkedValues.length == 2 && checkedValues[0] == "Online" && checkedValues[1] == "Virtual")) {
+                    timeBlocks.forEach(function (timeBlock) {
+                        timeBlock.disabled = false;
+                    });
+                    timeBlocks2.forEach(function (timeBlock) {
+                        timeBlock.disabled = false;
+                    });
+                    daysOfWeek.forEach(function (dayOfWeek) {
+                        dayOfWeek.disabled = false;
+                    });
+                    campuses.forEach(function (campus) {
+                        campus.disabled = true;
+                    });
+                }
+                else {
                     // If any other modalities are selected, enable the time blocks, days of week, and campuses
                     timeBlocks.forEach(function (timeBlock) {
                         timeBlock.disabled = false;
@@ -205,28 +220,6 @@
                     campuses.forEach(function (campus) {
                         campus.disabled = false;
                     });
-                }
-
-                if (checkedValues.includes("Virtual")) {
-                    campuses.forEach(function (campus) {
-                        campus.disabled = true;
-                    });
-
-                    if (checkedValues.length > 1 && !checkedValues.includes("Online")) {
-                        // If any other modalities are selected, enable the time blocks, days of week, and campuses
-                        timeBlocks.forEach(function (timeBlock) {
-                            timeBlock.disabled = false;
-                        });
-                        timeBlocks2.forEach(function (timeBlock) {
-                            timeBlock.disabled = false;
-                        });
-                        daysOfWeek.forEach(function (dayOfWeek) {
-                            dayOfWeek.disabled = false;
-                        });
-                        campuses.forEach(function (campus) {
-                            campus.disabled = false;
-                        });
-                    }
                 }
 
                 console.log("Checked Boxes: " + checkedValues.length);

@@ -50,5 +50,7 @@ namespace Infrastructure.Interfaces
 
         //Update changes to an object 
         void Update(T entity);
+
+        void Detach(T entity);
     }
 }

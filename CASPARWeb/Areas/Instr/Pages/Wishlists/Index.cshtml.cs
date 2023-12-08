@@ -3,6 +3,7 @@ using Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Security.Claims;
 
@@ -269,7 +270,38 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 			return RedirectToPage("./Index");
 		}
 
-		public IActionResult OnPostCheckBoxes(int? selectedSemesterId)
+        public IActionResult OnPostUpRank(int? selectedCourse)
+        {
+            //Update the rank of the selected course to be one less than its current rank
+			WishlistCourse wishlistCourse = _unitOfWork.WishlistCourse.Get(w => w.Id == (int)selectedCourse);
+			if (wishlistCourse.PreferenceRank > 1)
+			{
+                wishlistCourse.PreferenceRank = wishlistCourse.PreferenceRank - 1;
+                _unitOfWork.WishlistCourse.Update(wishlistCourse);
+
+                _unitOfWork.Commit();
+            }
+
+            return RedirectToPage("./Index");
+        }
+        public IActionResult OnPostDownRank(int? selectedCourse)
+        {
+            //Update the rank of the selected course to be one more than its current rank
+            WishlistCourse wishlistCourse = _unitOfWork.WishlistCourse.Get(w => w.Id == (int)selectedCourse);
+
+            //if (wishlistCourse.PreferenceRank <= _unitOfWork.WishlistCourse.GetAll(w => w.WishlistId == wishlistCourse.WishlistId).Count())
+            //{
+                wishlistCourse.PreferenceRank = wishlistCourse.PreferenceRank + 1;
+                _unitOfWork.WishlistCourse.Update(wishlistCourse);
+
+                _unitOfWork.Commit();
+            //}
+
+            return RedirectToPage("./Index");
+        }
+
+
+        public IActionResult OnPostCheckBoxes(int? selectedSemesterId)
 		{
 			SelectedSemesterId = (int)selectedSemesterId;
 			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
