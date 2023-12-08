@@ -19,10 +19,15 @@ namespace CASPARWeb.Pages
 
         public IActionResult OnGet()
         {
-			if (User.IsInRole(SD.ADMIN_ROLE) || User.IsInRole(SD.PROGRAM_COORDINATOR_ROLE))
+			if (User.IsInRole(SD.ADMIN_ROLE))
 			{
                 return Page();
 			}
+
+            if(User.IsInRole(SD.PROGRAM_COORDINATOR_ROLE)) 
+            {
+                return Redirect("/Coord/BuildSchedule/Index");
+            }
 
 			if (User.IsInRole(SD.INSTRUCTOR_ROLE))
             {
