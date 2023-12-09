@@ -342,7 +342,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 			//and where their their load requirements has not been met.
 			//var courseId = _unitOfWork.CourseSection.GetById(courseSectionId).CourseId;
 			//Get wishlists table with applicationUser table appended to it
-			if (false)//courseSectionId == 0
+			if (courseSectionId == 0)//courseSectionId == 0
 			{
 				courseId = 0;
 
