@@ -332,13 +332,15 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 				TempData["success"] = "Wishlist added Successfully";
 			}
 			//Modifying a Row
-			else
+			else if (checkedPartOfDayList.Length > 0)
 			{
 				//get all attached WishlistPartOfDay's
 				IEnumerable<WishlistPartOfDay> tempList = _unitOfWork.WishlistPartOfDay.GetAll(c => c.WishlistId == objWishlist.Id && c.IsArchived != true);
 				foreach (WishlistPartOfDay ap in tempList)
 				{
-					var modality = ap.PartOfDay;
+					var id = ap.Id;
+					var modalityId = ap.PartOfDayId;
+					var modality = _unitOfWork.PartOfDay.Get(c => c.Id == modalityId && c.IsArchived != true);
 					if (modality != null && !checkedPartOfDayList.Contains(modality.PartOfDayValue))
 					{
 						ap.IsArchived = true;
@@ -397,13 +399,15 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 				TempData["success"] = "Wishlist added Successfully";
 			}
 			//Modifying a Row
-			else
+			else if (checkedDaysOfWeekList.Length > 0)
 			{
 				//get all attached WishlistDaysOfWeek's
 				IEnumerable<WishlistDaysOfWeek> tempList = _unitOfWork.WishlistDaysOfWeek.GetAll(c => c.WishlistId == objWishlist.Id && c.IsArchived != true);
 				foreach (WishlistDaysOfWeek ap in tempList)
 				{
-					var daysOfWeek = ap.DaysOfWeek;
+					var id = ap.Id;
+					var daysOfWeekId = ap.DaysOfWeekId;
+					var daysOfWeek = _unitOfWork.DaysOfWeek.Get(c => c.Id == daysOfWeekId && c.IsArchived != true);
 					if (daysOfWeek != null && !checkedDaysOfWeekList.Contains(daysOfWeek.DaysOfWeekValue))
 					{
 						ap.IsArchived = true;
@@ -463,7 +467,7 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 				TempData["success"] = "Wishlist added Successfully";
 			}
 			//Modifying a Row
-			else
+			else if (checkedCampusList.Length > 0)
 			{
 				//get all attached WishlistCampus's
 				IEnumerable<WishlistCampus> tempList = _unitOfWork.WishlistCampus.GetAll(c => c.WishlistId == objWishlist.Id && c.IsArchived != true);

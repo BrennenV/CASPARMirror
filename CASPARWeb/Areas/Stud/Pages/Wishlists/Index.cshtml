@@ -189,6 +189,46 @@
 
 			window.onload = updateCheckboxModality;
 
+			function updateCheckboxPartOfDay() {
+				//get all "checked" checkbox values
+				var checkboxes = document.querySelectorAll('.form-check-input');
+				var checkedValues = [];
+				console.log("");
+
+				//swal.fire('Error', 'TEST', 'error');
+				// Loop through each checkbox
+				checkboxes.forEach(function (checkbox) {
+					if (checkbox.checked) {
+						console.log(checkbox.value);
+						checkedValues.push(checkbox.value);
+					}
+				});
+				console.log("Checked Boxes: " + checkedValues.length);
+				//generate the comma separated return list
+				var returnList = "";
+				for (var i = 0; i < checkedValues.length; i++) {
+					returnList = returnList + checkedValues[i];
+					if (i < checkedValues.length - 1) {
+						returnList = returnList + ",";
+					}
+				}
+				document.getElementById('partOfDayArrayInput').value = returnList;
+				//if the list is empty set the return string to '_'
+				if (checkedValues.length == 0) {
+					document.getElementById('partOfDayArrayInput').value = "_";
+				}
+				console.log("Return string: " + document.getElementById('partOfDayArrayInput').value);
+			}
+
+			function ValidateInput(event) {
+				if (document.getElementById('ddlTemplateCourses').value == "") {
+					swal.fire('Error', 'Please Select a Course', 'error');
+					return false;
+				}
+				return true;
+
+			}
+
 			function updateCheckboxCampus() {
 				//get all "checked" checkbox values
 				var checkboxes = document.querySelectorAll('.form-check-input');

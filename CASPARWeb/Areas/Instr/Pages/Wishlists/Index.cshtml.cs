@@ -537,7 +537,7 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
 				TempData["success"] = "Wishlist added Successfully";
 			}
 			//Modifying a Row
-			else
+			else if (checkedCampusList.Length > 0)
 			{
 				//get all attached WishlistCampus's
 				IEnumerable<WishlistCampus> tempList = _unitOfWork.WishlistCampus.GetAll(c => c.WishlistId == objWishlist.Id && c.IsArchived != true);
