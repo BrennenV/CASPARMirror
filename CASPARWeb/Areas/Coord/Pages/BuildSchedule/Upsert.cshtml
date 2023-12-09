@@ -146,8 +146,7 @@
 																	<strong>Assigned Courses</strong>
 																</div>
 															</div>
-														@if (Model.instructorReport[i].assignedCourses.Count > 0)
-														{
+														@if (Model.instructorReport[i].assignedCourses.Count > 0 && Model.instructorReport[i].assignedCourses != null) {
 															@for (int l = 0; l < Model.instructorReport[i].assignedCourses.Count; l++)
 															{
 																<div class="col-9 mb-2">
@@ -162,33 +161,62 @@
 
 																		<div class="col">
 																			<!--campus name-->
+																			@if (Model.instructorReport[i].assignedCourses[l].Classroom != null && Model.instructorReport[i].assignedCourses[l].Classroom.Building != null && Model.instructorReport[i].assignedCourses[l].Classroom.Building.Campus != null) {
 																			@Model.instructorReport[i].assignedCourses[l].Classroom.Building.Campus.CampusName
+																			} else {
+
+																			}
+																			
 																		</div>
 																		<div class="col">
 																			<!--modality name-->
-																			@Model.instructorReport[i].assignedCourses[l].Modality.ModalityName
+																			@if (Model.instructorReport[i].assignedCourses[l].Modality != null) {
+																				@Model.instructorReport[i].assignedCourses[l].Modality.ModalityName
+																			} else {
+
+																			}
 																		</div>
 																	</div>
 																	<div class="row no-gutters">
 
 																		<div class="col">
 																			<!--building name-->
-																			@Model.instructorReport[i].assignedCourses[l].Classroom.Building.BuildingName
+																			@if (Model.instructorReport[i].assignedCourses[l].Classroom != null && Model.instructorReport[i].assignedCourses[l].Classroom.Building != null) {
+																				@Model.instructorReport[i].assignedCourses[l].Classroom.Building.BuildingName
+																			} else {
+
+																			}
+
 																		</div>
 																		<div class="col">
 																			<!--days-->
-																			@Model.instructorReport[i].assignedCourses[l].DaysOfWeek.DaysOfWeekValue
+																			@if (Model.instructorReport[i].assignedCourses[l].DaysOfWeek != null) {
+																				@Model.instructorReport[i].assignedCourses[l].DaysOfWeek.DaysOfWeekValue
+																			} else {
+
+																			}
+
 																		</div>
 
 																	</div>
 																	<div class="row no-gutters">
 																		<div class="col">
 																			<!--classroom #-->
-																			@Model.instructorReport[i].assignedCourses[l].Classroom.ClassroomNumber
+																			@if (Model.instructorReport[i].assignedCourses[l].Classroom != null) {
+																				@Model.instructorReport[i].assignedCourses[l].Classroom.ClassroomNumber
+																			} else {
+
+																			}
+																			
 																		</div>
 																		<div class="col">
 																			<!--time block-->
+																			@if (Model.instructorReport[i].assignedCourses[l].TimeBlock != null) {
 																			@Model.instructorReport[i].assignedCourses[l].TimeBlock.TimeBlockValue
+																			} else {
+
+																			}
+
 																		</div>
 																	</div>
 
