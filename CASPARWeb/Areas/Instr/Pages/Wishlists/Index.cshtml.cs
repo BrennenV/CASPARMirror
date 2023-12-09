@@ -300,7 +300,6 @@ namespace CASPARWeb.Areas.Instr.Pages.Wishlists
             return RedirectToPage("./Index");
         }
 
-
         public IActionResult OnPostCheckBoxes(int? selectedSemesterId)
 		{
 			SelectedSemesterId = (int)selectedSemesterId;
