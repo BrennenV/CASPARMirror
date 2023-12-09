@@ -517,7 +517,12 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 						foreach (WishlistModality tempModality in tempModalitys)
 						{
 							String temp = tempModality.Modality.ModalityName;
-							instructorReport[i].modalityList.Add(temp);
+							if (!hasValue(instructorReport[i].modalityList, temp)) {
+								instructorReport[i].modalityList.Add(temp);
+							}
+
+
+							
 						}
 					}
 					//Get all locations
@@ -531,7 +536,10 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 						foreach (WishlistCampus tempCampus in tempCampuses)
 						{
 							String temp = tempCampus.Campus.CampusName;
-							instructorReport[i].locationList.Add(temp);
+							if (!hasValue(instructorReport[i].locationList, temp)) {
+								instructorReport[i].locationList.Add(temp);
+							}
+
 						}
 					}
 					//Get all time blocks
@@ -542,7 +550,10 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
                 } else {
                     foreach (WishlistTimeBlock tempTimeBlock in tempTimeBlocks) {
                         String temp = tempTimeBlock.TimeBlock.TimeBlockValue;
-                        instructorReport[i].timeList.Add(temp);
+						if(!hasValue(instructorReport[i].timeList, temp)) {
+								instructorReport[i].timeList.Add(temp);
+							}
+
                     }
                 }
 				//Get all days of week
@@ -551,7 +562,10 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
                 } else { 
                     foreach (WishlistDaysOfWeek tempWeekDay in tempWeekDays) {
                         String temp = tempWeekDay.DaysOfWeek.DaysOfWeekValue;
-                        instructorReport[i].weekDayList.Add(temp);
+							if (!hasValue(instructorReport[i].weekDayList, temp)) {
+								instructorReport[i].weekDayList.Add(temp);
+							}
+                        
                     }
                 }
             }
@@ -594,5 +608,13 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
             _unitOfWork.Commit();
             return RedirectToPage("./Sections", new { semesterInstanceId = objCourseSection.SemesterInstanceId });
         }
+		private bool hasValue(List<String> list, String str) {
+			for (int i = 0; i < list.Count; i++) {
+				if (list[i] == str) {
+					return true;
+				}
+			}
+			return false;
+		}
     }
 }
