@@ -272,7 +272,10 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 				IEnumerable<WishlistModality> tempList = _unitOfWork.WishlistModality.GetAll(c => c.WishlistId == objWishlist.Id && c.IsArchived != true);
 				foreach (WishlistModality ap in tempList)
 				{
-					var modality = ap.Modality;
+					var id = ap.Id;
+					var modalityId = ap.ModalityId;
+					var modality = _unitOfWork.Modality.Get(c => c.Id == modalityId && c.IsArchived != true);
+
 					if (modality != null && !checkedModalityList.Contains(modality.ModalityName))
 					{
 						ap.IsArchived = true;
@@ -473,7 +476,9 @@ namespace CASPARWeb.Areas.Stud.Pages.Wishlists
 				IEnumerable<WishlistCampus> tempList = _unitOfWork.WishlistCampus.GetAll(c => c.WishlistId == objWishlist.Id && c.IsArchived != true);
 				foreach (WishlistCampus ap in tempList)
 				{
-					var campus = ap.Campus;
+					var id = ap.Id;
+					var campusId = ap.CampusId;
+					var campus = _unitOfWork.Campus.Get(c => c.Id == campusId && c.IsArchived != true);
 					if (campus != null && !checkedCampusList.Contains(campus.CampusName))
 					{
 						ap.IsArchived = true;
