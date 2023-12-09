@@ -33,7 +33,7 @@ namespace CASPARWeb.Areas.Admin.Pages.LoadRequirements
                                 Value = c.Id.ToString()
                             });
             objSemesterInstance = _unitOfWork.SemesterInstance.Get(c => c.Id == id && c.IsArchived != true, true);
-            objLoadReqList = _unitOfWork.LoadReq.GetAll(c => c.SemesterInstanceId == id && c.IsArchived != true, null, "ApplicationUser,SemesterInstance");
+            objLoadReqList = _unitOfWork.LoadReq.GetAll(c => c.SemesterInstanceId == id && c.IsArchived != true, null, "ApplicationUser,SemesterInstance").OrderBy(c => c.ApplicationUser.LastName);
             return Page();
         }
         public void OnPost()

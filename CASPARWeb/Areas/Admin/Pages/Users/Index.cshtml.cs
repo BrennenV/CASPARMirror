@@ -28,7 +28,7 @@ namespace CASPARWeb.Areas.Admin.Pages.Users
             Success = success;
             Message = message;
             UserRoles = new Dictionary<string, List<string>>();
-            ApplicationUsers = _unitOfWork.ApplicationUser.GetAll(null);
+            ApplicationUsers = _unitOfWork.ApplicationUser.GetAll(null).OrderBy(u => u.LastName);
             foreach (var user in ApplicationUsers)
             {
                 var userRole = await _userManager.GetRolesAsync(user);
