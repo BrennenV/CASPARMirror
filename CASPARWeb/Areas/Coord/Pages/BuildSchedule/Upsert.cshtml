@@ -440,7 +440,8 @@
 		function showBuildings() {
 			var campus = document.getElementById("ddlCampus").value;
 			var buildingOptions = document.getElementById("ddlBuilding").options;
-
+				$("#ddlBuilding").prop("selectedIndex", 0);
+				$("#ddlClassroom").prop("selectedIndex", 0);
 			for (var i = 0; i < buildingOptions.length; i++) {
 				if (buildingOptions[i].value.includes(campus)) {
 					buildingOptions[i].style.display = "block";
@@ -452,7 +453,7 @@
 		function showClassrooms() {
 			var building = $('#ddlBuilding option:selected').text();
 			var classroomOptions = document.getElementById("ddlClassroom").options;
-			
+				$("#ddlClassroom").prop("selectedIndex", 0);
 			for (var i = 0; i < classroomOptions.length; i++) {
 				if (classroomOptions[i].innerText.includes(building)) {
 					classroomOptions[i].style.display = "block";
