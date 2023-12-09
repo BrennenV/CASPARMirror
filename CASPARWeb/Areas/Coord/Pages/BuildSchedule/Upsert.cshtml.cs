@@ -342,7 +342,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 			//and where their their load requirements has not been met.
 			//var courseId = _unitOfWork.CourseSection.GetById(courseSectionId).CourseId;
 			//Get wishlists table with applicationUser table appended to it
-			if (courseSectionId == 0)
+			if (false)//courseSectionId == 0
 			{
 				courseId = 0;
 
@@ -494,7 +494,7 @@ namespace CASPARWeb.Areas.Coord.Pages.BuildSchedule
 					WishlistCourse tempWishCourses = _unitOfWork.WishlistCourse.Get(c => c.WishlistId == instructorReport[i].wishlist.Id && c.CourseId == tempCourse.Id && c.IsArchived != true);
 					//get all assigned instructor coursesSections
 					IEnumerable<CourseSection> tempCourseSections = _unitOfWork.CourseSection.GetAll(c => c.InstructorId == instructorReport[i].wishlist.ApplicationUser.Id && c.IsArchived != true && c.SemesterInstanceId == semesterInstanceId, null, "Course,Classroom,Classroom.Building,Classroom.Building.Campus,TimeBlock,Modality,DaysOfWeek");
-					if (tempCourseSections == null || tempCourseSections.Count() == 0) {/*PASS*/}
+					if (tempCourseSections == null || tempCourseSections.Count() == 0) { }
 					else
 					{
 						foreach (CourseSection tempCourseSection2 in tempCourseSections)
