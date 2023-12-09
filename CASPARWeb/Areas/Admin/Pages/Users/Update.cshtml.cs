@@ -84,8 +84,8 @@ namespace CASPARWeb.Areas.Admin.Pages.Users
             {
                 //Create LoadReq and ReleaseTimes for the new instructor in all existing semester instances
                 IEnumerable<SemesterInstance> semesterInstances = _unitOfWork.SemesterInstance.GetAll(c => c.IsArchived != true, null, "Semester");
-                IEnumerable<LoadReq> existingLoadReqs = _unitOfWork.LoadReq.GetAll(c => c.IsArchived != true && c.InstructorId == user.Id, null, "SemesterInstance");
-                IEnumerable<ReleaseTime> existingReleaseTimes = _unitOfWork.ReleaseTime.GetAll(c => c.IsArchived != true && c.InstructorId == user.Id, null, "SemesterInstance");
+                IEnumerable<LoadReq> existingLoadReqs = _unitOfWork.LoadReq.GetAll(c => c.InstructorId == user.Id, null, "SemesterInstance");
+                IEnumerable<ReleaseTime> existingReleaseTimes = _unitOfWork.ReleaseTime.GetAll(c => c.InstructorId == user.Id, null, "SemesterInstance");
                 List<int> semesterInstanceIds = new List<int>();
 
                 foreach(var loadReq in existingLoadReqs)

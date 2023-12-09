@@ -24,7 +24,7 @@ namespace CASPARWeb.Areas.Admin.Pages.ReleaseTimes
         {
             Expression<Func<SemesterInstance, bool>> predicate = c => c.Id == id && c.IsArchived != true;
             objSemesterInstance = _unitOfWork.SemesterInstance.Get(predicate, true, "Semester");
-            objReleaseTimeList = _unitOfWork.ReleaseTime.GetAll(c => c.SemesterInstanceId == id && c.IsArchived != true, null, "ApplicationUser");
+            objReleaseTimeList = _unitOfWork.ReleaseTime.GetAll(c => c.SemesterInstanceId == id && c.IsArchived != true, null, "ApplicationUser").OrderBy(c => c.ApplicationUser.LastName);
             return Page();
         }
         public IActionResult OnPost()

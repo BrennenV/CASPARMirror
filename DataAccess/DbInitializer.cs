@@ -85,6 +85,17 @@ namespace DataAccess
             user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@admin.com");
             _userManager.AddToRoleAsync(user, SD.SECRETARY_ROLE).GetAwaiter().GetResult();
 
+            _userManager.CreateAsync(new ApplicationUser
+            {
+                UserName = "admin2@admin.com",
+                Email = "admin2@admin.com",
+                FirstName = "Richard",
+                LastName = "Admin",
+            }, "Admin123*").GetAwaiter().GetResult();
+
+            user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin2@admin.com");
+            _userManager.AddToRoleAsync(user, SD.ADMIN_ROLE).GetAwaiter().GetResult();
+
             //Creating Instructors
             _userManager.CreateAsync(new ApplicationUser
 			{
